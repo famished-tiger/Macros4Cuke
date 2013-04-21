@@ -1,0 +1,10 @@
+default: --strict -v -b  --format progress features
+html: --strict -v -b  --format html --out result.html features
+pdf: --strict -v -b  --format pdf --out result.pdf features
+stepdefs: --strict -v -b  --format stepdefs --out stepdefs.txt features
+rerun: --strict -v -b  --format rerun --out rerun.txt features
+tag_cloud: --strict -v -b  --format tag_cloud --out tag_cloud.txt features
+usage: --strict -v -b  --format usage --out usage.txt features
+
+
+
