@@ -15,9 +15,7 @@ module MacroStepSupport
 
   # Callback invoked when a World object is extend(ed) with this module.
   def self.extended(world)
-    # Add & initialize an instance variable for macro support.
-    #world.clear_macro_steps()
-    
+    # Add & initialize an instance variable for macro support.  
     MacroCollection::instance.init()
   end
 
