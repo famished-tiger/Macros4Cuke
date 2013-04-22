@@ -36,7 +36,6 @@ end # module
 World { Macros4Cuke::TracingWorld.new }
 
 
-
 # Macros4Cuke step two: extend the world object with the mix-in module
 # that adds the support for macros in Cucumber.
 World(Macros4Cuke::MacroStepSupport)

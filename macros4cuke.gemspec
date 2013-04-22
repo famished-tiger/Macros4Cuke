@@ -19,7 +19,7 @@ MACROS4CUKE_GEMSPEC = Gem::Specification.new do |pkg|
 	pkg.summary = Macros4Cuke::Description
 	pkg.description = <<EOSTRING
 	Macros4Cuke is a lightweight library that adds a macro facility your Cucumber scenarios.
-  In short, you will be able to create new steps that will replace a sequence of lower-level steps. 
+  In short, you can create new steps that replace a sequence of lower-level steps. 
 EOSTRING
 
 	pkg.post_install_message =<<EOSTRING

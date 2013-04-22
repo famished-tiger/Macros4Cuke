@@ -5,7 +5,8 @@ require 'mustache'  # Load the Mustache template library
 
 module Macros4Cuke # Module used as a namespace
 
-# In essence, a macro step object represents a Cucumber step that stands for a sequence of steps.
+# In essence, a macro step object represents a Cucumber step that is itself
+# an aggregation of lower-level Cucumber steps.
 class MacroStep
   # A Mustache instance that expands the steps upon request.
   attr_reader(:renderer)
@@ -18,6 +19,7 @@ class MacroStep
   
   # The list of macro argument names (as appearing in the Mustache template and in the macro phrase).
   attr_reader(:args)
+
   
   # Constructor.
   # [aMacroPhrase]
@@ -106,7 +108,7 @@ class MacroStep
 
     unless rawData.nil?
       rawData.each do |(key, value)|
-        raise StandardError,"Unknown macro argument #{key}." unless @args.include? key
+        raise UnknownArgumentError.new(key) unless @args.include? key
         if macro_parameters.include? key
           if macro_parameters[key].kind_of?(Array)
              macro_parameters[key] << value
@@ -121,6 +123,7 @@ class MacroStep
     
     return macro_parameters
   end
+
 
   
 private
@@ -140,7 +143,7 @@ private
       when :invokation
         /"([^"]*)"/
       else
-        raise Standard, "Internal error: Unknown mode argument #{mode}"
+        raise InternalError, "Internal error: Unknown mode argument #{mode}"
     end
     raw_result = aMacroPhrase.scan(pattern)
     return raw_result.flatten.compact
@@ -152,7 +155,7 @@ private
   def add_tags_multi(tokens)
     first_token = tokens.shift
     unless first_token == :multi
-      raise StandardError, "Expecting a :multi token instead of a #{first_token}"
+      raise InternalError, "Expecting a :multi token instead of a #{first_token}"
     end
     
     tokens.each do |an_opcode|
@@ -166,7 +169,7 @@ private
         when String
           #Do nothing...
         else
-          raise StandardError, "Unknown Mustache token type #{an_opcode.first}"
+          raise InternalError, "Unknown Mustache token type #{an_opcode.first}"
       end
     end
   end
@@ -178,8 +181,8 @@ private
     case mustache_opcode[0]
       when :etag
         triplet = mustache_opcode[1]
-        raise StandardError, "expected 'mustache' token instead of '#{triplet[0]}'" unless triplet[0] == :mustache
-        raise StandardError, "expected 'fetch' token instead of '#{triplet[1]}'" unless triplet[1] == :fetch
+        raise InternalError, "expected 'mustache' token instead of '#{triplet[0]}'" unless triplet[0] == :mustache
+        raise InternalError, "expected 'fetch' token instead of '#{triplet[1]}'" unless triplet[1] == :fetch
         @args << triplet.last
         
       when :fetch
@@ -189,7 +192,7 @@ private
         add_tags_section(mustache_opcode)
 
       else
-        raise StandardError, "Unknown Mustache token type #{mustache_opcode.first}"        
+        raise InternalError, "Unknown Mustache token type #{mustache_opcode.first}"        
     end
   end
   
@@ -208,7 +211,7 @@ private
         when String
           return
         else
-          raise StandardError, "Unknown Mustache token type #{op.first}"
+          raise InternalError, "Unknown Mustache token type #{op.first}"
       end
     end
   end
