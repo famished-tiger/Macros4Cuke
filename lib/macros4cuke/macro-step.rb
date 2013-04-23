@@ -22,18 +22,21 @@ class MacroStep
 
   
   # Constructor.
-  # [aMacroPhrase]
-  # [aTemplate] The source text of the steps to be expanded upon macro invokation.
-  def initialize(aMacroPhrase, aTemplate)
+  # [aMacroPhrase] The text from the macro step definition that is between the square brackets.
+  # [theSubsteps] The source text of the steps to be expanded upon macro invokation.
+  def initialize(aMacroPhrase, theSubsteps)
     @name = self.class.macro_key(aMacroPhrase, :definition)
     
     # Retrieve the macro arguments embedded in the phrase.
     @phrase_args = scan_arguments(aMacroPhrase, :definition)
     @args = @phrase_args.dup()
     
+    # Manipulate the substeps source text (e.g. remove comment lines)
+    substeps_processed = preprocess(theSubsteps)
+    
     # The expansion text is a Mustache template
     @renderer = Mustache.new
-    renderer.template = aTemplate
+    renderer.template = substeps_processed
     
     # Retrieve the Mustache tag names from the template and add them as macro arguments    
     add_tags_multi(renderer.template.tokens())
@@ -147,6 +150,18 @@ private
     end
     raw_result = aMacroPhrase.scan(pattern)
     return raw_result.flatten.compact
+  end
+  
+  # Return the substeps text after some transformation
+  # [theSubstepsSource] The source text of the steps to be expanded upon macro invokation.
+  def preprocess(theSubstepsSource)
+    # Split text into lines
+    lines = theSubstepsSource.split(/\r\n?|\n/)
+    
+    # Reject comment lines. This necessary because Cucumber::RbSupport::RbWorld#steps complains when it sees a comment.
+    processed = lines.reject { |a_line| a_line =~ /\s*#/ }
+    
+    return processed.join("\n")
   end
 
   # Visit an array of tokens of which the first element is the :multi symbol.

@@ -1,3 +1,10 @@
+## [0.1.04]
+## New features:
+* Gherkin comments are allowed in sub-steps sequence. Previous version supported only Mustache comments.
+## Changes:
+* Added a few more examples in the 'travelling-demo.feature' file.
+
+
 ## [0.1.03]
 ### Documentation
 * README.md: slightly reworked and added link to Mustache.  
