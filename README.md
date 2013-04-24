@@ -48,10 +48,11 @@ When it is executed, the last macro-step (invokation) as the same effect as:
   """  
 ```
 
-In other words, this sequence of 5 steps can be replaced by just one.  
+In other words, this sequence of 5 steps can be replaced by just one.
 Macros4Cuke not only helps in getting rid of the repeated step sequences,
  it allows the feature writers to create themselves higher-level steps
- that are closer to the business logic.
+ that are closer to the business logic.  
+
 See also the working examples in the features folder.
 
 ## Install and setup ##
@@ -73,6 +74,7 @@ World(Macros4Cuke::MacroStepSupport)
 * Step 3: Import the macro-management steps  
 In your /features/step_definitions/ folder:  
   - Create a ruby file (say, 'use\_macro\_steps.rb') with the following line:  
+  
 ```ruby  
 require 'macros4cuke/../macro_steps'
 ```  

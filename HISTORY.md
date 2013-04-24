@@ -1,3 +1,8 @@
+## [0.1.07]
+### Changes:
+* Added new class TemplateEngine.
+
+
 ## [0.1.06]
 
 ### Documentation:
