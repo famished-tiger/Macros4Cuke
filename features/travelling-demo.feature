@@ -19,6 +19,11 @@ Scenario: Do a simple travel
   # You should see the output:
   # I leave Brussels
   # I arrive in Rome
+  
+  # Actual values can have embedded double quotes provided they are escaped.
+  When I [travel from "Tampa" to "\"Little Italy\""]  
+  
+  # Notice the HTML-escaping done by Mustache
 
 
 

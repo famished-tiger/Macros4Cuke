@@ -50,6 +50,7 @@ class MacroStep
   # In invokation mode, a placeholder is delimited by double quotes.
   # The rule for building the identifier are:
   # - Leading and trailing space(s) are removed.
+  # - Each underscore character is removed.
   # - Every sequence of one or more space(s) is converted into an underscore
   # - Each placeholder (i.e. = delimiters + enclosed text) is converted into a letter X.
   # - The endings are transformed as follows: ] => '', ]: => _T 
@@ -59,17 +60,20 @@ class MacroStep
   def self.macro_key(aMacroPhrase, mode)
     stripped_phrase = aMacroPhrase.strip # Remove leading ... trailing space(s)
     
+    # Remove every underscore
+    stripped_phrase.gsub!(/_/, '')
     
     # Replace all consecutive whitespaces by an underscore    
     stripped_phrase.gsub!(/\s+/, '_')
     
     
-    # Determine the pattern to isolate each argument/paramter with its delimiters
+    # Determine the pattern to isolate each argument/parameter with its delimiters
     pattern = case mode
       when :definition
         /\{{2,3}[^}]*\}{2,3}/
       when :invokation
-        /"[^"]*"/
+        /"([^\\"]|\\.)*"/
+
     end
     
     # Each text between quotes or mustaches is replaced by the letter X
@@ -144,7 +148,7 @@ private
       when :definition
         /{{{([^}]*)}}}|{{([^}]*)}}/ # Two capturing groups!...
       when :invokation
-        /"([^"]*)"/
+        /"((?:[^\\"]|\\.)*)"/
       else
         raise InternalError, "Internal error: Unknown mode argument #{mode}"
     end

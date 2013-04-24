@@ -38,12 +38,26 @@ That macro-step can then be used in a scenario like this:
   When I [enter my userid "jdoe" and password "hello-world"]
 ```
 
+When it is executed, the last macro-step (invokation) as the same effect as:
+```cucumber 
+  Given I landed in the homepage  
+  When I click "Sign in"  
+  And I fill in "Username" with "jdoe"  
+  And I fill in "Password" with "hello-world"  
+  And I click "Submit"  
+  """  
+```
+
+In other words, this sequence of 5 steps can be replaced by just one.  
+Macros4Cuke not only helps in getting rid of the repeated step sequences,
+ it allows the feature writers to create themselves higher-level steps
+ that are closer to the business logic.
 See also the working examples in the features folder.
 
-### Install and setup ###
+## Install and setup ##
 * Step 1: Install the macros4cuke gem:
 ```bash  
-gem install macros4cuke
+[sudo] gem install macros4cuke
 ```
 
   
@@ -52,6 +66,7 @@ In your /features/support/ folder:
   - Create a Ruby file (e.g. 'macro\_support.rb') with the following contents:  
 ```ruby
 require 'macros4cuke'  
+
 World(Macros4Cuke::MacroStepSupport)
 ```  
   
@@ -64,6 +79,7 @@ require 'macros4cuke/../macro_steps'
   
 Now, you can start writing macros in your Cucumber project.
 
+---
 
 Copyright
 ---------

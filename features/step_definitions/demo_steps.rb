@@ -21,17 +21,21 @@ end
 
 
 When(/^I leave (.+)$/) do |city|
-  trace_steps << %Q|Invoked step: ... I leave #{city}|
+  show "I leave #{city}"
 end
 
 
 When(/^I visit (.+)$/) do |city|
-  trace_steps << %Q|Invoked step: ... I visit #{city}|
+ show "I visit #{city}"
 end
 
 
 When(/^I arrive in (.+)$/) do |city|
-  trace_steps << %Q|Invoked step: ... I arrive in #{city}|
+  show "I arrive in #{city}"
+end
+
+When(/^I type \"([^"]*)\"$/) do |text|
+  show text
 end
 
 
