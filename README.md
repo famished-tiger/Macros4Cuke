@@ -64,9 +64,9 @@ See also the working examples in the features folder.
 * Step 2: Add support for macros in your Cucumber project  
 In your /features/support/ folder:    
   - Create a Ruby file (e.g. 'macro\_support.rb') with the following contents:  
+  
 ```ruby
 require 'macros4cuke'  
-
 World(Macros4Cuke::MacroStepSupport)
 ```  
   
