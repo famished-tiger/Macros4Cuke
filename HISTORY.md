@@ -1,3 +1,15 @@
+## [0.2.00] Version number was bumped
+### Changes:
+* Replaced the Mustache template engine by own lightweight TemplateEngine
+* Macro-step arguments have a syntax that is closer to Gherkin's scenario outlines.
+* Upgraded TemplateEngine class to become a simple templating system.
+* Remove dependency to mustache gem.
+
+### Documentation:
+* All demos updated to new syntax.
+* Updated the examples in README.md
+
+
 ## [0.1.07]
 ### Changes:
 * Added new class TemplateEngine.

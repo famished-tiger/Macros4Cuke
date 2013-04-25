@@ -19,19 +19,18 @@ To each macro-step, it is possible to associate a sequence of sub-steps
 ## Synopsis ##
 Here is an example taken from our demo files:  
 ```cucumber
-  Given I define the step "When I [enter my userid {{userid}} and password {{password}}]" to mean:  
+  Given I define the step "When I [enter my userid <userid> and password <password>]" to mean:  
   """  
   Given I landed in the homepage  
   When I click "Sign in"  
-  And I fill in "Username" with "{{userid}}"  
-  And I fill in "Password" with "{{password}}"  
+  And I fill in "Username" with "<userid>"  
+  And I fill in "Password" with "<password>"  
   And I click "Submit"  
   """  
 ```
 
-Notice how the arguments are enclosed between curly braces {{..}}. In its current incarnation,
-Macros4Cuke relies on the [Mustache](http://mustache.github.io/mustache.5.html) template engine
- for generating the sub-steps.
+Notice how the arguments _userid_ and _password_ are enclosed between chevrons (angle brackets) <...>.
+
 
 That macro-step can then be used in a scenario like this:  
 ```cucumber
@@ -73,7 +72,7 @@ World(Macros4Cuke::MacroStepSupport)
   
 * Step 3: Import the macro-management steps  
 In your /features/step_definitions/ folder:  
-  - Create a ruby file (say, 'use\_macro\_steps.rb') with the following line:  
+  - Create a Ruby file (say, 'use\_macro\_steps.rb') with the following line:  
   
 ```ruby  
 require 'macros4cuke/../macro_steps'

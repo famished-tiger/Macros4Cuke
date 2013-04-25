@@ -1,14 +1,15 @@
 # File: macro-step.rb
 # Purpose: Implementation of the MacroStep class.
 
-require 'mustache'  # Load the Mustache template library
+
+require_relative 'template-engine'
 
 module Macros4Cuke # Module used as a namespace
 
 # In essence, a macro step object represents a Cucumber step that is itself
 # an aggregation of lower-level Cucumber steps.
 class MacroStep
-  # A Mustache instance that expands the steps upon request.
+  # A template engine that expands the substeps upon request.
   attr_reader(:renderer)
   
   # Name of the macro as derived from the macro phrase.
@@ -17,7 +18,7 @@ class MacroStep
   # The list of macro arguments that appears in the macro phrase.
   attr_reader(:phrase_args)
   
-  # The list of macro argument names (as appearing in the Mustache template and in the macro phrase).
+  # The list of macro argument names (as appearing in the substeps and in the macro phrase).
   attr_reader(:args)
 
   
@@ -31,22 +32,18 @@ class MacroStep
     @phrase_args = scan_arguments(aMacroPhrase, :definition)
     @args = @phrase_args.dup()
     
-    # Manipulate the substeps source text (e.g. remove comment lines)
+    # Manipulate the substeps source text
     substeps_processed = preprocess(theSubsteps)
-    
-    # The expansion text is a Mustache template
-    @renderer = Mustache.new
-    renderer.template = substeps_processed
-    
-    # Retrieve the Mustache tag names from the template and add them as macro arguments    
-    add_tags_multi(renderer.template.tokens())
-    @args = @args.flatten.uniq.sort
+
+    @renderer = TemplateEngine.new(substeps_processed)
+    @args.concat(renderer.variables)
+    @args.uniq!
   end
   
   
   # Compute the identifier of the macro from the given macro phrase.
   # A macro phrase is a text that must start with a recognised verb and may contain zero or more placeholders.
-  # In definition mode, a placeholder is delimited by double or triple mustaches (accolades)
+  # In definition mode, a placeholder is delimited by chevrons <..>
   # In invokation mode, a placeholder is delimited by double quotes.
   # The rule for building the identifier are:
   # - Leading and trailing space(s) are removed.
@@ -70,13 +67,13 @@ class MacroStep
     # Determine the pattern to isolate each argument/parameter with its delimiters
     pattern = case mode
       when :definition
-        /\{{2,3}[^}]*\}{2,3}/
+        /<(?:[^\\<>]|\\.)*>/
       when :invokation
         /"([^\\"]|\\.)*"/
 
     end
     
-    # Each text between quotes or mustaches is replaced by the letter X
+    # Each text between quotes or chevron is replaced by the letter X
     normalized = stripped_phrase.gsub(pattern, 'X')
     
     # Drop the "]" ending or replace the "]:# ending by "_T"
@@ -94,7 +91,7 @@ class MacroStep
   # taken by the parameters
   # [macro_parameters] a Hash with pairs of the kind: macro argument name => value
   def expand(macro_parameters)
-    return renderer.render(macro_parameters)
+    return renderer.render(nil, macro_parameters)
   end
 
   
@@ -134,7 +131,7 @@ class MacroStep
 
   
 private
-  # Retrieve from the macro phrase, all the text between "mustaches" or double quotes.
+  # Retrieve from the macro phrase, all the text between <..> or double quotes.
   # Returns an array. Each of its elements corresponds to quoted text.
   # Example:
   # aMacroPhrase = 'a "qualifier" text with "quantity" placeholders.'
@@ -146,7 +143,8 @@ private
     # as a regular expression with one capturing group
     pattern = case mode
       when :definition
-        /{{{([^}]*)}}}|{{([^}]*)}}/ # Two capturing groups!...
+        /<((?:[^\\<>]|\\.)*)>/
+        # /{{{([^}]*)}}}|{{([^}]*)}}/ # Two capturing groups!...
       when :invokation
         /"((?:[^\\"]|\\.)*)"/
       else
@@ -168,73 +166,6 @@ private
     return processed.join("\n")
   end
 
-  # Visit an array of tokens of which the first element is the :multi symbol.
-  # Every found template variable is added to the 'args' attribute.
-  # [tokens] An array that begins with the :multi symbol
-  def add_tags_multi(tokens)
-    first_token = tokens.shift
-    unless first_token == :multi
-      raise InternalError, "Expecting a :multi token instead of a #{first_token}"
-    end
-    
-    tokens.each do |an_opcode|
-      case an_opcode[0]
-        when :static
-          # Do nothing...
-          
-        when :mustache
-          add_tags_mustache(an_opcode)
-          
-        when String
-          #Do nothing...
-        else
-          raise InternalError, "Unknown Mustache token type #{an_opcode.first}"
-      end
-    end
-  end
-  
-  # [mustache_opcode] An array with the first element being :mustache
-  def add_tags_mustache(mustache_opcode)
-    mustache_opcode.shift() # Drop the :mustache symbol
-    
-    case mustache_opcode[0]
-      when :etag
-        triplet = mustache_opcode[1]
-        raise InternalError, "expected 'mustache' token instead of '#{triplet[0]}'" unless triplet[0] == :mustache
-        raise InternalError, "expected 'fetch' token instead of '#{triplet[1]}'" unless triplet[1] == :fetch
-        @args << triplet.last
-        
-      when :fetch
-        @args << mustache_opcode.last
-      
-      when :section
-        add_tags_section(mustache_opcode)
-
-      else
-        raise InternalError, "Unknown Mustache token type #{mustache_opcode.first}"        
-    end
-  end
-  
-  
-  def add_tags_section(opcodes)
-    opcodes.shift() # Drop the :section symbol
-    
-    opcodes.each do |op|
-      case op[0]
-        when :mustache
-          add_tags_mustache(op)
-          
-        when :multi
-          add_tags_multi(op)
-          
-        when String
-          return
-        else
-          raise InternalError, "Unknown Mustache token type #{op.first}"
-      end
-    end
-  end
-  
 end # class
 
 end # module

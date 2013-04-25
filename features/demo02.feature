@@ -9,12 +9,12 @@ Scenario: Creating a basic scenario with one argument
   # The next step creates a macro(-step)
   # The syntax of the new macro-step is specified between the double quotes.
   # The steps to execute when the macro is used/invoked are listed in the multiline triple quotes arguments.
-  # The macro argument is put between double(triple) curly braces {{...}} as required by the Mustache template library.
-  Given I define the step "When I [log in as {{userid}}]" to mean:
+  # The macro argument is put between chevrons <...>.
+  Given I define the step "When I [log in as <userid>]" to mean:
   """
   Given I landed in the homepage
   When I click "Sign in"
-  And I fill in "Username" with "{{userid}}"
+  And I fill in "Username" with "<userid>"
   And I fill in "Password" with "unguessable"
   And I click "Submit"
   """

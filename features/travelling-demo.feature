@@ -6,10 +6,10 @@ Feature: Show -visually- the several ways to use macros
 
 
 Scenario: Definition of a simple macro-step with two arguments
-  Given I define the step "When I [travel from {{origin}} to {{destination}}]" to mean:
+  Given I define the step "When I [travel from <origin> to <destination>]" to mean:
   """
-  When I leave {{origin}}
-  And I arrive in {{destination}}
+  When I leave <origin>
+  And I arrive in <destination>
   """
 
 Scenario: Do a simple travel
@@ -23,16 +23,15 @@ Scenario: Do a simple travel
   # Actual values can have embedded double quotes provided they are escaped.
   When I [travel from "Tampa" to "\"Little Italy\""]  
   
-  # Notice the HTML-escaping done by Mustache
 
 
 
 Scenario: Defining a macro calling other macro(s)
-  Given I define the step "When I [travel from {{origin}} to {{destination}} and back]" to mean:
+  Given I define the step "When I [travel from <origin> to <destination> and back]" to mean:
   """
   # The next two steps are, in fact, macro-step invokations
-  When I [travel from "{{origin}}" to "{{destination}}"]
-  When I [travel from "{{destination}}" to "{{origin}}"]
+  When I [travel from "<origin>" to "<destination>"]
+  When I [travel from "{{destination}}" to "<origin>"]
   """
 
 Scenario: Do a travel back and forth
@@ -48,12 +47,12 @@ Scenario: Do a travel back and forth
 Scenario: Defining a macro that requires a data table
   Given I define the step "When I [fill in the form with]:" to mean:
   """
-  When I type "{{firstname}}"
-  And I type "{{lastname}}"
-  And I type "{{street_address}}"
-  And I type "{{postcode}}"
-  And I type "{{city}}"
-  And I type "{{country}}"
+  When I type "<firstname>"
+  And I type "<lastname>"
+  And I type "<street_address>"
+  And I type "<postcode>"
+  And I type "<city>"
+  And I type "<country>"
   """
 
 Scenario: Using a macro-step with a data table
@@ -96,10 +95,10 @@ Scenario: Demonstrate that it is possible to use a sub-step with a data table
   Given I define the step "When I [fill in, as a Londonian, the form with]:" to mean:
   """
   When I [fill in the form with]:
-  |firstname| {{firstname}}|
-  |lastname | {{lastname}} |
-  |street_address| {{street_address}}|
-  |postcode|{{postcode}} |
+  |firstname| <firstname>|
+  |lastname | <lastname> |
+  |street_address| <street_address>|
+  |postcode|<postcode> |
   # The next two lines have hard-coded values
   |city    |London   |  
   |country | U.K.    |

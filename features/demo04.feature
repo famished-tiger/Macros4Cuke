@@ -9,13 +9,13 @@ Scenario: Defining a macro to be used with multiple arguments in a table
   # The next step creates a macro(-step)
   # The syntax of the new macro-step is specified between double quotes.
   # The steps to execute when the macro is used/invoked are listed in the multiline triple quotes arguments.
-  # The macro argument is put between double(triple) curly braces {{...}} as required by the Mustache template library.
+  # The macro arguments are put between chevrons <...>.
   Given I define the step "When I [enter my credentials as]:" to mean:
   """
   Given I landed in the homepage
   When I click "Sign in"
-  And I fill in "Username" with "{{userid}}"
-  And I fill in "Password" with "{{password}}"
+  And I fill in "Username" with "<userid>"
+  And I fill in "Password" with "<password>"
   And I click "Submit"
   """
 
