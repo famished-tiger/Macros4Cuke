@@ -31,7 +31,7 @@ Scenario: Defining a macro calling other macro(s)
   """
   # The next two steps are, in fact, macro-step invokations
   When I [travel from "<origin>" to "<destination>"]
-  When I [travel from "{{destination}}" to "<origin>"]
+  When I [travel from "<destination>" to "<origin>"]
   """
 
 Scenario: Do a travel back and forth

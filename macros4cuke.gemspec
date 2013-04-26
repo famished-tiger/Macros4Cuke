@@ -36,9 +36,9 @@ EOSTRING
 	pkg.require_path = "lib"
 	
 	pkg.has_rdoc = false
-	
-  pkg.add_dependency('rake',[">= 0"])
-  pkg.add_dependency('cucumber',[">= 0"])
+	pkg.add_runtime_dependency('rake',[">= 0"])
+  pkg.add_runtime_dependency('cucumber',[">= 0"])
+  pkg.add_development_dependency('rspec',[">= 2.00"])
 	
 	pkg.bindir = 'bin'
 	pkg.executables = []

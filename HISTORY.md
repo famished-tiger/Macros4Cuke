@@ -1,9 +1,11 @@
 ## [0.2.00] Version number was bumped
 ### Changes:
-* Replaced the Mustache template engine by own lightweight TemplateEngine
-* Macro-step arguments have a syntax that is closer to Gherkin's scenario outlines.
-* Upgraded TemplateEngine class to become a simple templating system.
-* Remove dependency to mustache gem.
+* Regexp in the step definitions are more robust: they accept escape character sequence. 
+* Expanded the README.md file.
+
+### Fixes:
+* Corrected remnant of Mustache template in travelling_demo.feature file.
+
 
 ### Documentation:
 * All demos updated to new syntax.

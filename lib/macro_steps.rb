@@ -14,7 +14,7 @@
 #  And I click "Submit"
 #  """
 
-Given(/^I define the step "When I \[([^\]]+\]:?)" to mean:$/) do |macro_phrase, template|
+Given(/^I define the step "When I \[((?:[^\\\]]|\\.)+\]:?)" to mean:$/) do |macro_phrase, template|
   add_macro(macro_phrase, template)
 end
 
@@ -22,7 +22,7 @@ end
 # Example:
 #  When I [log in as "guest"]
 #
-When(/^I \[([^\]]+\])$/) do |macro_phrase|
+When(/^I \[((?:[^\\\]]|\\.)+\])$/) do |macro_phrase|
   invoke_macro(macro_phrase)  # This will call the macro with the given phrase
 end
 
