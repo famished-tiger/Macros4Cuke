@@ -109,8 +109,16 @@ Let's begin with a simple example:
 
 The first line in the snippet is a step that helps to define macro-step.
 It is a perfectly valid step once your Cucumber project was configured to use __Macros4Cuke__
- as explained in the Setup section above.  
-The syntax of a macro-step sentence is defined by its __phrase__, that is, the text on the first line that appears
+ as explained in the Setup section above.  The syntax of the new step being created is specified by
+ the text between quotes.  
+Here, for instance, the new step will have for syntax:
+```cucumber
+  When I [enter my credentials]  
+``` 
+It is important to realize that the structure of the sentence outside the quotes ```Given I define the step "..." to mean:```
+is the syntax of the _defining_ step not of your macro-step.
+ 
+A key ingredient of the syntax of a macro-step sentence is its __phrase__, that is, the text on the first line that appears
  between square brackets [...].
 In the example at hand, the _phrase_ is the text:  
 ```cucumber
@@ -156,7 +164,6 @@ enumerates the sub-steps associated with the macro-step. A pleasing aspect is th
   And I click "Sign in"  
   """  
 ``` 
-
  
 ---
 

@@ -49,6 +49,16 @@ end
   
   context "Provided services" do
     it "should render the substeps" do
+      text = subject.expand({'userid' => 'nobody', 'password' => 'no-secret'})
+      expectation = <<-SNIPPET
+  Given I landed in the homepage
+  When I click "Sign in"
+  And I fill in "Username" with "nobody"
+  And I fill in "Password" with "no-secret"
+  And I click "Submit"
+SNIPPET
+      
+      text.should == expectation
     end
   end # context
   
