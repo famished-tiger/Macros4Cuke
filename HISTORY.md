@@ -1,7 +1,11 @@
+## [0.2.03]
+### Changes:
+* Regexp of defining step is more general: it accepts the Gherkin adverbs Given, When, Then, And.
+
+
 ## [0.2.02]
 ### Changes:
 * Added an example in template-engine_spec.rb file. 
-
 
 ### Documentation:
 * Expanded the README.md file.
