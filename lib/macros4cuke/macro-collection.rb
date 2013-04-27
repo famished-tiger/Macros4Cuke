@@ -38,7 +38,7 @@ public
     # Prevent collision of macros (macros with same phrase).
     # This can occur if a macro was defined in a background section.
     # An exception is raised if the phrase syntax of both macros are the     
-    raise DuplicateMacroError.new(aPhrase) f find_macro(aPhrase)
+    raise DuplicateMacroError.new(aPhrase) if find_macro(aPhrase)
     
     @macro_steps[new_macro.name] = new_macro    
 

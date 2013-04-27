@@ -1,3 +1,7 @@
+## [0.2.04]
+### Fixes:
+* Class MacroCollection#add_macro: typo correction.
+
 ## [0.2.03]
 ### Changes:
 * Regexp of defining step is more general: it accepts the Gherkin adverbs Given, When, Then, And.
