@@ -1,3 +1,8 @@
+## [0.2.06]
+#### Changes:
+* Formatting improvements in README.md.
+
+
 ## [0.2.05]
 #### Changes:
 * Expanded README.md with macro-step invokation, passing data value via a table.

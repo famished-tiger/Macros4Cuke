@@ -130,7 +130,7 @@ A phrase can be without argument as in:
 ```
   
 Alternatively, a phrase can have one or more arguments enclosed between chevrons <...>.
-For instance, the next first phrase has one argument, the second has two arguments:  
+For instance, the next first phrase has one argument, the second has three arguments:  
 ```cucumber
   [enter my <userid> and <password>]
   [travel from <origin> to <destination> via <waypoint>]
@@ -168,9 +168,9 @@ Sub-steps can also have macro arguments.
 ``` 
 
 ### Using(invoking) a macro-step ###
-  The rules for using a given macro-step in a scenario are pretty straightforward:
-- Follow closely the syntax of the _quoted sentence_ in the macro definition.
-- Replace every <argument> in the _phrase_ by its actual value between quotes.
+  The rules for using a given macro-step in a scenario are pretty straightforward:  
+- Follow closely the syntax of the _quoted sentence_ in the macro definition.  
+- Replace every \<argument\> in the _phrase_ by its actual value between quotes.  
 
 #### Example 1: ####
 Consider the following macro-step definition:  
@@ -216,7 +216,7 @@ a terminating colon (:) character.
 
 The next example is based on one of the demo feature files:  
 ```cucumber
-  # Next step has a colon after the ']': data can be passed with a table
+  # Next step has a colon ':'  after the ']': data can be passed with a table
   Given I define the step "When I [enter my address as follows]:" to mean:
   """
   When I fill in firstname with "<firstname>"  
@@ -236,8 +236,9 @@ This step can be used like this:
   |street_address| Main Street, 22|  
   |city| Old White Castel|  
   |postcode|JK345|  
-
-Here are few observations worth noticing:  
+```
+  
+Here are few observations worth noticing:   
 - The data table has two columns.  
 - Each row is of the form: |argument name| actual value|. For instance, the argument _street_address_ takes
 the value "Main Street, 22".  
