@@ -13,7 +13,7 @@
 #  And I fill in "Password" with "unguessable"
 #  And I click "Submit"
 #  """
-Given(/^I define the step "(?:When|Given|Then|And) I \[((?:[^\\\]]|\\.)+\]:?)" to mean:$/) do |macro_phrase, template|
+Given(/^I define the step "(?:Given|When|Then) I \[((?:[^\\\]]|\\.)+\]:?)" to mean:$/) do |macro_phrase, template|
   add_macro(macro_phrase, template)
 end
 

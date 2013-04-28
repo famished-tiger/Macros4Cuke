@@ -1,3 +1,7 @@
+## [0.2.05]
+#### Changes:
+* Expanded README.md with macro-step invokation, passing data value via a table.
+
 ## [0.2.04]
 ### Fixes:
 * Class MacroCollection#add_macro: typo correction.

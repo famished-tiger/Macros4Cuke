@@ -4,11 +4,10 @@ Macros4Cuke
 _Add macros to your Cucumber scenarios._  
 [Homepage](https://github.com/famished-tiger/Macros4Cuke)
 
-__Macros4Cuke__ gives you the opportunity to factor out repeated steps
- in your Cucumber scenarios. You can create (macro-)steps directly in feature files.   
-To each macro-step, it is possible to associate a sequence of sub-steps
- that will be executed every time a macro-step occurs in a scenario.
-
+__Macros4Cuke__ is a lightweight library that adds a macro facility your Cucumber scenarios.  
+  In short, you can create any new step that replaces a sequence of lower-level steps.
+  All this can be done directly in your feature files without programming step definitions.
+ 
 ### Highlights ###
 * Works with out-of-the-box Cucumber
 * Simple installation and setup (no programming required),
@@ -37,7 +36,7 @@ That macro-step can then be used in a scenario like this:
   When I [enter my userid "jdoe" and password "hello-world"]
 ```
 
-When it is executed, the last macro-step (invokation) as the same effect as:  
+Once it is executing, the macro-step as the same effect as:  
 ```cucumber 
   Given I landed in the homepage  
   When I click "Sign in"  
@@ -85,19 +84,67 @@ That's it! Now you can start writing macros in your Cucumber project.
 
 ## Getting started ##
 Working with a macro-step is a two-stages process:  
-1. First, the definition of a new macro-step  
-2. Second, the use of that macro-step in a scenario.
+1. Defining a new macro-step  
+2. Using that macro-step in a scenario.
 
-Let's begin by taking a closer look at the definition step.
+Let's begin by taking a closer look at the definition part.
 ### Defining a macro-step ###
-There are three questions to keep in mind when creating a new macro-step:  
-1. What is its syntax?  
-2. What are its substeps?     
-3. Does it need arguments?  
+To create a macro-step, you'll need to use a _defining_ step bundled with Macros4Cuke.
+It is a rather unusual Cucumber step in the sense that its sole purpose is to build another step!  
+The defining step follows the general pattern:
+```cucumber
+  Given I define the step "When I [some phrase]" to mean:  
+  """  
+  # A sequence of sub-steps comes here
+  """  
+```
+
+The defining step has two key components:  
+1. The _quoted sentence_ ```"When I [some phrase]"```. That part
+ specifies the syntax of your future macro-step.  
+2. The multiline text enclosed between the triple quotes (""") and immediately follows the
+ the defining step. It is the place where the sub-steps are listed.  
+
+These two components are detailed now.
+
 
 #### Specifying the syntax of a macro-step ####
-Let's begin with a simple example: 
+As just mentioned earlier, the __quoted sentence__ determines the syntax of the new macro-step.
+Its syntax is more or less free:  
+- The text outside the square brackets follows a fixed pattern. In other words,
+ the quoted sentence MUST always start as follows: ```"When I [...```. Notice however,
+ that the Given, Then keywords are also allowed.  
+- The text delimited by the square brackets [...], is called the __phrase__.  
+
+A few remarks about the __phrase__ part:  
+- It must be unique. In other words, it is not possible to create another
+  macro-step with the same phrase. In fact, Macros4Cuke uses the phrase internally as a mean to identify/name
+  a macro-step.  
+- It may have one or more arguments.
+Besides that, the text inside the phrase can be arbitrary (well, almost).
+
+A phrase can be without argument as in:  
 ```cucumber
+  # A phrase without argument
+  [enter my credentials]
+```
+  
+Alternatively, a phrase can have one or more arguments enclosed between chevrons <...>.
+For instance, the next first phrase has one argument, the second has two arguments:  
+```cucumber
+  [enter my <userid> and <password>]
+  [travel from <origin> to <destination> via <waypoint>]
+```
+
+Each argument (variable) is enclosed between <...> chevrons. In our last example,
+the argument names are: _origin_ and _destination_. Notice that _origin_ and _destination_ are
+ variable names that will take a value (if any) when the step is invoked _(more on this later)_.
+ 
+
+#### Specifying the sub-steps of a macro-step ####
+The sub-steps are placed in a Gherkin multiline text, that is, a text that is enclosed between 
+ triple quotes ("""). In the next example,  
+```cucumber 
   Given I define the step "When I [enter my credentials]" to mean:  
   """  
   Given I landed in the homepage   
@@ -105,57 +152,12 @@ Let's begin with a simple example:
   And I fill in "Password" with "tweedledee"  
   And I click "Sign in"  
   """  
-```
-
-The first line in the snippet is a step that helps to define macro-step.
-It is a perfectly valid step once your Cucumber project was configured to use __Macros4Cuke__
- as explained in the Setup section above.  The syntax of the new step being created is specified by
- the text between quotes.  
-Here, for instance, the new step will have for syntax:
-```cucumber
-  When I [enter my credentials]  
-``` 
-It is important to realize that the structure of the sentence outside the quotes ```Given I define the step "..." to mean:```
-is the syntax of the _defining_ step not of your macro-step.
- 
-A key ingredient of the syntax of a macro-step sentence is its __phrase__, that is, the text on the first line that appears
- between square brackets [...].
-In the example at hand, the _phrase_ is the text:  
-```cucumber
-  [enter my credentials] 
-``` 
-
-A few remarks about the __phrase__ part:  
-- It must be unique. In other words, it is not possible to create another
-  macro-step with the same phrase. In fact, Macros4Cuke uses the phrase internally as a mean to identify/name
-  a macro-step.  
-- It may have one or more arguments. The example above illustrates the simplest case where no argument
-is placed inside the phrase.  
-Besides that, the text inside the phrase can be arbitrary (well, almost).
-
-The next phrase takes two arguments:  
-```cucumber
-  [travel from <origin> to <destination>] 
 ```  
-
-Each argument (variable), is enclosed between <...> chevrons. In our last example,
-the argument names are: _origin_ and _destination_. Notice that _origin_ and _destination_ are
- variable names that will take a value (if any) when the step is invoked _(more on this later)_.
-
-#### Specifying the sub-steps of a macro-step ####
-The sub-steps are placed in a Gherkin multiline text, that is, a text that is enclosed between 
- triple quotes ("""). In the earlier example, the text 
-```cucumber  
-  """  
-  Given I landed in the homepage   
-  And I fill in "Username" with "tweedledum"  
-  And I fill in "Password" with "tweedledee"  
-  And I click "Sign in"  
-  """  
-```  
-enumerates the sub-steps associated with the macro-step. A pleasing aspect is the familiar syntax 
- the sub-steps have: they closely look to steps in a genuine scenario. Sub-steps can also have macro arguments.  
- For instance, the previous step sequence may have two arguments called _userid_ and _password_:
+  
+the text between triple quotes enumerates the sub-steps associated with the macro-step.  
+ A pleasing aspect is the familiar syntax the sub-steps have: they closely look to genuine steps of a scenario.  
+Sub-steps can also have macro arguments. 
+ For instance, the previous step sequence could have two arguments called _userid_ and _password_:  
 ```cucumber  
   """  
   Given I landed in the homepage   
@@ -164,9 +166,83 @@ enumerates the sub-steps associated with the macro-step. A pleasing aspect is th
   And I click "Sign in"  
   """  
 ``` 
- 
----
+
+### Using(invoking) a macro-step ###
+  The rules for using a given macro-step in a scenario are pretty straightforward:
+- Follow closely the syntax of the _quoted sentence_ in the macro definition.
+- Replace every <argument> in the _phrase_ by its actual value between quotes.
+
+#### Example 1: ####
+Consider the following macro-step definition:  
+```cucumber
+  Given I define the step "When I [log in as <userid>]" to mean: 
+  """
+  # Sub-steps come here...
+  """
+```
+
+Its quoted sentence is ```"When I [log in as <userid>]"```, therefore
+ the macro-step can be invoked in a scenario like this:  
+```cucumber
+  Given I do this ...
+  When I [log in as "jdoe"]
+  And I do that...
+```  
+
+#### Example 2: ####
+Here is another -partial- macro-step definition:  
+```cucumber
+  Given I define the step "When I [travel from <origin> to <destination> via <stop>]" to mean: 
+  """
+  # Sub-steps come here...
+  """
+```
+
+This macro-step can occur in a scenario as:  
+```cucumber
+  When I [travel from "San Francisco" to "New-York" via "Las Vegas"]
+```
+
+The actual values for the arguments _origin_, _destination_ and _stop_ are
+respectively San Francisco, New-York and Las Vegas.
+
+
+### Passing argument data via a table  ###
+Passing more than three arguments in the phrase becomes problematic for readability reasons.
+ One ends up with lengthy and clumsy steps.  
+Therefore __Macros4Cuke__ has an alternative way to pass data values via a Gherkin table.  
+To enable this mechanism for a given macro, ensure that in its definition the quoted sentence ends with
+a terminating colon (:) character.
+
+The next example is based on one of the demo feature files:  
+```cucumber
+  # Next step has a colon after the ']': data can be passed with a table
+  Given I define the step "When I [enter my address as follows]:" to mean:
+  """
+  When I fill in firstname with "<firstname>"  
+  And I fill in lastname with  "<lastname>"  
+  And I fill in street with "<street_address>"  
+  And I fill in postcode with "<postcode>"  
+  And I fill in locality with "<city>"  
+  And I fill in country with "<country>"  
+  """
+```
+
+This step can be used like this:
+```cucumber
+  When I [enter my address as follows]:"  
+  |lastname|Doe|  
+  |firstname|John|  
+  |street_address| Main Street, 22|  
+  |city| Old White Castel|  
+  |postcode|JK345|  
+
+Here are few observations worth noticing:  
+- The data table has two columns.  
+- Each row is of the form: |argument name| actual value|. For instance, the argument _street_address_ takes
+the value "Main Street, 22".  
+- Data rows don't have to follow strictly the order of the arguments in the sub-step sequence. 
 
 Copyright
 ---------
-Copyright (c) 2013, Dimitri Geshef. See [LICENSE.txt](https://github.com/famished-tiger/Macros4Cuke/blob/master/LICENSE.txt) for details.
+Copyright (c) 2013, Dimitri Geshef. Macros4Cuke is released under the MIT License see [LICENSE.txt](https://github.com/famished-tiger/Macros4Cuke/blob/master/LICENSE.txt) for details.
