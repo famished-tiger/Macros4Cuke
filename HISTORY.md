@@ -1,3 +1,10 @@
+## [0.2.09]
+#### Changes:
+* Added one dedicated capturing group in regexp of macro defining step.
+* Class MacroStep: initialize method and others. Added an explicit argument for use table mode.
+* This impacts the MacroSupport module and the MacroCollection class.
+
+
 ## [0.2.08]
 #### Changes:
 * Class MacroStep: method validate_params is now private, the signature of expand method has changed.

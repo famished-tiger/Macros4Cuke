@@ -9,7 +9,7 @@ require_relative '../../lib/macros4cuke/macro-step'	# The class under test
 module Macros4Cuke	# Open the module to avoid lengthy qualified names
 
 describe MacroStep do
-  let(:sample_phrase) { "enter my credentials as <userid>]:" }
+  let(:sample_phrase) { "enter my credentials as <userid>" }
   
   let(:sample_template) do
     snippet = <<-SNIPPET
@@ -24,12 +24,13 @@ SNIPPET
 end
 
   # Default instantiation rule
-  subject { MacroStep.new(sample_phrase, sample_template) }
+  subject { MacroStep.new(sample_phrase, sample_template, true) }
 
 
   context "Creation & initialization" do
-    it "should be created with a phrase and a template" do
-      lambda { MacroStep.new(sample_phrase, sample_template) }.should_not raise_error
+    it "should be created with a phrase, substeps and a table use indicator" do
+      lambda { MacroStep.new(sample_phrase, sample_template, true) }.should_not raise_error
+      lambda { MacroStep.new(sample_phrase, sample_template, false) }.should_not raise_error      
     end
 
   
@@ -50,7 +51,7 @@ end
   
   context "Provided services" do
   
-    let(:phrase_instance) {%Q|enter my credentials as "nobody"]:|}
+    let(:phrase_instance) {%Q|enter my credentials as "nobody"|}
     
     it "should render the substeps" do
       text = subject.expand(phrase_instance, [ ['password', 'no-secret'] ])

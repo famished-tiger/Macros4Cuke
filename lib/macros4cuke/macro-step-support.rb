@@ -26,9 +26,9 @@ public
   # Pre-condition: there is no existing macro with the same key.
   # [aPhrase] The text that is enclosed between the square brackets.
   # [aTemplate] A text that consists of a sequence of Cucumber steps.
-  # These steps
-  def add_macro(aPhrase, aTemplate)
-    MacroCollection::instance.add_macro(aPhrase, aTemplate)
+  # [useTable] A boolean that indicates whether a table should be used to pass actual values.
+  def add_macro(aPhrase, aTemplate, useTable)
+    MacroCollection::instance.add_macro(aPhrase, aTemplate, useTable)
   end
 
   

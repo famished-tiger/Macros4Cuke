@@ -13,15 +13,17 @@
 #  And I fill in "Password" with "unguessable"
 #  And I click "Submit"
 #  """
-Given(/^I define the step "(?:Given|When|Then) I \[((?:[^\\\]]|\\.)+\]:?)" to mean:$/) do |macro_phrase, template|
-  add_macro(macro_phrase, template)
+# The regexp has two capturing group: one for the phrase, a second for the terminating colon (:)
+Given(/^I define the step "(?:Given|When|Then) I \[((?:[^\\\]]|\\.)+)\](:?)" to mean:$/) do |macro_phrase, colon_present, template|
+  use_table = (colon_present == ':')
+  add_macro(macro_phrase, template, use_table)
 end
 
 # This step is used to invoke a simple macro-step
 # Example:
 #  When I [log in as "guest"]
 #
-When(/^I \[((?:[^\\\]]|\\.)+\])$/) do |macro_phrase|
+When(/^I \[((?:[^\\\]]|\\.)+)\]$/) do |macro_phrase|
   invoke_macro(macro_phrase)  # This will call the macro with the given phrase
 end
 
@@ -31,7 +33,7 @@ end
 #  When I [enter my credentials as]:
 #  |userid  |guest      |
 #  |password|unguessable|
-When(/^I \[([^\]]+\]:)$/) do |macro_phrase, table_argument|
+When(/^I \[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   # Ensure that the second argument is of the correct type
   unless table_argument.kind_of?(Cucumber::Ast::Table)
      raise StandardError, "This step must have a data table as an argument."

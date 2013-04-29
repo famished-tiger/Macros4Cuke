@@ -26,8 +26,9 @@ class MacroStep
   # Constructor.
   # [aMacroPhrase] The text from the macro step definition that is between the square brackets.
   # [theSubsteps] The source text of the steps to be expanded upon macro invokation.
-  def initialize(aMacroPhrase, theSubsteps)
-    @key = self.class.macro_key(aMacroPhrase, :definition)
+  # [useTable] A boolean that indicates whether a table should be used to pass actual values.
+  def initialize(aMacroPhrase, theSubsteps, useTable)
+    @key = self.class.macro_key(aMacroPhrase, useTable, :definition)
     
     # Retrieve the macro arguments embedded in the phrase.
     @phrase_args = scan_arguments(aMacroPhrase, :definition)
@@ -51,11 +52,14 @@ class MacroStep
   # - Each underscore character is removed.
   # - Every sequence of one or more space(s) is converted into an underscore
   # - Each placeholder (i.e. = delimiters + enclosed text) is converted into a letter X.
-  # - The endings are transformed as follows: ] => '', ]: => _T 
+  # - when useTable is true, concatenate: _T 
   # Example:
   # Consider the macro phrase: 'create the following "contactType" contact]:'
   # The resulting macro_key is: 'create_the_following_X_contact_T'
-  def self.macro_key(aMacroPhrase, mode)
+  # [aMacroPhrase] The text from the macro step definition that is between the square brackets.
+  # [useTable] A boolean that indicates whether a table should be used to pass actual values.
+  # [mode] one of the following: :definition, :invokation
+  def self.macro_key(aMacroPhrase, useTable, mode)
     stripped_phrase = aMacroPhrase.strip # Remove leading ... trailing space(s)
     
     # Remove every underscore
@@ -77,12 +81,7 @@ class MacroStep
     # Each text between quotes or chevron is replaced by the letter X
     normalized = stripped_phrase.gsub(pattern, 'X')
     
-    # Drop the "]" ending or replace the "]:# ending by "_T"
-    key = if normalized.end_with?("]")
-      normalized.chop()
-    else
-      normalized.sub(/\]:/, '_T')
-    end
+    key = normalized + (useTable ? '_T' : '')
     
     return key
   end  
