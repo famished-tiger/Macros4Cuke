@@ -10,6 +10,7 @@ module Macros4Cuke	# Open the module to avoid lengthy qualified names
 
 describe MacroStep do
   let(:sample_phrase) { "enter my credentials as <userid>]:" }
+  
   let(:sample_template) do
     snippet = <<-SNIPPET
   Given I landed in the homepage
@@ -32,8 +33,8 @@ end
     end
 
   
-    it "should know its key/name" do
-      subject.name.should == "enter_my_credentials_as_X_T"
+    it "should know its key" do
+      subject.key.should == "enter_my_credentials_as_X_T"
     end
   
     it "should know the tags(placeholders) from its phrase" do
@@ -48,8 +49,11 @@ end
   
   
   context "Provided services" do
+  
+    let(:phrase_instance) {%Q|enter my credentials as "nobody"]:|}
+    
     it "should render the substeps" do
-      text = subject.expand({'userid' => 'nobody', 'password' => 'no-secret'})
+      text = subject.expand(phrase_instance, [ ['password', 'no-secret'] ])
       expectation = <<-SNIPPET
   Given I landed in the homepage
   When I click "Sign in"
@@ -60,6 +64,27 @@ SNIPPET
       
       text.should == expectation
     end
+    
+    it "should render steps even when one argument has no actual value" do
+      # Special case: password has no value...
+      text = subject.expand(phrase_instance, [ ])
+      expectation = <<-SNIPPET
+  Given I landed in the homepage
+  When I click "Sign in"
+  And I fill in "Username" with "nobody"
+  And I fill in "Password" with ""
+  And I click "Submit"
+SNIPPET
+      
+      text.should == expectation    
+    end
+    
+    it "should complain when an unknown variable is used" do
+      # Error case: there is no macro argument called <unknown>
+      error_message = "Unknown macro-ste argument 'unknown'."
+      lambda { subject.expand(phrase_instance, [ ['unknown', 'anything'] ]) }.should raise_error(UnknownArgumentError, error_message)
+    end
+
   end # context
   
 

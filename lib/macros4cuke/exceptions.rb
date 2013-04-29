@@ -30,7 +30,7 @@ end # class
 # that has an unknown name. 
 class UnknownArgumentError < Macros4CukeError
   def initialize(argName)
-    super("Unknown macro argument #{argName}.")
+    super("Unknown macro-ste argument '#{argName}'.")
   end
 end # class
 

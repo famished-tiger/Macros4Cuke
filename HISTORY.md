@@ -1,3 +1,10 @@
+## [0.2.08]
+#### Changes:
+* Class MacroStep: method validate_params is now private, the signature of expand method has changed.
+* macro-step.rb: added a missing require 'exceptions'.
+* macro-step_spec.rb: updated to taken into account the above change. Added test case when a macro is called with unknown argument.
+* Class MacroCollection#render_steps updated for the above change.
+
 ## [0.2.07]
 #### Changes:
 * Editorial improvements in README.md, corrected one inaccurate sentence.

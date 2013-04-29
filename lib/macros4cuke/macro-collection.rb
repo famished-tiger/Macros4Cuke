@@ -40,7 +40,7 @@ public
     # An exception is raised if the phrase syntax of both macros are the     
     raise DuplicateMacroError.new(aPhrase) if find_macro(aPhrase)
     
-    @macro_steps[new_macro.name] = new_macro    
+    @macro_steps[new_macro.key] = new_macro    
 
   end
   
@@ -55,13 +55,9 @@ public
 
     macro = find_macro(aPhrase) 
     raise UnknownMacroError.new(aPhrase) if macro.nil?
-    
-    # Retrieve macro argument names and their associated value from the table
-    params = macro.validate_params(aPhrase, rawData)
 
     # Render the steps
-    rendered_steps = macro.expand(params)
-    
+    return  macro.expand(aPhrase, rawData)
   end
 
 private

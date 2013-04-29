@@ -2,6 +2,7 @@
 # Purpose: Implementation of the MacroStep class.
 
 
+require_relative 'exceptions'
 require_relative 'template-engine'
 
 module Macros4Cuke # Module used as a namespace
@@ -12,8 +13,8 @@ class MacroStep
   # A template engine that expands the substeps upon request.
   attr_reader(:renderer)
   
-  # Name of the macro as derived from the macro phrase.
-  attr_reader(:name)
+  # Unique key of the macro as derived from the macro phrase.
+  attr_reader(:key)
   
   # The list of macro arguments that appears in the macro phrase.
   attr_reader(:phrase_args)
@@ -26,7 +27,7 @@ class MacroStep
   # [aMacroPhrase] The text from the macro step definition that is between the square brackets.
   # [theSubsteps] The source text of the steps to be expanded upon macro invokation.
   def initialize(aMacroPhrase, theSubsteps)
-    @name = self.class.macro_key(aMacroPhrase, :definition)
+    @key = self.class.macro_key(aMacroPhrase, :definition)
     
     # Retrieve the macro arguments embedded in the phrase.
     @phrase_args = scan_arguments(aMacroPhrase, :definition)
@@ -89,12 +90,16 @@ class MacroStep
   
   # Render the steps from the template, given the values
   # taken by the parameters
-  # [macro_parameters] a Hash with pairs of the kind: macro argument name => value
-  def expand(macro_parameters)
-    return renderer.render(nil, macro_parameters)
+  # [aPhrase] an instance of the macro phrase.
+  # [rawData] An Array of couples.
+  # Each couple is of the form: argument name, a value.
+  # Multiple rows with same argument name are acceptable.
+  def expand(aPhrase, rawData)
+    params = validate_params(aPhrase, rawData)
+    return renderer.render(nil, params)
   end
 
-  
+private  
   # Build a Hash from the given raw data.
   # [aPhrase] an instance of the macro phrase.
   # [rawData] An Array of couples.
@@ -104,23 +109,23 @@ class MacroStep
     macro_parameters = {}
     
     # Retrieve the value(s) per variable in the phrase.
-    quoted_values = scan_arguments(aPhrase, :invokation)
+    quoted_values = scan_arguments(aPhrase, :invokation)   
     quoted_values.each_with_index do |val, index|
       macro_parameters[phrase_args[index]] = val
     end
     
 
     unless rawData.nil?
-      rawData.each do |(key, value)|
-        raise UnknownArgumentError.new(key) unless @args.include? key
-        if macro_parameters.include? key
-          if macro_parameters[key].kind_of?(Array)
-             macro_parameters[key] << value
+      rawData.each do |(a_key, value)|
+        raise UnknownArgumentError.new(a_key) unless @args.include? a_key
+        if macro_parameters.include? a_key
+          if macro_parameters[a_key].kind_of?(Array)
+             macro_parameters[a_key] << value
           else
-            macro_parameters[key] = [macro_parameters[key], value]
+            macro_parameters[a_key] = [macro_parameters[a_key], value]
           end
         else
-          macro_parameters[key] = value
+          macro_parameters[a_key] = value
         end
       end
     end
@@ -130,7 +135,7 @@ class MacroStep
 
 
   
-private
+
   # Retrieve from the macro phrase, all the text between <..> or double quotes.
   # Returns an array. Each of its elements corresponds to quoted text.
   # Example:
