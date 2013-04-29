@@ -5,7 +5,7 @@ _Add macros to your Cucumber scenarios._
 [Homepage](https://github.com/famished-tiger/Macros4Cuke)
 
 __Macros4Cuke__ is a lightweight library that adds a macro facility your Cucumber scenarios.  
-  In short, you can create any new step that replaces a sequence of lower-level steps.
+  With it, you can create any new step that replaces a sequence of lower-level steps.
   All this can be done directly in your feature files without programming step definitions.
  
 ### Highlights ###
@@ -16,7 +16,7 @@ __Macros4Cuke__ is a lightweight library that adds a macro facility your Cucumbe
 * Data values can be passed to the sub-steps.
 
 ## A quick example ##
-Here is an example taken from our demo files:  
+Here is a macro-step example taken from our demo files:  
 ```cucumber
   Given I define the step "When I [enter my userid <userid> and password <password>]" to mean:  
   """  
@@ -51,7 +51,7 @@ Macros4Cuke not only helps in getting rid of the repeated step sequences,
  it allows the feature writers to create themselves higher-level steps
  that are closer to the business logic.  
 
-See also the working examples in the features folder.
+See also the working examples in the ```features/``` folder.
 
 ## Setup ##
 ### Installation ###
@@ -84,7 +84,7 @@ That's it! Now you can start writing macros in your Cucumber project.
 
 ## Getting started ##
 Working with a macro-step is a two-stages process:  
-1. Defining a new macro-step  
+1. Defining a new macro-step; and,  
 2. Using that macro-step in a scenario.
 
 Let's begin by taking a closer look at the definition part.
@@ -102,7 +102,7 @@ The defining step follows the general pattern:
 The defining step has two key components:  
 1. The _quoted sentence_ ```"When I [some phrase]"```. That part
  specifies the syntax of your future macro-step.  
-2. The multiline text enclosed between the triple quotes (""") and immediately follows the
+2. The multiline text enclosed between the triple quotes (""") that immediately follows the
  the defining step. It is the place where the sub-steps are listed.  
 
 These two components are detailed now.
@@ -130,7 +130,7 @@ A phrase can be without argument as in:
 ```
   
 Alternatively, a phrase can have one or more arguments enclosed between chevrons <...>.
-For instance, the next first phrase has one argument, the second has three arguments:  
+For instance, the next first phrase has two arguments, the second has three arguments:  
 ```cucumber
   [enter my <userid> and <password>]
   [travel from <origin> to <destination> via <waypoint>]
@@ -167,7 +167,7 @@ Sub-steps can also have macro arguments.
   """  
 ``` 
 
-### Using(invoking) a macro-step ###
+### Using (invoking) a macro-step ###
   The rules for using a given macro-step in a scenario are pretty straightforward:  
 - Follow closely the syntax of the _quoted sentence_ in the macro definition.  
 - Replace every \<argument\> in the _phrase_ by its actual value between quotes.  
@@ -234,7 +234,7 @@ This step can be used like this:
   |lastname|Doe|  
   |firstname|John|  
   |street_address| Main Street, 22|  
-  |city| Old White Castel|  
+  |city| Old White Castle|  
   |postcode|JK345|  
 ```
   

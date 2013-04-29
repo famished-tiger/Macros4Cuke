@@ -1,3 +1,8 @@
+## [0.2.07]
+#### Changes:
+* Editorial improvements in README.md, corrected one inaccurate sentence.
+
+
 ## [0.2.06]
 #### Changes:
 * Formatting improvements in README.md.
