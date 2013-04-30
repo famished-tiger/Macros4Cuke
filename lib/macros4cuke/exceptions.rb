@@ -15,6 +15,23 @@ class DuplicateMacroError < Macros4CukeError
   end
 end # class
 
+# Raised when one defines an argument name in a macro-step's phrase
+# and that argument name does not appear in any sub-step.
+class UselessPhraseArgument < Macros4CukeError
+  def initialize(anArgName)
+    super("The phrase argument '#{anArgName}' does not appear in a sub-step.")
+  end
+end # class
+
+
+
+# Raised when one defines an argument name in a macro-step's phrase
+# and that argument name does not appear in any sub-step.
+class UnreachableSubstepArgument < Macros4CukeError
+  def initialize(anArgName)
+    super("The sub-step argument '#{anArgName}' does not appear in the phrase.")
+  end
+end # class
 
 
 # Raised when one invokes a macro-step with an unknown phrase. 
@@ -30,9 +47,19 @@ end # class
 # that has an unknown name. 
 class UnknownArgumentError < Macros4CukeError
   def initialize(argName)
-    super("Unknown macro-ste argument '#{argName}'.")
+    super("Unknown macro-step argument '#{argName}'.")
   end
 end # class
+
+
+
+# Raised when one invokes a macro-step without a required data table argument
+class DataTableNotFound < Macros4CukeError
+  def initialize(argName)
+    super("The macro-step is missing a data table argument.")
+  end
+end # class
+
 
 
 # Raised when Macros4Cuke encountered an issue

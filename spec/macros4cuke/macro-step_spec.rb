@@ -29,9 +29,21 @@ end
 
   context "Creation & initialization" do
     it "should be created with a phrase, substeps and a table use indicator" do
-      lambda { MacroStep.new(sample_phrase, sample_template, true) }.should_not raise_error
-      lambda { MacroStep.new(sample_phrase, sample_template, false) }.should_not raise_error      
+      lambda { MacroStep.new(sample_phrase, sample_template, true) }.should_not raise_error     
     end
+    
+      
+    it "should complain when a sub-step argument can never be assigned a value via the phrase" do
+      error_message = "The sub-step argument 'password' does not appear in the phrase."
+      lambda { MacroStep.new(sample_phrase, sample_template, false) }.should raise_error(Macros4Cuke::UnreachableSubstepArgument, error_message)   
+    end
+    
+    
+    it "should complain when an argument from the phrase never occurs in a substep" do
+      a_phrase = "enter my credentials as <foobar>"
+      error_message = "The phrase argument 'foobar' does not appear in a sub-step."
+      lambda { MacroStep.new(a_phrase, sample_template, true) }.should raise_error(Macros4Cuke::UselessPhraseArgument, error_message)   
+    end    
 
   
     it "should know its key" do
@@ -82,7 +94,7 @@ SNIPPET
     
     it "should complain when an unknown variable is used" do
       # Error case: there is no macro argument called <unknown>
-      error_message = "Unknown macro-ste argument 'unknown'."
+      error_message = "Unknown macro-step argument 'unknown'."
       lambda { subject.expand(phrase_instance, [ ['unknown', 'anything'] ]) }.should raise_error(UnknownArgumentError, error_message)
     end
 

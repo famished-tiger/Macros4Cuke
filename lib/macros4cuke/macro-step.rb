@@ -26,19 +26,22 @@ class MacroStep
   # Constructor.
   # [aMacroPhrase] The text from the macro step definition that is between the square brackets.
   # [theSubsteps] The source text of the steps to be expanded upon macro invokation.
-  # [useTable] A boolean that indicates whether a table should be used to pass actual values.
+  # [useTable] A boolean that indicates whether a data table must be used to pass actual values.
   def initialize(aMacroPhrase, theSubsteps, useTable)
     @key = self.class.macro_key(aMacroPhrase, useTable, :definition)
     
     # Retrieve the macro arguments embedded in the phrase.
     @phrase_args = scan_arguments(aMacroPhrase, :definition)
-    @args = @phrase_args.dup()
     
     # Manipulate the substeps source text
     substeps_processed = preprocess(theSubsteps)
 
     @renderer = TemplateEngine.new(substeps_processed)
-    @args.concat(renderer.variables)
+    substeps_vars = renderer.variables
+    
+    
+    @args = validate_phrase_args(@phrase_args, substeps_vars)
+    @args.concat(substeps_vars)
     @args.uniq!
   end
   
@@ -168,6 +171,29 @@ private
     processed = lines.reject { |a_line| a_line =~ /\s*#/ }
     
     return processed.join("\n")
+  end
+  
+  # Check for inconsistencies between the argument names in the phrase and the substeps part.
+  def validate_phrase_args(thePhraseArgs, substepsVars)
+    # Error when the phrase names an argument that never occurs in the substeps
+    thePhraseArgs.each do |phrase_arg|
+      raise UselessPhraseArgument.new(phrase_arg) unless substepsVars.include? phrase_arg
+    end
+    
+    # Error when a substep has an argument that never appears in the phrase and the macro-step does not use data table.
+    unless use_table?
+      substepsVars.each do |substep_arg|
+        raise UnreachableSubstepArgument.new(substep_arg) unless thePhraseArgs.include? substep_arg
+      end      
+    end
+  
+    return thePhraseArgs.dup()
+  end
+  
+  
+  # Return true, if the macro-step requires a data table to pass actual values of the arguments.
+  def use_table?()
+    return key =~ /_T$/
   end
 
 end # class

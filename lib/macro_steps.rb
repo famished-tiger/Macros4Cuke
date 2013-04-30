@@ -28,7 +28,7 @@ When(/^I \[((?:[^\\\]]|\\.)+)\]$/) do |macro_phrase|
 end
 
 
-# This step is used to invoke a macro-step with a table argument.
+# This step is used to invoke a macro-step with a data table argument.
 # Example:
 #  When I [enter my credentials as]:
 #  |userid  |guest      |
@@ -36,7 +36,7 @@ end
 When(/^I \[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   # Ensure that the second argument is of the correct type
   unless table_argument.kind_of?(Cucumber::Ast::Table)
-     raise StandardError, "This step must have a data table as an argument."
+     raise Macros4Cuke::DataTableNotFound, "This step must have a data table as an argument."
   end
   
   # This will call the macro with the given phrase.

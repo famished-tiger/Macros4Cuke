@@ -168,7 +168,8 @@ Sub-steps can also have macro arguments.
 ``` 
 
 ### Using (invoking) a macro-step ###
-  The rules for using a given macro-step in a scenario are pretty straightforward:  
+A macro-step can only be invoked after its definition has been read by Cucumber.  
+The syntax rules for using a given macro-step in a scenario are pretty straightforward:  
 - Follow closely the syntax of the _quoted sentence_ in the macro definition.  
 - Replace every \<argument\> in the _phrase_ by its actual value between quotes.  
 
