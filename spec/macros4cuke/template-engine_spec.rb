@@ -155,6 +155,13 @@ SNIPPET
       instance = TemplateEngine.new ''
       instance.source.should be_empty
     end
+    
+    it "should complain when a placeholder is empty or blank" do
+      text_w_empty_arg = sample_template.sub(/userid/, '')
+      error_message = %Q|An empty or blank argument occurred in 'And I fill in "Username" with "<>"'.|
+      lambda { TemplateEngine.new text_w_empty_arg }.should raise_error(Macros4Cuke::EmptyArgumentError, error_message)      
+      
+    end
   end
   
   context "Provided services" do

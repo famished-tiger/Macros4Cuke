@@ -2,6 +2,7 @@
 # Purpose: Implementation of the MacroStep class.
 
 require 'strscan' # Use the StringScanner for lexical analysis.
+require_relative 'exceptions' # Load the 
 
 module Macros4Cuke # Module used as a namespace
 
@@ -52,18 +53,21 @@ public
 end # class
 
 
+# A very simple implementation of a templating engine. 
 class TemplateEngine
   # The original text of the template is kept here.
   attr_reader(:source)
   
   # Constructor.
-  # [aSourceTemplate]
+  # [aSourceTemplate] the template source text. It may contain zero or tags enclosed between chevrons <...>.
   def initialize(aSourceTemplate)
     @source = aSourceTemplate
     @representation = compile(aSourceTemplate)
   end
 
 public
+  # [aContextObject] context object to get actual values (when not present in the Hash parameter).
+  # [theLocals] a Hash with pairs of the form: argument name => actual value.
   def render(aContextObject = nil, theLocals)
     return '' if @representation.empty?
     context = aContextObject.nil? ? Object.new : aContextObject
@@ -88,6 +92,8 @@ public
 
   # Class method. Parse the given line text.
   # Returns an array of couples.
+  # Couples are of the form:
+  # [:static, text] or [:dynamic, text]
   def self.parse(aTextLine)
     scanner = StringScanner.new(aTextLine)
     result = []
@@ -134,13 +140,21 @@ private
     input_lines = aSourceTemplate.split(/\r\n?|\n/)
     
     # Parse the input text into raw data.
-    raw_lines = input_lines.map { |line| self.class.parse(line) }
+    raw_lines = input_lines.map do |line| 
+      line_items = self.class.parse(line)
+      line_items.each do |(kind, text)|
+        # A tag text cannot be empty nor blank
+        raise EmptyArgumentError.new(line.strip) if (kind == :dynamic) && text.strip.empty?
+      end
+      
+      line_items
+    end
     
     compiled_lines = raw_lines.map { |line| compile_line(line) }
     return compiled_lines.flatten()
   end
   
-  
+  # Convert the array of raw entries into full-fledged template elements.
   def compile_line(aRawLine)
     line_rep = aRawLine.map { |couple| compile_couple(couple) }
     line_rep << EOLRep.new

@@ -34,6 +34,15 @@ class UnreachableSubstepArgument < Macros4CukeError
 end # class
 
 
+
+# Raised when a sub-step has an empty or blank argument name.
+class EmptyArgumentError < Macros4CukeError
+  def initialize(aText)
+    super("An empty or blank argument occurred in '#{aText}'.")
+  end
+end # class
+
+
 # Raised when one invokes a macro-step with an unknown phrase. 
 class UnknownMacroError < Macros4CukeError
   def initialize(aPhrase)

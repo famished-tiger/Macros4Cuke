@@ -1,3 +1,10 @@
+## 0.2.12 / 2013-05-01
+* [CHANGE] Method `Macros4Cuke#compile` raise an `EmptyArgumentError` exception when a line contains an empty or blank argument.
+* [CHANGE] File `template-engine_spec.rb`: Added an example for error case mentioned in previous line.
+
+## 0.2.11 / 2013-05-01
+* [CHANGE] File `macros4cuke.gemspec`: Removed dependency on Rake.
+
 ## 0.2.10 / 2013-04-30
 
 * [CHANGE] `CHANGELOG.md` replaces `HISTORY.md` file. Partial reformatting of historical entries to [Changelogs Convention](tech-angels.github.com/vandamme/#changelogs-convention)
