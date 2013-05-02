@@ -11,7 +11,7 @@ end # class
 # that has the same phrase as an existing macro.
 class DuplicateMacroError < Macros4CukeError
   def initialize(aPhrase)
-    super("A macro-step with phrase '[#{aPhrase}' already exist.")
+    super("A macro-step with phrase '#{aPhrase}' already exist.")
   end
 end # class
 

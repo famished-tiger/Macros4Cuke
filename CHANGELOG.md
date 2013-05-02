@@ -1,3 +1,7 @@
+## 0.2.13 / 2013-05-02
+* [NEW] File `macro-collection_spec.rb`: partial spec file for the `MacroCollection` class.
+* [FIX] `DuplicateMacroError#initialize`: Removed superfluous [ in error message.
+
 ## 0.2.12 / 2013-05-01
 * [CHANGE] Method `Macros4Cuke#compile` raise an `EmptyArgumentError` exception when a line contains an empty or blank argument.
 * [CHANGE] File `template-engine_spec.rb`: Added an example for error case mentioned in previous line.
