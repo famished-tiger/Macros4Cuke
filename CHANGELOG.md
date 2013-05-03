@@ -1,3 +1,8 @@
+## 0.2.15 / 2013-05-03
+* [CHANGE] File `macro-step-support_spec.rb`: Added one RSpec example.
+* [FIX] Updated gemspec.
+
+
 ## 0.2.14 / 2013-05-03
 * [CHANGE] Code comments reformatted to YARD. The command line `yard stats`display a 100% documented score!
 * [CHANGE] Moved all classes related to the template engine to the new module Templating.

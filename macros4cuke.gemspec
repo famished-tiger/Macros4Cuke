@@ -22,8 +22,8 @@ Enjoy using Cucumber with macros...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 EOSTRING
 	
-	file_list = Dir['cucumber.yml', 'CHANGELOG.md', 'LICENSE.txt', 'README.md', 
-    'lib/*.*', 'lib/*/*.rb', 'features/*.*', 'features/*/*.rb', 'spec/*.*', 'spec/*/*_spec.rb']  
+	file_list = Dir['.yardopts', 'cucumber.yml', 'CHANGELOG.md', 'LICENSE.txt', 'README.md', 
+    'lib/*.*', 'lib/*/*.rb', 'lib/*/*/*.rb', 'features/*.*', 'features/*/*.rb', 'spec/*.*', 'spec/*/*_spec.rb', 'spec/*/*/*_spec.rb']  
 	pkg.files = file_list
 	pkg.require_path = "lib"
 	

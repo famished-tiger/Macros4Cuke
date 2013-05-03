@@ -40,6 +40,12 @@ SNIPPET
       error_message = "A macro-step with phrase 'enter the credentials' already exist."
       lambda { world.add_macro(m1_phrase, m1_substeps, true) }.should raise_error(Macros4Cuke::DuplicateMacroError, error_message)
     end
+    
+    it "should complain macro uses no table and phrase is parameterless" do
+      # Error case: substeps have arguments, but the macro has no mechanism to pass the needed data.
+      error_message = "The sub-step argument 'userid' does not appear in the phrase."
+      lambda { world.add_macro("fill in the credentials", m1_substeps, false) }.should raise_error(Macros4Cuke::UnreachableSubstepArgument, error_message)    
+    end
   end # context
 
 end # describe
