@@ -5,48 +5,48 @@ require_relative "macro-collection"
 
 module Macros4Cuke # Module used as a namespace
 
-# Mix-in module that should be extending World objects in Cucumber.
-# Synopsis (in env.rb):
-# require 'macros4cuke'
-# ...
-# World(Macros4Cuke::MacroStepSupport) # Extend the world object with this module.
-#
+# Mix-in module that should be extending World objects in Cucumber.  
+# Synopsis (in env.rb):  
+#   
+#   require 'macros4cuke'  
+#   ...  
+#   World(Macros4Cuke::MacroStepSupport) # Extend the world object with this module.
+#    
 module MacroStepSupport
-
-  # Callback invoked when a World object is extend(ed) with this module.
-  def self.extended(world)
-    # Add & initialize an instance variable for macro support.  
-    MacroCollection::instance.init()
-  end
-
-
 public
 
   # Add a new macro.
   # Pre-condition: there is no existing macro with the same key.
-  # [aPhrase] The text that is enclosed between the square brackets.
-  # [aTemplate] A text that consists of a sequence of Cucumber steps.
-  # [useTable] A boolean that indicates whether a table should be used to pass actual values.
+  # @param aPhrase [String] The text that is enclosed between the square brackets [...].
+  # @param aTemplate [String] The text template that consists of a sequence of sub-steps.
+  # @param useTable [boolean] A flag that indicates whether a table should be used to pass actual values.
   def add_macro(aPhrase, aTemplate, useTable)
     MacroCollection::instance.add_macro(aPhrase, aTemplate, useTable)
   end
 
-  
+
   # Invoke a macro with given phrase and (optionally) a table of values
-  # [aPhrase] an instance of the macro phrase.
-  # [rawData] An Array of couples.
-  # Each couple is of the form: argument name, a value.
+  # @param aPhraseInstance [String] an instance of the macro phrase. That is, the text between [...] and with zero or more actual values.
+  # @param rawData [Array or nil] An array of couples. Each couple is of the form: [macro argument name, a value].
   # Multiple rows with same argument name are acceptable.  
-  def invoke_macro(aPhrase, rawData = nil)
+  def invoke_macro(aPhraseInstance, rawData = nil)
     # Generate a text rendition of the step to be executed.
-    rendered_steps = MacroCollection::instance.render_steps(aPhrase, rawData)
+    rendered_steps = MacroCollection::instance.render_steps(aPhraseInstance, rawData)
     
-    # Execute the steps
+    # Let Cucumber execute the sub-steps
     steps(rendered_steps)
+  end
+
+
+  # Clear (remove) all the macro-step definitions.
+  # After this, we are in the same situation when no macro-step was ever defined.
+  def clear_macros()
+    MacroCollection::instance.clear()
   end
 
 end # module
 
 end # module
+
 
 # End of file

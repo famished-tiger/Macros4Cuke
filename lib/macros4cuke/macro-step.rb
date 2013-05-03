@@ -3,14 +3,18 @@
 
 
 require_relative 'exceptions'
-require_relative 'template-engine'
+require_relative 'templating/engine'
 
 module Macros4Cuke # Module used as a namespace
 
-# In essence, a macro step object represents a Cucumber step that is itself
-# an aggregation of lower-level Cucumber steps.
+# A macro-step object is a Cucumber step that is itself
+# an aggregation of lower-level sub-steps.
+# When a macro-step is used in a scenario, then its execution is equivalent
+# to the execution of its sub-steps.
+# A macro-step may have zero or more arguments. The actual values bound to these arguments
+# are passed to the sub-steps at execution time.
 class MacroStep
-  # A template engine that expands the substeps upon request.
+  # A template engine that expands the sub-steps upon request.
   attr_reader(:renderer)
   
   # Unique key of the macro as derived from the macro phrase.
@@ -24,54 +28,56 @@ class MacroStep
 
   
   # Constructor.
-  # [aMacroPhrase] The text from the macro step definition that is between the square brackets.
-  # [theSubsteps] The source text of the steps to be expanded upon macro invokation.
-  # [useTable] A boolean that indicates whether a data table must be used to pass actual values.
+  # @param aMacroPhrase[String] The text from the macro step definition that is between the square brackets.
+  # @param theSubsteps [String] The source text of the steps to be expanded upon macro invokation.
+  # @param useTable [boolean] A flag indicating whether a data table must be used to pass actual values.
   def initialize(aMacroPhrase, theSubsteps, useTable)
     @key = self.class.macro_key(aMacroPhrase, useTable, :definition)
-    
+
     # Retrieve the macro arguments embedded in the phrase.
     @phrase_args = scan_arguments(aMacroPhrase, :definition)
-    
+
     # Manipulate the substeps source text
     substeps_processed = preprocess(theSubsteps)
 
-    @renderer = TemplateEngine.new(substeps_processed)
+    @renderer = Templating::Engine.new(substeps_processed)
     substeps_vars = renderer.variables
-    
-    
+
+
     @args = validate_phrase_args(@phrase_args, substeps_vars)
     @args.concat(substeps_vars)
     @args.uniq!
   end
-  
-  
-  # Compute the identifier of the macro from the given macro phrase.
-  # A macro phrase is a text that must start with a recognised verb and may contain zero or more placeholders.
-  # In definition mode, a placeholder is delimited by chevrons <..>
-  # In invokation mode, a placeholder is delimited by double quotes.
-  # The rule for building the identifier are:
-  # - Leading and trailing space(s) are removed.
-  # - Each underscore character is removed.
-  # - Every sequence of one or more space(s) is converted into an underscore
-  # - Each placeholder (i.e. = delimiters + enclosed text) is converted into a letter X.
-  # - when useTable is true, concatenate: _T 
-  # Example:
-  # Consider the macro phrase: 'create the following "contactType" contact]:'
-  # The resulting macro_key is: 'create_the_following_X_contact_T'
-  # [aMacroPhrase] The text from the macro step definition that is between the square brackets.
-  # [useTable] A boolean that indicates whether a table should be used to pass actual values.
-  # [mode] one of the following: :definition, :invokation
+
+
+  # Compute the identifier of the macro from the given macro phrase.  
+  # A macro phrase is a text that may contain zero or more placeholders.   
+  # In definition mode, a placeholder is delimited by chevrons <..>.  
+  # In invokation mode, a value bound to a placeholder is delimited by double quotes.  
+  # The rule for building the identifying key are:  
+  # - Leading and trailing space(s) are removed.  
+  # - Each underscore character is removed.  
+  # - Every sequence of one or more space(s) is converted into an underscore  
+  # - Each placeholder (i.e. = delimiters + enclosed text) is converted into a letter X.  
+  # - when useTable is true, concatenate: _T   
+  # @example:
+  #   Consider the macro phrase: 'create the following "contactType" contact'  
+  #   The resulting macro_key is: 'create_the_following_X_contact_T'
+  #
+  # @param aMacroPhrase [String] The text from the macro step definition that is between the square brackets.
+  # @param useTable [boolean] A flag indicating whether a table should be used to pass actual values.
+  # @param mode [:definition, :invokation]
+  # @return [String] the key of the phrase/macro.
   def self.macro_key(aMacroPhrase, useTable, mode)
     stripped_phrase = aMacroPhrase.strip # Remove leading ... trailing space(s)
-    
+
     # Remove every underscore
     stripped_phrase.gsub!(/_/, '')
-    
+
     # Replace all consecutive whitespaces by an underscore    
     stripped_phrase.gsub!(/\s+/, '_')
-    
-    
+
+
     # Determine the pattern to isolate each argument/parameter with its delimiters
     pattern = case mode
       when :definition
@@ -80,28 +86,27 @@ class MacroStep
         /"([^\\"]|\\.)*"/
 
     end
-    
+
     # Each text between quotes or chevron is replaced by the letter X
     normalized = stripped_phrase.gsub(pattern, 'X')
-    
+
     key = normalized + (useTable ? '_T' : '')
-    
+
     return key
-  end  
-  
-  
+  end
+
+
   # Render the steps from the template, given the values
   # taken by the parameters
-  # [aPhrase] an instance of the macro phrase.
-  # [rawData] An Array of couples.
-  # Each couple is of the form: argument name, a value.
-  # Multiple rows with same argument name are acceptable.
+  # @param aPhrase [String] an instance of the macro phrase.
+  # @param rawData [Array] An array of couples of the form: [argument name, a value].
+  #   Multiple rows with same argument name are acceptable.
   def expand(aPhrase, rawData)
     params = validate_params(aPhrase, rawData)
     return renderer.render(nil, params)
   end
 
-private  
+private
   # Build a Hash from the given raw data.
   # [aPhrase] an instance of the macro phrase.
   # [rawData] An Array of couples.
@@ -109,7 +114,7 @@ private
   # Multiple rows with same argument name are acceptable.
   def validate_params(aPhrase, rawData)
     macro_parameters = {}
-    
+
     # Retrieve the value(s) per variable in the phrase.
     quoted_values = scan_arguments(aPhrase, :invokation)   
     quoted_values.each_with_index do |val, index|

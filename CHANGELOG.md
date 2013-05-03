@@ -1,3 +1,10 @@
+## 0.2.14 / 2013-05-03
+* [CHANGE] Code comments reformatted to YARD. The command line `yard stats`display a 100% documented score!
+* [CHANGE] Moved all classes related to the template engine to the new module Templating.
+* [CHANGE] Classes `StaticRep, EOLRep, VariableRep, TemplateEngine` renamed to `StaticText, EOLine, Placeholder, Engine` respectively.
+* [CHANGE] Added spec file for `MacroStepSupport` module.
+* [CHANGE] Initialization of `MacroStepSupport` singleton changed (no dependency on `extended` hook).
+
 ## 0.2.13 / 2013-05-02
 * [NEW] File `macro-collection_spec.rb`: partial spec file for the `MacroCollection` class.
 * [FIX] `DuplicateMacroError#initialize`: Removed superfluous [ in error message.

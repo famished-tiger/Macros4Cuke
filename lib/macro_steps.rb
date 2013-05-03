@@ -5,17 +5,17 @@
 
 # This step is used to define a macro-step
 # Example:
-#  Given I define the step "When I [log in as {{userid}}]" to mean:
+#  Given I define the step "When I [log in as <userid>]" to mean:
 #  """
 #  Given I landed in the homepage
 #  When I click "Sign in"
-#  And I fill in "Username" with "{{userid}}"
+#  And I fill in "Username" with "<userid>"
 #  And I fill in "Password" with "unguessable"
 #  And I click "Submit"
 #  """
 # The regexp has two capturing group: one for the phrase, a second for the terminating colon (:)
-Given(/^I define the step "(?:Given|When|Then) I \[((?:[^\\\]]|\\.)+)\](:?)" to mean:$/) do |macro_phrase, colon_present, template|
-  use_table = (colon_present == ':')
+Given(/^I define the step "(?:Given|When|Then) I \[((?:[^\\\]]|\\.)+)\](:?)" to mean:$/) do |macro_phrase, colon_capture, template|
+  use_table = (colon_capture == ':')
   add_macro(macro_phrase, template, use_table)
 end
 
@@ -43,6 +43,7 @@ When(/^I \[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   # The second argument consists of a hash with pairs of the kind: argument name => actual value
   invoke_macro(macro_phrase, table_argument.rows_hash())
 end
+
 
 
 # End of file

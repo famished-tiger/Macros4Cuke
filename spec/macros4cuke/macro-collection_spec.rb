@@ -8,20 +8,15 @@ module Macros4Cuke # Open this namespace to get rid of module qualifier prefixes
 
 describe MacroCollection do
 
-  before(:all) do
-    # Initialize the sole instance
-    MacroCollection.instance.init()
-  end
-  
   let(:singleton) { MacroCollection.instance() }
-  
+
   context "Initialization:" do
     it "should be empty" do
       singleton.macro_steps.should be_empty
     end
-  
+
   end
-  
+
   context "Provided services:" do
     let(:sample_substeps) do
       snippet = <<-SNIPPET
@@ -32,20 +27,20 @@ describe MacroCollection do
   And I click "Submit"
 SNIPPET
 
-      snippet    
+      snippet
     end
 
     it "should accept the addition of a new macro-step" do
       phrase = "[enter my credentials]"
       lambda { singleton.add_macro(phrase, sample_substeps, true)}.should_not raise_error
       singleton.should have(1).macro_steps
-      
+
       # Error case: inserting another macro with same phrase.
       error_message = "A macro-step with phrase '[enter my credentials]' already exist."
       lambda { singleton.add_macro(phrase, sample_substeps, true) }.should raise_error(Macros4Cuke::DuplicateMacroError, error_message)
     end
   end
-  
+
 end # describe
 
 end # module

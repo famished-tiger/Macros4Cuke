@@ -62,11 +62,11 @@ $[sudo] gem install macros4cuke
 
 ### Setting up your Cucumber project ####
   
-* Step 1: Add support for macros in your Cucumber project  
-In your `/features/support/` folder:    
-  - Create a Ruby file (e.g. 'macro\_support.rb') with the following contents:  
+* Step 1: Add support for macros in your Cucumber project    
   
 ```ruby
+# /features/support/env.rb
+# Add the two next lines
 require 'macros4cuke'  
 World(Macros4Cuke::MacroStepSupport)
 ```  

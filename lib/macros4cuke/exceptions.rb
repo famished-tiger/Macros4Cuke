@@ -3,6 +3,7 @@
 
 module Macros4Cuke # Module used as a namespace
 
+# @abstract
 # Base class for any exception explicitly raised in the Macros4Cuke methods.
 class Macros4CukeError < StandardError
 end # class
