@@ -1,3 +1,7 @@
+## 0.2.16 / 2013-05-04
+* [FEATURE] Added dependency to SimpleCov. It is used to measure test code coverage (the combination of Cucumber and RSpec result in 95.9% code coverage).
+* [CHANGE] File `macro-step-support_spec.rb`: Added one RSpec example
+
 ## 0.2.15 / 2013-05-03
 * [CHANGE] File `macro-step-support_spec.rb`: Added one RSpec example.
 * [FIX] Updated gemspec.

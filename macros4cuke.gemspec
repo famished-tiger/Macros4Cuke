@@ -22,7 +22,7 @@ Enjoy using Cucumber with macros...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 EOSTRING
 	
-	file_list = Dir['.yardopts', 'cucumber.yml', 'CHANGELOG.md', 'LICENSE.txt', 'README.md', 
+	file_list = Dir['.simplecov', '.yardopts', 'cucumber.yml', 'CHANGELOG.md', 'LICENSE.txt', 'README.md', 
     'lib/*.*', 'lib/*/*.rb', 'lib/*/*/*.rb', 'features/*.*', 'features/*/*.rb', 'spec/*.*', 'spec/*/*_spec.rb', 'spec/*/*/*_spec.rb']  
 	pkg.files = file_list
 	pkg.require_path = "lib"
@@ -30,6 +30,7 @@ EOSTRING
 	pkg.has_rdoc = false
   pkg.add_runtime_dependency('cucumber',[">= 0"])
   pkg.add_development_dependency('rspec',[">= 2.00"])
+  pkg.add_development_dependency('simplecov',[">= 0.5.0"])
 	
 	pkg.bindir = 'bin'
 	pkg.executables = []

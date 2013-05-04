@@ -47,7 +47,7 @@ end # class
 # Raised when one invokes a macro-step with an unknown phrase. 
 class UnknownMacroError < Macros4CukeError
   def initialize(aPhrase)
-    super("Unknown macro-step with phrase: '[#{aPhrase}'.")
+    super("Unknown macro-step with phrase: '#{aPhrase}'.")
   end
 end # class
 
