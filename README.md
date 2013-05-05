@@ -245,6 +245,22 @@ Here are few observations worth noticing:
 the value "Main Street, 22".  
 - Data rows don't have to follow strictly the order of the arguments in the sub-step sequence. 
 
+## With great power comes great responsibility. ##
+_Stan Lee_  
+
+Our experience is that macro-steps change deeply the way one designs and writes feature files.  
+Macro-steps are most useful in UI-testing (e.g. with tools like Capybara) because they help to close
+ the gap between the user's intent and the low-level user interface actions.   
+In addition __Macros4Cuke__ allows advanced users to craft their own steps without having to program step definitions.
+This last argument becomes important in the context of user acceptance testing, a domain where the assumption that
+ every tester is also Rubyist is -alas!- far from the truth.
+
+ 
+Macros with Cucumber is highly debated topic, so it is always wise to know what other people say about it:  
+[Support for Macros] (https://github.com/cucumber/gherkin/issues/178)  
+[Substeps - macro request for the nth time] (http://grokbase.com/t/gg/cukes/133ey063b8/cucumber-substeps-macro-request-for-the-nth-time)
+
+
 Copyright
 ---------
 Copyright (c) 2013, Dimitri Geshef. Macros4Cuke is released under the MIT License see [LICENSE.txt](https://github.com/famished-tiger/Macros4Cuke/blob/master/LICENSE.txt) for details.

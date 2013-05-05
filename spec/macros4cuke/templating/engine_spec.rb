@@ -134,6 +134,18 @@ SNIPPET
       error_message = "Missing closing chevron '>'."
       lambda { Engine::parse(sample_text) }.should raise_error(StandardError, error_message)
     end
+    
+    it  "should complain if a text misses an opening chevron" do
+      sample_text = 'begin <some_tag> > end'
+      error_message = "Missing opening chevron '<'."
+      lambda { Engine::parse(sample_text) }.should raise_error(StandardError, error_message)
+    end
+    
+    it  "should complain if a text ha&s nested opening chevrons" do
+      sample_text = 'begin <<some_tag> > end'
+      error_message = "Nested opening chevron '<'."
+      lambda { Engine::parse(sample_text) }.should raise_error(StandardError, error_message)
+    end    
 
   end # context
 
@@ -166,12 +178,22 @@ SNIPPET
   context "Provided services" do
 
     it "should know the variable(s) it contains" do
+      # Case using the sample template
       subject.variables == [:userid, :password]
 
       # Case of an empty source template text
       instance = Engine.new ''
       instance.variables.should be_empty
     end
+  
+  
+    it "should ignore variables/placeholders in comments" do
+      substeps = "  # Comment 1 <miscellaneous>\n" + sample_template
+      substeps += "  #\n Comment 2 <haphazard>"
+      instance = Engine.new substeps
+      subject.variables == [:userid, :password]
+    end
+
 
     it "should render the text given the actuals" do
       locals = {'userid' => "johndoe"}
