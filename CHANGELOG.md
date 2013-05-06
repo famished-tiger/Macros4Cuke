@@ -1,3 +1,7 @@
+## 0.2.18 / 2013-05-06
+* [CHANGE] Amended spec files and added a new demo feature. SimpleCov code coverage raised to more than 97%.
+* [CHANGE] Macro-step arguments can be multivalued (experimental)
+
 ## 0.2.17 / 2013-05-05
 * [CHANGE] File `engine_spec.rb`: Added more RSpec examples. SimpleCov code coverage raised to more than 96%.
 * [CHANGE] Added section in README.md

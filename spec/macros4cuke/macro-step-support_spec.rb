@@ -57,7 +57,7 @@ SNIPPET
     end
   end # context
   
-  context "Invoking macro(s)" do
+  context "Invoking macro(s):" do
   
     it "should complain when invoking an unknown macro-step" do
       phrase_unknown = "dream of a perfect world"
@@ -68,7 +68,7 @@ SNIPPET
 
   end # context  
   
-  context "Clearing macro(s)" do
+  context "Clearing macro(s):" do
   
     it "should clear all macros" do
       lambda { world.clear_macros() }.should_not raise_error

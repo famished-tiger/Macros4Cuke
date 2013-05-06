@@ -38,10 +38,10 @@ When(/^I \[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   unless table_argument.kind_of?(Cucumber::Ast::Table)
      raise Macros4Cuke::DataTableNotFound, "This step must have a data table as an argument."
   end
-  
+
   # This will call the macro with the given phrase.
-  # The second argument consists of a hash with pairs of the kind: argument name => actual value
-  invoke_macro(macro_phrase, table_argument.rows_hash())
+  # The second argument consists of an array with couples of the kind: [argument name, actual value]
+  invoke_macro(macro_phrase, table_argument.raw)
 end
 
 

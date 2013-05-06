@@ -134,18 +134,18 @@ SNIPPET
       error_message = "Missing closing chevron '>'."
       lambda { Engine::parse(sample_text) }.should raise_error(StandardError, error_message)
     end
-    
+
     it  "should complain if a text misses an opening chevron" do
       sample_text = 'begin <some_tag> > end'
       error_message = "Missing opening chevron '<'."
       lambda { Engine::parse(sample_text) }.should raise_error(StandardError, error_message)
     end
-    
-    it  "should complain if a text ha&s nested opening chevrons" do
+
+    it  "should complain if a text has nested opening chevrons" do
       sample_text = 'begin <<some_tag> > end'
       error_message = "Nested opening chevron '<'."
       lambda { Engine::parse(sample_text) }.should raise_error(StandardError, error_message)
-    end    
+    end
 
   end # context
 
@@ -185,8 +185,8 @@ SNIPPET
       instance = Engine.new ''
       instance.variables.should be_empty
     end
-  
-  
+
+
     it "should ignore variables/placeholders in comments" do
       substeps = "  # Comment 1 <miscellaneous>\n" + sample_template
       substeps += "  #\n Comment 2 <haphazard>"
@@ -207,6 +207,22 @@ SNIPPET
   And I click "Sign in"
 SNIPPET
 
+      rendered_text.should == expected
+      
+      # Case of an actual that's not a String
+      locals = {'userid' => "johndoe", "password" => 12345678 }
+      rendered_text = subject.render(Object.new, locals)
+      expected = <<-SNIPPET
+  Given I landed in the homepage
+  # The credentials are entered here
+  And I fill in "Username" with "johndoe"
+  And I fill in "Password" with "12345678"
+  And I click "Sign in"
+SNIPPET
+
+      rendered_text.should == expected      
+      
+
       # Place actual value in context object
       Context = Struct.new(:userid, :password)
       context = Context.new("sherlock", "holmes")
@@ -219,12 +235,29 @@ SNIPPET
   And I click "Sign in"
 SNIPPET
 
+      rendered_text.should == expected
+      
 
       # Case of an empty source template text
       instance = Engine.new ''
       instance.render(nil, {}).should be_empty
     end
-  end
+
+    it "should render multivalued actuals" do
+      locals = {'userid' => ["johndoe", "yeti"] } # Silly case
+
+      rendered_text = subject.render(Object.new, locals)
+      expected = <<-SNIPPET
+  Given I landed in the homepage
+  # The credentials are entered here
+  And I fill in "Username" with "johndoe<br/>yeti"
+  And I fill in "Password" with ""
+  And I click "Sign in"
+SNIPPET
+
+      rendered_text.should == expected
+    end
+  end # context
 
 end # describe
 

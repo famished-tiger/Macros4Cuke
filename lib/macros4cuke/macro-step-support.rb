@@ -27,7 +27,7 @@ public
 
   # Invoke a macro with given phrase and (optionally) a table of values
   # @param aPhraseInstance [String] an instance of the macro phrase. That is, the text between [...] and with zero or more actual values.
-  # @param rawData [Array or nil] An array of couples. Each couple is of the form: [macro argument name, a value].
+  # @param rawData [Array or nil] An Array with coupples of the form: [macro argument name, a value].
   # Multiple rows with same argument name are acceptable.  
   def invoke_macro(aPhraseInstance, rawData = nil)
     # Generate a text rendition of the step to be executed.

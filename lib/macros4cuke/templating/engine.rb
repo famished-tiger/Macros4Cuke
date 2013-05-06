@@ -56,12 +56,25 @@ public
   #   Returns an empty string when no value is assigned to the placeholder.
   def render(aContextObject, theLocals)
     actual_value = theLocals[name]
-    if actual_value.nil?
-      actual_value = aContextObject.send(name.to_sym) if aContextObject.respond_to?(name.to_sym)
-      actual_value = '' if actual_value.nil?
+    if actual_value.nil? && aContextObject.respond_to?(name.to_sym)
+      actual_value = aContextObject.send(name.to_sym)
     end
     
-    return actual_value.is_a?(String) ? actual_value : actual_value.to_s
+    result = case actual_value
+      when NilClass
+        ''
+      
+      when Array
+        # TODO: Move away from hard-coded separator.
+        actual_value.join("<br/>")
+        
+      when String
+        actual_value
+      else
+        actual_value.to_s()
+    end
+        
+    return result
   end  
 
 end # class

@@ -99,7 +99,7 @@ class MacroStep
   # Render the steps from the template, given the values
   # taken by the parameters
   # @param aPhrase [String] an instance of the macro phrase.
-  # @param rawData [Array] An array of couples of the form: [argument name, a value].
+  # @param rawData [Array or nil] An Array with coupples of the form: [macro argument name, a value].
   #   Multiple rows with same argument name are acceptable.
   def expand(aPhrase, rawData)
     params = validate_params(aPhrase, rawData)
@@ -108,9 +108,8 @@ class MacroStep
 
 private
   # Build a Hash from the given raw data.
-  # [aPhrase] an instance of the macro phrase.
-  # [rawData] An Array of couples.
-  # Each couple is of the form: argument name, a value.
+  # @param aPhrase [String] an instance of the macro phrase.
+  # @param rawData [Array or nil] An Array with coupples of the form: [macro argument name, a value].
   # Multiple rows with same argument name are acceptable.
   def validate_params(aPhrase, rawData)
     macro_parameters = {}
