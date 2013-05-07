@@ -1,3 +1,6 @@
+## 0.2.20 / 2013-05-06
+* [NEW] Added `examples` folder with a first example of an internationalized customisation of __Macros4Cuke__.
+
 ## 0.2.19 / 2013-05-06
 * [CHANGE] Added validation of macro argument names in new `Engine::parse_tag` method.
 * [CHANGE] InvalidCharError exception added.
