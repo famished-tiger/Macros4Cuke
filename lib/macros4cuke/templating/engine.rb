@@ -101,6 +101,15 @@ end # class
 #     while Mustache use !{{...}} delimiters),  
 # - Feature files are meant to be simple, so should the template engine be. 
 class Engine
+  # The regular expression that matches any punctuation sign or delimiter that is forbidden between chevrons <...> template tags.
+  DisallowedSigns = begin 
+    forbidden =  '!"#' + "$%&'()*+,-./:;<=>?[\\]^`{|}~" # Used concatenation (+) to work around Ruby bug!
+    all_escaped = [] 
+    forbidden.each_char() { |ch| all_escaped << Regexp.escape(ch) }
+    pattern = all_escaped.join("|")
+    Regexp.new(pattern)
+  end
+
   # The original text of the template is kept here.
   attr_reader(:source)
   
@@ -139,7 +148,6 @@ public
     
     return @variables
   end
-
 
   # Class method. Parse the given line text into a raw representation.
   # @return [Array] Couples of the form:
@@ -211,7 +219,7 @@ private
   end
 
   
-  # [aCouple] a two-element array of the form: [kind, text]
+  # @param aCouple [Array] a two-element array of the form: [kind, text]
   # Where kind must be one of :static, :dynamic
   def compile_couple(aCouple)
     (kind, text) = aCouple
@@ -221,14 +229,24 @@ private
         StaticText.new(text)
         
       when :dynamic
-        Placeholder.new(text)
+        parse_tag(text)
       else
         raise StandardError, "Internal error: Don't know template element of kind #{kind}"
       end
-    
+
     return result
   end
   
+  # Parse the contents of a tag entry.
+  # @param aText [String] The text that is enclosed between chevrons.
+  def parse_tag(aText)
+    # Disallow punctuation and delimiter signs in tags.
+    matching = DisallowedSigns.match(aText)
+    raise InvalidCharError.new(aText, matching[0]) if matching
+
+    return Placeholder.new(aText)    
+  end
+ 
 end # class
 
 end # module

@@ -4,6 +4,7 @@
 require_relative '../../spec_helper'
 require_relative '../../../lib/macros4cuke/templating/engine'	# Load the class under test
 
+
 module Macros4Cuke
 
 module Templating # Open this namespace to get rid of module qualifier prefixes
@@ -171,9 +172,14 @@ SNIPPET
       text_w_empty_arg = sample_template.sub(/userid/, '')
       error_message = %Q|An empty or blank argument occurred in 'And I fill in "Username" with "<>"'.|
       lambda { Engine.new text_w_empty_arg }.should raise_error(Macros4Cuke::EmptyArgumentError, error_message)
-
     end
-  end
+
+    it "should complain when a placeholder contains an invalid character" do
+      text_w_empty_arg = sample_template.sub(/userid/, 'user%id')
+      error_message = "The invalid sign '%' occurs in the argument/tag 'user%id'."
+      lambda { Engine.new text_w_empty_arg }.should raise_error(Macros4Cuke::InvalidCharError, error_message)
+    end
+  end # context
 
   context "Provided services" do
 
@@ -208,7 +214,7 @@ SNIPPET
 SNIPPET
 
       rendered_text.should == expected
-      
+
       # Case of an actual that's not a String
       locals = {'userid' => "johndoe", "password" => 12345678 }
       rendered_text = subject.render(Object.new, locals)
@@ -220,8 +226,8 @@ SNIPPET
   And I click "Sign in"
 SNIPPET
 
-      rendered_text.should == expected      
-      
+      rendered_text.should == expected
+
 
       # Place actual value in context object
       Context = Struct.new(:userid, :password)
@@ -236,7 +242,7 @@ SNIPPET
 SNIPPET
 
       rendered_text.should == expected
-      
+
 
       # Case of an empty source template text
       instance = Engine.new ''

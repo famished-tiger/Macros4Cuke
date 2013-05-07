@@ -1,3 +1,9 @@
+## 0.2.19 / 2013-05-06
+* [CHANGE] Added validation of macro argument names in new `Engine::parse_tag` method.
+* [CHANGE] InvalidCharError exception added.
+* [CHANGE] File `engine_spec.rb`: Added one RSpec example for an invalid argument name.
+* [CHANGE] File `README.md`: added a new section on naming macro arguments.
+
 ## 0.2.18 / 2013-05-06
 * [CHANGE] Amended spec files and added a new demo feature. SimpleCov code coverage raised to more than 97%.
 * [CHANGE] Macro-step arguments can be multivalued (experimental)

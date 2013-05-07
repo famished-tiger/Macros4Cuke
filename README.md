@@ -245,6 +245,14 @@ Here are few observations worth noticing:
 the value "Main Street, 22".  
 - Data rows don't have to follow strictly the order of the arguments in the sub-step sequence. 
 
+## Naming macro-step arguments ##
+In line with most computer languages, Macros4Cuke accepts argument names containing alphanumeric characters and 
+underscores.  
+In fact, the only characters that are not allowed in argument names are the following punctuation or delimiting
+signs:  
+__\!"'\#$%\&\*\+\-/,\.\:\;\=\?\(\)\<\>\[\]\{\}\\\^\`\|\~__
+
+
 ## With great power comes great responsibility. ##
 _Stan Lee_  
 

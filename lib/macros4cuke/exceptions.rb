@@ -1,4 +1,4 @@
-# encoding: utf-8 -- You should see a paragraph character: § 
+# encoding: utf-8 -- You should see a paragraph character: §
 # File: exceptions.rb
 
 module Macros4Cuke # Module used as a namespace
@@ -8,7 +8,7 @@ module Macros4Cuke # Module used as a namespace
 class Macros4CukeError < StandardError
 end # class
 
-# Raised when one attempts to define a new macro 
+# Raised when one attempts to define a new macro
 # that has the same phrase as an existing macro.
 class DuplicateMacroError < Macros4CukeError
   def initialize(aPhrase)
@@ -44,7 +44,15 @@ class EmptyArgumentError < Macros4CukeError
 end # class
 
 
-# Raised when one invokes a macro-step with an unknown phrase. 
+# Raised when an argument name contains invalid characters.
+class InvalidCharError < Macros4CukeError
+  def initialize(aText, aWrongChar)
+    super("The invalid sign '#{aWrongChar}' occurs in the argument/tag '#{aText}'.")
+  end
+end # class
+
+
+# Raised when one invokes a macro-step with an unknown phrase.
 class UnknownMacroError < Macros4CukeError
   def initialize(aPhrase)
     super("Unknown macro-step with phrase: '#{aPhrase}'.")
@@ -54,7 +62,7 @@ end # class
 
 
 # Raised when one invokes a macro-step with an argument
-# that has an unknown name. 
+# that has an unknown name.
 class UnknownArgumentError < Macros4CukeError
   def initialize(argName)
     super("Unknown macro-step argument '#{argName}'.")
