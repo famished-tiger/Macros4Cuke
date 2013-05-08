@@ -245,12 +245,44 @@ Here are few observations worth noticing:
 the value "Main Street, 22".  
 - Data rows don't have to follow strictly the order of the arguments in the sub-step sequence. 
 
-## Naming macro-step arguments ##
+## Macro-step arguments ##
+
+### Argument names ###
 In line with most computer languages, Macros4Cuke accepts argument names containing alphanumeric characters and 
 underscores.  
 In fact, the only characters that are not allowed in argument names are the following punctuation or delimiting
 signs:  
 __\!"'\#$%\&\*\+\-/,\.\:\;\=\?\(\)\<\>\[\]\{\}\\\^\`\|\~__
+
+
+### Assigning a value to an argument ###
+An argument appearing in the phrase MUST always be bound to a value at the step invokation.
+Taking again a previous example of a -partial- macro-step definition:  
+```cucumber
+  Given I define the step "When I [travel from <origin> to <destination> via <stop>]" to mean: 
+  """
+  # Sub-steps come here...
+  """
+```
+
+The following step invokation is invalid:
+```cucumber
+  When I [travel from "San Francisco" to via "Las Vegas"]
+```
+
+The issue is: the destination value is missing, Macros4Cuke won't be able to find a step with that syntax.  
+The next invokation is syntactically correct for Macros4Cuke:
+```cucumber
+  When I [travel from "San Francisco" to "" via "Las Vegas"]
+```
+
+The _destination_ argument gets an empty text as actual value. 
+
+For any argument that can receive a value through a data table, three situations can occur:  
+1. A row for that argument together with a text value are specified at invokation. The argument is bound to that text value.  
+2. A row for that argument and an empty text value are specified at invokation. The argument is bound to an empty text.  
+3. There is no row for that argument. The argument is unbound (nil) but is rendered as an empty text.  
+
 
 
 ## With great power comes great responsibility. ##

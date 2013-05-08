@@ -1,3 +1,6 @@
+## 0.2.22 / 2013-05-08
+ [CHANGE] File `README.md`: expanded the section on macro arguments.
+
 ## 0.2.21 / 2013-05-08
 * [NEW] Added new class `Templating::UnaryElement`.
 * [CHANGE] Made `Placeholder` class inherit from `UnaryElement`.
