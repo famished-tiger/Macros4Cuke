@@ -1,3 +1,8 @@
+## 0.3.00 / 2013-05-09 Version number bumped
+* [CHANGE] Class `Templating::Engine` can handle conditional tags (TODO: document).
+* [CHANGE] File `engine_spec.rb`: Added a RSpec examples to test the conditional tags.
+
+
 ## 0.2.22 / 2013-05-08
  [CHANGE] File `README.md`: expanded the section on macro arguments.
 
@@ -7,7 +12,7 @@
 * [NEW] Added new class `Templating::Section`, a subclass of `UnaryElement`.
 * [NEW] Added new class `Templating::ConditionalSection, a subclass of `Section`.
 * [CHANGE] Method Engine#parse_tag modified in prevision of conditional tags.
-* [NEW] File `section_spec.rb`: Added a RSpec to test the Conditional class.
+* [NEW] File `section_spec.rb`: Added a RSpec file to test the Conditional class.
 
 ## 0.2.20 / 2013-05-07
 * [NEW] Added `examples` folder with a first example of an internationalized customisation of __Macros4Cuke__.

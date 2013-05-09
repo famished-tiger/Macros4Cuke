@@ -299,7 +299,7 @@ private
     end
     
     compiled_lines = raw_lines.map { |line| compile_line(line) }
-    return compiled_lines.flatten()
+    return compile_sections(compiled_lines.flatten())
   end
   
   # Convert the array of raw entries into full-fledged template elements.
@@ -351,6 +351,37 @@ private
     end
 
     return result
+  end
+  
+  # Group the elements by sections.
+  # @param flat_sequence [Array] a linear list of elements (including sections)
+  def compile_sections(flat_sequence)
+    open_sections = []  # The list of nested open sections
+    compiled = flat_sequence.each_with_object([]) do |element, subResult|
+      case element
+        when Section
+          open_sections << element
+        
+        when SectionEndMarker
+          if open_sections.empty?
+            raise StandardError, "End of section</#{element.name}> found while no corresponding section must be closed."
+          end
+          if element.name != open_sections.last.name
+            raise StandardError, "End of section</#{element.name}> doesn't match current section '#{open_sections.last.name}'."
+          end
+          subResult << open_sections.pop()
+          
+        else
+          if open_sections.empty?
+            subResult << element
+          else
+            open_sections.last.add_child(element)
+          end
+      end
+      
+    end
+    
+    return compiled
   end
  
 end # class

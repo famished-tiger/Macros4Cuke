@@ -11,6 +11,7 @@ module Templating # Open this namespace to get rid of module qualifier prefixes
 
 
 describe Engine do
+  # Sample template (consisting of a sequence of steps)
   let(:sample_template) do
       source = <<-SNIPPET
   Given I landed in the homepage
@@ -20,6 +21,21 @@ describe Engine do
   And I click "Sign in"
 SNIPPET
     end
+    
+  # Template containing two conditional sections
+  let(:sophisticated_template) do
+      source = <<-SNIPPET
+  When I fill in "firstname" with "<firstname>"
+  And I fill in "lastname" with "<lastname>"
+  <?address>And I fill in "address" with "<address>"</address>
+  <?birthdate>
+  And I fill in "birthdate" with "<birthdate>"
+  </birthdate>
+  And I click "Register"
+SNIPPET
+    end    
+  
+  
 
   # Rule for default instantiation
   subject { Engine.new sample_template }
@@ -167,6 +183,11 @@ SNIPPET
       instance = Engine.new ''
       instance.source.should be_empty
     end
+    
+    it "should accept conditional section" do
+      lambda { Engine.new sophisticated_template }.should_not raise_error
+      instance = Engine.new sophisticated_template
+    end
 
     it "should complain when a placeholder is empty or blank" do
       text_w_empty_arg = sample_template.sub(/userid/, '')
@@ -179,6 +200,7 @@ SNIPPET
       error_message = "The invalid sign '%' occurs in the argument/tag 'user%id'."
       lambda { Engine.new text_w_empty_arg }.should raise_error(Macros4Cuke::InvalidCharError, error_message)
     end
+    
   end # context
 
   context "Provided services" do
@@ -248,6 +270,30 @@ SNIPPET
       instance = Engine.new ''
       instance.render(nil, {}).should be_empty
     end
+    
+    
+    it "should render conditional sections" do
+      instance = Engine.new(sophisticated_template)
+      
+      locals = {'firstname' => "Anon", 
+        "lastname" => "Eemoos" ,
+        "birthdate" => "1976-04-21"
+        }
+      rendered_text = instance.render(Object.new, locals)
+      expected = <<-SNIPPET
+  When I fill in "firstname" with "Anon"
+  And I fill in "lastname" with "Eemoos"
+  
+  
+  And I fill in "birthdate" with "1976-04-21"
+  
+  And I click "Register"
+SNIPPET
+
+      rendered_text.should == expected
+      
+    end
+    
 
     it "should render multivalued actuals" do
       locals = {'userid' => ["johndoe", "yeti"] } # Silly case
