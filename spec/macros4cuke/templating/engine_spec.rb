@@ -27,10 +27,11 @@ SNIPPET
       source = <<-SNIPPET
   When I fill in "firstname" with "<firstname>"
   And I fill in "lastname" with "<lastname>"
-  <?address>And I fill in "address" with "<address>"</address>
+<?address>  And I fill in "address" with "<address>"</address>
   <?birthdate>
   And I fill in "birthdate" with "<birthdate>"
   </birthdate>
+<?dummy></dummy>
   And I click "Register"
 SNIPPET
     end    
@@ -201,6 +202,29 @@ SNIPPET
       lambda { Engine.new text_w_empty_arg }.should raise_error(Macros4Cuke::InvalidCharError, error_message)
     end
     
+    it "should complain when a section has no closing tag" do
+      # Removing an end of section tag...
+      text_w_open_section = sophisticated_template.sub(/<\/address>/, '')
+
+      error_message = "Unterminated section <?address>."
+      lambda { Engine.new text_w_open_section}.should raise_error(StandardError, error_message)
+    end
+    
+    it "should complain when a closing tag does not correspond to currently open section" do
+      # Replacing an end of section tag by another...
+      text_w_wrong_end = sophisticated_template.sub(/<\/address>/, '</foobar>')
+
+      error_message = "End of section</foobar> doesn't match current section 'address'."
+      lambda { Engine.new text_w_wrong_end}.should raise_error(StandardError, error_message)
+    end
+    
+    it "should complain when a closing tag is found while no section is open" do
+      # Replacing an end of section tag by another...
+      text_w_wrong_end = sophisticated_template.sub(/<\?birthdate>/, '</foobar>')
+      error_message = "End of section</foobar> found while no corresponding section is open."
+      lambda { Engine.new text_w_wrong_end}.should raise_error(StandardError, error_message)
+    end    
+    
   end # context
 
   context "Provided services" do
@@ -283,15 +307,25 @@ SNIPPET
       expected = <<-SNIPPET
   When I fill in "firstname" with "Anon"
   And I fill in "lastname" with "Eemoos"
-  
-  
   And I fill in "birthdate" with "1976-04-21"
-  
   And I click "Register"
 SNIPPET
 
       rendered_text.should == expected
       
+      # Redo with another context
+      locals["birthdate"] = nil
+      locals["address"] = "122, Mercer Street"
+      
+      rendered_text = instance.render(Object.new, locals)
+      expected = <<-SNIPPET
+  When I fill in "firstname" with "Anon"
+  And I fill in "lastname" with "Eemoos"
+  And I fill in "address" with "122, Mercer Street"
+  And I click "Register"
+SNIPPET
+
+      rendered_text.should == expected      
     end
     
 

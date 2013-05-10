@@ -10,7 +10,7 @@ Scenario: Creating a basic scenario with one argument
   # The syntax of the new macro-step is specified between the double quotes.
   # The steps to execute when the macro is used/invoked are listed in the multiline triple quotes arguments.
   # The macro argument is put between chevrons <...>.
-  Given I define the step "When I [log in\[\] as <userid>]" to mean:
+  Given I define the step "* I [log in\[\] as <userid>]" to mean:
   """
   Given I landed in the homepage
   When I click "Sign in"

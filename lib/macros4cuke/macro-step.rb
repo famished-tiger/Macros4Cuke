@@ -158,11 +158,14 @@ private
         # /{{{([^}]*)}}}|{{([^}]*)}}/ # Two capturing groups!...
       when :invokation
         /"((?:[^\\"]|\\.)*)"/
-      else
-        raise InternalError, "Internal error: Unknown mode argument #{mode}"
     end
     raw_result = aMacroPhrase.scan(pattern)
-    return raw_result.flatten.compact
+    args = raw_result.flatten.compact
+    
+    # Replace escaped quotes by quote character.
+    args.map! { |a| a.sub(/\\"/, '"') }  if mode == :invokation
+    
+    return args
   end
   
   # Return the substeps text after some transformation
@@ -203,6 +206,5 @@ private
 end # class
 
 end # module
-
 
 # End of file

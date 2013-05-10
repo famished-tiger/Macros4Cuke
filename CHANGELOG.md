@@ -1,3 +1,15 @@
+## 0.3.01 / 2013-05-10
+* [NEW] features/ folder: added `demo06.feature` file showing the new conditional section.
+* [NEW] File `placeholder_spec.rb`: Added a RSpec file to test the Placeholder class.
+* [CHANGE] File `macro_steps.rb` Macro-step definition accepts the '*' Gherkin keyword.
+* [CHANGE] Method `Engine#compile_sction` completed and tested to support section elements.
+* [CHANGE] Method `Section#variables` expanded to support section elements.
+* [CHANGE] Method `Engine#variables` expanded to support section elements.
+* [CHANGE] Method `Engine#compile_line` added two formatting rules. 
+* [CHANGE] Method `MacroStep#scan_arguments` now un-escape the \" sequence into plain quote.
+* [CHANGE] examples/ folder expanded and reorganized
+* [FIX] Method `Section#render` fixed typo in call to __method__
+
 ## 0.3.00 / 2013-05-09 Version number bumped
 * [CHANGE] Class `Templating::Engine` can handle conditional tags (TODO: document).
 * [CHANGE] File `engine_spec.rb`: Added a RSpec examples to test the conditional tags.

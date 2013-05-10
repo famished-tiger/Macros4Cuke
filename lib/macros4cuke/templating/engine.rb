@@ -130,14 +130,31 @@ public
   def add_child(aChild)
     children << aChild
   end
+  
+  # Retrieve all placeholder names that appear in the template.
+  # @return [Array] The list of placeholder names.
+  def variables()
+    all_vars = children.each_with_object([]) do |a_child, subResult|
+      case a_child
+        when Placeholder
+          subResult << a_child.name
+        when Section
+          subResult.concat(a_child.variables)
+        else
+          # Do nothing
+      end
+    end
+    
+    return all_vars.flatten.uniq
+  end
 
-protected
+#protected
   # Render the placeholder given the passed arguments.
   # This method has the same signature as the {Engine#render} method.
   # @return [String] The text value assigned to the placeholder. 
   #   Returns an empty string when no value is assigned to the placeholder.
   def render(aContextObject, theLocals)
-    raise NotImplementedError, "Method Section::#{_method_} must be implemented in subclass(es)."
+    raise NotImplementedError, "Method Section::#{__method__} must be implemented in subclass(es)."
   end    
 
 end # class
@@ -175,7 +192,13 @@ public
     end
     
     return result
-  end   
+  end
+
+
+  # @return [String] The original text representation of the tag.
+  def to_s()
+    return "<?#{name}>"
+  end
 
 end # class
 
@@ -232,8 +255,20 @@ public
   def variables()
     # The result will be cached/memoized...
     @variables ||= begin
-      vars = @representation.select { |element| element.is_a?(Placeholder) }
-      vars.map(&:name)
+      vars = @representation.each_with_object([]) do |element, subResult|
+        case element
+          when Placeholder          
+            subResult << element.name
+          
+          when Section
+            subResult.concat(element.variables)
+          
+          else
+            # Do nothing
+        end
+      end
+      
+      vars.flatten.uniq
     end
     
     return @variables
@@ -302,10 +337,44 @@ private
     return compile_sections(compiled_lines.flatten())
   end
   
-  # Convert the array of raw entries into full-fledged template elements.
+  # Convert the array of raw entries (per line) into full-fledged template elements.
   def compile_line(aRawLine)
     line_rep = aRawLine.map { |couple| compile_couple(couple) }
-    line_rep << EOLine.new
+    
+    # Apply the rule: when a line just consist of spaces and a section element, 
+    # then remove all the spaces from that line.
+    section_item = nil
+    line_to_squeeze = line_rep.all? do |item|
+      case item
+        when StaticText
+          item.source =~ /\s+/
+          
+        when Section, SectionEndMarker
+          if section_item.nil?
+            section_item = item
+            true
+          else
+            false
+          end
+        else
+          false
+      end
+    end
+    if line_to_squeeze && ! section_item.nil?
+      line_rep = [section_item]
+    else
+      # Apply another rule: if last item in line is an end of section marker, 
+      # then place eoline before that item. Otherwise, end the line with a eoline marker.
+      if line_rep.last.is_a?(SectionEndMarker)
+        section_end = line_rep.pop()
+        line_rep << EOLine.new
+        line_rep << section_end
+      else
+        line_rep << EOLine.new
+      end
+    end
+    
+    return line_rep
   end
 
   
@@ -353,10 +422,11 @@ private
     return result
   end
   
-  # Group the elements by sections.
+  # Transform a flat sequence of elements into a hierarchy of sections.
   # @param flat_sequence [Array] a linear list of elements (including sections)
   def compile_sections(flat_sequence)
     open_sections = []  # The list of nested open sections
+    
     compiled = flat_sequence.each_with_object([]) do |element, subResult|
       case element
         when Section
@@ -364,7 +434,7 @@ private
         
         when SectionEndMarker
           if open_sections.empty?
-            raise StandardError, "End of section</#{element.name}> found while no corresponding section must be closed."
+            raise StandardError, "End of section</#{element.name}> found while no corresponding section is open."
           end
           if element.name != open_sections.last.name
             raise StandardError, "End of section</#{element.name}> doesn't match current section '#{open_sections.last.name}'."
@@ -380,6 +450,8 @@ private
       end
       
     end
+    
+    raise StandardError, "Unterminated section #{open_sections.last}." unless open_sections.empty?
     
     return compiled
   end

@@ -91,7 +91,22 @@ SNIPPET
 
       text.should == expectation
     end
+    
+    it "should un-escape the double-quotes for phrase arguments" do
+      specific_phrase = %q|enter my credentials as "quotable\""|
+      text = subject.expand(specific_phrase, [ ['password', 'no-secret'] ])
+      expectation = <<-SNIPPET
+  Given I landed in the homepage
+  When I click "Sign in"
+  And I fill in "Username" with "quotable""
+  And I fill in "Password" with "no-secret"
+  And I click "Submit"
+SNIPPET
 
+      text.should == expectation
+    end
+
+    
     it "should complain when an unknown variable is used" do
       # Error case: there is no macro argument called <unknown>
       error_message = "Unknown macro-step argument 'unknown'."

@@ -10,7 +10,7 @@ Scenario: Defining a macro to be used with multiple arguments in a table
   # The syntax of the new macro-step is specified between double quotes.
   # The steps to execute when the macro is used/invoked are listed in the multiline triple quotes arguments.
   # The macro arguments are put between chevrons <...>.
-  Given I define the step "When I [enter my credentials as]:" to mean:
+  Given I define the step "* I [enter my credentials as]:" to mean:
   """
   Given I landed in the homepage
   When I click "Sign in"
