@@ -15,6 +15,9 @@ __Macros4Cuke__ is a lightweight library that adds a macro facility your Cucumbe
 * Macro-steps may have data arguments,
 * Data values can be passed to the sub-steps.
 
+In addtion, since version 0.3.01:
+* Sub-steps can be made conditional.
+
 ## A quick example ##
 Here is a macro-step example taken from our demo files:  
 ```cucumber
@@ -73,11 +76,13 @@ World(Macros4Cuke::MacroStepSupport)
   
 * Step 2: Import the macro-management steps  
 In your `/features/step_definitions/` folder:  
-  - Create a Ruby file (say, 'use\_macro\_steps.rb') with the following line:  
+  - The cleanest is to create a Ruby file (say, 'use\_macro\_steps.rb') with the line:  
   
 ```ruby  
 require 'macros4cuke/../macro_steps'
 ```  
+  - Alternatively, you could directly add the require in one of your step definition file.
+ 
   
 That's it! Now you can start writing macros in your Cucumber project.
 
@@ -89,9 +94,9 @@ Working with a macro-step is a two-stages process:
 
 Let's begin by taking a closer look at the definition part.
 ### Defining a macro-step ###
-To create a macro-step, you'll need to use a _defining_ step bundled with Macros4Cuke.
+To create a macro-step, you'll need to use a __defining__ step bundled with Macros4Cuke.
 It is a rather unusual Cucumber step in the sense that its sole purpose is to build another step!  
-The defining step follows the general pattern:
+The _defining step_ follows the general pattern:
 ```cucumber
   Given I define the step "When I [some phrase]" to mean:  
   """  
@@ -110,10 +115,10 @@ These two components are detailed now.
 
 #### Specifying the syntax of a macro-step ####
 As just mentioned earlier, the __quoted sentence__ determines the syntax of the new macro-step.
-Its syntax is more or less free:  
+Its syntax is defined like this:  
 - The text outside the square brackets follows a fixed pattern. In other words,
  the quoted sentence MUST always start as follows: ```"When I [...```. Notice however,
- that the Given, Then keywords are also allowed.  
+ that the Given, Then and '*' keywords are also allowed.  
 - The text delimited by the square brackets [...], is called the __phrase__.  
 
 A few remarks about the __phrase__ part:  
@@ -209,7 +214,7 @@ respectively San Francisco, New-York and Las Vegas.
 
 
 ### Passing argument data via a table  ###
-Passing more than three arguments in the phrase becomes problematic for readability reasons.
+Passing more than three arguments in the phrase becomes problematic from a readability viewpoint.
  One ends up with lengthy and clumsy steps.  
 Therefore __Macros4Cuke__ has an alternative way to pass data values via a Gherkin table.  
 To enable this mechanism for a given macro, ensure that in its definition the quoted sentence ends with
@@ -282,6 +287,55 @@ For any argument that can receive a value through a data table, three situations
 1. A row for that argument together with a text value are specified at invokation. The argument is bound to that text value.  
 2. A row for that argument and an empty text value are specified at invokation. The argument is bound to an empty text.  
 3. There is no row for that argument. The argument is unbound (nil) but is rendered as an empty text.  
+
+
+## Conditional sections in substeps. ##
+To make the macros more flexible, it is possible to define conditional sections in the substep sequence.  
+The general pattern for the conditional section is:  
+```cucumber
+  <?foobar>
+  substep1
+  substep2
+  </foobar>
+```
+
+This works like this:
+```<?foobar>``` marks the begin of a conditional section. The end of that section is marked by ```</foobar>```.  
+Anything that is in this section will be executed provided the argument ```foobar``` has a value bound to it.
+Stated otherwise, when ```foobar``` has no value at invokation, then ```substep1``` and ```substep2``` will be skipped.  
+Conditional sections are useful for steps that are optional or for which an empty value '' isn't equal to no value.
+This is the case in user interface testing: skipping a field or entering a field and leaving it empty may
+lead to very different system behaviour (e.g. setting the focus in a field can trigger UI-events).  
+
+Consider the following example:  
+
+```cucumber
+  Given I define the step "* I [fill in the form with]:" to mean:
+  """
+  When I fill in "first_name" with "<firstname>"
+  And I fill in "last_name" with "<lastname>"
+  And I fill in "street_address" with "<street_address>"
+  And I fill in "zip" with "<postcode>"
+  And I fill in "city" with "<city>"
+  # Let's assume that e-mail is optional
+  <?email>
+  And I fill in "email" with "<email>"
+  </email>
+  And I click "Save"
+  """
+```
+
+When invoked like this:  
+```cucumber
+  When I [fill in the form with]:
+  |firstname     |Alice|
+  |lastname      | Inn |
+  |street_address| 11, No Street|
+  |city| Nowhere-City|
+  |country|Wonderland|
+```
+
+the substep concerning the email address won't be executed since the email argument isn't used at invokation.
 
 
 
