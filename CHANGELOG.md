@@ -1,3 +1,6 @@
+## 0.3.02 / 2013-05-11
+* [FIX] File `macro_steps.rb`: Recovered. Was missing in the 0.3.01 distribution!
+
 ## 0.3.01 / 2013-05-10
 * [NEW] features/ folder: added `demo06.feature` file showing the new conditional section.
 * [NEW] File `placeholder_spec.rb`: Added a RSpec file to test the Placeholder class.
