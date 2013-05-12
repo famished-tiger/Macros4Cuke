@@ -1,6 +1,7 @@
 Macros4Cuke
 ===========
 [![Build Status](https://travis-ci.org/famished-tiger/Macros4Cuke.png?branch=master)](https://travis-ci.org/famished-tiger/Macros4Cuke)
+[![Code Climate](https://codeclimate.com/github/famished-tiger/Macros4Cuke.png)](https://codeclimate.com/github/famished-tiger/Macros4Cuke.png)
 
 _Add macros to your Cucumber scenarios._  
 [Homepage](https://github.com/famished-tiger/Macros4Cuke)

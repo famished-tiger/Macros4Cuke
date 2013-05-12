@@ -1,8 +1,11 @@
+## 0.3.07 / 2013-05-12
+* [CHANGE] File `README.md`: Added Codeclimate badge
+
 ## 0.3.06 / 2013-05-12
-* [FIX] File `README.md`: Fixed formatting issue of Travis CI status button
+* [FIX] File `README.md`: Fixed formatting issue of Travis CI status badge
 
 ## 0.3.05 / 2013-05-12 Unreleased
-* [CHANGE] File `README.md`: Added Travis CI status button
+* [CHANGE] File `README.md`: Added Travis CI status badge
 
 ## 0.3.04 / 2013-05-12 Unreleased
 * [NEW] File `.travis.yml`: Added for integration with Travis CI
