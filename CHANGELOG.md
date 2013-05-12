@@ -1,5 +1,11 @@
+## 0.3.04 / 2013-05-12
+* [NEW] File `.travis.yml`: Added for integration with Travis CI
+* [NEW] File `Gemfile`: Added for integration with Bundler
+* [NEW] File `Rakefile`: Added with test tasks
+* [CHANGE] File `macros4cuke.gemspec`: added development dependency on rake. 
+
 ## 0.3.03 / 2013-05-11
- [CHANGE] File `README.md`: added section on conditional section.
+* [CHANGE] File `README.md`: added section on conditional section.
 
 ## 0.3.02 / 2013-05-11
 * [FIX] File `macro_steps.rb`: Recovered. Was missing in the 0.3.01 gem!
