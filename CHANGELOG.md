@@ -1,4 +1,7 @@
-## 0.3.04 / 2013-05-12
+## 0.3.05 / 2013-05-12
+* [NEW] File `README.md`: Added Travis CI status button
+
+## 0.3.04 / 2013-05-12 Unreleased
 * [NEW] File `.travis.yml`: Added for integration with Travis CI
 * [NEW] File `Gemfile`: Added for integration with Bundler
 * [NEW] File `Rakefile`: Added with test tasks
