@@ -1,5 +1,8 @@
-## 0.3.05 / 2013-05-12
-* [NEW] File `README.md`: Added Travis CI status button
+## 0.3.06 / 2013-05-12
+* [FIX] File `README.md`: Fixed formatting issue of Travis CI status button
+
+## 0.3.05 / 2013-05-12 Unreleased
+* [CHANGE] File `README.md`: Added Travis CI status button
 
 ## 0.3.04 / 2013-05-12 Unreleased
 * [NEW] File `.travis.yml`: Added for integration with Travis CI
