@@ -1,3 +1,6 @@
+## 0.3.08 / 2013-05-12
+* [CHANGE] File `README.md`: Added Gem Version badge
+
 ## 0.3.07 / 2013-05-12
 * [CHANGE] File `README.md`: Added Codeclimate badge
 
