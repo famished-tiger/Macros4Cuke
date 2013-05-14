@@ -1,3 +1,6 @@
+## 0.3.09 / 2013-05-13
+* [CHANGE] File `.travis.yml`: Added jruby as a target Ruby
+
 ## 0.3.08 / 2013-05-12
 * [CHANGE] File `README.md`: Added Gem Version badge
 

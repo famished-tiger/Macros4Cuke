@@ -148,7 +148,7 @@ public
     return all_vars.flatten.uniq
   end
 
-#protected
+
   # Render the placeholder given the passed arguments.
   # This method has the same signature as the {Engine#render} method.
   # @return [String] The text value assigned to the placeholder. 
