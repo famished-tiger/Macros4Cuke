@@ -338,7 +338,32 @@ When invoked like this:
   |country|Wonderland|
 ```
 
-the substep concerning the email address won't be executed since the email argument isn't used at invokation.
+the following substep sequence is executed:
+```cucumber
+  When I fill in "first_name" with "Alice"
+  And I fill in "last_name" with "Inn"
+  And I fill in "street_address" with "11, No Street"
+  And I fill in "zip" with ""
+  And I fill in "city" with "Nowhere-City"
+  And I click "Save"
+```
+
+A few remarks concerning the executed sequence:  
+1. Every macro argument (say, firstname) that takes a value (say, "Alice"), is replaced
+ that by that value in the substeps.  
+2. Every macro argument (say, zip) that doesn't have a corresponding row in the data table,
+ is replaced by an empty text (look at the substep for the zip code entry).  
+3. The substep with the email entry doesn't appear at all. This can be explained by the conditional
+section <?email>...</email> that prevents the enclosed substep(s) to be generated in absence of a value for
+the email macro argument.
+
+
+A typical use case for conditional sections is to prevent the execution of one or more steps in
+absence of a given data item. This simulates, for instance, the behaviour of a user that skips 
+one or more widgets in a page/screen. From a user interface testing viewpoint, entering an empty
+text in an entry field may be noticeably different than skipping that same entry field.
+Think of specific UI-events that can trigger some special system response.
+
 
 
 

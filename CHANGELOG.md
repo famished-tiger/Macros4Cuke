@@ -1,3 +1,7 @@
+## 0.3.10 / 2013-05-14
+* [CHANGE] File `README.md`: Expanded section on conditional section.
+* [CHANGE] Method `Templating::Engine::parse` slightly refactored in order to decrease its complexity.
+
 ## 0.3.09 / 2013-05-13
 * [CHANGE] File `.travis.yml`: Added jruby as a target Ruby
 
