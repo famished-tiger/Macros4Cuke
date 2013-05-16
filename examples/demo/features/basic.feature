@@ -5,6 +5,20 @@ Feature: Show -visually- the several ways to use macros
   So that I enjoy writing scenario.
 
 
+Scenario: Definition of a silly macro-step without argument
+   Given I define the step "* I [bark three times]" to mean:
+   """
+   When I type "woof!"
+   And I type "Woof!"
+   And I type "WOOF!"
+   """
+   
+Scenario: Let's bark
+	When I [bark three times]
+	# You should see woof! three times...
+  
+
+
 Scenario: Definition of a simple macro-step with two arguments
   Given I define the step "* I [travel from <origin> to <destination>]" to mean:
   """
@@ -52,3 +66,4 @@ Scenario: Do a travel back and forth
   # I arrive in Paris
 
 
+  # End of file

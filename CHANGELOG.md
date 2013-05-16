@@ -1,4 +1,8 @@
 ## 0.3.10 / 2013-05-14
+* [CHANGE] File `README.md`: Minor reformating.
+* [CHANGE] File `basic.feature` (in examples/): Added one more macro-step example.
+
+## 0.3.10 / 2013-05-14
 * [CHANGE] File `README.md`: Expanded section on conditional section.
 * [CHANGE] Method `Templating::Engine::parse` slightly refactored in order to decrease its complexity.
 

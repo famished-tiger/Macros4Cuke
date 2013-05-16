@@ -8,30 +8,29 @@ _Add macros to your Cucumber scenarios._
 [Homepage](https://github.com/famished-tiger/Macros4Cuke)
 
 __Macros4Cuke__ is a lightweight library that adds a macro facility your Cucumber scenarios.  
-  With it, you can create any new step that replaces a sequence of lower-level steps.
+  With it, you can create any new step that replaces a sequence of lower-level steps (substeps).
   All this can be done directly in your feature files without programming step definitions.
   
 ### Highlights ###
 * Works with out-of-the-box Cucumber
 * Simple installation and setup (no programming required),
+* Familiar syntax for macro-step definitions,
 * Substep sequence can be of arbitrary length,
 * Macro-steps may have data arguments,
 * Data values can be passed to the sub-steps.
-
-In addtion, since version 0.3.01:
-* Sub-steps can be made conditional.
+* A section with sub-steps can be made conditional.
 
 ## A quick example ##
 Here is a macro-step example taken from our demo files:  
 ```cucumber
-  Given I define the step "When I [enter my userid <userid> and password <password>]" to mean:  
-  """  
-  Given I landed in the homepage  
-  When I click "Sign in"  
-  And I fill in "Username" with "<userid>"  
-  And I fill in "Password" with "<password>"  
-  And I click "Submit"  
-  """  
+    Given I define the step "When I [enter my userid <userid> and password <password>]" to mean:  
+    """  
+    Given I landed in the homepage  
+    When I click "Sign in"  
+    And I fill in "Username" with "<userid>"  
+    And I fill in "Password" with "<password>"  
+    And I click "Submit"  
+    """  
 ```
 
 Notice how the arguments _userid_ and _password_ are enclosed between chevrons (angle brackets) <...>.
@@ -39,17 +38,16 @@ Notice how the arguments _userid_ and _password_ are enclosed between chevrons (
 
 That macro-step can then be used in a scenario like this:  
 ```cucumber 
-  When I [enter my userid "jdoe" and password "hello-world"]
+    When I [enter my userid "jdoe" and password "hello-world"]
 ```
 
 Once it is executing, the macro-step as the same effect as:  
 ```cucumber 
-  Given I landed in the homepage  
-  When I click "Sign in"  
-  And I fill in "Username" with "jdoe"  
-  And I fill in "Password" with "hello-world"  
-  And I click "Submit"  
-  """  
+    Given I landed in the homepage  
+    When I click "Sign in"  
+    And I fill in "Username" with "jdoe"  
+    And I fill in "Password" with "hello-world"  
+    And I click "Submit"    
 ```
 
 In other words, this sequence of 5 steps can be replaced by just one.
