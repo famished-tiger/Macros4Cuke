@@ -1,3 +1,7 @@
+## 0.3.14 / 2013-05-14
+* [FIX] lib/ folder in secondary local repository was messed up. Gem was OK.
+
+
 ## 0.3.13 / 2013-05-14
 * [NEW] File `.rubocop.yml` Added.
 * [CHANGE] Many source files changed to please Rubocop.
