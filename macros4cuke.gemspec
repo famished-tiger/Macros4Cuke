@@ -24,7 +24,7 @@ Enjoy using Cucumber with macros...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 EOSTRING
     
-	file_list = Dir['.simplecov', '.travis.yml', '.yardopts', 'cucumber.yml', 'Gemfile', 'Rakefile',  'CHANGELOG.md', 'LICENSE.txt', 'README.md', 
+	file_list = Dir['.rubocop.yml', '.rspec', '.ruby-gemset', '.ruby-version', '.simplecov', '.travis.yml', '.yardopts', 'cucumber.yml', 'Gemfile', 'Rakefile',  'CHANGELOG.md', 'LICENSE.txt', 'README.md', 
     'lib/*.*', 'lib/**/*.rb', 'examples/**/*.*', 'features/*.*', 'features/**/*.rb', 'spec/**/*.rb'
   ]
 	pkg.files = file_list

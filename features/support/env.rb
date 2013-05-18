@@ -1,11 +1,13 @@
 # encoding: utf-8	You should see a paragraph character: §
 # File: env.rb
-# Purpose: Allow Cucumber to load the sample application configuration and hooks.
-# It also demonstrate what to do in your env.rb file to use the Macros4Cuke gem.
+# Purpose: Allow Cucumber to load the sample application configuration
+# and hooks.
+# It also demonstrate what to do in your env.rb file 
+# to use the Macros4Cuke gem.
 
 begin
   require 'simplecov'
-rescue LoadError
+rescue LoadError => exc
   # Gobble silently the exception if simplecov isn't installed.
 end
 

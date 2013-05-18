@@ -1,0 +1,18 @@
+AsciiComments:
+  Enabled: false
+
+CaseIndentation:
+  Enabled: false
+
+DefWithParentheses:  
+  Enabled: false
+  
+EmptyLines:
+  Enabled: false
+
+  
+StringLiterals:
+  Enabled: false
+
+TrailingWhitespace:
+  Enabled: false

@@ -9,18 +9,21 @@ end
 
 
 Quand(/^j(?:e |')\[((?:[^\\\]]|\\.)+)\]$/) do |macro_phrase|
-  invoke_macro(macro_phrase)  # This will call the macro with the given phrase
+  # This will call the macro with the given phrase
+  invoke_macro(macro_phrase)
 end
 
 
 Quand(/^j(?:e |')\[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   # Ensure that the second argument is of the correct type
   unless table_argument.kind_of?(Cucumber::Ast::Table)
-     raise Macros4Cuke::DataTableNotFound, "This step must have a data table as an argument."
+    error_message = "This step must have a data table as an argument."
+    raise Macros4Cuke::DataTableNotFound, error_message
   end
 
   # This will call the macro with the given phrase.
-  # The second argument consists of an array with couples of the kind: [argument name, actual value]
+  # The second argument consists of an array with couples
+  # of the kind: [argument name, actual value]
   invoke_macro(macro_phrase, table_argument.raw)
 end
 

@@ -1,3 +1,4 @@
+# encoding: utf-8
 # File: macro-step.rb
 # Purpose: Implementation of the MacroStep class.
 
@@ -99,7 +100,8 @@ class MacroStep
   # Render the steps from the template, given the values
   # taken by the parameters
   # @param aPhrase [String] an instance of the macro phrase.
-  # @param rawData [Array or nil] An Array with coupples of the form: [macro argument name, a value].
+  # @param rawData [Array or nil] An Array with coupples of the form: 
+  # [macro argument name, a value].
   #   Multiple rows with same argument name are acceptable.
   def expand(aPhrase, rawData)
     params = validate_params(aPhrase, rawData)
@@ -109,7 +111,8 @@ class MacroStep
 private
   # Build a Hash from the given raw data.
   # @param aPhrase [String] an instance of the macro phrase.
-  # @param rawData [Array or nil] An Array with coupples of the form: [macro argument name, a value].
+  # @param rawData [Array or nil] An Array with coupples of the form: 
+  # [macro argument name, a value].
   # Multiple rows with same argument name are acceptable.
   def validate_params(aPhrase, rawData)
     macro_parameters = {}
@@ -169,28 +172,35 @@ private
   end
   
   # Return the substeps text after some transformation
-  # [theSubstepsSource] The source text of the steps to be expanded upon macro invokation.
+  # [theSubstepsSource] The source text of the steps 
+  # to be expanded upon macro invokation.
   def preprocess(theSubstepsSource)
     # Split text into lines
     lines = theSubstepsSource.split(/\r\n?|\n/)
     
-    # Reject comment lines. This necessary because Cucumber::RbSupport::RbWorld#steps complains when it sees a comment.
+    # Reject comment lines. This is necessary because
+    # Cucumber::RbSupport::RbWorld#steps complains when it sees a comment.
     processed = lines.reject { |a_line| a_line =~ /\s*#/ }
     
     return processed.join("\n")
   end
   
-  # Check for inconsistencies between the argument names in the phrase and the substeps part.
+  # Check for inconsistencies between the argument names 
+  # in the phrase and the substeps part.
   def validate_phrase_args(thePhraseArgs, substepsVars)
     # Error when the phrase names an argument that never occurs in the substeps
     thePhraseArgs.each do |phrase_arg|
-      raise UselessPhraseArgument.new(phrase_arg) unless substepsVars.include? phrase_arg
-    end
-    
-    # Error when a substep has an argument that never appears in the phrase and the macro-step does not use data table.
+      unless substepsVars.include? phrase_arg
+        raise UselessPhraseArgument.new(phrase_arg)
+      end
+    end 
+    # Error when a substep has an argument that never appears in the phrase 
+    # and the macro-step does not use data table.
     unless use_table?
       substepsVars.each do |substep_arg|
-        raise UnreachableSubstepArgument.new(substep_arg) unless thePhraseArgs.include? substep_arg
+        unless thePhraseArgs.include? substep_arg
+          raise UnreachableSubstepArgument.new(substep_arg)
+        end
       end      
     end
   
@@ -198,7 +208,8 @@ private
   end
   
   
-  # Return true, if the macro-step requires a data table to pass actual values of the arguments.
+  # Return true, if the macro-step requires a data table 
+  # to pass actual values of the arguments.
   def use_table?()
     return key =~ /_T$/
   end

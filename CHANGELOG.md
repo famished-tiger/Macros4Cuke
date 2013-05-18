@@ -1,3 +1,7 @@
+## 0.3.13 / 2013-05-14
+* [NEW] File `.rubocop.yml` Added.
+* [CHANGE] Many source files changed to please Rubocop.
+
 ## 0.3.12 / 2013-05-14
 * [NEW] File `.ruby-gemset` Added (for RVM users).
 * [NEW] File `.ruby-version` Added (for RVM users).

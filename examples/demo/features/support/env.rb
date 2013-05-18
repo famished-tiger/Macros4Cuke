@@ -1,4 +1,4 @@
-# encoding: utf-8	You should see a paragraph character: §
+# encoding: utf-8
 # File: env.rb
 
 
