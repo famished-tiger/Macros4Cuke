@@ -1,3 +1,4 @@
+# encoding: utf-8
 # File: macro-step_spec.rb
 
 
@@ -29,20 +30,22 @@ end
 
   context "Creation & initialization" do
     it "should be created with a phrase, substeps and a table use indicator" do
-      lambda { MacroStep.new(sample_phrase, sample_template, true) }.should_not raise_error
+      ->(){ MacroStep.new(sample_phrase, sample_template, true) }.should_not raise_error
     end
 
 
     it "should complain when a sub-step argument can never be assigned a value via the phrase" do
-      error_message = "The sub-step argument 'password' does not appear in the phrase."
-      lambda { MacroStep.new(sample_phrase, sample_template, false) }.should raise_error(Macros4Cuke::UnreachableSubstepArgument, error_message)
+      msg = "The sub-step argument 'password' does not appear in the phrase."
+      ->(){ MacroStep.new(sample_phrase, sample_template, false) }.should 
+        raise_error(Macros4Cuke::UnreachableSubstepArgument, msg)
     end
 
 
-    it "should complain when an argument from the phrase never occurs in a substep" do
-      a_phrase = "enter my credentials as <foobar>"
-      error_message = "The phrase argument 'foobar' does not appear in a sub-step."
-      lambda { MacroStep.new(a_phrase, sample_template, true) }.should raise_error(Macros4Cuke::UselessPhraseArgument, error_message)
+    it "should complain when an argument in phrase never occurs in substeps" do
+      phrase = "enter my credentials as <foobar>"
+      msg = "The phrase argument 'foobar' does not appear in a sub-step."
+      ->(){ MacroStep.new(phrase, sample_template, true) }.should 
+       raise_error(Macros4Cuke::UselessPhraseArgument, msg)
     end
 
 
@@ -63,10 +66,10 @@ end
 
   context "Provided services" do
 
-    let(:phrase_instance) {%Q|enter my credentials as "nobody"|}
+    let(:phrase_instance) { %Q|enter my credentials as "nobody"| }
 
     it "should render the substeps" do
-      text = subject.expand(phrase_instance, [ ['password', 'no-secret'] ])
+      text = subject.expand(phrase_instance, [ %w(password no-secret) ])
       expectation = <<-SNIPPET
   Given I landed in the homepage
   When I click "Sign in"
@@ -94,7 +97,7 @@ SNIPPET
     
     it "should un-escape the double-quotes for phrase arguments" do
       specific_phrase = %q|enter my credentials as "quotable\""|
-      text = subject.expand(specific_phrase, [ ['password', 'no-secret'] ])
+      text = subject.expand(specific_phrase, [ %w(password no-secret) ])
       expectation = <<-SNIPPET
   Given I landed in the homepage
   When I click "Sign in"
@@ -110,11 +113,12 @@ SNIPPET
     it "should complain when an unknown variable is used" do
       # Error case: there is no macro argument called <unknown>
       error_message = "Unknown macro-step argument 'unknown'."
-      lambda { subject.expand(phrase_instance, [ ['unknown', 'anything'] ]) }.should raise_error(UnknownArgumentError, error_message)
+      args = [ %w(unknown anything) ]
+      ->(){ subject.expand(phrase_instance, args) }.should 
+        raise_error(UnknownArgumentError, error_message)
     end
 
   end # context
-
 
 end # describe
 

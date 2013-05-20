@@ -1,7 +1,10 @@
+# encoding: utf-8
 # File: macro-step_spec.rb
 
 require_relative '../spec_helper'
-require_relative '../../lib/macros4cuke/macro-step-support'	# The class under test
+
+# The class under test
+require_relative '../../lib/macros4cuke/macro-step-support'	
 
 
 module Macros4Cuke	# Open the module to avoid lengthy qualified names
@@ -41,29 +44,33 @@ SNIPPET
   
   context "Defining macro(s):" do
     it "should add valid new macro" do
-      lambda { world.add_macro(m1_phrase, m1_substeps, true) }.should_not raise_error
+      ->(){ world.add_macro(m1_phrase, m1_substeps, true) }.should_not raise_error
     end
     
     it "should complain when entering the same macro again" do
       # Error case: trying to register another macro with same key/phrase.
-      error_message = "A macro-step with phrase 'enter the credentials' already exist."
-      lambda { world.add_macro(m1_phrase, m1_substeps, true) }.should raise_error(Macros4Cuke::DuplicateMacroError, error_message)
+      msg = "A macro-step with phrase 'enter the credentials' already exist."
+      -> { world.add_macro(m1_phrase, m1_substeps, true) }.should 
+        raise_error(Macros4Cuke::DuplicateMacroError, msg)
     end
     
     it "should complain macro uses no table and phrase is parameterless" do
-      # Error case: substeps have arguments, but the macro has no mechanism to pass the needed data.
-      error_message = "The sub-step argument 'userid' does not appear in the phrase."
-      lambda { world.add_macro("fill in the credentials", m1_substeps, false) }.should raise_error(Macros4Cuke::UnreachableSubstepArgument, error_message)    
+      # Error case: substeps have arguments, 
+      # but the macro has no mechanism to pass the needed data.
+      phrase = "fill in the credentials"
+      msg = "The sub-step argument 'userid' does not appear in the phrase."
+      ->(){ world.add_macro(phrase, m1_substeps, false) }.should 
+        raise_error(Macros4Cuke::UnreachableSubstepArgument, msg)    
     end
   end # context
   
   context "Invoking macro(s):" do
   
     it "should complain when invoking an unknown macro-step" do
-      phrase_unknown = "dream of a perfect world"
-      
-      error_message = "Unknown macro-step with phrase: 'dream of a perfect world'."
-      lambda { world.invoke_macro(phrase_unknown) }.should raise_error( Macros4Cuke::UnknownMacroError, error_message)
+      phrase_unknown = "dream of a perfect world" 
+      msg = "Unknown macro-step with phrase: 'dream of a perfect world'."
+      ->(){ world.invoke_macro(phrase_unknown) }.should 
+        raise_error(Macros4Cuke::UnknownMacroError, msg)
     end
 
   end # context  
@@ -71,10 +78,10 @@ SNIPPET
   context "Clearing macro(s):" do
   
     it "should clear all macros" do
-      lambda { world.clear_macros() }.should_not raise_error
+      ->(){ world.clear_macros() }.should_not raise_error
       
       # Control the post-condition
-      MacroCollection::instance.macro_steps.should be_empty
+      MacroCollection.instance.macro_steps.should be_empty
     end  
 
   end # context

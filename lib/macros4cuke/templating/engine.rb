@@ -155,7 +155,7 @@ public
   # @return [String] The text value assigned to the placeholder. 
   #   Returns an empty string when no value is assigned to the placeholder.
   def render(aContextObject, theLocals)
-    raise NotImplementedError, "Method Section::#{__method__} must be implemented in subclass(es)."
+    raise NotImplementedError, "Method Section.#{__method__} must be implemented in subclass."
   end    
 
 end # class

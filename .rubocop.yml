@@ -1,3 +1,4 @@
+# This is disabled because some demos use UTF-8
 AsciiComments:
   Enabled: false
 
@@ -9,7 +10,13 @@ DefWithParentheses:
   
 EmptyLines:
   Enabled: false
+  
+# Avoid methods longer than 40 lines of code
+MethodLength:
+  Max: 40
 
+SpaceInsideBrackets:
+  Enabled: false
   
 StringLiterals:
   Enabled: false

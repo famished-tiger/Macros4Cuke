@@ -1,27 +1,31 @@
-## 0.3.14 / 2013-05-14
+## 0.3.15 / 2013-05-20
+* [FIX] File `.CHANGELOG.md` Date entries weren't incremented.
+* [CHANGE] File `.rubocop.yml`: Added more configuration entries.
+* [CHANGE] Spec files updated to better please Rubocop.
+
+## 0.3.14 / 2013-05-18
 * [FIX] lib/ folder in secondary local repository was messed up. Gem was OK.
 
-
-## 0.3.13 / 2013-05-14
+## 0.3.13 / 2013-05-18
 * [NEW] File `.rubocop.yml` Added.
 * [CHANGE] Many source files changed to please Rubocop.
 
-## 0.3.12 / 2013-05-14
+## 0.3.12 / 2013-05-17
 * [NEW] File `.ruby-gemset` Added (for RVM users).
 * [NEW] File `.ruby-version` Added (for RVM users).
 
-## 0.3.11 / 2013-05-14
+## 0.3.11 / 2013-05-16
 * [CHANGE] File `README.md`: Minor reformating.
 * [CHANGE] File `basic.feature` (in examples/): Added one more macro-step example.
 
-## 0.3.10 / 2013-05-14
+## 0.3.10 / 2013-05-15
 * [CHANGE] File `README.md`: Expanded section on conditional section.
 * [CHANGE] Method `Templating::Engine::parse` slightly refactored in order to decrease its complexity.
 
-## 0.3.09 / 2013-05-13
+## 0.3.09 / 2013-05-14
 * [CHANGE] File `.travis.yml`: Added jruby as a target Ruby
 
-## 0.3.08 / 2013-05-12
+## 0.3.08 / 2013-05-13
 * [CHANGE] File `README.md`: Added Gem Version badge
 
 ## 0.3.07 / 2013-05-12

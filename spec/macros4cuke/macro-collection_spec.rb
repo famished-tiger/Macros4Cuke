@@ -2,9 +2,11 @@
 # File: macro-collection_spec.rb
 
 require_relative '../spec_helper'
-require_relative '../../lib/macros4cuke/macro-collection'	# Load the class under test
 
-module Macros4Cuke # Open this namespace to get rid of module qualifier prefixes
+# Load the class under test
+require_relative '../../lib/macros4cuke/macro-collection'
+
+module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
 
 describe MacroCollection do
 
@@ -32,12 +34,14 @@ SNIPPET
 
     it "should accept the addition of a new macro-step" do
       phrase = "[enter my credentials]"
-      lambda { singleton.add_macro(phrase, sample_substeps, true)}.should_not raise_error
+      args = [phrase, sample_substeps, true]
+      ->() { singleton.add_macro(*args)}.should_not raise_error
       singleton.should have(1).macro_steps
 
       # Error case: inserting another macro with same phrase.
-      error_message = "A macro-step with phrase '[enter my credentials]' already exist."
-      lambda { singleton.add_macro(phrase, sample_substeps, true) }.should raise_error(Macros4Cuke::DuplicateMacroError, error_message)
+      msg = "A macro-step with phrase '[enter my credentials]' already exist."
+      ->(){ singleton.add_macro(*args) }.should 
+        raise_error(Macros4Cuke::DuplicateMacroError, msg)
     end
   end
 
