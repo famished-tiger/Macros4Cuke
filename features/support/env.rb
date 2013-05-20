@@ -7,7 +7,7 @@
 
 begin
   require 'simplecov'
-rescue LoadError => exc
+rescue LoadError
   # Gobble silently the exception if simplecov isn't installed.
 end
 
@@ -42,7 +42,5 @@ end # module
 # For testing purpose we override the default Cucumber behaviour
 # making our world object an instance of the TracingWorld class
 World { DemoMacros4Cuke::TracingWorld.new }
-
-
 
 # End of file

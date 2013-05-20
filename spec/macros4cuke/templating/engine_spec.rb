@@ -210,15 +210,15 @@ SNIPPET
     it "should complain when a placeholder is empty or blank" do
       text_w_empty_arg = sample_template.sub(/userid/, '')
       msg = %q(An empty or blank argument occurred in 'And I fill in "Username" with "<>"'.)
-      ->(){ Engine.new text_w_empty_arg }.should 
-        raise_error(Macros4Cuke::EmptyArgumentError, msg)
+      ->(){ Engine.new text_w_empty_arg }.should raise_error(
+        Macros4Cuke::EmptyArgumentError, msg)
     end
 
     it "should complain when a placeholder contains an invalid character" do
       text_w_empty_arg = sample_template.sub(/userid/, 'user%id')
-      msg = "The invalid sign '%' occurs in the argument/tag 'user%id'."
-      ->(){ Engine.new text_w_empty_arg }.should 
-        raise_error(Macros4Cuke::InvalidCharError, msg)
+      msg = "The invalid sign '%' occurs in the argument 'user%id'."
+      ->(){ Engine.new text_w_empty_arg }.should raise_error(
+        Macros4Cuke::InvalidCharError, msg)
     end
     
     it "should complain when a section has no closing tag" do
@@ -226,8 +226,8 @@ SNIPPET
       text_w_open_section = sophisticated_template.sub(/<\/address>/, '')
 
       error_message = "Unterminated section <?address>."
-      ->(){ Engine.new text_w_open_section}.should 
-        raise_error(StandardError, error_message)
+      ->(){ Engine.new text_w_open_section}.should raise_error(
+        StandardError, error_message)
     end
     
     it "should complain when a closing tag has no corresponding opening tag" do
@@ -235,16 +235,15 @@ SNIPPET
       text_w_wrong_end = sophisticated_template.sub(/<\/address>/, '</foobar>')
 
       msg = "End of section</foobar> doesn't match current section 'address'."
-      ->(){ Engine.new text_w_wrong_end }.should 
-        raise_error(StandardError, msg)
+      ->(){ Engine.new text_w_wrong_end }.should raise_error(
+        StandardError, msg)
     end
     
     it "should complain when a closing tag is found without opening tag" do
       # Replacing an end of section tag by another...
       wrong_end = sophisticated_template.sub(/<\?birthdate>/, '</foobar>')
       msg = "End of section</foobar> found while no corresponding section is open."
-      ->(){ Engine.new wrong_end }.should 
-        raise_error(StandardError, msg)
+      ->(){ Engine.new wrong_end }.should raise_error(StandardError, msg)
     end    
     
   end # context

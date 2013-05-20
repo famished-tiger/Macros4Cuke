@@ -36,16 +36,16 @@ end
 
     it "should complain when a sub-step argument can never be assigned a value via the phrase" do
       msg = "The sub-step argument 'password' does not appear in the phrase."
-      ->(){ MacroStep.new(sample_phrase, sample_template, false) }.should 
-        raise_error(Macros4Cuke::UnreachableSubstepArgument, msg)
+      ->(){ MacroStep.new(sample_phrase, sample_template, false) }.should raise_error(
+        Macros4Cuke::UnreachableSubstepArgument, msg)
     end
 
 
     it "should complain when an argument in phrase never occurs in substeps" do
       phrase = "enter my credentials as <foobar>"
       msg = "The phrase argument 'foobar' does not appear in a sub-step."
-      ->(){ MacroStep.new(phrase, sample_template, true) }.should 
-       raise_error(Macros4Cuke::UselessPhraseArgument, msg)
+      ->(){ MacroStep.new(phrase, sample_template, true) }.should raise_error(
+        Macros4Cuke::UselessPhraseArgument, msg)
     end
 
 
@@ -114,8 +114,8 @@ SNIPPET
       # Error case: there is no macro argument called <unknown>
       error_message = "Unknown macro-step argument 'unknown'."
       args = [ %w(unknown anything) ]
-      ->(){ subject.expand(phrase_instance, args) }.should 
-        raise_error(UnknownArgumentError, error_message)
+      ->(){ subject.expand(phrase_instance, args) }.should raise_error(
+        UnknownArgumentError, error_message)
     end
 
   end # context

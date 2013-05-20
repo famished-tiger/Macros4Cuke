@@ -15,13 +15,15 @@ module Templating
 
 # Class used internally by the template engine.  
 # Represents a static piece of text from a template.  
-# A static text is a text that is reproduced verbatim when rendering a template.
+# A static text is a text that is reproduced verbatim 
+# when rendering a template.
 class StaticText
   # The static text extracted from the original template.
   attr_reader(:source)
   
 
-  # @param aSourceText [String] A piece of text extracted from the template that must be rendered verbatim.
+  # @param aSourceText [String] A piece of text extracted 
+  #   from the template that must be rendered verbatim.
   def initialize(aSourceText)
     @source = aSourceText
   end
@@ -64,7 +66,8 @@ class UnaryElement
 
 protected
   # This method has the same signature as the {Engine#render} method.
-  # @return [Object] The actual value from the locals or context that is assigned to the variable.
+  # @return [Object] The actual value from the locals or context
+  # that is assigned to the variable.
   def retrieve_value_from(aContextObject, theLocals)
     actual_value = theLocals[name]
     if actual_value.nil? && aContextObject.respond_to?(name.to_sym)
@@ -81,7 +84,8 @@ end # class
 # Class used internally by the template engine.  
 # Represents a named placeholder in a template, that is, 
 # a name placed between <..> in the template.  
-# At rendition, a placeholder is replaced by the text value that is associated with it. 
+# At rendition, a placeholder is replaced by the text value
+# that is associated with it. 
 class Placeholder < UnaryElement
 
 public
@@ -155,7 +159,8 @@ public
   # @return [String] The text value assigned to the placeholder. 
   #   Returns an empty string when no value is assigned to the placeholder.
   def render(aContextObject, theLocals)
-    raise NotImplementedError, "Method Section.#{__method__} must be implemented in subclass."
+    msg = "Method Section.#{__method__} must be implemented in subclass."
+    raise NotImplementedError, msg
   end    
 
 end # class
@@ -165,12 +170,14 @@ end # class
 # a set of template elements for which its rendition depends
 # on the (in)existence of an actual value bound to the variable name.
 class ConditionalSection < Section
-  # A boolean that indicates whether the rendition condition is the existence of a value for the variable (true)
+  # A boolean that indicates whether the rendition condition is 
+  # the existence of a value for the variable (true)
   # or its inexistence (false).
   attr_reader(:existence)
 
   # @param aVarName [String] The name of the placeholder from a template.
-  # @param renderWhenExisting [boolean] When true, render the children elements if a value exists for the variable.  
+  # @param renderWhenExisting [boolean] When true, render the children elements
+  #   if a value exists for the variable.  
   def initialize(aVarName, renderWhenExisting = true)
     super(aVarName)
     @existence = renderWhenExisting
@@ -208,16 +215,22 @@ SectionEndMarker = Struct.new(:name)
 
 
 # A very simple implementation of a templating engine.  
-# Earlier versions of Macros4Cuke relied on the logic-less Mustache template engine.  
-# But it was decided afterwards to replace it by a very simple template engine.  
+# Earlier versions of Macros4Cuke relied on the logic-less 
+# Mustache template engine.  
+# But it was decided afterwards to replace it by a very simple 
+# template engine.  
 # The reasons were the following:  
-# - Be closer to the usual Gherkin syntax (parameters of scenario outlines use chevrons <...>, 
+# - Be closer to the usual Gherkin syntax (parameters of scenario outlines 
+#     use chevrons <...>, 
 #     while Mustache use !{{...}} delimiters),  
 # - Feature files are meant to be simple, so should the template engine be. 
 class Engine
-  # The regular expression that matches a space, any punctuation sign or delimiter that is forbidden between chevrons <...> template tags.
+  # The regular expression that matches a space, 
+  # any punctuation sign or delimiter that is forbidden
+  # between chevrons <...> template tags.
   DisallowedSigns = begin 
-    forbidden =  ' !"#' + "$%&'()*+,-./:;<=>?[\\]^`{|}~" # Used concatenation (+) to work around Ruby bug!
+    # Use concatenation (+) to work around Ruby bug!
+    forbidden =  ' !"#' + "$%&'()*+,-./:;<=>?[\\]^`{|}~" 
     all_escaped = [] 
     forbidden.each_char() { |ch| all_escaped << Regexp.escape(ch) }
     pattern = all_escaped.join("|")
@@ -227,19 +240,25 @@ class Engine
   # The original text of the template is kept here.
   attr_reader(:source)
   
-  # Builds an Engine and compiles the given template text into an internal representation.
-  # @param aSourceTemplate [String] The template source text. It may contain zero or tags enclosed between chevrons <...>.
+  # Builds an Engine and compiles the given template text into
+  #  an internal representation.
+  # @param aSourceTemplate [String] The template source text. 
+  #   It may contain zero or tags enclosed between chevrons <...>.
   def initialize(aSourceTemplate)
     @source = aSourceTemplate
     @representation = compile(aSourceTemplate)
   end
 
 public
-  # Render the template within the given scope object and with the locals specified.
+  # Render the template within the given scope object and 
+  # with the locals specified.
   # The method mimicks the signature of the Tilt::Template#render method.
-  # @param aContextObject [anything] context object to get actual values (when not present in the locals Hash).
-  # @param theLocals [Hash] Contains one or more pairs of the form: tag/placeholder name => actual value.
-  # @return [String] The rendition of the template given the passed argument values.
+  # @param aContextObject [anything] context object to get actual values
+  #   (when not present in the locals Hash).
+  # @param theLocals [Hash] Contains one or more pairs of the form:
+  #   tag/placeholder name => actual value.
+  # @return [String] The rendition of the template given 
+  #  the passed argument values.
   def render(aContextObject = Object.new, theLocals)
     return '' if @representation.empty?
     
@@ -285,7 +304,9 @@ public
     until scanner.eos?
       # Scan tag at current position...
       tag_literal = scanner.scan(/<(?:[^\\<>]|\\.)*>/)
-      result << [:dynamic, tag_literal.gsub(/^<|>$/, '')] unless tag_literal.nil?
+      unless tag_literal.nil?
+        result << [:dynamic, tag_literal.gsub(/^<|>$/, '')] 
+      end
       
       # ... or scan plain text at current position
       text_literal = scanner.scan(/(?:[^\\<>]|\\.)+/)
@@ -303,11 +324,14 @@ private
   def self.identify_parse_error(aTextLine)
     # Unsuccessful scanning: we typically have improperly balanced chevrons.
     # We will analyze the opening and closing chevrons...
-    no_escaped = aTextLine.gsub(/\\[<>]/, "--")  # First: replace escaped chevron(s)
-    unbalance = 0 # This variable equals: count of < -  count of > (can only be 0 or -temporarily- 1)
+     # First: replace escaped chevron(s)
+    no_escaped = aTextLine.gsub(/\\[<>]/, "--") 
+    
+    # var. equals count_of(<) -  count_of(>): can only be 0 or temporarily 1
+    unbalance = 0 
 
-    no_escaped.scan(/(.)/) do |match|
-      case match[0]
+    no_escaped.each_char do |ch|
+      case ch
         when '<'
           unbalance += 1 
         when '>'  
@@ -318,8 +342,7 @@ private
       raise StandardError, "Missing opening chevron '<'." if unbalance < 0
     end
     
-    raise StandardError, "Missing closing chevron '>'." if unbalance == 1
-    raise StandardError, "Cannot parse:\n'#{aTextLine}'"  
+    raise StandardError, "Missing closing chevron '>'." if unbalance == 1 
   end
   
   
@@ -333,7 +356,9 @@ private
       line_items = self.class.parse(line)
       line_items.each do |(kind, text)|
         # A tag text cannot be empty nor blank
-        raise EmptyArgumentError.new(line.strip) if (kind == :dynamic) && text.strip.empty?
+        if (kind == :dynamic) && text.strip.empty?
+          raise EmptyArgumentError.new(line.strip)
+        end
       end
       
       line_items
@@ -343,12 +368,13 @@ private
     return compile_sections(compiled_lines.flatten())
   end
   
-  # Convert the array of raw entries (per line) into full-fledged template elements.
+  # Convert the array of raw entries (per line) 
+  # into full-fledged template elements.
   def compile_line(aRawLine)
     line_rep = aRawLine.map { |couple| compile_couple(couple) }
     
-    # Apply the rule: when a line just consist of spaces and a section element, 
-    # then remove all the spaces from that line.
+    # Apply the rule: when a line just consist of spaces 
+    # and a section element, then remove all the spaces from that line.
     section_item = nil
     line_to_squeeze = line_rep.all? do |item|
       case item
@@ -370,7 +396,8 @@ private
       line_rep = [section_item]
     else
       # Apply another rule: if last item in line is an end of section marker, 
-      # then place eoline before that item. Otherwise, end the line with a eoline marker.
+      # then place eoline before that item. 
+      # Otherwise, end the line with a eoline marker.
       if line_rep.last.is_a?(SectionEndMarker)
         section_end = line_rep.pop()
         line_rep << EOLine.new
@@ -395,8 +422,6 @@ private
         
       when :dynamic
         parse_tag(text)
-      else
-        raise StandardError, "Internal error: Don't know template element of kind #{kind}"
       end
 
     return result
@@ -414,7 +439,6 @@ private
     end
     raise InvalidCharError.new(aText, matching[0]) if matching
     
-    SectionEndMarker
     result = case aText[0, 1]
       when '?'
         ConditionalSection.new(aText[1..-1], true)
@@ -443,7 +467,8 @@ private
             raise StandardError, "End of section</#{element.name}> found while no corresponding section is open."
           end
           if element.name != open_sections.last.name
-            raise StandardError, "End of section</#{element.name}> doesn't match current section '#{open_sections.last.name}'."
+            msg = "End of section</#{element.name}> doesn't match current section '#{open_sections.last.name}'."
+            raise StandardError, msg
           end
           subResult << open_sections.pop()
           
@@ -457,7 +482,10 @@ private
       
     end
     
-    raise StandardError, "Unterminated section #{open_sections.last}." unless open_sections.empty?
+    unless open_sections.empty?
+      error_message =  "Unterminated section #{open_sections.last}."
+      raise StandardError, error_message
+    end
     
     return compiled
   end

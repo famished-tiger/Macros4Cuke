@@ -30,7 +30,8 @@ end # class
 # and that argument name does not appear in any sub-step.
 class UnreachableSubstepArgument < Macros4CukeError
   def initialize(anArgName)
-    super("The sub-step argument '#{anArgName}' does not appear in the phrase.")
+    msg = "The sub-step argument '#{anArgName}' does not appear in the phrase."
+    super(msg)
   end
 end # class
 
@@ -46,8 +47,9 @@ end # class
 
 # Raised when an argument name contains invalid characters.
 class InvalidCharError < Macros4CukeError
-  def initialize(aText, aWrongChar)
-    super("The invalid sign '#{aWrongChar}' occurs in the argument/tag '#{aText}'.")
+  def initialize(aTag, aWrongChar)
+    msg = "The invalid sign '#{aWrongChar}' occurs in the argument '#{aTag}'."
+    super(msg)
   end
 end # class
 
@@ -73,10 +75,13 @@ end # class
 
 # Raised when one invokes a macro-step without a required data table argument
 class DataTableNotFound < Macros4CukeError
-  def initialize(argName)
-    super("The macro-step is missing a data table argument.")
+  def initialize(phrase)
+    msg = "The step with phrase [#{phrase}]: requires a data table."
+    super(msg)
   end
 end # class
+
+    msg = 
 
 
 

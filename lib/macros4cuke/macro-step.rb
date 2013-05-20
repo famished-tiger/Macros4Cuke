@@ -12,7 +12,8 @@ module Macros4Cuke # Module used as a namespace
 # an aggregation of lower-level sub-steps.
 # When a macro-step is used in a scenario, then its execution is equivalent
 # to the execution of its sub-steps.
-# A macro-step may have zero or more arguments. The actual values bound to these arguments
+# A macro-step may have zero or more arguments. 
+# The actual values bound to these arguments
 # are passed to the sub-steps at execution time.
 class MacroStep
   # A template engine that expands the sub-steps upon request.
@@ -24,14 +25,18 @@ class MacroStep
   # The list of macro arguments that appears in the macro phrase.
   attr_reader(:phrase_args)
   
-  # The list of macro argument names (as appearing in the substeps and in the macro phrase).
+  # The list of macro argument names (as appearing in the substeps 
+  # and in the macro phrase).
   attr_reader(:args)
 
   
   # Constructor.
-  # @param aMacroPhrase[String] The text from the macro step definition that is between the square brackets.
-  # @param theSubsteps [String] The source text of the steps to be expanded upon macro invokation.
-  # @param useTable [boolean] A flag indicating whether a data table must be used to pass actual values.
+  # @param aMacroPhrase[String] The text from the macro step definition 
+  #   that is between the square brackets.
+  # @param theSubsteps [String] The source text of the steps to be expanded
+  #   upon macro invokation.
+  # @param useTable [boolean] A flag indicating whether a data table 
+  #   must be used to pass actual values.
   def initialize(aMacroPhrase, theSubsteps, useTable)
     @key = self.class.macro_key(aMacroPhrase, useTable, :definition)
 
@@ -54,19 +59,23 @@ class MacroStep
   # Compute the identifier of the macro from the given macro phrase.  
   # A macro phrase is a text that may contain zero or more placeholders.   
   # In definition mode, a placeholder is delimited by chevrons <..>.  
-  # In invokation mode, a value bound to a placeholder is delimited by double quotes.  
+  # In invokation mode, a value bound to a placeholder is delimited 
+  # by double quotes.  
   # The rule for building the identifying key are:  
   # - Leading and trailing space(s) are removed.  
   # - Each underscore character is removed.  
   # - Every sequence of one or more space(s) is converted into an underscore  
-  # - Each placeholder (i.e. = delimiters + enclosed text) is converted into a letter X.  
+  # - Each placeholder (i.e. = delimiters + enclosed text) 
+  #     is converted into a letter X.  
   # - when useTable is true, concatenate: _T   
   # @example:
   #   Consider the macro phrase: 'create the following "contactType" contact'  
   #   The resulting macro_key is: 'create_the_following_X_contact_T'
   #
-  # @param aMacroPhrase [String] The text from the macro step definition that is between the square brackets.
-  # @param useTable [boolean] A flag indicating whether a table should be used to pass actual values.
+  # @param aMacroPhrase [String] The text from the macro step definition 
+  #   that is between the square brackets.
+  # @param useTable [boolean] A flag indicating whether a table
+  #  should be used to pass actual values.
   # @param mode [:definition, :invokation]
   # @return [String] the key of the phrase/macro.
   def self.macro_key(aMacroPhrase, useTable, mode)
@@ -79,7 +88,8 @@ class MacroStep
     stripped_phrase.gsub!(/\s+/, '_')
 
 
-    # Determine the pattern to isolate each argument/parameter with its delimiters
+    # Determine the pattern to isolate 
+    # each argument/parameter with its delimiters
     pattern = case mode
       when :definition
         /<(?:[^\\<>]|\\.)*>/

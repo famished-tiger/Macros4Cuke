@@ -23,6 +23,11 @@ Scenario: Defining a macro with conditional substeps
   And I click "Save"
   """
   
+
+Scenario: An exception is forced by invoking the above macro with a triple quote string instead of a data table.
+  When I generate a DataTableNotFound exception  
+
+  
 Scenario: # Let's use the macro-step WITHOUT the optional argument values.
   When I [fill in the form with]:
   |firstname|Alice|
@@ -70,4 +75,5 @@ Scenario: # Let's use the macro-step WITH the optional argument values.
   Invoked step: ... I fill in "email" with "alice.inn@wonder.land"
   Invoked step: ... I fill in "comment" with "No comment!"
   Invoked step: ... I click "Save"
-  """  
+  """
+  

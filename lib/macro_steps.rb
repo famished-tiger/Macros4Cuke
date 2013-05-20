@@ -1,5 +1,7 @@
+# encoding: utf-8
 # File: macro_steps.rb
-# Purpose: step definitions that help to build macro-steps (i.e. a step that is equivalent to a sequence of steps)
+# Purpose: step definitions that help to build macro-steps 
+# (i.e. a step that is equivalent to a sequence of steps)
 
 
 
@@ -13,7 +15,8 @@
 #  And I fill in "Password" with "unguessable"
 #  And I click "Submit"
 #  """
-# The regexp has two capturing group: one for the phrase, a second for the terminating colon (:)
+# The regexp has two capturing group: one for the phrase, 
+# a second for the terminating colon (:)
 Given(/^I define the step "(?:Given|When|Then|\*) I \[((?:[^\\\]]|\\.)+)\](:?)" to mean:$/) do |macro_phrase, colon_capture, template|
   use_table = (colon_capture == ':')
   add_macro(macro_phrase, template, use_table)
@@ -38,11 +41,12 @@ end
 When(/^I \[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   # Ensure that the second argument is of the correct type
   unless table_argument.kind_of?(Cucumber::Ast::Table)
-     raise Macros4Cuke::DataTableNotFound, "This step must have a data table as an argument."
+    raise Macros4Cuke::DataTableNotFound.new(macro_phrase)
   end
 
   # This will call the macro with the given phrase.
-  # The second argument consists of an array with couples of the kind: [argument name, actual value]
+  # The second argument consists of an array 
+  # with couples of the kind: [argument name, actual value]
   invoke_macro(macro_phrase, table_argument.raw)
 end
 
