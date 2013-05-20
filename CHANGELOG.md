@@ -1,3 +1,11 @@
+## 0.3.17 / 2013-05-20
+* [CHANGE] File `README.md`: Added dynamic dependencies badge (Gemnasium).
+
+## 0.3.16 / 2013-05-20
+* [CHANGE] File `demo06.feature`: Added a scenario that causes a specific exception to be raised.
+* [CHANGE] File `demo_steps.rb`: Added a specific step that raises a TableNotException. It is captured and compared to expectations. 
+* [CHANGE] File `engine.rb`: Removed two lines that were never executed.
+
 ## 0.3.15 / 2013-05-20
 * [FIX] File `.CHANGELOG.md` Date entries weren't incremented.
 * [CHANGE] File `.rubocop.yml`: Added more configuration entries.
