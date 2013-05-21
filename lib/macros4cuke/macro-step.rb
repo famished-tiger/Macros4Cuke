@@ -16,6 +16,11 @@ module Macros4Cuke # Module used as a namespace
 # The actual values bound to these arguments
 # are passed to the sub-steps at execution time.
 class MacroStep
+  # The set of predefined macro argument constant values.
+  BuiltinParameters = {
+    'quotes' => '"""'
+  }
+  
   # A template engine that expands the sub-steps upon request.
   attr_reader(:renderer)
   
@@ -28,7 +33,6 @@ class MacroStep
   # The list of macro argument names (as appearing in the substeps 
   # and in the macro phrase).
   attr_reader(:args)
-
   
   # Constructor.
   # @param aMacroPhrase[String] The text from the macro step definition 
@@ -110,11 +114,15 @@ class MacroStep
   # Render the steps from the template, given the values
   # taken by the parameters
   # @param aPhrase [String] an instance of the macro phrase.
-  # @param rawData [Array or nil] An Array with coupples of the form: 
+  # @param rawData [Array or nil] An Array with couples of the form: 
   # [macro argument name, a value].
   #   Multiple rows with same argument name are acceptable.
   def expand(aPhrase, rawData)
     params = validate_params(aPhrase, rawData)
+    
+    # Add built-in constants if necessary.
+    params = BuiltinParameters.merge(params)
+
     return renderer.render(nil, params)
   end
 
@@ -132,7 +140,6 @@ private
     quoted_values.each_with_index do |val, index|
       macro_parameters[phrase_args[index]] = val
     end
-    
 
     unless rawData.nil?
       rawData.each do |(a_key, value)|
@@ -153,7 +160,7 @@ private
   end
 
 
-  
+
 
   # Retrieve from the macro phrase, all the text between <..> or double quotes.
   # Returns an array. Each of its elements corresponds to quoted text.
@@ -180,7 +187,7 @@ private
     
     return args
   end
-  
+
   # Return the substeps text after some transformation
   # [theSubstepsSource] The source text of the steps 
   # to be expanded upon macro invokation.
@@ -208,8 +215,9 @@ private
     # and the macro-step does not use data table.
     unless use_table?
       substepsVars.each do |substep_arg|
-        unless thePhraseArgs.include? substep_arg
-          raise UnreachableSubstepArgument.new(substep_arg)
+        unless (thePhraseArgs.include?(substep_arg) ||
+        BuiltinParameters.include?(substep_arg))
+          raise UnreachableSubstepArgument.new(substep_arg) 
         end
       end      
     end

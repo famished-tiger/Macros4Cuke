@@ -7,14 +7,22 @@ When(/^I leave '(.*)'$/) do |city|
 end
 
 
-When(/^I visit (.+)$/) do |city|
+When(/^I visit (\S+)$/) do |city|
  show "I visit #{city}"
+end
+
+
+# This step uses a multiline text argument
+When(/^I visit the cities:$/) do |cities_raw|
+ cities = cities_raw.split(/\r\n?|\n/)
+ cities.each { |city| show "I visit #{city}" }
 end
 
 
 When(/^I arrive in (.+)$/) do |city|
   show "I arrive in #{city}"
 end
+
 
 When(/^I type \"([^"]*)\"$/) do |text|
   show text

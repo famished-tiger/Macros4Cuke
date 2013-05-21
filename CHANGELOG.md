@@ -1,3 +1,11 @@
+## 0.3.18 / 2013-05-21
+* [FEATURE] Support for sub-steps having multiline text arguments (docstring).
+* [CHANGE] Method MacroStep#expand passes also built-in arguments to template engine.
+* [CHANGE] Method MacroStep#validate_phrase_args does not apply validations on built-in arguments.
+* [CHANGE] File `macro-step_spec.rb`: Added one example to test the insertion of triple quotes.
+* [NEW] File `multiline.feature` added in examples/features/ folder.
+* [CHANGE] File `README.md`: Added section 'Sub-steps with multiline text argument'
+
 ## 0.3.17 / 2013-05-20
 * [CHANGE] File `README.md`: Added dynamic dependencies badge (Gemnasium).
 

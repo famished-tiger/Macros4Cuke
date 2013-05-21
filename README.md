@@ -236,7 +236,7 @@ The next example is based on one of the demo feature files:
   """
 ```
 
-This step can be used like this:
+This step can be used like this:  
 ```cucumber
   When I [enter my address as follows]:"  
   |lastname|Doe|  
@@ -272,13 +272,13 @@ Taking again a previous example of a -partial- macro-step definition:
   """
 ```
 
-The following step invokation is invalid:
+The following step invokation is invalid:  
 ```cucumber
   When I [travel from "San Francisco" to via "Las Vegas"]
 ```
 
 The issue is: the destination value is missing, Macros4Cuke won't be able to find a step with that syntax.  
-The next invokation is syntactically correct for Macros4Cuke:
+The next invokation is syntactically correct for Macros4Cuke:  
 ```cucumber
   When I [travel from "San Francisco" to "" via "Las Vegas"]
 ```
@@ -289,6 +289,47 @@ For any argument that can receive a value through a data table, three situations
 1. A row for that argument together with a text value are specified at invokation. The argument is bound to that text value.  
 2. A row for that argument and an empty text value are specified at invokation. The argument is bound to an empty text.  
 3. There is no row for that argument. The argument is unbound (nil) but is rendered as an empty text.  
+
+## Sub-steps with multiline text argument ##
+- __Question__: is it possible to define a macro-step with a sub-step that itself
+ uses a multiline text argument (also called a docstring)?  
+- __Answer__: Yes but there is a catch.
+
+Consider the following attempt of a macro-step definition:  
+```cucumber
+  Given I define the step "* I [make a long journey]" to mean:
+  """
+    When I visit the cities:
+    """
+    Amsterdam
+    Brussels
+    Copenhagen
+    """
+  """
+```
+
+This will result in an error. The issue is caused by the nesting of triple quotes:
+Cucumber simply doesn't allow this. In fact, the error is reported by [Gherkin](https://github.com/cucumber/gherkin), 
+a component used by Cucumber.  
+As Gherkin has other [issues](https://github.com/cucumber/gherkin/issues/124) with docstrings, we
+need a workaround today until the fixes are applied.  
+The workaround is the following:  
+- There exists in Macros4Cuke a predefined sub-step argument called __\<quotes\>__ and its value
+is set to a triple quote sequence """.  
+- Use it everywhere you want to place nested triple quotes.
+
+Thus to make the previous example work, one must change it like follows:  
+```cucumber
+  Given I define the step "* I [make a long journey]" to mean:
+  """
+    When I visit the cities:
+    <quotes>
+    Amsterdam
+    Brussels
+    Copenhagen
+    <quotes>
+  """
+```
 
 
 ## Conditional sections in substeps. ##
@@ -377,7 +418,7 @@ This last argument becomes important in the context of user acceptance testing, 
  every tester is also Rubyist is -alas!- far from the truth.
 
  
-Macros with Cucumber is highly debated topic, so it is always wise to know what other people say about it:  
+Macros with Cucumber is highly debated topic, so it is good to know what other people say about it:  
 [Support for Macros] (https://github.com/cucumber/gherkin/issues/178)  
 [Substeps - macro request for the nth time] (http://grokbase.com/t/gg/cukes/133ey063b8/cucumber-substeps-macro-request-for-the-nth-time)
 

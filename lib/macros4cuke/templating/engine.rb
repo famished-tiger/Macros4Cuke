@@ -166,9 +166,8 @@ public
 end # class
 
 
-# Represents a section in a template, that is, 
-# a set of template elements for which its rendition depends
-# on the (in)existence of an actual value bound to the variable name.
+# A specialized section in a template for which its rendition
+# depends on the (in)existence of an actual value bound to the variable name.
 class ConditionalSection < Section
   # A boolean that indicates whether the rendition condition is 
   # the existence of a value for the variable (true)

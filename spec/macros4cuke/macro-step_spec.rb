@@ -94,7 +94,7 @@ SNIPPET
 
       text.should == expectation
     end
-    
+
     it "should un-escape the double-quotes for phrase arguments" do
       specific_phrase = %q|enter my credentials as "quotable\""|
       text = subject.expand(specific_phrase, [ %w(password no-secret) ])
@@ -109,7 +109,7 @@ SNIPPET
       text.should == expectation
     end
 
-    
+
     it "should complain when an unknown variable is used" do
       # Error case: there is no macro argument called <unknown>
       error_message = "Unknown macro-step argument 'unknown'."
@@ -117,6 +117,25 @@ SNIPPET
       ->(){ subject.expand(phrase_instance, args) }.should raise_error(
         UnknownArgumentError, error_message)
     end
+
+
+    it "should expand built-in variables" do
+      phrase = "do nothing useful"
+      substeps = <<-SNIPPET
+  Given I travel through:
+  <quotes>
+  London
+  Paris
+  San Francisco
+  <quotes>
+SNIPPET
+       
+      instance = MacroStep.new(phrase, substeps, true)
+      actual = instance.expand(phrase, [])
+      expected = substeps.gsub(/<quotes>/, '"""')
+      actual.should == expected
+    end
+   
 
   end # context
 
