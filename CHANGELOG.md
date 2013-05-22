@@ -1,7 +1,13 @@
+## 0.3.19 / 2013-05-22
+* [CHANGE] File `.rubocop.yml`: Reduced MethodLength to 30 (lines in a method).
+* [CHANGE] Method `Engine#compile_line refactored: Extract Method pattern => new method line_rep_ending added.
+* [CHANGE] Method `Engine#compile_sections refactored: Extract Method pattern => new method validate_section_end added.
+
+
 ## 0.3.18 / 2013-05-21
 * [FEATURE] Support for sub-steps having multiline text arguments (docstring).
-* [CHANGE] Method MacroStep#expand passes also built-in arguments to template engine.
-* [CHANGE] Method MacroStep#validate_phrase_args does not apply validations on built-in arguments.
+* [CHANGE] Method `MacroStep#expand passes` also built-in arguments to template engine.
+* [CHANGE] Method `MacroStep#validate_phrase_args` does not apply validations on built-in arguments.
 * [CHANGE] File `macro-step_spec.rb`: Added one example to test the insertion of triple quotes.
 * [NEW] File `multiline.feature` added in examples/features/ folder.
 * [CHANGE] File `README.md`: Added section 'Sub-steps with multiline text argument'

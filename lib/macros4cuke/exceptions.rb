@@ -81,9 +81,6 @@ class DataTableNotFound < Macros4CukeError
   end
 end # class
 
-    msg = 
-
-
 
 # Raised when Macros4Cuke encountered an issue
 # that it can't handle properly.

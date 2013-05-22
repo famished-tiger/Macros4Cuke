@@ -11,9 +11,9 @@ DefWithParentheses:
 EmptyLines:
   Enabled: false
   
-# Avoid methods longer than 40 lines of code
+# Avoid methods longer than 30 lines of code
 MethodLength:
-  Max: 40
+  Max: 30
 
 SpaceInsideBrackets:
   Enabled: false

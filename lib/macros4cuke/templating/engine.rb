@@ -394,19 +394,24 @@ private
     if line_to_squeeze && ! section_item.nil?
       line_rep = [section_item]
     else
-      # Apply another rule: if last item in line is an end of section marker, 
-      # then place eoline before that item. 
-      # Otherwise, end the line with a eoline marker.
-      if line_rep.last.is_a?(SectionEndMarker)
-        section_end = line_rep.pop()
-        line_rep << EOLine.new
-        line_rep << section_end
-      else
-        line_rep << EOLine.new
-      end
+      line_rep_ending(line_rep)
     end
     
     return line_rep
+  end
+  
+
+  # Apply rule: if last item in line is an end of section marker, 
+  # then place eoline before that item. 
+  # Otherwise, end the line with a eoline marker.  
+  def line_rep_ending(theLineRep)
+    if theLineRep.last.is_a?(SectionEndMarker)
+      section_end = theLineRep.pop()
+      theLineRep << EOLine.new
+      theLineRep << section_end
+    else
+      theLineRep << EOLine.new
+    end  
   end
 
   
@@ -461,24 +466,18 @@ private
         when Section
           open_sections << element
         
-        when SectionEndMarker
-          if open_sections.empty?
-            raise StandardError, "End of section</#{element.name}> found while no corresponding section is open."
-          end
-          if element.name != open_sections.last.name
-            msg = "End of section</#{element.name}> doesn't match current section '#{open_sections.last.name}'."
-            raise StandardError, msg
-          end
+        when SectionEndMarker           
+          validate_section_end(element, open_sections)
           subResult << open_sections.pop()
-          
+         
         else
           if open_sections.empty?
             subResult << element
           else
             open_sections.last.add_child(element)
           end
-      end
-      
+
+      end 
     end
     
     unless open_sections.empty?
@@ -487,6 +486,18 @@ private
     end
     
     return compiled
+  end
+  
+  # Validate the given end of section marker taking into account the open sections.
+  def validate_section_end(marker, sections)
+    if sections.empty?
+      msg = "End of section</#{marker.name}> found while no corresponding section is open."
+      raise StandardError, msg
+    end
+    if marker.name != sections.last.name
+      msg = "End of section</#{marker.name}> doesn't match current section '#{sections.last.name}'."
+      raise StandardError, msg
+    end
   end
  
 end # class
