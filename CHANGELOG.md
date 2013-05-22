@@ -2,6 +2,7 @@
 * [CHANGE] File `.rubocop.yml`: Reduced MethodLength to 30 (lines in a method).
 * [CHANGE] Method `Engine#compile_line refactored: Extract Method pattern => new method line_rep_ending added.
 * [CHANGE] Method `Engine#compile_sections refactored: Extract Method pattern => new method validate_section_end added.
+* [FIX] File `exceptions.rb`: Removal of useless assignment (detected by Rubocop). No runtime impact.
 
 
 ## 0.3.18 / 2013-05-21
