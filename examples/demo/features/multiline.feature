@@ -1,6 +1,6 @@
 # File: multiline.feature
 
-Feature: Show how multiline text inside macros
+Feature: Show how to use multiline text inside macros
   As a Cuke user
   So that I enjoy writing scenario.
 

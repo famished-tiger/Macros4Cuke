@@ -1,3 +1,7 @@
+## 0.3.20 / 2013-05-23
+* [CHANGE] File `.travis.yml`: Added more CI environments: ruby-head and jruby-head.
+* [CHANGE] File `Rakefile`: Added task to push gem to Rubygems.
+
 ## 0.3.19 / 2013-05-22
 * [CHANGE] File `.rubocop.yml`: Reduced MethodLength to 30 (lines in a method).
 * [CHANGE] Method `Engine#compile_line refactored: Extract Method pattern => new method line_rep_ending added.
