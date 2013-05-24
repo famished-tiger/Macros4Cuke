@@ -29,7 +29,7 @@ describe MacroStepSupport do
   # Rule to build a custom world object
   let(:world) { MyWorld.new }
   
-  let(:m1_phrase) { "enter the credentials" }
+  let(:m1_phrase) { 'enter the credentials' }
   
   let(:m1_substeps) do
       ssteps = <<-SNIPPET
@@ -42,32 +42,32 @@ SNIPPET
       ssteps
   end  
   
-  context "Defining macro(s):" do
-    it "should add valid new macro" do
+  context 'Defining macro(s):' do
+    it 'should add valid new macro' do
       ->(){ world.add_macro(m1_phrase, m1_substeps, true) }.should_not raise_error
     end
     
-    it "should complain when entering the same macro again" do
+    it 'should complain when entering the same macro again' do
       # Error case: trying to register another macro with same key/phrase.
       msg = "A macro-step with phrase 'enter the credentials' already exist."
       -> { world.add_macro(m1_phrase, m1_substeps, true) }.should raise_error(
         Macros4Cuke::DuplicateMacroError, msg)
     end
     
-    it "should complain macro uses no table and phrase is parameterless" do
+    it 'should complain macro uses no table and phrase is parameterless' do
       # Error case: substeps have arguments, 
       # but the macro has no mechanism to pass the needed data.
-      phrase = "fill in the credentials"
+      phrase = 'fill in the credentials'
       msg = "The sub-step argument 'userid' does not appear in the phrase."
       ->(){ world.add_macro(phrase, m1_substeps, false) }.should raise_error(
         Macros4Cuke::UnreachableSubstepArgument, msg)    
     end
   end # context
   
-  context "Invoking macro(s):" do
+  context 'Invoking macro(s):' do
   
-    it "should complain when invoking an unknown macro-step" do
-      phrase_unknown = "dream of a perfect world" 
+    it 'should complain when invoking an unknown macro-step' do
+      phrase_unknown = 'dream of a perfect world'
       msg = "Unknown macro-step with phrase: 'dream of a perfect world'."
       ->(){ world.invoke_macro(phrase_unknown) }.should raise_error(
         Macros4Cuke::UnknownMacroError, msg)
@@ -75,9 +75,9 @@ SNIPPET
 
   end # context  
   
-  context "Clearing macro(s):" do
+  context 'Clearing macro(s):' do
   
-    it "should clear all macros" do
+    it 'should clear all macros' do
       ->(){ world.clear_macros() }.should_not raise_error
       
       # Control the post-condition

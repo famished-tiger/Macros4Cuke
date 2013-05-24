@@ -102,7 +102,7 @@ public
       
       when Array
         # TODO: Move away from hard-coded separator.
-        actual_value.join("<br/>")
+        actual_value.join('<br/>')
         
       when String
         actual_value
@@ -232,7 +232,7 @@ class Engine
     forbidden =  ' !"#' + "$%&'()*+,-./:;<=>?[\\]^`{|}~" 
     all_escaped = [] 
     forbidden.each_char() { |ch| all_escaped << Regexp.escape(ch) }
-    pattern = all_escaped.join("|")
+    pattern = all_escaped.join('|')
     Regexp.new(pattern)
   end
 
@@ -324,10 +324,10 @@ private
     # Unsuccessful scanning: we typically have improperly balanced chevrons.
     # We will analyze the opening and closing chevrons...
      # First: replace escaped chevron(s)
-    no_escaped = aTextLine.gsub(/\\[<>]/, "--") 
-    
+    no_escaped = aTextLine.gsub(/\\[<>]/, '--')
+
     # var. equals count_of(<) -  count_of(>): can only be 0 or temporarily 1
-    unbalance = 0 
+    unbalance = 0
 
     no_escaped.each_char do |ch|
       case ch

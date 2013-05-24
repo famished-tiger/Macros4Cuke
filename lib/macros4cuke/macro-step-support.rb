@@ -1,8 +1,8 @@
 # encoding: utf-8
 # File: macro-step-support.rb
 
-require_relative "exceptions"
-require_relative "macro-collection"
+require_relative 'exceptions'
+require_relative 'macro-collection'
 
 module Macros4Cuke # Module used as a namespace
 

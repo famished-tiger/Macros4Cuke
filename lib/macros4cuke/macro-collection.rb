@@ -3,7 +3,7 @@
 # Purpose: Implementation of the MacroCollection class.
 
 require 'singleton'  # We'll use the Singleton design pattern for this class.
-require_relative "macro-step"
+require_relative 'macro-step'
 
 module Macros4Cuke # Module used as a namespace
 

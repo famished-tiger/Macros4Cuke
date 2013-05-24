@@ -17,9 +17,6 @@ MethodLength:
 
 SpaceInsideBrackets:
   Enabled: false
-  
-StringLiterals:
-  Enabled: false
 
 TrailingWhitespace:
   Enabled: false

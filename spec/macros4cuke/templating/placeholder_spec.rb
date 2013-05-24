@@ -15,20 +15,20 @@ describe Placeholder do
   # Default instantiation rule
   subject { Placeholder.new('foobar') }
 
-  context "Creation and initialization:" do
+  context 'Creation and initialization:' do
 
-    it "should be created with a variable name" do
+    it 'should be created with a variable name' do
       ->() { Placeholder.new('foobar') }.should_not raise_error
     end
 
-    it "should know the name of its variable" do
+    it 'should know the name of its variable' do
       subject.name.should == 'foobar'
     end
 
   end # context
 
-  context "Provided services:" do
-    it "should render an empty string when no actual value is absent" do
+  context 'Provided services:' do
+    it 'should render an empty string when no actual value is absent' do
       # Case: context has no value associated to 'foobar'
       rendered_text = subject.render(Object.new, {})
       rendered_text.should be_empty
@@ -41,12 +41,12 @@ describe Placeholder do
       context = Object.new
       def context.foobar  # Add singleton method foobar that returns nil
         nil
-      end 
+      end
       rendered_text = subject.render(context, {})
       rendered_text.should be_empty
     end
 
-    it "should render the actual value bound to the placeholder" do
+    it 'should render the actual value bound to the placeholder' do
       # Case: locals Hash has a value associated to 'foobar'
       rendered_text = subject.render(Object.new, { 'foobar' => 'hello' })
       rendered_text.should == 'hello'

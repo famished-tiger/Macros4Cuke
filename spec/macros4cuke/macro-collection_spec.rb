@@ -12,14 +12,14 @@ describe MacroCollection do
 
   let(:singleton) { MacroCollection.instance() }
 
-  context "Initialization:" do
-    it "should be empty" do
+  context 'Initialization:' do
+    it 'should be empty' do
       singleton.macro_steps.should be_empty
     end
 
   end
 
-  context "Provided services:" do
+  context 'Provided services:' do
     let(:sample_substeps) do
       snippet = <<-SNIPPET
   Given I landed in the homepage
@@ -32,8 +32,8 @@ SNIPPET
       snippet
     end
 
-    it "should accept the addition of a new macro-step" do
-      phrase = "[enter my credentials]"
+    it 'should accept the addition of a new macro-step' do
+      phrase = '[enter my credentials]'
       args = [phrase, sample_substeps, true]
       ->() { singleton.add_macro(*args)}.should_not raise_error
       singleton.should have(1).macro_steps

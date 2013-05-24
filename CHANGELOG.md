@@ -1,4 +1,8 @@
 ## 0.3.20 / 2013-05-23
+* [CHANGE] File `.rubocop.yml`: StringLiterals cop is now enabled
+* [CHANGE] Many file: replaced double quotes by single quotes in order to pass the StringLiterals Robocop rule.
+
+## 0.3.20 / 2013-05-23
 * [CHANGE] File `.travis.yml`: Added more CI environments: ruby-head and jruby-head.
 * [CHANGE] File `Rakefile`: Added task to push gem to Rubygems.
 

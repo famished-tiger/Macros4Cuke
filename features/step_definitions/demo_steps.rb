@@ -32,7 +32,7 @@ SNIPPET
   begin
     steps(wrong)
   rescue Macros4Cuke::DataTableNotFound => exc
-    msg = "The step with phrase [fill in the form with]: requires a data table."
+    msg = 'The step with phrase [fill in the form with]: requires a data table.'
     exc.message.should == msg
   end
 end

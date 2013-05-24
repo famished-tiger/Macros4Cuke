@@ -18,7 +18,7 @@ Scenario: Defining a macro with conditional substeps
   <?email>
   And I fill in "email" with "<email>"
   </email>
-  # Let's also assume that comment is optional
+  # Let's also assume that comment is also optional
 <?comment>  And I fill in "comment" with "<comment>"</comment>
   And I click "Save"
   """
