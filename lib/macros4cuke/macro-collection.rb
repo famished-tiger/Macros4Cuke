@@ -42,7 +42,7 @@ public
   # and (optionally) given a table of values.
   # Return the rendered steps as a text.
   # @param aPhrase [String] an instance of the macro phrase.
-  # @param rawData [Array or nil] An Array with coupples of the form:
+  # @param rawData [Array or nil] An Array with couples of the form:
   # [macro argument name, a value]. 
   #   Multiple rows with same argument name are acceptable.
   # @return [String]

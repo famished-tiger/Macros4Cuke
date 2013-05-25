@@ -43,6 +43,22 @@ SNIPPET
       ->(){ singleton.add_macro(*args) }.should 
         raise_error(Macros4Cuke::DuplicateMacroError, msg)
     end
+
+    it 'should return the rendition of a given macro-step' do
+      phrase = '[enter my credentials]'
+      input_values = [ ['userid', 'nobody'], ['password', 'no-secret'] ]
+      rendered = singleton.render_steps(phrase, input_values)
+      expected = <<-SNIPPET
+  Given I landed in the homepage
+  When I click "Sign in"
+  And I fill in "Username" with "nobody"
+  And I fill in "Password" with "no-secret"
+  And I click "Submit"
+SNIPPET
+      rendered.should == expected
+    end
+    
+
   end
 
 end # describe

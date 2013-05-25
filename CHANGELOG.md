@@ -1,5 +1,9 @@
-## 0.3.20 / 2013-05-23
-* [CHANGE] File `.rubocop.yml`: StringLiterals cop is now enabled
+## 0.3.22 / 2013-05-25
+* [CHANGE] File `macro-collection_spec.rb`: Added one test for the `MacroCollection#render_steps` method.
+
+
+## 0.3.21 / 2013-05-24
+* [CHANGE] File `.rubocop.yml`: StringLiterals cop is now enabled.
 * [CHANGE] Many file: replaced double quotes by single quotes in order to pass the StringLiterals Robocop rule.
 
 ## 0.3.20 / 2013-05-23
