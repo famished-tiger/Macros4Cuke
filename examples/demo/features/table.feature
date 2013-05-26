@@ -31,6 +31,7 @@ Scenario: Using a macro-step with a data table
   # Sherlock
   # Holmes
   # 221B, Baker Street
+  # NW1 6XE  
   # London
   # U.K.
   
@@ -52,6 +53,34 @@ Scenario: Using a macro-step with a data table
 
   # Did you notice the empty line in the previous output.
   # Guess what? We forgot to specify a value for the postcode argument.
+
+Scenario: Show that one can combine parameters passing with the phrase and a table
+  Given I define the step "* I [fill in the form as <firstname> <lastname>]:" to mean:
+  """
+  When I [fill in the form with]:
+  |firstname| <firstname>| 
+  |lastname | <lastname>  |
+  |street_address| <street_address>|
+  |city    |<city>   |
+  |postcode|<postcode>  |
+  |country |<country> |  
+  """
+  
+  # Let's try
+  When I [fill in the form as "Sherlock" "Holmes"]:
+  |street_address| 221B, Baker Street|
+  |city    |London   |
+  |postcode|NW1 6XE  |
+  |country | U.K.    |
+
+  # You should see the output:
+  # Sherlock
+  # Holmes
+  # 221B, Baker Street
+  # NW1 6XE
+  # London
+  # U.K.
+  
   
   
 Scenario: Demonstrate that it is possible to use a sub-step with a data table
