@@ -35,7 +35,7 @@ SNIPPET
     it 'should accept the addition of a new macro-step' do
       phrase = '[enter my credentials]'
       args = [phrase, sample_substeps, true]
-      ->() { singleton.add_macro(*args)}.should_not raise_error
+      ->() { singleton.add_macro(*args) }.should_not raise_error
       singleton.should have(1).macro_steps
 
       # Error case: inserting another macro with same phrase.

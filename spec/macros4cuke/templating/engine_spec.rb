@@ -226,7 +226,7 @@ SNIPPET
       text_w_open_section = sophisticated_template.sub(/<\/address>/, '')
 
       error_message = 'Unterminated section <?address>.'
-      ->(){ Engine.new text_w_open_section}.should raise_error(
+      ->(){ Engine.new text_w_open_section }.should raise_error(
         StandardError, error_message)
     end
     

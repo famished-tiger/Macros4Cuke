@@ -1,3 +1,7 @@
+## 0.3.24 / 2013-05-28
+* [CHANGE] File `.rubocop.yml`: A few new Rubocop 0.8.0 checks are disabled.
+* [CHANGE] Many source files refactored to satisfy new "cops" from Rubocop 0.8.0
+
 ## 0.3.23 / 2013-05-26
 * [CHANGE] Demo file `table.feature`: Added one scenario combining argument passing via the phrase and table.
 

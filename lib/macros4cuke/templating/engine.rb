@@ -65,6 +65,7 @@ class UnaryElement
   end
 
 protected
+
   # This method has the same signature as the {Engine#render} method.
   # @return [Object] The actual value from the locals or context
   # that is assigned to the variable.
@@ -317,6 +318,7 @@ public
   end
 
 private
+
   # Called when the given text line could not be parsed.
   # Raises an exception with the syntax issue identified.
   # @param aTextLine [String] A text line from the template.  

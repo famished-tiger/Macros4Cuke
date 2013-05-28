@@ -19,6 +19,7 @@ class MacroCollection
 
   
 public
+
   # Add a new macro.
   # Pre-condition: there is no existing macro with the same key.
   # @param aPhrase [String] The text that is enclosed between 
@@ -71,6 +72,7 @@ public
   end
   
 private
+
   # Retrieve the macro, given a phrase.
   def find_macro(aMacroPhrase, useTable)
     key = MacroStep.macro_key(aMacroPhrase, useTable, :invokation)

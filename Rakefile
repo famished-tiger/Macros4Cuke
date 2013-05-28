@@ -9,7 +9,7 @@ task :push do
   system("gem push macros4cuke-#{Macros4Cuke::Version}.gem")
 end
 
-end
+end # namespace
 
 # Testing-specific tasks
 
@@ -20,13 +20,13 @@ end
 
 # RSpec as testing tool
 require 'rspec/core/rake_task'
-desc "Run RSpec"
+desc 'Run RSpec'
 RSpec::Core::RakeTask.new do |spec|
   spec.pattern = 'spec/**/*_spec.rb'
 end
 
 # Combine RSpec and Cucumber tests
-desc "Run tests, with RSpec and Cucumber"
+desc 'Run tests, with RSpec and Cucumber'
 task :test => [:spec, :cucumber]
 
 # Default rake task

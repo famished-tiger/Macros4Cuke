@@ -215,8 +215,8 @@ private
     # and the macro-step does not use data table.
     unless use_table?
       substepsVars.each do |substep_arg|
-        unless (thePhraseArgs.include?(substep_arg) ||
-        BuiltinParameters.include?(substep_arg))
+        unless thePhraseArgs.include?(substep_arg) ||
+        BuiltinParameters.include?(substep_arg)
           raise UnreachableSubstepArgument.new(substep_arg) 
         end
       end      
