@@ -1,6 +1,0 @@
-default: --strict -v -b  --format progress features
-html: --strict -v -b  --format html --out result.html features
-usage: --strict -v -b  --format usage --out usage.txt features
-
-
-
