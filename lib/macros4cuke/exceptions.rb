@@ -36,6 +36,17 @@ class UnreachableSubstepArgument < Macros4CukeError
 end # class
 
 
+# Raised when one passes one value for an argument via the macro-step's phrase
+# and a value for that same argument via the the data table.
+# and that argument name does not appear in any sub-step.
+class AmbiguousArgumentValue < Macros4CukeError
+  def initialize(anArgName, valuePhrase, valueTable)
+    msg = "The macro argument '#{anArgName}' has value '#{valuePhrase}' and 'valueTable'."
+    super(msg)
+  end
+end # class
+
+
 
 # Raised when a sub-step has an empty or blank argument name.
 class EmptyArgumentError < Macros4CukeError

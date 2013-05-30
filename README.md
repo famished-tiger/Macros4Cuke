@@ -59,6 +59,11 @@ Macros4Cuke not only helps in getting rid of the repeated step sequences,
 See also the working examples in the ```features/``` folder.
 
 ## Setup ##
+### Pre-requisites ###
+Macros4Cuke works with:  
+- MRI Ruby 1.9.x and 2.0.x.  
+- JRuby (was tested with version 1.7.3 and above).
+
 ### Installation ###
 To install the macros4cuke gem:
 ```bash  
@@ -404,6 +409,35 @@ one or more widgets in a page/screen. From a user interface testing viewpoint, e
 text in an entry field may be noticeably different than skipping that same entry field.
 Think of specific UI-events that can trigger some special system response.
 
+
+
+## FAQ ##
+__Q__: Can I define a macro in one scenario and invoke it in another scenario in the same feature file?  
+__A__: Yes. Once a macro is defined in a feature file it can be invoked in any scenario that follows the definition.  
+In fact, the macro can be invoked in any scenario from any feature file, provided the invokation takes place _after_ the 
+macro definition.  
+
+__Q__: So, a macro can be shared between multiple files.  
+__A__: Indeed. This is similar to genuine step definitions which are global (accessible to every feature files).
+For macro-steps, again, they can be used anywhere after their definition.  
+
+__Q__: How should I pass arguments: via the phrase or a data table?  
+__A__: Both data passing mechanisms can be used at the same time. Favour data value passing
+via the phrase when the number of macro arguments is small (say, <= 2).   
+
+__Q__: Can I define a macro-step in a Background section?  
+__A__: No. Here is why: Every step from the Background section is executed in each scenario (outline).
+If a macro were defined in the Background, then the macro definition will occur multiple times, which is
+ flagged as an error by Macros4Cuke.  
+ 
+__Q__: Can I define a macro-step in a Scenario Outline?  
+__A__: No, if the scenario outline has multiple rows then an error will occur. Bear in mind,
+that steps in a scenario outline are repeating n times, n being the number of rows in the example table.
+Since a macro can only be defined once, placing a macro definition in a scenario outline will
+most likely cause an error.  
+
+__Q__: Can I invoke/call a macro-step in a Background or Scenario Outline?  
+__A__: Yes. A macro-step can be invoked many times.
 
 
 

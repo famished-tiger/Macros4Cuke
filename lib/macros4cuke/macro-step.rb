@@ -136,14 +136,17 @@ private
     macro_parameters = {}
 
     # Retrieve the value(s) per variable in the phrase.
-    quoted_values = scan_arguments(aPhrase, :invokation)   
+    quoted_values = scan_arguments(aPhrase, :invokation)  
     quoted_values.each_with_index do |val, index|
       macro_parameters[phrase_args[index]] = val
     end
-
+    
     unless rawData.nil?
       rawData.each do |(a_key, value)|
         raise UnknownArgumentError.new(a_key) unless @args.include? a_key
+        if (phrase_args.include? a_key) && (macro_parameters[a_key] != value)
+          raise AmbiguousArgumentValue.new(a_key, macro_parameters[a_key], value)        
+        end
         if macro_parameters.include? a_key
           if macro_parameters[a_key].kind_of?(Array)
              macro_parameters[a_key] << value

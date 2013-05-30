@@ -67,7 +67,6 @@ end
   context 'Provided services:' do
 
     let(:phrase_instance) { %Q|enter my credentials as "nobody"| }
-
     it 'should render the substeps' do
       text = subject.expand(phrase_instance, [ %w(password no-secret) ])
       expectation = <<-SNIPPET
@@ -117,6 +116,16 @@ SNIPPET
       ->(){ subject.expand(phrase_instance, args) }.should raise_error(
         UnknownArgumentError, error_message)
     end
+ 
+    
+    it 'should complain when argument gets a value from phrase and table' do
+      # Error case: there is no macro argument called <unknown>
+      phrase = %Q|enter my credentials as "nobody"|
+      msg = "The macro argument 'userid' has value 'nobody' and 'valueTable'."
+      args = [ %w(userid someone), %w(password no-secret) ]
+      ->(){ subject.expand(phrase, args) }.should raise_error(
+        AmbiguousArgumentValue, msg)
+    end
 
 
     it 'should expand built-in variables' do
@@ -135,7 +144,7 @@ SNIPPET
       expected = substeps.gsub(/<quotes>/, '"""')
       actual.should == expected
     end
-   
+  
 
   end # context
 
