@@ -57,7 +57,7 @@ SNIPPET
 
     it 'should parse an empty text line' do
       # Expectation: result should be an empty array.
-      Engine.parse('').should be_empty
+      expect(Engine.parse('')).to be_empty
     end
 
     it 'should parse a text line without tag' do
@@ -66,8 +66,8 @@ SNIPPET
 
       # Expectation: an array with one couple: 
       # [:static, the source text]
-      result.should have(1).items
-      result[0].should == [:static, sample_text]
+      expect(result).to have(1).items
+      expect(result[0]).to eq([:static, sample_text])
     end
 
     it 'should parse a text line that consists of just a tag' do
@@ -76,8 +76,8 @@ SNIPPET
 
       # Expectation: an array with one couple: 
       # [:static, the source text]
-      result.should have(1).items
-      result[0].should == [:dynamic, strip_chevrons(sample_text)]
+      expect(result).to have(1).items
+      expect(result[0]).to eq([:dynamic, strip_chevrons(sample_text)])
     end
 
     it 'should parse a text line with a tag at the start' do
@@ -86,9 +86,9 @@ SNIPPET
 
       # Expectation: an array with two couples: 
       # [dynamic, 'some_tag'][:static, some text]
-      result.should have(2).items
-      result[0].should == [:dynamic, 'some_tag']
-      result[1].should == [:static,  'some text']
+      expect(result).to have(2).items
+      expect(result[0]).to eq([:dynamic, 'some_tag'])
+      expect(result[1]).to eq([:static,  'some text'])
     end
 
     it 'should parse a text line with a tag at the end' do
@@ -97,9 +97,9 @@ SNIPPET
 
       # Expectation: an array with two couples: 
       # [:static, some text] [dynamic, 'some_tag']
-      result.should have(2).items
-      result[0].should == [:static,  'some text']
-      result[1].should == [:dynamic, 'some_tag']
+      expect(result).to have(2).items
+      expect(result[0]).to eq([:static,  'some text'])
+      expect(result[1]).to eq([:dynamic, 'some_tag'])
     end
 
     it 'should parse a text line with a tag in the middle' do
@@ -107,10 +107,10 @@ SNIPPET
       result = Engine.parse(sample_text)
 
       # Expectation: an array with three couples:
-      result.should have(3).items
-      result[0].should == [:static,  'begin ']
-      result[1].should == [:dynamic, 'some_tag']
-      result[2].should == [:static,  ' end']
+      expect(result).to have(3).items
+      expect(result[0]).to eq([:static,  'begin '])
+      expect(result[1]).to eq([:dynamic, 'some_tag'])
+      expect(result[2]).to eq([:static,  ' end'])
     end
 
     it 'should parse a text line with two tags in the middle' do
@@ -118,23 +118,23 @@ SNIPPET
       result = Engine.parse(sample_text)
 
       # Expectation: an array with items couples:
-      result.should have(5).items
-      result[0].should == [:static ,  'begin ']
-      result[1].should == [:dynamic, 'some_tag']
-      result[2].should == [:static , 'middle']
-      result[3].should == [:dynamic, 'another_tag']
-      result[4].should == [:static,  ' end']
+      expect(result).to have(5).items
+      expect(result[0]).to eq([:static ,  'begin '])
+      expect(result[1]).to eq([:dynamic, 'some_tag'])
+      expect(result[2]).to eq([:static , 'middle'])
+      expect(result[3]).to eq([:dynamic, 'another_tag'])
+      expect(result[4]).to eq([:static,  ' end'])
 
       # Case: two consecutive tags
       sample_text = 'begin <some_tag><another_tag> end'
       result = Engine.parse(sample_text)
 
       # Expectation: an array with four couples:
-      result.should have(4).items
-      result[0].should == [:static,  'begin ']
-      result[1].should == [:dynamic, 'some_tag']
-      result[2].should == [:dynamic, 'another_tag']
-      result[3].should == [:static,  ' end']
+      expect(result).to have(4).items
+      expect(result[0]).to eq([:static,  'begin '])
+      expect(result[1]).to eq([:dynamic, 'some_tag'])
+      expect(result[2]).to eq([:dynamic, 'another_tag'])
+      expect(result[3]).to eq([:static,  ' end'])
     end
 
     it 'should parse a text line with escaped chevrons' do
@@ -142,8 +142,8 @@ SNIPPET
       result = Engine.parse(sample_text)
 
       # Expectation: an array with one couple: [:static, the source text]
-      result.should have(1).items
-      result[0].should == [:static, sample_text]
+      expect(result).to have(1).items
+      expect(result[0]).to eq([:static, sample_text])
     end
 
     it 'should parse a text line with escaped chevrons in a tag' do
@@ -151,30 +151,30 @@ SNIPPET
       result = Engine.parse(sample_text)
 
       # Expectation: an array with three couples:
-      result.should have(3).items
-      result[0].should == [:static,  'begin ']
-      result[1].should == [:dynamic, 'some_\<\\>weird\>_tag']
-      result[2].should == [:static,  ' end']
+      expect(result).to have(3).items
+      expect(result[0]).to eq([:static,  'begin '])
+      expect(result[1]).to eq([:dynamic, 'some_\<\\>weird\>_tag'])
+      expect(result[2]).to eq([:static,  ' end'])
     end
 
     it 'should complain if a tag misses an closing chevron' do
       sample_text = 'begin <some_tag\> end'
       error_message = "Missing closing chevron '>'."
-      ->(){ Engine.parse(sample_text) }.should raise_error(
+      expect { Engine.parse(sample_text) }.to raise_error(
         StandardError, error_message)
     end
 
     it  'should complain if a text misses an opening chevron' do
       sample_text = 'begin <some_tag> > end'
       error_message = "Missing opening chevron '<'."
-      ->(){ Engine.parse(sample_text) }.should raise_error(
+      expect { Engine.parse(sample_text) }.to raise_error(
         StandardError, error_message)
     end
 
     it  'should complain if a text has nested opening chevrons' do
       sample_text = 'begin <<some_tag> > end'
       error_message = "Nested opening chevron '<'."
-      ->(){ Engine.parse(sample_text) }.should raise_error(
+      expect { Engine.parse(sample_text) }.to raise_error(
         StandardError, error_message)
     end
 
@@ -183,41 +183,41 @@ SNIPPET
   context 'Creation and initialization:' do
 
     it 'should accept an empty template text' do
-      ->(){ Engine.new '' }.should_not raise_error
+      expect { Engine.new '' }.not_to raise_error
     end
 
     it 'should be created with a template text' do
-      ->(){ Engine.new sample_template }.should_not raise_error
+      expect { Engine.new sample_template }.not_to raise_error
     end
 
     it 'should know the source text' do
-      subject.source.should == sample_template
+      expect(subject.source).to eq(sample_template)
 
       # Case of an empty template
       instance = Engine.new ''
-      instance.source.should be_empty
+      expect(instance.source).to be_empty
     end
     
     it 'should accept conditional section' do
-      ->(){ Engine.new sophisticated_template }.should_not raise_error
+      expect { Engine.new sophisticated_template }.not_to raise_error
       instance = Engine.new sophisticated_template
       elements = instance.instance_variable_get(:@representation)
       sections = elements.select { |e| e.is_a?(Section) }
       names = sections.map { |e| e.to_s }
-      names.should == %w(<?address> <?birthdate> <?dummy>)
+      expect(names).to eq(%w(<?address> <?birthdate> <?dummy>))
     end
 
     it 'should complain when a placeholder is empty or blank' do
       text_w_empty_arg = sample_template.sub(/userid/, '')
       msg = %q(An empty or blank argument occurred in 'And I fill in "Username" with "<>"'.)
-      ->(){ Engine.new text_w_empty_arg }.should raise_error(
+      expect { Engine.new text_w_empty_arg }.to raise_error(
         Macros4Cuke::EmptyArgumentError, msg)
     end
 
     it 'should complain when a placeholder contains an invalid character' do
       text_w_empty_arg = sample_template.sub(/userid/, 'user%id')
       msg = "The invalid sign '%' occurs in the argument 'user%id'."
-      ->(){ Engine.new text_w_empty_arg }.should raise_error(
+      expect { Engine.new text_w_empty_arg }.to raise_error(
         Macros4Cuke::InvalidCharError, msg)
     end
     
@@ -226,7 +226,7 @@ SNIPPET
       text_w_open_section = sophisticated_template.sub(/<\/address>/, '')
 
       error_message = 'Unterminated section <?address>.'
-      ->(){ Engine.new text_w_open_section }.should raise_error(
+      expect { Engine.new text_w_open_section }.to raise_error(
         StandardError, error_message)
     end
     
@@ -235,7 +235,7 @@ SNIPPET
       text_w_wrong_end = sophisticated_template.sub(/<\/address>/, '</foobar>')
 
       msg = "End of section</foobar> doesn't match current section 'address'."
-      ->(){ Engine.new text_w_wrong_end }.should raise_error(
+      expect { Engine.new text_w_wrong_end }.to raise_error(
         StandardError, msg)
     end
     
@@ -243,7 +243,7 @@ SNIPPET
       # Replacing an end of section tag by another...
       wrong_end = sophisticated_template.sub(/<\?birthdate>/, '</foobar>')
       msg = 'End of section</foobar> found while no corresponding section is open.'
-      ->(){ Engine.new wrong_end }.should raise_error(StandardError, msg)
+      expect { Engine.new wrong_end }.to raise_error(StandardError, msg)
     end    
     
   end # context
@@ -256,7 +256,7 @@ SNIPPET
 
       # Case of an empty source template text
       instance = Engine.new ''
-      instance.variables.should be_empty
+      expect(instance.variables).to be_empty
     end
 
 
@@ -264,7 +264,7 @@ SNIPPET
       substeps = "  # Comment 1 <miscellaneous>\n" + sample_template
       substeps += "  #\n Comment 2 <haphazard>"
       instance = Engine.new substeps
-      instance.variables == [:userid, :password]
+      # expect(instance.variables).to eq([:userid, :password])
     end
 
 
@@ -280,7 +280,7 @@ SNIPPET
   And I click "Sign in"
 SNIPPET
 
-      rendered_text.should == expected
+      expect(rendered_text).to eq(expected)
 
       # Case of an actual that's not a String
       locals = { 'userid' => 'johndoe', 'password' => 12345 }
@@ -293,7 +293,7 @@ SNIPPET
   And I click "Sign in"
 SNIPPET
 
-      rendered_text.should == expected
+      expect(rendered_text).to eq(expected)
 
 
       # Place actual value in context object
@@ -308,12 +308,12 @@ SNIPPET
   And I click "Sign in"
 SNIPPET
 
-      rendered_text.should == expected
+      expect(rendered_text).to eq(expected)
 
 
       # Case of an empty source template text
       instance = Engine.new ''
-      instance.render(nil, {}).should be_empty
+      expect(instance.render(nil, {})).to be_empty
     end
     
     
@@ -332,7 +332,7 @@ SNIPPET
   And I click "Register"
 SNIPPET
 
-      rendered_text.should == expected
+      expect(rendered_text).to eq(expected)
       
       # Redo with another context
       locals['birthdate'] = nil
@@ -346,7 +346,7 @@ SNIPPET
   And I click "Register"
 SNIPPET
 
-      rendered_text.should == expected      
+      expect(rendered_text).to eq(expected)
     end
     
 
@@ -362,7 +362,7 @@ SNIPPET
   And I click "Sign in"
 SNIPPET
 
-      rendered_text.should == expected
+      expect(rendered_text).to eq(expected)
     end
   end # context
 

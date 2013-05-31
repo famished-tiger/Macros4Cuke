@@ -26,15 +26,15 @@ describe Section do
   context 'Creation and initialization' do
 
     it 'should be created with a variable name' do
-      ->() { Section.new('foobar') }.should_not raise_error
+      expect { Section.new('foobar') }.not_to raise_error
     end
 
     it 'should know the name of its variable' do
-      subject.name.should == 'foobar'
+      expect(subject.name).to eq('foobar')
     end
 
     it 'should have no child at start' do
-      subject.should have(0).children
+       expect(subject).to have(0).children
     end
 
   end # context
@@ -46,13 +46,13 @@ describe Section do
       end
 
       # Control that the addition work as expected
-      subject.children.should == sample_children
+      expect(subject.children).to eq(sample_children)
     end
 
     it 'should know the name all child placeholders' do
       # Case: simple flat list of children
       sample_children.each { |a_child| subject.add_child(a_child) }
-      subject.variables.should == [ 'user' ]
+      expect(subject.variables).to eq([ 'user' ])
 
       # Case: at least one child is a group
       parent = Section.new('son')
@@ -62,13 +62,13 @@ describe Section do
         EOLine.new
       ].each { |a_child| parent.add_child(a_child) }
 
-      parent.variables.should == %w(user firstname)
+      expect(parent.variables).to eq(%w(user firstname))
     end
 
 
     it 'should expect that its subclasses render the children' do
       error_message = 'Method Section.render must be implemented in subclass.'
-      ->(){ subject.send(:render, Object.new, {}) }.should raise_error(
+       expect { subject.send(:render, Object.new, {}) }.to raise_error(
         NotImplementedError, error_message)
     end
 
@@ -84,14 +84,14 @@ describe ConditionalSection do
   context 'Creation and initialization:' do
 
     it 'should be created with a variable name and a boolean' do
-      ->(){ ConditionalSection.new('foobar', false) }.should_not raise_error
-      ->(){ ConditionalSection.new('foobar', true) }.should_not raise_error
+      expect { ConditionalSection.new('foobar', false) }.not_to raise_error
+      expect { ConditionalSection.new('foobar', true) }.not_to raise_error
     end
 
     it 'should know whether the rendition on existence of actual value' do
       [false, true].each do |existence|
         instance = ConditionalSection.new('foobar', existence)
-        instance.existence.should == existence
+        expect(instance.existence).to eq(existence)
       end
     end
 
@@ -110,7 +110,7 @@ describe ConditionalSection do
     subject { ConditionalSection.new('foobar', true) }
 
     it 'should know its original source text' do
-      subject.to_s.should == '<?foobar>'
+      expect(subject.to_s).to eq('<?foobar>')
     end
 
     it 'should render its children when conditions are met' do
@@ -121,7 +121,7 @@ describe ConditionalSection do
       locals = { 'user' => 'joe', 'foobar' => 'exists' }
       rendered_text = subject.render(Object.new, locals)
       expected_text = "Hello joe\n"
-      rendered_text.should == expected_text
+      expect(rendered_text).to eq(expected_text)
 
       # Case of a conditional section that should be
       # rendering when value is non-existing.
@@ -131,7 +131,7 @@ describe ConditionalSection do
       # Case of a non-existing actual
       locals = { 'user' => 'joe' }
       rendered_text = instance.render(Object.new, locals)
-      rendered_text.should == expected_text
+      expect(rendered_text).to eq(expected_text)
     end
 
     it "should render noting when conditions are'nt met" do
@@ -141,7 +141,7 @@ describe ConditionalSection do
       # Case of a non-existing actual
       locals = { 'user' => 'joe' }
       rendered_text = subject.render(Object.new, locals)
-      rendered_text.should == ''
+      expect(rendered_text).to eq('')
 
       # Case of a conditional section that should be
       # rendering when value is non-existing.
@@ -151,7 +151,7 @@ describe ConditionalSection do
       # Case of a non-existing actual
       locals = { 'user' => 'joe', 'foobar' => 'exists' }
       rendered_text = instance.render(Object.new, locals)
-      rendered_text.should == ''
+      expect(rendered_text).to eq('')
     end
 
   end # context

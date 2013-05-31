@@ -44,13 +44,13 @@ SNIPPET
   
   context 'Defining macro(s):' do
     it 'should add valid new macro' do
-      ->(){ world.add_macro(m1_phrase, m1_substeps, true) }.should_not raise_error
+      expect { world.add_macro m1_phrase, m1_substeps, true }.not_to raise_error
     end
     
     it 'should complain when entering the same macro again' do
       # Error case: trying to register another macro with same key/phrase.
       msg = "A macro-step with phrase 'enter the credentials' already exist."
-      -> { world.add_macro(m1_phrase, m1_substeps, true) }.should raise_error(
+      expect { world.add_macro(m1_phrase, m1_substeps, true) }.to raise_error(
         Macros4Cuke::DuplicateMacroError, msg)
     end
     
@@ -59,7 +59,7 @@ SNIPPET
       # but the macro has no mechanism to pass the needed data.
       phrase = 'fill in the credentials'
       msg = "The sub-step argument 'userid' does not appear in the phrase."
-      ->(){ world.add_macro(phrase, m1_substeps, false) }.should raise_error(
+      expect { world.add_macro(phrase, m1_substeps, false) }.to raise_error(
         Macros4Cuke::UnreachableSubstepArgument, msg)    
     end
   end # context
@@ -69,7 +69,7 @@ SNIPPET
     it 'should complain when invoking an unknown macro-step' do
       phrase_unknown = 'dream of a perfect world'
       msg = "Unknown macro-step with phrase: 'dream of a perfect world'."
-      ->(){ world.invoke_macro(phrase_unknown) }.should raise_error(
+      expect { world.invoke_macro(phrase_unknown) }.to raise_error(
         Macros4Cuke::UnknownMacroError, msg)
     end
 
@@ -78,10 +78,10 @@ SNIPPET
   context 'Clearing macro(s):' do
   
     it 'should clear all macros' do
-      ->(){ world.clear_macros() }.should_not raise_error
+      expect { world.clear_macros() }.not_to raise_error
       
       # Control the post-condition
-      MacroCollection.instance.macro_steps.should be_empty
+      expect(MacroCollection.instance.macro_steps).to be_empty
     end  
 
   end # context

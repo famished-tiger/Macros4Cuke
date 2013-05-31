@@ -1,3 +1,7 @@
+### 0.3.26 / 2013-05-31
+* [CHANGE] All RSpec files: migrated to the expect syntax instead of the should syntax.
+* [CHANGE] `spec_helper.rb`: RSpec is configured to allow the expect syntax only.
+
 ### 0.3.25 / 2013-05-30
 * [NEW] File `exceptions.rb`: New exception class AmbiguousArgumentValue.
 * [CHANGE] Method `MacroStep#validate_params`: an AmbiguousArgumentValue is raised when a macro argument get its value from phrase and data table at the same time.

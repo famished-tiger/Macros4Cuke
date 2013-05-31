@@ -14,7 +14,7 @@ describe MacroCollection do
 
   context 'Initialization:' do
     it 'should be empty' do
-      singleton.macro_steps.should be_empty
+      expect(singleton.macro_steps).to be_empty
     end
 
   end
@@ -35,13 +35,13 @@ SNIPPET
     it 'should accept the addition of a new macro-step' do
       phrase = '[enter my credentials]'
       args = [phrase, sample_substeps, true]
-      ->() { singleton.add_macro(*args) }.should_not raise_error
-      singleton.should have(1).macro_steps
+      expect { singleton.add_macro(*args) }.not_to raise_error
+      expect(singleton).to have(1).macro_steps
 
       # Error case: inserting another macro with same phrase.
       msg = "A macro-step with phrase '[enter my credentials]' already exist."
-      ->(){ singleton.add_macro(*args) }.should 
-        raise_error(Macros4Cuke::DuplicateMacroError, msg)
+      expect { singleton.add_macro(*args) }.to raise_error(
+        Macros4Cuke::DuplicateMacroError, msg)
     end
 
     it 'should return the rendition of a given macro-step' do
@@ -55,7 +55,7 @@ SNIPPET
   And I fill in "Password" with "no-secret"
   And I click "Submit"
 SNIPPET
-      rendered.should == expected
+      expect(rendered).to eq(expected)
     end
     
 
