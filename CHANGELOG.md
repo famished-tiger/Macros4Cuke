@@ -1,3 +1,7 @@
+### 0.3.27 / 2013-05-31
+* [CHANGE] `Method Engine#compile`: input comment lines are removed.
+* [FIX] `engine_spec.rb`: corrected RSpec examples broken by change in `Method Engine#compile`.
+
 ### 0.3.26 / 2013-05-31
 * [CHANGE] All RSpec files: migrated to the expect syntax instead of the should syntax.
 * [CHANGE] `spec_helper.rb`: RSpec is configured to allow the expect syntax only.

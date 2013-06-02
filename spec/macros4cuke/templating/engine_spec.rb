@@ -17,7 +17,6 @@ describe Engine do
   let(:sample_template) do
       source = <<-SNIPPET
   Given I landed in the homepage
-  # The credentials are entered here
   And I fill in "Username" with "<userid>"
   And I fill in "Password" with "<password>"
   And I click "Sign in"
@@ -260,26 +259,16 @@ SNIPPET
     end
 
 
-    it 'should ignore variables/placeholders in comments' do
-      substeps = "  # Comment 1 <miscellaneous>\n" + sample_template
-      substeps += "  #\n Comment 2 <haphazard>"
-      instance = Engine.new substeps
-      # expect(instance.variables).to eq([:userid, :password])
-    end
-
-
     it 'should render the text given the actuals' do
       locals = { 'userid' => 'johndoe' }
 
       rendered_text = subject.render(Object.new, locals)
       expected = <<-SNIPPET
   Given I landed in the homepage
-  # The credentials are entered here
   And I fill in "Username" with "johndoe"
   And I fill in "Password" with ""
   And I click "Sign in"
 SNIPPET
-
       expect(rendered_text).to eq(expected)
 
       # Case of an actual that's not a String
@@ -287,14 +276,11 @@ SNIPPET
       rendered_text = subject.render(Object.new, locals)
       expected = <<-SNIPPET
   Given I landed in the homepage
-  # The credentials are entered here
   And I fill in "Username" with "johndoe"
   And I fill in "Password" with "12345"
   And I click "Sign in"
 SNIPPET
-
       expect(rendered_text).to eq(expected)
-
 
       # Place actual value in context object
       Context = Struct.new(:userid, :password)
@@ -302,7 +288,6 @@ SNIPPET
       rendered_text = subject.render(context, { 'userid' => 'susan' })
       expected = <<-SNIPPET
   Given I landed in the homepage
-  # The credentials are entered here
   And I fill in "Username" with "susan"
   And I fill in "Password" with "holmes"
   And I click "Sign in"
@@ -356,7 +341,6 @@ SNIPPET
       rendered_text = subject.render(Object.new, locals)
       expected = <<-SNIPPET
   Given I landed in the homepage
-  # The credentials are entered here
   And I fill in "Username" with "johndoe<br/>yeti"
   And I fill in "Password" with ""
   And I click "Sign in"
