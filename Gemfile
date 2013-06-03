@@ -5,6 +5,6 @@ gem "cucumber", [">= 0.5.0"]
 
 group :development do
   gem "rake",  ">= 0.8.0" 
-  gem "rspec", ">= 2.00"
+  gem "rspec", ">= 2.11.0"
   gem "simplecov", ">= 0.5.0"
 end

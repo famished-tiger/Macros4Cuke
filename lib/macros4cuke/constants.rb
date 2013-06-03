@@ -4,7 +4,7 @@
 
 module Macros4Cuke # Module used as a namespace
   # The version number of the gem.
-  Version = '0.3.27'
+  Version = '0.3.28'
 
   # Brief description of the gem.
   Description = 'Macros for Cucumber'

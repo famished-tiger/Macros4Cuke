@@ -1,6 +1,10 @@
+### 0.3.28 / 2013-06-03
+* [CHANGE] `macros4cuke.gemspec`: Dependencies. Increased version number of RSpec to 2.11.0 (needed after switching to the expect syntax).
+* [CHANGE] `Gemfile`: Dependencies. Increased version number of RSpec to 2.11.0.
+
 ### 0.3.27 / 2013-05-31
-* [CHANGE] `Method Engine#compile`: input comment lines are removed.
-* [FIX] `engine_spec.rb`: corrected RSpec examples broken by change in `Method Engine#compile`.
+* [FIX] `engine_spec.rb`: Removal of a comment in sample template.
+* [CHANGE] `engine_spec.rb`: Removal of an useless test.
 
 ### 0.3.26 / 2013-05-31
 * [CHANGE] All RSpec files: migrated to the expect syntax instead of the should syntax.

@@ -33,7 +33,7 @@ EOSTRING
 	pkg.has_rdoc = false
   pkg.add_runtime_dependency('cucumber',[">= 0.5.0"])
   pkg.add_development_dependency('rake',[">= 0.8.0"])
-  pkg.add_development_dependency('rspec',[">= 2.00"])
+  pkg.add_development_dependency('rspec',[">= 2.11.0"])
   pkg.add_development_dependency('simplecov',[">= 0.5.0"])
 	
 	pkg.bindir = 'bin'
