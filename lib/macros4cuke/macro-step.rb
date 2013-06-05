@@ -142,11 +142,8 @@ private
     end
     
     unless rawData.nil?
-      rawData.each do |(a_key, value)|
-        raise UnknownArgumentError.new(a_key) unless @args.include? a_key
-        if (phrase_args.include? a_key) && (macro_parameters[a_key] != value)
-          raise AmbiguousArgumentValue.new(a_key, macro_parameters[a_key], value)        
-        end
+      rawData.each do |a_row|
+        (a_key, value) = validate_row(a_row, macro_parameters)
         if macro_parameters.include? a_key
           if macro_parameters[a_key].kind_of?(Array)
              macro_parameters[a_key] << value
@@ -160,6 +157,21 @@ private
     end
     
     return macro_parameters
+  end
+  
+  # Validate a row from the data table.
+  # Return the validated row.
+  # @param a_row [Array] A 2-elements Array (i.e. a couple) of the form: 
+  # [macro argument name, a value].
+  # @param value [Hash] The pairs phrase argument name => value
+  def validate_row(a_row, phrase_params)
+    (a_key, value) = a_row
+    raise UnknownArgumentError.new(a_key) unless args.include? a_key
+    if (phrase_args.include? a_key) && (phrase_params[a_key] != value)
+      raise AmbiguousArgumentValue.new(a_key, phrase_params[a_key], value)        
+    end 
+    
+    return a_row
   end
 
 

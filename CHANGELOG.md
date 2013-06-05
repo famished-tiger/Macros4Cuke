@@ -1,3 +1,8 @@
+### 0.3.29 / 2013-06-05
+* [CHANGE] `MacroStep#validate_params` method: `Extract Method` Refactoring, resulting in new method `MacroStep#validate_row`.
+* [CHANGE] `README.md`: Few editorial changes. Added section `More resources`.
+
+
 ### 0.3.28 / 2013-06-03
 * [CHANGE] `macros4cuke.gemspec`: Dependencies. Increased version number of RSpec to 2.11.0 (needed after switching to the expect syntax).
 * [CHANGE] `Gemfile`: Dependencies. Increased version number of RSpec to 2.11.0.

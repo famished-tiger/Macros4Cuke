@@ -65,14 +65,14 @@ Macros4Cuke works with:
 - JRuby (was tested with version 1.7.3 and above).
 
 ### Installation ###
-To install the macros4cuke gem:
+The macros4cuke gem is fairly standard:  
 ```bash  
 $[sudo] gem install macros4cuke
 ```
 
-### Setting up your Cucumber project ####
+### Configuring up your Cucumber projects ####
   
-* Step 1: Add support for macros in your Cucumber project    
+* Step 1: Add support for macros in an existing Cucumber project    
   
 ```ruby
 # /features/support/env.rb
@@ -425,20 +425,29 @@ __Q__: How should I pass arguments: via the phrase or a data table?
 __A__: Both data passing mechanisms can be used at the same time. Favour data value passing
 via the phrase when the number of macro arguments is small (say, <= 2).   
 
-__Q__: Can I define a macro-step in a Background section?  
-__A__: No. Here is why: Every step from the Background section is executed in each scenario (outline).
+__Q__: Can I define a macro-step in a `Background` section?  
+__A__: No. Here is why: every step from the Background section is executed in each scenario (outline).
 If a macro were defined in the Background, then the macro definition will occur multiple times, which is
  flagged as an error by Macros4Cuke.  
  
-__Q__: Can I define a macro-step in a Scenario Outline?  
+__Q__: Can I define a macro-step in a `Scenario Outline`?  
 __A__: No, if the scenario outline has multiple rows then an error will occur. Bear in mind,
 that steps in a scenario outline are repeating n times, n being the number of rows in the example table.
 Since a macro can only be defined once, placing a macro definition in a scenario outline will
 most likely cause an error.  
 
-__Q__: Can I invoke/call a macro-step in a Background or Scenario Outline?  
-__A__: Yes. A macro-step can be invoked many times.
+__Q__: Can I __invoke/call__ a macro-step in a `Background` or `Scenario Outline`?  
+__A__: Yes. As a macro-step can be invoked multiple times.
 
+
+## Changelog
+
+Macros4Cuke's changelog is available [here](CHANGELOG.md).
+ 
+## More resources:
+-   [**Detailed CI status**](https://travis-ci.org/famished-tiger/Macros4Cuke)
+-   [**Suggest an improvement**](https://github.com/famished-tiger/Macros4Cuke/issues)
+-   [**Report a bug**](https://github.com/famished-tiger/Macros4Cuke/issues)
 
 
 ## With great power comes great responsibility. ##
@@ -452,7 +461,7 @@ This last argument becomes important in the context of user acceptance testing, 
  every tester is also Rubyist is -alas!- far from the truth.
 
  
-Macros with Cucumber is highly debated topic, so it is good to know what other people say about it:  
+Macros with Cucumber is a hot topic, so it is good to know what other people say about it:  
 [Support for Macros] (https://github.com/cucumber/gherkin/issues/178)  
 [Substeps - macro request for the nth time] (http://grokbase.com/t/gg/cukes/133ey063b8/cucumber-substeps-macro-request-for-the-nth-time)
 
