@@ -142,12 +142,12 @@ public
   def variables()
     all_vars = children.each_with_object([]) do |a_child, subResult|
       case a_child
-        when Placeholder
-          subResult << a_child.name
-        when Section
-          subResult.concat(a_child.variables)
-        else
-          # Do nothing
+      when Placeholder
+        subResult << a_child.name
+      when Section
+        subResult.concat(a_child.variables)
+      else
+        # Do nothing
       end
     end
     
@@ -277,14 +277,14 @@ public
     @variables ||= begin
       vars = @representation.each_with_object([]) do |element, subResult|
         case element
-          when Placeholder          
-            subResult << element.name
-          
-          when Section
-            subResult.concat(element.variables)
-          
-          else
-            # Do nothing
+        when Placeholder          
+          subResult << element.name
+        
+        when Section
+          subResult.concat(element.variables)
+        
+        else
+          # Do nothing
         end
       end
       
@@ -333,10 +333,8 @@ private
 
     no_escaped.each_char do |ch|
       case ch
-        when '<'
-          unbalance += 1 
-        when '>'  
-          unbalance -= 1              
+      when '<' then unbalance += 1 
+      when '>' then unbalance -= 1              
       end
       
       raise StandardError, "Nested opening chevron '<'." if unbalance > 1
@@ -379,18 +377,18 @@ private
     section_item = nil
     line_to_squeeze = line_rep.all? do |item|
       case item
-        when StaticText
-          item.source =~ /\s+/
-          
-        when Section, SectionEndMarker
-          if section_item.nil?
-            section_item = item
-            true
-          else
-            false
-          end
+      when StaticText
+        item.source =~ /\s+/
+        
+      when Section, SectionEndMarker
+        if section_item.nil?
+          section_item = item
+          true
         else
           false
+        end
+      else
+        false
       end
     end
     if line_to_squeeze && ! section_item.nil?
@@ -423,12 +421,9 @@ private
     (kind, text) = aCouple
     
     result = case kind
-      when :static
-        StaticText.new(text)
-        
-      when :dynamic
-        parse_tag(text)
-      end
+    when :static then StaticText.new(text)
+    when :dynamic then parse_tag(text)
+    end
 
     return result
   end
@@ -465,20 +460,19 @@ private
     
     compiled = flat_sequence.each_with_object([]) do |element, subResult|
       case element
-        when Section
-          open_sections << element
-        
-        when SectionEndMarker           
-          validate_section_end(element, open_sections)
-          subResult << open_sections.pop()
-         
+      when Section
+        open_sections << element
+      
+      when SectionEndMarker           
+        validate_section_end(element, open_sections)
+        subResult << open_sections.pop()
+       
+      else
+        if open_sections.empty?
+          subResult << element
         else
-          if open_sections.empty?
-            subResult << element
-          else
-            open_sections.last.add_child(element)
-          end
-
+          open_sections.last.add_child(element)
+        end
       end 
     end
     

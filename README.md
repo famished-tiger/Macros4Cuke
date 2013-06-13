@@ -410,6 +410,19 @@ text in an entry field may be noticeably different than skipping that same entry
 Think of specific UI-events that can trigger some special system response.
 
 
+## A word on Step Argument Transforms##
+Cucumber provides a handy facility that helps to convert implicitly the values of step arguments.
+A first description of this lesser-known functionality is available at 
+[Step Argument Transforms] (https://github.com/cucumber/cucumber/wiki/Step-Argument-Transforms).  
+Does Macros4Cuke provide such a facility for its own macro-step arguments?  
+The answer is no: if macro-steps had their own kind of transformations, then these would have interfere with the ones defined directly in Cucumber.
+In fact, Cucumber will happily apply transformations on any step, including the macro definition steps and the
+steps invoking macros. Stated otherwise, the rules pertaining the Step Argument Transforms work as usual. Or almost. 
+There is one very specific case where Cucumber behaves slightly differently: the transforms aren't applied when a sub-step is executed.
+Internally, Macros4Cuke calls the `Cucumber::RbSupport::RbWorld::#steps` method that allows to run a Gherkin snippet (the substeps),
+and it appears that this method does not trigger the transforms. In practice, this doesn't prevent the use of transforms together
+with Macros4Cuke. In the vast majority of cases both will work fine as expected.
+
 
 ## FAQ ##
 __Q__: Can I define a macro in one scenario and invoke it in another scenario in the same feature file?  
@@ -440,6 +453,7 @@ __Q__: Can I __invoke/call__ a macro-step in a `Background` or `Scenario Outline
 __A__: Yes. As a macro-step can be invoked multiple times.
 
 
+
 ## Changelog
 
 Macros4Cuke's changelog is available [here](CHANGELOG.md).
@@ -450,7 +464,7 @@ Macros4Cuke's changelog is available [here](CHANGELOG.md).
 -   [**Report a bug**](https://github.com/famished-tiger/Macros4Cuke/issues)
 
 
-## With great power comes great responsibility. ##
+### With great power comes great responsibility. ###
 _Stan Lee_  
 
 Our experience is that macro-steps change deeply the way one designs and writes feature files.  

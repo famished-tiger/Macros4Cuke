@@ -1,3 +1,8 @@
+### 0.3.29 / 2013-06-13
+* [CHANGE] `README.md`: Added section `A word on Step Argument Transforms`.
+* [CHANGE] `engine_spec.rb`: A test assertion was missing in a test.
+* [TESTED] Test with Cucumber 1.3.2. Pass.
+
 ### 0.3.29 / 2013-06-05
 * [CHANGE] `MacroStep#validate_params` method: `Extract Method` Refactoring, resulting in new method `MacroStep#validate_row`.
 * [CHANGE] `README.md`: Few editorial changes. Added section `More resources`.

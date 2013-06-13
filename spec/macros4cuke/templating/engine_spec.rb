@@ -251,7 +251,7 @@ SNIPPET
 
     it 'should know the variable(s) it contains' do
       # Case using the sample template
-      subject.variables == [:userid, :password]
+      expect(subject.variables).to be == ['userid', 'password']
 
       # Case of an empty source template text
       instance = Engine.new ''

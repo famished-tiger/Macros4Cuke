@@ -29,7 +29,7 @@ describe MacroStepSupport do
   # Rule to build a custom world object
   let(:world) { MyWorld.new }
   
-  let(:m1_phrase) { 'enter the credentials' }
+  let(:phrase1) { 'enter the credentials' }
   
   let(:m1_substeps) do
       ssteps = <<-SNIPPET
@@ -44,13 +44,13 @@ SNIPPET
   
   context 'Defining macro(s):' do
     it 'should add valid new macro' do
-      expect { world.add_macro m1_phrase, m1_substeps, true }.not_to raise_error
+      expect { world.add_macro phrase1, m1_substeps, true }.not_to raise_error
     end
     
     it 'should complain when entering the same macro again' do
       # Error case: trying to register another macro with same key/phrase.
       msg = "A macro-step with phrase 'enter the credentials' already exist."
-      expect { world.add_macro(m1_phrase, m1_substeps, true) }.to raise_error(
+      expect { world.add_macro(phrase1, m1_substeps, true) }.to raise_error(
         Macros4Cuke::DuplicateMacroError, msg)
     end
     
