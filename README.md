@@ -417,7 +417,7 @@ A first description of this lesser-known functionality is available at
 Does Macros4Cuke provide such a facility for its own macro-step arguments?  
 The answer is no: if macro-steps had their own kind of transformations, then these would have interfere with the ones defined directly in Cucumber.
 In fact, Cucumber will happily apply transformations on any step, including the macro definition steps and the
-steps invoking macros. Stated otherwise, the rules pertaining the Step Argument Transforms work as usual. Or almost. 
+steps invoking macros. Stated otherwise, all the rules pertaining to the Step Argument Transforms work as usual. Or almost. 
 There is one very specific case where Cucumber behaves slightly differently: the transforms aren't applied when a sub-step is executed.
 Internally, Macros4Cuke calls the `Cucumber::RbSupport::RbWorld::#steps` method that allows to run a Gherkin snippet (the substeps),
 and it appears that this method does not trigger the transforms. In practice, this doesn't prevent the use of transforms together
