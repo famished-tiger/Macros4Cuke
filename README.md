@@ -34,7 +34,10 @@ Here is a macro-step example taken from our demo files:
     """  
 ```
 
-Notice how the arguments _userid_ and _password_ are enclosed between chevrons (angle brackets) <...>.
+The first line above specifies the syntax of the macro-step (it is the text between the square brackets).  
+Notice also how the arguments _userid_ and _password_ are enclosed between chevrons (angle brackets) <...>.
+Finally, the lines delimited by the triple quotes """ represent the Cucumber steps to execute when
+the macro-step is invoked(used) elsewhere in a feature file.
 
 
 That macro-step can then be used in a scenario like this:  

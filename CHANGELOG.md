@@ -1,3 +1,8 @@
+### 0.3.31 / 2013-06-13
+* [FIX] File `Rakefile`: A bug in Cucumber's Rake task prevented our rake task to complete. We fix temporarily this by monkey-patching Cucumber code until that project has a fix for it.
+* [CHANGE] File `README.md`: Reformulated description in the quick example section.
+
+
 ### 0.3.30 / 2013-06-13
 * [CHANGE] File `README.md`: Added section `A word on Step Argument Transforms`.
 * [CHANGE] File `engine.rb`: Changed a few case statements in order to please Rubocop.
