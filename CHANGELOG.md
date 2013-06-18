@@ -1,5 +1,11 @@
-### 0.3.31 / 2013-06-13
+### 0.3.32 / 2013-06-19
+* [FIX] File `macros4cuke.gemspec`: Replaced obsolete code for generating the gem (broken with Rubygem v 2+).
+* [CHANGE] File `macros4cuke.gemspec`: Added development dependency on rubygem version > 2+
+
+
+### 0.3.31 / 2013-06-19
 * [FIX] File `Rakefile`: A bug in Cucumber's Rake task prevented our rake task to complete. We fix temporarily this by monkey-patching Cucumber code until that project has a fix for it.
+* [CHANGE] File ``
 * [CHANGE] File `README.md`: Reformulated description in the quick example section.
 
 

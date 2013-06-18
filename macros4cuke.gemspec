@@ -35,6 +35,7 @@ EOSTRING
   pkg.add_development_dependency('rake',[">= 0.8.0"])
   pkg.add_development_dependency('rspec',[">= 2.11.0"])
   pkg.add_development_dependency('simplecov',[">= 0.5.0"])
+  pkg.add_development_dependency('rubygems', [">= 2.0.0"])
 	
 	pkg.bindir = 'bin'
 	pkg.executables = []
@@ -43,7 +44,8 @@ EOSTRING
 end
 
 if $0 == __FILE__
-	Gem::Builder.new(MACROS4CUKE_GEMSPEC).build
+  require 'rubygems/package'
+	Gem::Package.build(MACROS4CUKE_GEMSPEC)
 end
 
 # End of file
