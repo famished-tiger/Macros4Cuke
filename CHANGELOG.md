@@ -1,3 +1,6 @@
+### 0.3.33 / 2013-06-19
+* [CHANGE] File `travis.yml`: Wrong config in Travis CI. As a temporary workaround, removed RVM environments: - jruby-19mode  - ruby-head.
+
 ### 0.3.32 / 2013-06-19
 * [FIX] File `macros4cuke.gemspec`: Replaced obsolete code for generating the gem (broken with Rubygem v 2+).
 * [CHANGE] File `macros4cuke.gemspec`: Added development dependency on rubygem version > 2+
