@@ -1,9 +1,11 @@
 language: ruby
-# Travis fails for: - jruby-19mode  - ruby-head
+#   - jruby-19mode
 rvm:
   - 2.0.0
   - 1.9.3
   - 1.9.2
+  - jruby-19mode
+  - ruby-head
   - jruby-head
 
 gemfile:
