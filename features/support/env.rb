@@ -1,4 +1,3 @@
-# encoding: utf-8	You should see a paragraph character: §
 # File: env.rb
 # Purpose: Allow Cucumber to load the sample application configuration
 # and hooks.

@@ -1,3 +1,6 @@
+AccessControl:
+  Enabled: false
+
 # This is disabled because some demos use UTF-8
 AsciiComments:
   Enabled: false
@@ -5,10 +8,16 @@ AsciiComments:
 CaseIndentation:
   Enabled: false
 
+ConstantName:  
+  Enabled: false
+  
 DefWithParentheses:  
   Enabled: false
   
 EmptyLines:
+  Enabled: false
+
+Encoding:
   Enabled: false
   
 # Avoid methods longer than 30 lines of code

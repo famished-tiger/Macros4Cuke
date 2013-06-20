@@ -1,4 +1,3 @@
-# encoding: utf-8
 # File: macro-step_spec.rb
 
 require_relative '../spec_helper'

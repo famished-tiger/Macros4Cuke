@@ -1,4 +1,3 @@
-# encoding: utf-8
 # File: use_macro_steps.rb
 # Place a copy of this file in the feature/step_definitions folder
 # of your own Cucumber-based project.

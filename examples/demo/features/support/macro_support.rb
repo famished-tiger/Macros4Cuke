@@ -1,4 +1,3 @@
-# encoding: utf-8
 # File: macro_support.rb
 # Purpose: Add the support for macros in Cucumber.
 # This file is meant to be put next to the 'env.rb' file

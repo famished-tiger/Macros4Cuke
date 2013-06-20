@@ -1,4 +1,3 @@
-# encoding: utf-8
 # File: macro_steps.rb
 # Purpose: step definitions that help to build macro-steps 
 # (i.e. a step that is equivalent to a sequence of steps)

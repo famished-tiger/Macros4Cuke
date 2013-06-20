@@ -1,4 +1,3 @@
-# encoding: utf-8
 # File: macro-collection.rb
 # Purpose: Implementation of the MacroCollection class.
 

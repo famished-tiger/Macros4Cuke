@@ -1,4 +1,3 @@
-# encoding: utf-8 -- You should see a paragraph character: §
 # File: engine_spec.rb
 
 require_relative '../../spec_helper'

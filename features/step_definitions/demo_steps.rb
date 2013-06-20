@@ -1,4 +1,3 @@
-# encoding: utf-8
 # File: demo_steps.rb
 # A few step definitions for demo and testing purpose.
 

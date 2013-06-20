@@ -1,4 +1,3 @@
-# encoding: utf-8
 # File: macro-step.rb
 # Purpose: Implementation of the MacroStep class.
 

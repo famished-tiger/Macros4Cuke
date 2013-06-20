@@ -1,4 +1,3 @@
-# encoding: utf-8 
 # File: macros4cuke.gemspec
 # Gem specification file for the Macros4Cuke project.
 

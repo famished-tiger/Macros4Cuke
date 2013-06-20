@@ -1,4 +1,3 @@
-# encoding: utf-8
 # File: macro-step-support.rb
 
 require_relative 'exceptions'

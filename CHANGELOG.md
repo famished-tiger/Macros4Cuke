@@ -1,3 +1,7 @@
+### 0.3.34 / 2013-06-20
+* [CHANGE] Most files: Except for the i18n sample files, the utf-8 encoding comment was in all Ruby files of the project.
+
+
 ### 0.3.33 / 2013-06-19
 * [CHANGE] File `travis.yml`: Wrong config in Travis CI. As a temporary workaround, removed RVM environments: - jruby-19mode  - ruby-head.
 

@@ -1,4 +1,3 @@
-# encoding: utf-8
 # File: engine.rb
 # Purpose: Implementation of the MacroStep class.
 

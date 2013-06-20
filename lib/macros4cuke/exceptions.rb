@@ -1,4 +1,3 @@
-# encoding: utf-8 -- You should see a paragraph character: §
 # File: exceptions.rb
 
 module Macros4Cuke # Module used as a namespace

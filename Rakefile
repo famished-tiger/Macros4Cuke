@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'rubygems'
 require_relative './lib/macros4cuke/constants'
 
