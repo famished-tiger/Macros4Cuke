@@ -1,4 +1,4 @@
---exclude features
+--exclude examples --exclude features --exclude spec
 --no-private
 --markup markdown
 -

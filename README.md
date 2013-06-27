@@ -23,6 +23,7 @@ __Macros4Cuke__ is a lightweight library that adds a macro facility your Cucumbe
 
 ## A quick example ##
 Here is a macro-step example taken from our demo files:  
+
 ```cucumber
     Given I define the step "When I [enter my userid <userid> and password <password>]" to mean:  
     """  
@@ -41,11 +42,13 @@ the macro-step is invoked(used) elsewhere in a feature file.
 
 
 That macro-step can then be used in a scenario like this:  
+
 ```cucumber 
     When I [enter my userid "jdoe" and password "hello-world"]
 ```
 
 Once it is executing, the macro-step as the same effect as:  
+
 ```cucumber 
     Given I landed in the homepage  
     When I click "Sign in"  
@@ -107,6 +110,7 @@ Let's begin by taking a closer look at the definition part.
 To create a macro-step, you'll need to use a __defining__ step bundled with Macros4Cuke.
 It is a rather unusual Cucumber step in the sense that its sole purpose is to build another step!  
 The _defining step_ follows the general pattern:
+
 ```cucumber
   Given I define the step "When I [some phrase]" to mean:  
   """  
@@ -139,6 +143,7 @@ A few remarks about the __phrase__ part:
 Besides that, the text inside the phrase can be arbitrary (well, almost).
 
 A phrase can be without argument as in:  
+
 ```cucumber
   # A phrase without argument
   [enter my credentials]
@@ -146,6 +151,7 @@ A phrase can be without argument as in:
   
 Alternatively, a phrase can have one or more arguments enclosed between chevrons <...>.
 For instance, the next first phrase has two arguments, the second has three arguments:  
+
 ```cucumber
   [enter my <userid> and <password>]
   [travel from <origin> to <destination> via <waypoint>]
@@ -159,6 +165,7 @@ the argument names are: _origin_ and _destination_. Notice that _origin_ and _de
 #### Specifying the sub-steps of a macro-step ####
 The sub-steps are placed in a Gherkin multiline text, that is, a text that is enclosed between 
  triple quotes ("""). In the next example,  
+
 ```cucumber 
   Given I define the step "When I [enter my credentials]" to mean:  
   """  
@@ -173,6 +180,7 @@ the text between triple quotes enumerates the sub-steps associated with the macr
  A pleasing aspect is the familiar syntax the sub-steps have: they closely look to genuine steps of a scenario.  
 Sub-steps can also have macro arguments. 
  For instance, the previous step sequence could have two arguments called _userid_ and _password_:  
+ 
 ```cucumber  
   """  
   Given I landed in the homepage   
@@ -190,6 +198,7 @@ The syntax rules for using a given macro-step in a scenario are pretty straightf
 
 #### Example 1: ####
 Consider the following macro-step definition:  
+
 ```cucumber
   Given I define the step "When I [log in as <userid>]" to mean: 
   """
@@ -199,6 +208,7 @@ Consider the following macro-step definition:
 
 Its quoted sentence is ```"When I [log in as <userid>]"```, therefore
  the macro-step can be invoked in a scenario like this:  
+ 
 ```cucumber
   Given I do this ...
   When I [log in as "jdoe"]
@@ -207,6 +217,7 @@ Its quoted sentence is ```"When I [log in as <userid>]"```, therefore
 
 #### Example 2: ####
 Here is another -partial- macro-step definition:  
+
 ```cucumber
   Given I define the step "When I [travel from <origin> to <destination> via <stop>]" to mean: 
   """
@@ -215,6 +226,7 @@ Here is another -partial- macro-step definition:
 ```
 
 This macro-step can occur in a scenario as:  
+
 ```cucumber
   When I [travel from "San Francisco" to "New-York" via "Las Vegas"]
 ```
@@ -231,6 +243,7 @@ To enable this mechanism for a given macro, ensure that in its definition the qu
 a terminating colon (:) character.
 
 The next example is based on one of the demo feature files:  
+
 ```cucumber
   # Next step has a colon ':'  after the ']': data can be passed with a table
   Given I define the step "When I [enter my address as follows]:" to mean:
@@ -245,6 +258,7 @@ The next example is based on one of the demo feature files:
 ```
 
 This step can be used like this:  
+
 ```cucumber
   When I [enter my address as follows]:"  
   |lastname|Doe|  
@@ -273,6 +287,7 @@ __\!"'\#$%\&\*\+\-/,\.\:\;\=\?\(\)\<\>\[\]\{\}\\\^\`\|\~__
 ### Assigning a value to an argument ###
 An argument appearing in the phrase MUST always be bound to a value at the step invokation.
 Taking again a previous example of a -partial- macro-step definition:  
+
 ```cucumber
   Given I define the step "When I [travel from <origin> to <destination> via <stop>]" to mean: 
   """
@@ -281,12 +296,14 @@ Taking again a previous example of a -partial- macro-step definition:
 ```
 
 The following step invokation is invalid:  
+
 ```cucumber
   When I [travel from "San Francisco" to via "Las Vegas"]
 ```
 
 The issue is: the destination value is missing, Macros4Cuke won't be able to find a step with that syntax.  
 The next invokation is syntactically correct for Macros4Cuke:  
+
 ```cucumber
   When I [travel from "San Francisco" to "" via "Las Vegas"]
 ```
@@ -304,6 +321,7 @@ For any argument that can receive a value through a data table, three situations
 - __Answer__: Yes but there is a catch.
 
 Consider the following attempt of a macro-step definition:  
+
 ```cucumber
   Given I define the step "* I [make a long journey]" to mean:
   """
@@ -327,6 +345,7 @@ is set to a triple quote sequence """.
 - Use it everywhere you want to place nested triple quotes.
 
 Thus to make the previous example work, one must change it like follows:  
+
 ```cucumber
   Given I define the step "* I [make a long journey]" to mean:
   """
@@ -342,7 +361,8 @@ Thus to make the previous example work, one must change it like follows:
 
 ## Conditional sections in substeps. ##
 To make the macros more flexible, it is possible to define conditional sections in the substep sequence.  
-The general pattern for the conditional section is:  
+The general pattern for the conditional section is: 
+ 
 ```cucumber
   <?foobar>
   substep1
@@ -376,7 +396,8 @@ Consider the following example:
   """
 ```
 
-When invoked like this:  
+When invoked like this:
+  
 ```cucumber
   When I [fill in the form with]:
   |firstname     |Alice|

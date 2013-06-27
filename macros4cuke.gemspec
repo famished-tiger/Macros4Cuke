@@ -22,14 +22,14 @@ Thank you for installing Macros4Cuke...
 Enjoy using Cucumber with macros...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 EOSTRING
-  pkg.rdoc_options << '--exclude=examples --exclude=features --exclude=spec'     
+  pkg.rdoc_options << '--exclude="examples|features|spec"'  
 	file_list = Dir['.rubocop.yml', '.rspec', '.ruby-gemset', '.ruby-version', '.simplecov', '.travis.yml', '.yardopts', 'cucumber.yml', 'Gemfile', 'Rakefile',  'CHANGELOG.md', 'LICENSE.txt', 'README.md', 
     'lib/*.*', 'lib/**/*.rb', 'examples/**/*.*', 'features/*.*', 'features/**/*.rb', 'spec/**/*.rb'
   ]
 	pkg.files = file_list
 	pkg.require_path = "lib"
 	
-	pkg.has_rdoc = false
+	pkg.extra_rdoc_files = ['README.md']
   pkg.add_runtime_dependency('cucumber',[">= 0.5.0"])
   pkg.add_development_dependency('rake',[">= 0.8.0"])
   pkg.add_development_dependency('rspec',[">= 2.11.0"])

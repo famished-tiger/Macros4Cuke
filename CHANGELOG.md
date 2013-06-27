@@ -1,3 +1,13 @@
+### 0.3.37 / 2013-06-27
+* [FIX] File `macros4cuke.gemspec`: added README.md in extra_rdoc_files option.
+* [CHANGE] File `README.md`: Re-formatting so that it is better rendered with darkfish (from YARD).
+* [CHANGE] File `.yardopts` : grouped the exclude options on one line. 
+
+### 0.3.36 / 2013-06-27
+* [FIX] File `macros4cuke.gemspec`: corrected the rdoc_options to exclude doc from examples, features and spec folders.
+  This was necessary because all but the latest versions of RDoc have difficulties to cope with utf-8.
+* [CHANGE] File `.yardopts` : added more folders to exclude from documentation generation. 
+
 ### 0.3.35 / 2013-06-27
 * [CHANGE] File `macros4cuke.gemspec`: added rdoc_options to exclude doc from examples, features and spec folders.
   This was necessary because all but the latest versions of RDoc have difficulties to cope with utf-8. 
