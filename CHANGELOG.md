@@ -1,3 +1,7 @@
+### 0.3.35 / 2013-06-27
+* [CHANGE] File `macros4cuke.gemspec`: added rdoc_options to exclude doc from examples, features and spec folders.
+  This was necessary because all but the latest versions of RDoc have difficulties to cope with utf-8. 
+
 ### 0.3.34 / 2013-06-20
 * [CHANGE] Most files: Except for the i18n sample files, the utf-8 encoding comment was in all Ruby files of the project.
 
