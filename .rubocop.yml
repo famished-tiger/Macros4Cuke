@@ -1,3 +1,9 @@
+AllCops:
+  Excludes:
+    - examples/**
+    - spec/**
+
+
 AccessControl:
   Enabled: false
 
@@ -29,3 +35,4 @@ SpaceInsideBrackets:
 
 TrailingWhitespace:
   Enabled: false
+  

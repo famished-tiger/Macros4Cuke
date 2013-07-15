@@ -15,7 +15,7 @@ MACROS4CUKE_GEMSPEC = Gem::Specification.new do |pkg|
 	pkg.homepage = "https://github.com/famished-tiger/Macros4Cuke"
 	pkg.platform = Gem::Platform::RUBY
 	pkg.summary = Macros4Cuke::Description
-	pkg.description = "Create your own macro-steps directly in Cucumber scenarios."
+	pkg.description = "Expand Cucumber with macro-steps."
 	pkg.post_install_message =<<EOSTRING
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Thank you for installing Macros4Cuke...

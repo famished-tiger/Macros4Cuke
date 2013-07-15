@@ -37,7 +37,7 @@ public
   # Multiple rows with same argument name are acceptable.  
   def invoke_macro(aPhraseInstance, rawData = nil)
     # Generate a text rendition of the step to be executed.
-    collection = MacroCollection.instance()
+    collection = MacroCollection.instance
     rendered_steps = collection.render_steps(aPhraseInstance, rawData)
     
     # Let Cucumber execute the sub-steps
@@ -49,7 +49,7 @@ public
   # After this, we are in the same situation when no macro-step 
   # was ever defined.
   def clear_macros()
-    MacroCollection.instance.clear()
+    MacroCollection.instance.clear
   end
 
 end # module

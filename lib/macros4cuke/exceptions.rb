@@ -40,8 +40,9 @@ end # class
 # and that argument name does not appear in any sub-step.
 class AmbiguousArgumentValue < Macros4CukeError
   def initialize(anArgName, valuePhrase, valueTable)
-    msg = "The macro argument '#{anArgName}' has value '#{valuePhrase}' and 'valueTable'."
-    super(msg)
+    msg1 = "The macro argument '#{anArgName}' has value "
+    msg2 = "'#{valuePhrase}' and '#{valueTable}'."
+    super(msg1 + msg2)
   end
 end # class
 

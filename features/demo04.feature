@@ -19,7 +19,7 @@ Scenario: Defining a macro to be used with multiple arguments in a table
   And I click "Submit"
   """
 
-Scenario: # Let's use the macro we created above
+Scenario: Let's use the macro we created above
   # Here the macro is invoked. Actual value for the argument are passed in a table argument.
   When I [enter my credentials as]:
   |userid|guest|

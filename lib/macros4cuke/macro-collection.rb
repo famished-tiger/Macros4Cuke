@@ -60,7 +60,7 @@ public
   # Post-condition: we are back to the same situation as 
   # no macro was ever defined.
   def clear()
-    macro_steps.clear()
+    macro_steps.clear
   end
 
   

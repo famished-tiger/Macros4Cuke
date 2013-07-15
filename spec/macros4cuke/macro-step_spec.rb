@@ -120,7 +120,7 @@ SNIPPET
     it 'should complain when argument gets a value from phrase and table' do
       # Error case: there is no macro argument called <unknown>
       phrase = %Q|enter my credentials as "nobody"|
-      msg = "The macro argument 'userid' has value 'nobody' and 'valueTable'."
+      msg = "The macro argument 'userid' has value 'nobody' and 'someone'."
       args = [ %w(userid someone), %w(password no-secret) ]
        expect { subject.expand(phrase, args) }.to raise_error(
         AmbiguousArgumentValue, msg)

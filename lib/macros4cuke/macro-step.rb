@@ -162,12 +162,12 @@ private
   # Return the validated row.
   # @param a_row [Array] A 2-elements Array (i.e. a couple) of the form: 
   # [macro argument name, a value].
-  # @param value [Hash] The pairs phrase argument name => value
-  def validate_row(a_row, phrase_params)
+  # @param params [Hash] The pairs phrase argument name => value
+  def validate_row(a_row, params)
     (a_key, value) = a_row
     raise UnknownArgumentError.new(a_key) unless args.include? a_key
-    if (phrase_args.include? a_key) && (phrase_params[a_key] != value)
-      raise AmbiguousArgumentValue.new(a_key, phrase_params[a_key], value)        
+    if (phrase_args.include? a_key) && (params[a_key] != value)
+      raise AmbiguousArgumentValue.new(a_key, params[a_key], value)        
     end 
     
     return a_row
@@ -236,7 +236,7 @@ private
       end      
     end
   
-    return thePhraseArgs.dup()
+    return thePhraseArgs.dup
   end
   
   

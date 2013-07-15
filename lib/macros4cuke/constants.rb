@@ -3,7 +3,7 @@
 
 module Macros4Cuke # Module used as a namespace
   # The version number of the gem.
-  Version = '0.3.37'
+  Version = '0.3.38'
 
   # Brief description of the gem.
   Description = 'Macros for Cucumber'
@@ -17,8 +17,8 @@ module Macros4Cuke # Module used as a namespace
     # The root folder of Macros4Cuke.
     RootDir = begin
       require 'pathname'	# Load Pathname class from standard library
-      rootdir = Pathname(__FILE__).dirname.parent.parent.expand_path()
-      rootdir.to_s() + '/'	# Append trailing slash character to it
+      rootdir = Pathname(__FILE__).dirname.parent.parent.expand_path
+      rootdir.to_s + '/'	# Append trailing slash character to it
     end
   end
 end # module

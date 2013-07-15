@@ -28,7 +28,7 @@ Scenario: An exception is forced by invoking the above macro with a triple quote
   When I generate a DataTableNotFound exception  
 
   
-Scenario: # Let's use the macro-step WITHOUT the optional argument values.
+Scenario: Let's use the macro-step WITHOUT the optional argument values.
   When I [fill in the form with]:
   |firstname|Alice|
   |lastname| Inn |
@@ -51,7 +51,7 @@ Scenario: # Let's use the macro-step WITHOUT the optional argument values.
   """
   
   
-Scenario: # Let's use the macro-step WITH the optional argument values.  
+Scenario: Let's use the macro-step WITH the optional argument values.  
   # Redo, now with e-mail and comment
   When I [fill in the form with]:
   |firstname|Alice|

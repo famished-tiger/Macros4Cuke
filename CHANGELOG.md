@@ -1,3 +1,9 @@
+### 0.3.38 / 2013-07-15
+* [FIX] In method AmbiguousArgumentValue#initialize: An method argument was not string-interpolated in the error message.
+* [CHANGE] File 'macro-step_spec.rb' Test updated to cope with the previous fix.
+* [CHANGE] Minor changes in code to please Rubocop 0.9.1
+* [CHANGE] File `.rubocop.yml` : exclude /examples and /spec folders from Rubocop checks.
+
 ### 0.3.37 / 2013-06-27
 * [FIX] File `macros4cuke.gemspec`: added README.md in extra_rdoc_files option.
 * [CHANGE] File `README.md`: Re-formatting so that it is better rendered with darkfish (from YARD).

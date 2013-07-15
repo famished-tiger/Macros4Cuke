@@ -107,7 +107,7 @@ public
       when String
         actual_value
       else
-        actual_value.to_s()
+        actual_value.to_s
     end
         
     return result
@@ -231,7 +231,7 @@ class Engine
     # Use concatenation (+) to work around Ruby bug!
     forbidden =  ' !"#' + "$%&'()*+,-./:;<=>?[\\]^`{|}~" 
     all_escaped = [] 
-    forbidden.each_char() { |ch| all_escaped << Regexp.escape(ch) }
+    forbidden.each_char { |ch| all_escaped << Regexp.escape(ch) }
     pattern = all_escaped.join('|')
     Regexp.new(pattern)
   end
@@ -363,7 +363,7 @@ private
     end
     
     compiled_lines = raw_lines.map { |line| compile_line(line) }
-    return compile_sections(compiled_lines.flatten())
+    return compile_sections(compiled_lines.flatten)
   end
   
   # Convert the array of raw entries (per line) 
@@ -405,7 +405,7 @@ private
   # Otherwise, end the line with a eoline marker.  
   def line_rep_ending(theLineRep)
     if theLineRep.last.is_a?(SectionEndMarker)
-      section_end = theLineRep.pop()
+      section_end = theLineRep.pop
       theLineRep << EOLine.new
       theLineRep << section_end
     else
@@ -464,7 +464,7 @@ private
       
       when SectionEndMarker           
         validate_section_end(element, open_sections)
-        subResult << open_sections.pop()
+        subResult << open_sections.pop
        
       else
         if open_sections.empty?
@@ -483,15 +483,18 @@ private
     return compiled
   end
   
-  # Validate the given end of section marker taking into account the open sections.
+  # Validate the given end of section marker taking into account 
+  # the open sections.
   def validate_section_end(marker, sections)
+    msg_prefix = "End of section</#{marker.name}> "
+    
     if sections.empty?
-      msg = "End of section</#{marker.name}> found while no corresponding section is open."
-      raise StandardError, msg
+      msg = 'found while no corresponding section is open.'
+      raise StandardError, msg_prefix + msg
     end
     if marker.name != sections.last.name
-      msg = "End of section</#{marker.name}> doesn't match current section '#{sections.last.name}'."
-      raise StandardError, msg
+      msg = "doesn't match current section '#{sections.last.name}'."
+      raise StandardError, msg_prefix + msg
     end
   end
  
