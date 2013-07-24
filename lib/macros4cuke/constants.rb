@@ -3,10 +3,10 @@
 
 module Macros4Cuke # Module used as a namespace
   # The version number of the gem.
-  Version = '0.3.38'
+  Version = '0.3.39'
 
   # Brief description of the gem.
-  Description = 'Macros for Cucumber'
+  Description = 'Macro-steps for Cucumber'
 
   # Constant Macros4Cuke::RootDir contains the absolute path of Rodent's
   # root directory. Note: it also ends with a slash character.

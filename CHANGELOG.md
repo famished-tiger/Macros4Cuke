@@ -1,3 +1,7 @@
+### 0.3.39 / 2013-07-24
+* [CHANGE] File `demo06.feature`: Expanded the comments on the conditional section
+* [CHANGE] File `README.md`: Small editorial changes in the 'A quick section' example.
+
 ### 0.3.38 / 2013-07-15
 * [FIX] In method AmbiguousArgumentValue#initialize: An method argument was not string-interpolated in the error message.
 * [CHANGE] File 'macro-step_spec.rb' Test updated to cope with the previous fix.

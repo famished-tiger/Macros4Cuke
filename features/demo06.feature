@@ -14,11 +14,17 @@ Scenario: Defining a macro with conditional substeps
   And I fill in "zip" with "<postcode>"
   And I fill in "city" with "<city>"
   And I fill in "country" with "<country>"
-  # Let's assume that e-mail is optional
+  
+  # Let's assume that the e-mail field is optional.
+  # The step between the <?email>...<email> will be executed
+  # when the argument <email> has a value assigned to it.
   <?email>
   And I fill in "email" with "<email>"
   </email>
+  
   # Let's also assume that comment is also optional
+  # See the slightly different syntax: the conditional section
+  # <?comment>...<comment> may fit in a single line
 <?comment>  And I fill in "comment" with "<comment>"</comment>
   And I click "Save"
   """

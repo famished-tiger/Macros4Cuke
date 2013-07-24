@@ -18,8 +18,9 @@ __Macros4Cuke__ is a lightweight library that adds a macro facility your Cucumbe
 * Familiar syntax for macro-step definitions,
 * Substep sequence can be of arbitrary length,
 * Macro-steps may have data arguments,
-* Data values can be passed to the sub-steps.
-* A section with sub-steps can be made conditional.
+* Data values can be passed to the sub-steps,
+* Domain neutral: applicable to any kind of application that can be driven with Cucumber,
+* A group of sub-steps can be made conditional.
 
 ## A quick example ##
 Here is a macro-step example taken from our demo files:  
@@ -36,18 +37,18 @@ Here is a macro-step example taken from our demo files:
 ```
 
 The first line above specifies the syntax of the macro-step (it is the text between the square brackets).  
-Notice also how the arguments _userid_ and _password_ are enclosed between chevrons (angle brackets) <...>.
-Finally, the lines delimited by the triple quotes """ represent the Cucumber steps to execute when
+Notice also how the macro-step arguments _userid_ and _password_ are enclosed between chevrons (angle brackets) <...>.
+Finally, the text lines between by the triple quotes """ represent the Cucumber steps to execute when
 the macro-step is invoked(used) elsewhere in a feature file.
 
 
-That macro-step can then be used in a scenario like this:  
+That macro-step can then be used/invoked in a scenario like this:  
 
 ```cucumber 
     When I [enter my userid "jdoe" and password "hello-world"]
 ```
 
-Once it is executing, the macro-step as the same effect as:  
+Once it is executing, the invoked macro-step should be equivalent to:  
 
 ```cucumber 
     Given I landed in the homepage  
