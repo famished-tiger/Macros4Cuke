@@ -47,8 +47,8 @@ public
   #   Multiple rows with same argument name are acceptable.
   # @return [String]
   def render_steps(aPhrase, rawData = nil)
-    useTable = ! rawData.nil?
-    macro = find_macro(aPhrase, useTable) 
+    use_table = ! rawData.nil?
+    macro = find_macro(aPhrase, use_table) 
     raise UnknownMacroError.new(aPhrase) if macro.nil?
 
     # Render the steps

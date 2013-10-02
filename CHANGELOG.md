@@ -1,3 +1,8 @@
+### 0.3.40 / 2013-07-24
+* [CHANGE] File `.rubocop.yml`: Updated the Excludes rule
+* [CHANGE] All .rb files: Added an newline at the end of each source file (to please Rubocop).
+
+
 ### 0.3.39 / 2013-07-24
 * [CHANGE] File `demo06.feature`: Expanded the comments on the conditional section
 * [CHANGE] File `README.md`: Small editorial changes in the 'A quick section' example.

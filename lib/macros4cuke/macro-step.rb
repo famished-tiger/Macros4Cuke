@@ -145,7 +145,7 @@ private
         (a_key, value) = validate_row(a_row, macro_parameters)
         if macro_parameters.include? a_key
           if macro_parameters[a_key].kind_of?(Array)
-             macro_parameters[a_key] << value
+            macro_parameters[a_key] << value
           else
             macro_parameters[a_key] = [macro_parameters[a_key], value]
           end

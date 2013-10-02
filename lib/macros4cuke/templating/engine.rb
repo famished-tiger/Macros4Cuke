@@ -27,7 +27,7 @@ class StaticText
     @source = aSourceText
   end
 
-public
+  public
 
   # Render the static text.
   # This method has the same signature as the {Engine#render} method.
@@ -41,7 +41,7 @@ end # class
 # Class used internally by the template engine.  
 # Represents an end of line that must be rendered as such.
 class EOLine
-public
+  public
   # Render an end of line.
   # This method has the same signature as the {Engine#render} method.
   # @return [String] An end of line marker. Its exact value is OS-dependent.
@@ -63,7 +63,7 @@ class UnaryElement
     @name = aVarName
   end
 
-protected
+  protected
 
   # This method has the same signature as the {Engine#render} method.
   # @return [Object] The actual value from the locals or context
@@ -88,7 +88,7 @@ end # class
 # that is associated with it. 
 class Placeholder < UnaryElement
 
-public
+  public
   # Render the placeholder given the passed arguments.
   # This method has the same signature as the {Engine#render} method.
   # @return [String] The text value assigned to the placeholder. 
@@ -130,7 +130,7 @@ class Section  < UnaryElement
     @children = []
   end
 
-public
+  public
   # Add a child element as member of the section
   def add_child(aChild)
     children << aChild
