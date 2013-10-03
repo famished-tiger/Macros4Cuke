@@ -16,7 +16,8 @@
 #  """
 # The regexp has two capturing group: one for the phrase, 
 # a second for the terminating colon (:)
-Given(/^I define the step "(?:Given|When|Then|\*) I \[((?:[^\\\]]|\\.)+)\](:?)" to mean:$/) do |macro_phrase, colon_capture, template|
+Given(/^I define the step "(?:Given|When|Then|\*) I \[((?:[^\\\]]|\\.)+)\](:?)" to mean:$/) do 
+  |macro_phrase, colon_capture, template|
   use_table = (colon_capture == ':')
   add_macro(macro_phrase, template, use_table)
 end

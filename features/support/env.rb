@@ -5,9 +5,9 @@
 # to use the Macros4Cuke gem.
 
 begin
-  require 'simplecov'
-rescue LoadError
-  # Gobble silently the exception if simplecov isn't installed.
+  require 'simplecov' # Development dependency only...
+rescue LoadError => mute
+  mute # .... So gobble silently the exception if simplecov isn't installed.
 end
 
 module DemoMacros4Cuke  # Use the module as a namespace
