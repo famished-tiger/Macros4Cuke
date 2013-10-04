@@ -1,6 +1,6 @@
 # File: macro_steps.rb
 # Purpose: step definitions that help to build macro-steps 
-# (i.e. a step that is equivalent to a sequence of steps)
+# (i.e. a Cucumber step that is equivalent to a sequence of sub-steps)
 
 
 
@@ -16,8 +16,11 @@
 #  """
 # The regexp has two capturing group: one for the phrase, 
 # a second for the terminating colon (:)
-Given(/^I define the step "(?:Given|When|Then|\*) I \[((?:[^\\\]]|\\.)+)\](:?)" to mean:$/) do 
-  |macro_phrase, colon_capture, template|
+# The regular expression uses the /x option in order to split it in pieces
+Given(/^I\sdefine\sthe\sstep\s" # Fixed part of defining step
+    (?:Given|When|Then|\*)\s  # ... A keyword that starts the new step
+    I\s\[((?:[^\\\]]|\\.)+)\](:?) # ...I followed by text enclosed in square brackets
+  "\sto\smean:$/x) do |macro_phrase, colon_capture, template|
   use_table = (colon_capture == ':')
   add_macro(macro_phrase, template, use_table)
 end

@@ -1,3 +1,7 @@
+### 0.3.42 / 2013-10-04
+* [CHANGE] File `macro_steps.rb`: Regular expression for defining step uses now the /x option.
+* [FIX] File `.simplecov` Removal of premataure dependency to 'coveralls' gem
+
 ### 0.3.41 / 2013-10-03
 * [CHANGE] File `env.rb`: Updated the exception handler when requiring `simplecov` to prevent the
   `Do not suppress exceptions` warning.
