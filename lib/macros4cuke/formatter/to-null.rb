@@ -15,6 +15,7 @@ module Formatter
 class ToNull
 
   public
+
   # Tell which notifications the formatter subscribes to.
   def implements()
     return Formatter::AllNotifications

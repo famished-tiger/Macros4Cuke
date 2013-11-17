@@ -12,7 +12,7 @@ module Formatter
 class ToGherkin
   # The IO where the formatter's output will be written to.
   attr_reader(:io)
-  
+
   # The number of macro-step encountered by the formatter.
   attr_reader(:step_count)
 
@@ -22,6 +22,7 @@ class ToGherkin
   end
 
   public
+
   # Tell which notifications this formatter subscribes to.
   def implements()
     return [:on_collection, :on_step, :on_step_end, :on_phrase, :on_source]
@@ -39,7 +40,7 @@ class ToGherkin
 
   def on_step(aLevel, aMacroStep)
     @step_count += 1
-    io.puts "#{indentation(aLevel)}Scenario: Macro #{step_count}"  
+    io.puts "#{indentation(aLevel)}Scenario: Macro #{step_count}"
   end
 
   def on_step_end(aLevel)
@@ -57,19 +58,20 @@ class ToGherkin
     ljust = indentation(aLevel)
     triple_quotes = %Q|#{ljust}"""|
     io.puts triple_quotes
-    
+
     # Indent source text
     indented_text = aSourceText.gsub(/^/m, "#{ljust}")
-    
+
     io.puts indented_text
     io.puts triple_quotes
   end
-  
-private
+
+  private
+
   def indentation(aLevel)
     return '  ' * (aLevel)
   end
-  
+
 
 end # class
 

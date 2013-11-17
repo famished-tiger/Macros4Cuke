@@ -14,7 +14,8 @@ module Macros4Cuke # Module used as a namespace
 #   World(Macros4Cuke::MacroStepSupport) 
 #    
 module MacroStepSupport
-public
+
+  public
 
   # Add a new macro.
   # Pre-condition: there is no existing macro with the same key.

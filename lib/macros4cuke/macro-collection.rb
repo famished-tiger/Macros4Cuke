@@ -17,7 +17,7 @@ class MacroCollection
   #   A Hash with pairs of the form: macro key => MacroStep object
 
   
-public
+  public
 
   # Add a new macro.
   # Pre-condition: there is no existing macro with the same key.
@@ -35,7 +35,6 @@ public
     fail(DuplicateMacroError, aPhrase) if find_macro(aPhrase, useTable)
     
     macro_steps[new_macro.key] = new_macro    
-
   end
 
   # Render the steps associated to the macro with given phrase
@@ -70,7 +69,7 @@ public
     return @macro_steps
   end
   
-private
+  private
 
   # Retrieve the macro, given a phrase.
   def find_macro(aMacroPhrase, useTable)

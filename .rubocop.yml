@@ -3,7 +3,6 @@ AllCops:
     - '*/examples/**'
     - '*/features/**'
 
-
 AccessControl:
   Enabled: false
 
@@ -21,6 +20,9 @@ ClassLength:
 ConstantName:  
   Enabled: false
   
+CyclomaticComplexity:
+  Enabled: false
+  
 DefWithParentheses:  
   Enabled: false
   
@@ -29,6 +31,9 @@ Documentation:
   
 EmptyLines:
   Enabled: false
+  
+EmptyLinesAroundBody:
+  Enabled: false  
 
 Encoding:
   Enabled: false

@@ -287,7 +287,7 @@ SNIPPET
       # Place actual value in context object
       Context = Struct.new(:userid, :password)
       context = Context.new('sherlock', 'holmes')
-      rendered_text = subject.render(context, { 'userid' => 'susan' })
+      rendered_text = subject.render(context, 'userid' => 'susan')
       expected = <<-SNIPPET
   Given I landed in the homepage
   And I fill in "Username" with "susan"

@@ -33,7 +33,7 @@ describe Placeholder do
       expect(rendered_text).to be_empty
 
       # Case: locals Hash has a nil value associated to 'foobar'
-      rendered_text = subject.render(Object.new, { 'foobar' => nil })
+      rendered_text = subject.render(Object.new, 'foobar' => nil)
       expect(rendered_text).to be_empty
 
       # Case: context object has a nil value associated to 'foobar'
@@ -47,7 +47,7 @@ describe Placeholder do
 
     it 'should render the actual value bound to the placeholder' do
       # Case: locals Hash has a value associated to 'foobar'
-      rendered_text = subject.render(Object.new, { 'foobar' => 'hello' })
+      rendered_text = subject.render(Object.new, 'foobar' => 'hello')
       expect(rendered_text).to eq('hello')
 
       # Case: context object has a value associated to 'foobar'

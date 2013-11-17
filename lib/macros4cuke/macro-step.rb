@@ -125,7 +125,8 @@ class MacroStep
     return renderer.render(nil, params)
   end
 
-private
+  private
+
   # Build a Hash from the given raw data.
   # @param aPhrase [String] an instance of the macro phrase.
   # @param rawData [Array or nil] An Array with coupples of the form: 

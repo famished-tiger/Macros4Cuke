@@ -1,3 +1,7 @@
+### 0.4.01 / 2013-11_17
+* [CHANGE] File `.rubocop.yml`: Disabled a few new 0.15.0 cops
+* [CHANGE] Files from `lib` and `spec` dirs updated for Rubocop 0.15.0
+
 ### 0.4.00 / 2013-11-17 
 #### Version number bumped. New feature: to list all encountered macro definitions into a single feature file.
 * [FEATURE] Sample `demo07.feature` file illustrates the new step that will list all macro definitions. 

@@ -13,13 +13,14 @@ module Formatter
 class ToTrace
   # The IO where the formatter's output will be written to.
   attr_reader(:io)
-  
+
 
   def initialize(anIO)
     @io = anIO
   end
 
   public
+
   # Tell which notifications the formatter subscribes to.
   def implements()
     return Formatter::AllNotifications
@@ -60,7 +61,7 @@ class ToTrace
   def on_static_text(aLevel, aStaticText)
     trace_event(aLevel, __method__)
   end
-  
+
   def on_comment(aLevel, aComment)
     trace_event(aLevel, __method__)
   end
@@ -82,10 +83,11 @@ class ToTrace
   end
 
   private
+
   def indentation(aLevel)
     return '  ' * aLevel
   end
-  
+
   def trace_event(aLevel, anEvent)
     io.puts "#{indentation(aLevel)}#{anEvent}"
   end

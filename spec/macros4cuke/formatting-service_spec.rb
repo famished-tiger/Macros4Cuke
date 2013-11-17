@@ -89,7 +89,9 @@ describe FormattingService do
         :on_step, 
         :on_step_end
       ]
-      formatter1.should_receive(:implements).at_least(69).times.and_return(supported_notifications)
+      formatter1.should_receive(:implements)
+        .at_least(69).times
+        .and_return(supported_notifications)
       subject.register(formatter1)
 
       # Test the notifications send to the formatter
@@ -118,7 +120,9 @@ describe FormattingService do
     it 'should support multiple formatters' do
       formatter1 = double('formatter')
       supported_notifications = [:on_collection]
-      formatter1.should_receive(:implements).at_least(69 * 3).times.and_return(supported_notifications)
+      formatter1.should_receive(:implements)
+        .at_least(69 * 3).times
+        .and_return(supported_notifications)
 
       # Cheating: registering three times the same formatter...
       3.times { subject.register(formatter1) }
