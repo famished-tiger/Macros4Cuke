@@ -23,6 +23,9 @@ class MacroStep
   # A template engine that expands the sub-steps upon request.
   attr_reader(:renderer)
   
+  # The sentence fragment that defines the syntax of the macro-step
+  attr_reader(:phrase)
+  
   # Unique key of the macro as derived from the macro phrase.
   attr_reader(:key)
   
@@ -30,7 +33,7 @@ class MacroStep
   attr_reader(:phrase_args)
   
   # The list of macro argument names (as appearing in the substeps 
-  # and in the macro phrase).
+  # AND in the macro phrase).
   attr_reader(:args)
   
   # Constructor.
@@ -41,15 +44,12 @@ class MacroStep
   # @param useTable [boolean] A flag indicating whether a data table 
   #   must be used to pass actual values.
   def initialize(aMacroPhrase, theSubsteps, useTable)
+    @phrase = aMacroPhrase
     @key = self.class.macro_key(aMacroPhrase, useTable, :definition)
 
     # Retrieve the macro arguments embedded in the phrase.
     @phrase_args = scan_arguments(aMacroPhrase, :definition)
-
-    # Manipulate the substeps source text
-    substeps_processed = preprocess(theSubsteps)
-
-    @renderer = Templating::Engine.new(substeps_processed)
+    @renderer = Templating::Engine.new(theSubsteps)
     substeps_vars = renderer.variables
 
 
@@ -165,15 +165,13 @@ private
   # @param params [Hash] The pairs phrase argument name => value
   def validate_row(a_row, params)
     (a_key, value) = a_row
-    raise UnknownArgumentError.new(a_key) unless args.include? a_key
+    fail(UnknownArgumentError.new(a_key)) unless args.include? a_key
     if (phrase_args.include? a_key) && (params[a_key] != value)
-      raise AmbiguousArgumentValue.new(a_key, params[a_key], value)        
+      fail(AmbiguousArgumentValue.new(a_key, params[a_key], value))       
     end 
     
     return a_row
   end
-
-
 
 
   # Retrieve from the macro phrase, all the text between <..> or double quotes.
@@ -201,20 +199,6 @@ private
     
     return args
   end
-
-  # Return the substeps text after some transformation
-  # [theSubstepsSource] The source text of the steps 
-  # to be expanded upon macro invokation.
-  def preprocess(theSubstepsSource)
-    # Split text into lines
-    lines = theSubstepsSource.split(/\r\n?|\n/)
-    
-    # Reject comment lines. This is necessary because
-    # Cucumber::RbSupport::RbWorld#steps complains when it sees a comment.
-    processed = lines.reject { |a_line| a_line =~ /\s*#/ }
-    
-    return processed.join("\n")
-  end
   
   # Check for inconsistencies between the argument names 
   # in the phrase and the substeps part.
@@ -222,7 +206,7 @@ private
     # Error when the phrase names an argument that never occurs in the substeps
     thePhraseArgs.each do |phrase_arg|
       unless substepsVars.include? phrase_arg
-        raise UselessPhraseArgument.new(phrase_arg)
+        fail(UselessPhraseArgument.new(phrase_arg))
       end
     end 
     # Error when a substep has an argument that never appears in the phrase 
@@ -231,7 +215,7 @@ private
       substepsVars.each do |substep_arg|
         unless thePhraseArgs.include?(substep_arg) ||
         BuiltinParameters.include?(substep_arg)
-          raise UnreachableSubstepArgument.new(substep_arg) 
+          fail(UnreachableSubstepArgument.new(substep_arg))
         end
       end      
     end

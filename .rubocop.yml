@@ -1,7 +1,7 @@
 AllCops:
   Excludes:
     - '*/examples/**'
-    - '*/spec/**'
+    - '*/features/**'
 
 
 AccessControl:
@@ -14,10 +14,17 @@ AsciiComments:
 CaseIndentation:
   Enabled: false
 
+ClassLength:
+  Max: 200
+  CountComments: false  
+
 ConstantName:  
   Enabled: false
   
 DefWithParentheses:  
+  Enabled: false
+  
+Documentation:
   Enabled: false
   
 EmptyLines:
@@ -26,9 +33,19 @@ EmptyLines:
 Encoding:
   Enabled: false
   
-# Avoid methods longer than 30 lines of code
+IndentationWidth :
+  Enabled: false
+  
+# Avoid methods longer than 50 lines of code
 MethodLength:
-  Max: 30
+  Max: 50
+  CountComments: false
+
+NumericLiterals:
+  Enabled: false
+  
+RaiseArgs:
+  Enabled: false
   
 RedundantReturn:
   Enabled: false

@@ -39,6 +39,34 @@ end # class
 
 
 # Class used internally by the template engine.  
+# Represents a comment from a template.  
+# A static text is a text that is reproduced verbatim 
+# when rendering a template.
+class Comment
+  # The comment as extracted from the original template.
+  attr_reader(:source)
+  
+
+  # @param aSourceText [String] A piece of text extracted 
+  #   from the template that must be rendered verbatim.
+  def initialize(aSourceText)
+    @source = aSourceText
+  end
+
+  public
+
+  # Render the comment.
+  # Comments are rendered as empty text. This is necessary because
+  # Cucumber::RbSupport::RbWorld#steps complains when it sees a comment.
+  # This method has the same signature as the {Engine#render} method.
+  # @return [String] Empty string ("as is")
+  def render(aContextObject, theLocals)
+    return ''
+  end
+end # class
+
+
+# Class used internally by the template engine.  
 # Represents an end of line that must be rendered as such.
 class EOLine
   public
@@ -160,7 +188,7 @@ class Section  < UnaryElement
   #   Returns an empty string when no value is assigned to the placeholder.
   def render(aContextObject, theLocals)
     msg = "Method Section.#{__method__} must be implemented in subclass."
-    raise NotImplementedError, msg
+    fail(NotImplementedError, msg)
   end    
 
 end # class
@@ -239,6 +267,9 @@ class Engine
   # The original text of the template is kept here.
   attr_reader(:source)
   
+  # The internal representation of the template text
+  attr_reader(:representation)
+  
   # Builds an Engine and compiles the given template text into
   #  an internal representation.
   # @param aSourceTemplate [String] The template source text. 
@@ -260,11 +291,19 @@ public
   #  the passed argument values.
   def render(aContextObject = Object.new, theLocals)
     return '' if @representation.empty?
-    
+
+    prev = nil
     result = @representation.each_with_object('') do |element, subResult|
-      subResult << element.render(aContextObject, theLocals)
+      # Output compaction rules:
+      # -In case of consecutive eol's only one is rendered.
+      # -In case of comment followed by one eol, both aren't rendered
+      unless element.is_a?(EOLine) && 
+        (prev.is_a?(EOLine) || prev.is_a?(Comment))
+        subResult << element.render(aContextObject, theLocals)
+      end
+      prev = element
     end
-    
+
     return result
   end
 
@@ -295,24 +334,28 @@ public
 
   # Class method. Parse the given line text into a raw representation.
   # @return [Array] Couples of the form:
-  # [:static, text] or [:dynamic, tag text]
+  # [:static, text], [:comment, text] or [:dynamic, tag text]
   def self.parse(aTextLine)
     scanner = StringScanner.new(aTextLine)
     result = []
-    
-    until scanner.eos?
-      # Scan tag at current position...
-      tag_literal = scanner.scan(/<(?:[^\\<>]|\\.)*>/)
-      unless tag_literal.nil?
-        result << [:dynamic, tag_literal.gsub(/^<|>$/, '')] 
+
+    if scanner.check(/\s*#/)  # Detect comment line
+      result << [:comment, aTextLine]
+    else
+      until scanner.eos?
+        # Scan tag at current position...
+        tag_literal = scanner.scan(/<(?:[^\\<>]|\\.)*>/)
+        unless tag_literal.nil?
+          result << [:dynamic, tag_literal.gsub(/^<|>$/, '')] 
+        end
+        
+        # ... or scan plain text at current position
+        literal = scanner.scan(/(?:[^\\<>]|\\.)+/)
+        result << [:static, literal] unless literal.nil? 
+        identify_parse_error(aTextLine) if tag_literal.nil? && literal.nil?
       end
-      
-      # ... or scan plain text at current position
-      text_literal = scanner.scan(/(?:[^\\<>]|\\.)+/)
-      result << [:static, text_literal] unless text_literal.nil? 
-      identify_parse_error(aTextLine) if tag_literal.nil? && text_literal.nil?
     end
-    
+
     return result
   end
 
@@ -336,11 +379,11 @@ private
       when '>' then unbalance -= 1              
       end
       
-      raise StandardError, "Nested opening chevron '<'." if unbalance > 1
-      raise StandardError, "Missing opening chevron '<'." if unbalance < 0
+      fail(StandardError, "Nested opening chevron '<'.") if unbalance > 1
+      fail(StandardError, "Missing opening chevron '<'.") if unbalance < 0
     end
     
-    raise StandardError, "Missing closing chevron '>'." if unbalance == 1 
+    fail(StandardError, "Missing closing chevron '>'.") if unbalance == 1 
   end
   
   
@@ -355,7 +398,7 @@ private
       line_items.each do |(kind, text)|
         # A tag text cannot be empty nor blank
         if (kind == :dynamic) && text.strip.empty?
-          raise EmptyArgumentError.new(line.strip)
+          fail(EmptyArgumentError.new(line.strip))
         end
       end
       
@@ -390,7 +433,7 @@ private
         false
       end
     end
-    if line_to_squeeze && ! section_item.nil?
+    if line_to_squeeze && !section_item.nil?
       line_rep = [section_item]
     else
       line_rep_ending(line_rep)
@@ -398,7 +441,7 @@ private
     
     return line_rep
   end
-  
+
 
   # Apply rule: if last item in line is an end of section marker, 
   # then place eoline before that item. 
@@ -418,15 +461,17 @@ private
   # Where kind must be one of :static, :dynamic
   def compile_couple(aCouple)
     (kind, text) = aCouple
-    
+
     result = case kind
     when :static then StaticText.new(text)
+    when :comment then Comment.new(text)
     when :dynamic then parse_tag(text)
     end
 
     return result
   end
-  
+
+
   # Parse the contents of a tag entry.
   # @param aText [String] The text that is enclosed between chevrons.
   def parse_tag(aText)
@@ -437,7 +482,7 @@ private
       # Disallow punctuation and delimiter signs in tags.
       matching = DisallowedSigns.match(aText)
     end
-    raise InvalidCharError.new(aText, matching[0]) if matching
+    fail(InvalidCharError.new(aText, matching[0])) if matching
     
     result = case aText[0, 1]
       when '?'
@@ -477,7 +522,7 @@ private
     
     unless open_sections.empty?
       error_message =  "Unterminated section #{open_sections.last}."
-      raise StandardError, error_message
+      fail(StandardError, error_message)
     end
     
     return compiled
@@ -490,11 +535,11 @@ private
     
     if sections.empty?
       msg = 'found while no corresponding section is open.'
-      raise StandardError, msg_prefix + msg
+      fail(StandardError, msg_prefix + msg)
     end
     if marker.name != sections.last.name
       msg = "doesn't match current section '#{sections.last.name}'."
-      raise StandardError, msg_prefix + msg
+      fail(StandardError, msg_prefix + msg)
     end
   end
  

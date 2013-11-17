@@ -1,14 +1,20 @@
 # File: env.rb
 # Purpose: Allow Cucumber to load the sample application configuration
 # and hooks.
-# It also demonstrate what to do in your env.rb file 
+# It also demonstrates what to do in your env.rb file 
 # to use the Macros4Cuke gem.
+
+require 'pp'
+require_relative '../../lib/macros4cuke/macro-collection'
+require_relative '../../lib/macros4cuke/formatting-service'
+require_relative '../../lib/macros4cuke/formatter/to-gherkin'
 
 begin
   require 'simplecov' # Development dependency only...
 rescue LoadError => mute
   mute # .... So gobble silently the exception if simplecov isn't installed.
 end
+
 
 module DemoMacros4Cuke  # Use the module as a namespace
 

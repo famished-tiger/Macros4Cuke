@@ -1,4 +1,4 @@
-# File: section_spec.rb
+# File: placeholder_spec.rb
 
 require_relative '../../spec_helper'
 

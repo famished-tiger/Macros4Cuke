@@ -48,7 +48,7 @@ describe Section do
       expect(subject.children).to eq(sample_children)
     end
 
-    it 'should know the name all child placeholders' do
+    it 'should know the name of all child placeholders' do
       # Case: simple flat list of children
       sample_children.each { |a_child| subject.add_child(a_child) }
       expect(subject.variables).to eq([ 'user' ])
@@ -56,6 +56,8 @@ describe Section do
       # Case: at least one child is a group
       parent = Section.new('son')
       [ subject,
+        Comment.new('# Simple step'),
+        EOLine.new,        
         StaticText.new('Bye '),
         Placeholder.new('firstname'),
         EOLine.new

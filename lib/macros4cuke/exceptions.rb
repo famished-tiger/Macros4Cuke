@@ -84,10 +84,32 @@ end # class
 
 
 
-# Raised when one invokes a macro-step without a required data table argument
+# Raised when one invokes a macro-step without a required data table argument.
+# The exception is raised only only via Cucumber (steps)
 class DataTableNotFound < Macros4CukeError
   def initialize(phrase)
     msg = "The step with phrase [#{phrase}]: requires a data table."
+    super(msg)
+  end
+end # class
+
+
+# Raised when the list of formatting events provided by a macro-step formatter
+# is nil or empty.
+class NoFormattingEventForFormatter < Macros4CukeError
+  def initialize(aFormatter)
+    msg = "Formatter #{aFormatter.class}"
+    msg << ' does not support any formatting event.'
+    super(msg)
+  end
+end # class
+
+
+# Raised when a macro-step formatter uses an unknown formatting event.
+class UnknownFormattingEvent < Macros4CukeError
+  def initialize(aFormatter, anEvent)
+    msg = "Formatter #{aFormatter.class}"
+    msg << " uses the unknown formatting event '#{anEvent}'."
     super(msg)
   end
 end # class

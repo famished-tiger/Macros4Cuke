@@ -1,6 +1,20 @@
+### 0.4.00 / 2013-11-17 
+#### Version number bumped. New feature: to list all encountered macro definitions into a single feature file.
+* [FEATURE] Sample `demo07.feature` file illustrates the new step that will list all macro definitions. 
+* [NEW] Class CollWalkerFactory. Creates specialized Enumerators that walk over the macro collection.
+* [NEW] Module Formatter. Purpose: Grouping of all classes that render macro definitions
+* [NEW] File `all-notifications.rb` List of macro collection visit events.
+* [NEW] Class `ToGherkin` A macro-step formatter that outputs back into Gherkin format.
+* [NEW] Class `ToNull` A macro-step formatter that outputs nothing.
+* [NEW] Class `ToTrace` A macro-step formatter that outputs the macro collection visit events.
+* [NEW] Class `Comment` to represent comments appearing in sub-steps source.
+* [CHANGE] Method `Engine#parse` parses Gherkin comments into Comment objects.
+* [CHANGE] File `.rubocop.yml`: Allow checks of spec files, override settings of some new cops.
+* [CHANGE] Replaced calls to Kernel#raise by Kernel#fail
+
 ### 0.3.42 / 2013-10-04
 * [CHANGE] File `macro_steps.rb`: Regular expression for defining step uses now the /x option.
-* [FIX] File `.simplecov` Removal of premataure dependency to 'coveralls' gem
+* [FIX] File `.simplecov` Removal of premature dependency to 'coveralls' gem
 
 ### 0.3.41 / 2013-10-03
 * [CHANGE] File `env.rb`: Updated the exception handler when requiring `simplecov` to prevent the

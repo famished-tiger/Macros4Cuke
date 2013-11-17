@@ -12,6 +12,9 @@ RSpec.configure do |config|
     # Disable the `should` syntax...
     c.syntax = :expect
   end
+  
+  # Display stack trace in case of failure
+  config.full_backtrace = true
 end
 
 

@@ -18,7 +18,7 @@ Quand(/^j(?:e |')\[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   # Ensure that the second argument is of the correct type
   unless table_argument.kind_of?(Cucumber::Ast::Table)
     error_message = 'This step must have a data table as an argument.'
-    raise Macros4Cuke::DataTableNotFound, error_message
+    fail(Macros4Cuke::DataTableNotFound, error_message)
   end
 
   # This will call the macro with the given phrase.

@@ -20,8 +20,8 @@ describe MacroStep do
   And I click "Submit"
 SNIPPET
 
-  snippet
-end
+    snippet
+  end
 
   # Default instantiation rule
   subject { MacroStep.new(sample_phrase, sample_template, true) }
@@ -29,13 +29,17 @@ end
 
   context 'Creation & initialization:' do
     it 'should be created with a phrase, substeps and a table use indicator' do
-      expect { MacroStep.new(sample_phrase, sample_template, true) }.not_to raise_error
+      phrase = sample_phrase
+      template = sample_template
+      expect { MacroStep.new(phrase, template, true) }.not_to raise_error
     end
 
 
-    it 'should complain when a sub-step argument can never be assigned a value via the phrase' do
+    it 'should complain when a sub-step argument can never be assigned' do
+      phrase = sample_phrase
+      template = sample_template
       msg = "The sub-step argument 'password' does not appear in the phrase."
-      expect { MacroStep.new(sample_phrase, sample_template, false) }.to raise_error(
+      expect { MacroStep.new(phrase, template, false) }.to raise_error(
         Macros4Cuke::UnreachableSubstepArgument, msg)
     end
 
@@ -47,7 +51,10 @@ end
         Macros4Cuke::UselessPhraseArgument, msg)
     end
 
-
+    it 'should know its phrase' do
+      expect(subject.phrase).to eq(sample_phrase)
+    end
+    
     it 'should know its key' do
       expect(subject.key).to eq('enter_my_credentials_as_X_T')
     end

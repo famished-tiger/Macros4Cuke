@@ -1,7 +1,7 @@
 # File: macro_support.rb
-# Purpose: Add the support for macros in Cucumber.
+# Purpose: Add the support for macros in a Cucumber project.
 # This file is meant to be put next to the 'env.rb' file 
-# of your Cucumeber project.
+# of your Cucumber project.
 
 
 # Macros4Cuke step one: Load modules and classes from the gem.

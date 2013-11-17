@@ -21,14 +21,15 @@ describe Engine do
   And I click "Sign in"
 SNIPPET
 
-      source
-    end
+    source
+  end
     
   # Template containing two conditional sections
   let(:sophisticated_template) do
       source = <<-SNIPPET
   When I fill in "firstname" with "<firstname>"
   And I fill in "lastname" with "<lastname>"
+  # Next line defines a comment
 <?address>  And I fill in "address" with "<address>"</address>
   <?birthdate>
   And I fill in "birthdate" with "<birthdate>"
@@ -38,7 +39,7 @@ SNIPPET
 SNIPPET
 
     source
-    end    
+  end    
   
   
 
@@ -207,7 +208,8 @@ SNIPPET
 
     it 'should complain when a placeholder is empty or blank' do
       text_w_empty_arg = sample_template.sub(/userid/, '')
-      msg = %q(An empty or blank argument occurred in 'And I fill in "Username" with "<>"'.)
+      msg = 'An empty or blank argument occurred in ' +
+        %Q('And I fill in "Username" with "<>"'.)
       expect { Engine.new text_w_empty_arg }.to raise_error(
         Macros4Cuke::EmptyArgumentError, msg)
     end
@@ -240,7 +242,8 @@ SNIPPET
     it 'should complain when a closing tag is found without opening tag' do
       # Replacing an end of section tag by another...
       wrong_end = sophisticated_template.sub(/<\?birthdate>/, '</foobar>')
-      msg = 'End of section</foobar> found while no corresponding section is open.'
+      msg = 'End of section</foobar> found' + 
+        ' while no corresponding section is open.'
       expect { Engine.new wrong_end }.to raise_error(StandardError, msg)
     end    
     
@@ -304,10 +307,11 @@ SNIPPET
     it 'should render conditional sections' do
       instance = Engine.new(sophisticated_template)
       
-      locals = { 'firstname' => 'Anon', 
+      locals = { 
+        'firstname' => 'Anon', 
         'lastname' => 'Eemoos' ,
         'birthdate' => '1976-04-21'
-        }
+      }
       rendered_text = instance.render(Object.new, locals)
       expected = <<-SNIPPET
   When I fill in "firstname" with "Anon"

@@ -9,7 +9,11 @@ module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
 
 describe MacroCollection do
 
-  let(:singleton) { MacroCollection.instance() }
+  let(:singleton) { MacroCollection.instance }
+  
+  before(:all) do
+    MacroCollection.instance.clear
+  end
 
   context 'Initialization:' do
     it 'should be empty' do
@@ -45,7 +49,7 @@ SNIPPET
 
     it 'should return the rendition of a given macro-step' do
       phrase = '[enter my credentials]'
-      input_values = [ ['userid', 'nobody'], ['password', 'no-secret'] ]
+      input_values = [ %w[userid nobody], %w[password no-secret] ]
       rendered = singleton.render_steps(phrase, input_values)
       expected = <<-SNIPPET
   Given I landed in the homepage
@@ -57,8 +61,7 @@ SNIPPET
       expect(rendered).to eq(expected)
     end
     
-
-  end
+  end # context
 
 end # describe
 

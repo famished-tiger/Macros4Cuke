@@ -32,7 +32,7 @@ public
     # Prevent collision of macros (macros with same phrase).
     # This can occur if a macro was defined in a background section.
     # An exception is raised if the phrase syntax of both macros are the     
-    raise DuplicateMacroError.new(aPhrase) if find_macro(aPhrase, useTable)
+    fail(DuplicateMacroError, aPhrase) if find_macro(aPhrase, useTable)
     
     macro_steps[new_macro.key] = new_macro    
 
@@ -47,9 +47,9 @@ public
   #   Multiple rows with same argument name are acceptable.
   # @return [String]
   def render_steps(aPhrase, rawData = nil)
-    use_table = ! rawData.nil?
+    use_table = !rawData.nil?
     macro = find_macro(aPhrase, use_table) 
-    raise UnknownMacroError.new(aPhrase) if macro.nil?
+    fail(UnknownMacroError, aPhrase) if macro.nil?
 
     # Render the steps
     return  macro.expand(aPhrase, rawData)

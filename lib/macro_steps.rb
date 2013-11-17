@@ -26,7 +26,6 @@ Given(/^I\sdefine\sthe\sstep\s" # Fixed part of defining step
 end
 
 
-
 # This step is used to invoke a simple macro-step
 # Example:
 #  When I [log in as "guest"]
@@ -37,6 +36,8 @@ end
 
 
 # This step is used to invoke a macro-step with a data table argument.
+# Notice the presence of an ending colon character ':' 
+# after the closing bracket ']'
 # Example:
 #  When I [enter my credentials as]:
 #  |userid  |guest      |
@@ -44,13 +45,29 @@ end
 When(/^I \[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   # Ensure that the second argument is of the correct type
   unless table_argument.kind_of?(Cucumber::Ast::Table)
-    raise Macros4Cuke::DataTableNotFound.new(macro_phrase)
+    fail(Macros4Cuke::DataTableNotFound.new(macro_phrase))
   end
 
   # This will call the macro with the given phrase.
   # The second argument consists of an array 
   # with couples of the kind: [argument name, actual value]
   invoke_macro(macro_phrase, table_argument.raw)
+end
+
+
+# This step will list all the encountered macro-step definitions
+# and will collect them in a single feature file.
+# the file is saved in the current working directory 
+# when Cucumber is closing down.
+When(/I want to list all the macros in the file "([^"]+)"$/) do |filepath|
+  at_exit do
+    output = File.open(filepath, 'w')
+    formatter = Macros4Cuke::Formatter::ToGherkin.new(output)
+    
+    service = Macros4Cuke::FormattingService.new
+    service.register(formatter)
+    service.start!(Macros4Cuke::MacroCollection.instance)
+  end
 end
 
 
