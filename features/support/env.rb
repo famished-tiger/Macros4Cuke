@@ -5,9 +5,9 @@
 # to use the Macros4Cuke gem.
 
 require 'pp'
-require_relative '../../lib/macros4cuke/macro-collection'
-require_relative '../../lib/macros4cuke/formatting-service'
-require_relative '../../lib/macros4cuke/formatter/to-gherkin'
+#require_relative '../../lib/macros4cuke/macro-collection'
+#require_relative '../../lib/macros4cuke/formatting-service'
+#require_relative '../../lib/macros4cuke/formatter/to-gherkin'
 
 begin
   require 'simplecov' # Development dependency only...

@@ -2,6 +2,9 @@
 # Purpose: step definitions that help to build macro-steps 
 # (i.e. a Cucumber step that is equivalent to a sequence of sub-steps)
 
+require_relative './macros4cuke/macro-collection'
+require_relative './macros4cuke/formatting-service'
+require_relative './macros4cuke/formatter/to-gherkin'
 
 
 # This step is used to define a macro-step

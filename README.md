@@ -22,6 +22,8 @@ __Macros4Cuke__ is a lightweight library that adds a macro facility your Cucumbe
 * Domain neutral: applicable to any kind of application that can be driven with Cucumber,
 * A group of sub-steps can be made conditional.
 
+Since version 0.4.00, it is also possible to [list all the encountered macro definitions](#listing-all-the-macro-definitions). 
+
 ## A quick example ##
 Here is a macro-step example taken from our demo files:  
 
@@ -433,6 +435,22 @@ absence of a given data item. This simulates, for instance, the behaviour of a u
 one or more widgets in a page/screen. From a user interface testing viewpoint, entering an empty
 text in an entry field may be noticeably different than skipping that same entry field.
 Think of specific UI-events that can trigger some special system response.
+
+
+## Listing all the macro definitions ##
+When one begins to write macros spread over a large collection of feature files
+ it becomes interesting to have an overview, a list of all macro ever defined.  
+Therefore _Macros4Cuke_ comes with a pre-defined step that generates such a list of macro definitions.  
+This specialized step has the following syntax:
+
+```cucumber
+  When I want to list all the macros in the file "all_macros.feature"
+```
+
+Where `all_macros.feature` is a feature file that will be generated when Cucumber
+terminates. The resulting feature file lists all the macros (one per scenario) in 
+the familiar Gherkin syntax.
+
 
 
 ## A word on Step Argument Transforms##
