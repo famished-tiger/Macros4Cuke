@@ -3,6 +3,7 @@
 
 require_relative 'macro-collection'
 
+
 module Macros4Cuke # Module used as a namespace
 
 

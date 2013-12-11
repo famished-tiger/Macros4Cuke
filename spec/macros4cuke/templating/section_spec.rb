@@ -1,9 +1,12 @@
 # File: section_spec.rb
 
 require_relative '../../spec_helper'
+require_relative '../../../lib/macros4cuke/templating/template-element'
+require_relative '../../../lib/macros4cuke/templating/placeholder'
 
 # Load the classes under test
-require_relative '../../../lib/macros4cuke/templating/engine'
+require_relative '../../../lib/macros4cuke/templating/section'
+
 
 module Macros4Cuke
 

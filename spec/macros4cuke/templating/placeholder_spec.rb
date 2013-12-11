@@ -3,7 +3,7 @@
 require_relative '../../spec_helper'
 
 # Load the classes under test
-require_relative '../../../lib/macros4cuke/templating/engine'
+require_relative '../../../lib/macros4cuke/templating/placeholder'
 
 module Macros4Cuke
 

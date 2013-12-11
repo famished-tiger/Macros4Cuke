@@ -1,8 +1,13 @@
-### 0.4.02 / 2013-11_17
+### 0.4.03 / 2013-12-11
+* [CHANGE] File `engine.rb`: Monolithic file splitted into more class-specific files.
+* [CHANGE] File `constants.rb`: Removal of legacy app in comment.
+
+
+### 0.4.02 / 2013-11-17
 * [CHANGE] File `README.md`: Added section on new feature: capability to list all macros.
 * [CHANGE] Files from `macro_steps.rb`: Added the `require` to enable the new step.
 
-### 0.4.01 / 2013-11_17
+### 0.4.01 / 2013-11-17
 * [CHANGE] File `.rubocop.yml`: Disabled a few new 0.15.0 cops
 * [CHANGE] Files from `lib` and `spec` dirs updated for Rubocop 0.15.0
 
