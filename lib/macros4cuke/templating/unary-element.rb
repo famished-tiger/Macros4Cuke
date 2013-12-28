@@ -1,8 +1,6 @@
 # File: unary-element.rb
 # Purpose: Implementation of the Section and ConditionalSection classes.
 
-require_relative 'unary-element' # Load the superclass
-
 
 module Macros4Cuke # Module used as a namespace
 

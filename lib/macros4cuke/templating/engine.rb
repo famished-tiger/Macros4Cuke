@@ -161,14 +161,14 @@ class Engine
     @variables ||= begin
       vars = @representation.each_with_object([]) do |element, subResult|
         case element
-        when Placeholder          
-          subResult << element.name
-        
-        when Section
-          subResult.concat(element.variables)
-        
-        else
-          # Do nothing
+          when Placeholder          
+            subResult << element.name
+          
+          when Section
+            subResult.concat(element.variables)
+          
+          else
+            # Do nothing
         end
       end
       
@@ -221,8 +221,8 @@ class Engine
 
     no_escaped.each_char do |ch|
       case ch
-      when '<' then unbalance += 1 
-      when '>' then unbalance -= 1              
+        when '<' then unbalance += 1 
+        when '>' then unbalance -= 1              
       end
       
       fail(StandardError, "Nested opening chevron '<'.") if unbalance > 1
@@ -265,18 +265,18 @@ class Engine
     section_item = nil
     line_to_squeeze = line_rep.all? do |item|
       case item
-      when StaticText
-        item.source =~ /\s+/
-        
-      when Section, SectionEndMarker
-        if section_item.nil?
-          section_item = item
-          true
+        when StaticText
+          item.source =~ /\s+/
+          
+        when Section, SectionEndMarker
+          if section_item.nil?
+            section_item = item
+            true
+          else
+            false
+          end
         else
           false
-        end
-      else
-        false
       end
     end
     if line_to_squeeze && !section_item.nil?
@@ -309,9 +309,9 @@ class Engine
     (kind, text) = aCouple
 
     result = case kind
-    when :static then StaticText.new(text)
-    when :comment then Comment.new(text)
-    when :dynamic then parse_tag(text)
+      when :static then StaticText.new(text)
+      when :comment then Comment.new(text)
+      when :dynamic then parse_tag(text)
     end
 
     return result
@@ -350,19 +350,19 @@ class Engine
     
     compiled = flat_sequence.each_with_object([]) do |element, subResult|
       case element
-      when Section
-        open_sections << element
-      
-      when SectionEndMarker           
-        validate_section_end(element, open_sections)
-        subResult << open_sections.pop
-       
-      else
-        if open_sections.empty?
-          subResult << element
+        when Section
+          open_sections << element
+        
+        when SectionEndMarker           
+          validate_section_end(element, open_sections)
+          subResult << open_sections.pop
+         
         else
-          open_sections.last.add_child(element)
-        end
+          if open_sections.empty?
+            subResult << element
+          else
+            open_sections.last.add_child(element)
+          end
       end 
     end
     

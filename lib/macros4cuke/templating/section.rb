@@ -37,12 +37,12 @@ class Section  < UnaryElement
   def variables()
     all_vars = children.each_with_object([]) do |a_child, subResult|
       case a_child
-      when Placeholder
-        subResult << a_child.name
-      when Section
-        subResult.concat(a_child.variables)
-      else
-        # Do nothing
+        when Placeholder
+          subResult << a_child.name
+        when Section
+          subResult.concat(a_child.variables)
+        else
+          # Do nothing
       end
     end
     

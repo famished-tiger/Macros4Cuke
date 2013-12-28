@@ -2,6 +2,8 @@ AllCops:
   Excludes:
     - '*/examples/**'
     - '*/features/**'
+    - '*/gems/**'
+
 
 AccessControl:
   Enabled: false
@@ -11,7 +13,8 @@ AsciiComments:
   Enabled: false
 
 CaseIndentation:
-  Enabled: false
+  IndentWhenRelativeTo: end
+  IndentOneStep: true
 
 ClassLength:
   Max: 200
@@ -40,6 +43,9 @@ Encoding:
   
 IndentationWidth :
   Enabled: false
+  
+MethodDefinition:
+  EnforcedStyle: parentheses
   
 # Avoid methods longer than 50 lines of code
 MethodLength:

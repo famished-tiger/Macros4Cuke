@@ -1,3 +1,10 @@
+### 0.4.04 / 2013-12-28
+* [CHANGE] File `.rubocop.yml`: Updated for Rubocop 0.16. Cop CaseIndentation is now enabled and uses parameters
+* [CHANGE] File `engine.rb`: Updated indentation in case statement to comply to latest Rubocop config file.
+* [CHANGE] File `section.rb`: Updated indentation in case statement to comply to latest Rubocop config file.
+* [CHANGE] File `coll-walker-factory.rb`: Updated indentation in case statement to comply to latest Rubocop config file.
+
+
 ### 0.4.03 / 2013-12-11
 * [CHANGE] File `engine.rb`: Monolithic file splitted into more class-specific files.
 * [CHANGE] File `constants.rb`: Removal of legacy app in comment.
