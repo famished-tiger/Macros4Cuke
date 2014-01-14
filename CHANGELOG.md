@@ -1,5 +1,6 @@
 ### 0.4.05 / 2014-01-14
-* [CHANGE] File `.travis.yml`: Attempt to use MRI 2.1.0
+* [CHANGE] File `.travis.yml`: Added Ruby MRI 2.1.0 to Travis CI
+* [CHANGE] File `README.md`: Added sentence explaining where list of macro. defs is placed.
 * [CHANGE] File `LICENSE.txt`: Added 2014 to copyright year.
 
 ### 0.4.04 / 2013-12-28

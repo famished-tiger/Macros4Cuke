@@ -449,7 +449,8 @@ This specialized step has the following syntax:
 
 Where `all_macros.feature` is a feature file that will be generated when Cucumber
 terminates. The resulting feature file lists all the macros (one per scenario) in 
-the familiar Gherkin syntax.
+the familiar Gherkin syntax. The file is placed in the current directory (i.e. the directory where
+Cucumber was launched).
 
 
 
