@@ -1,3 +1,7 @@
+### 0.4.05 / 2014-01-14
+* [CHANGE] File `.travis.yml`: Attempt to use MRI 2.1.0
+* [CHANGE] File `LICENSE.txt`: Added 2014 to copyright year.
+
 ### 0.4.04 / 2013-12-28
 * [CHANGE] File `.rubocop.yml`: Updated for Rubocop 0.16. Cop CaseIndentation is now enabled and uses parameters
 * [CHANGE] File `engine.rb`: Updated indentation in case statement to comply to latest Rubocop config file.
