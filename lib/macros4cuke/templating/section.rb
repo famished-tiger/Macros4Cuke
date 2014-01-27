@@ -67,7 +67,7 @@ end # class
 class ConditionalSection < Section
   # A boolean that indicates whether the rendition condition is 
   # the existence of a value for the variable (true)
-  # or its inexistence (false).
+  # or its non-existence (false).
   attr_reader(:existence)
 
   # @param aVarName [String] The name of the placeholder from a template.

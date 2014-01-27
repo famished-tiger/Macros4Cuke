@@ -55,7 +55,7 @@ describe CollWalkerFactory do
     end
 
     it 'should notify the visit of a first macro step' do
-       1.times { subject.next }
+      1.times { subject.next }
       first_step = subject.next
       step1 = macro_coll.macro_steps.values[0]
       expect(first_step).to eq([:on_step, 1, step1])

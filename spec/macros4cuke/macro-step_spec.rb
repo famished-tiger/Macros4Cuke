@@ -129,7 +129,7 @@ SNIPPET
       phrase = %Q|enter my credentials as "nobody"|
       msg = "The macro argument 'userid' has value 'nobody' and 'someone'."
       args = [ %w(userid someone), %w(password no-secret) ]
-       expect { subject.expand(phrase, args) }.to raise_error(
+      expect { subject.expand(phrase, args) }.to raise_error(
         AmbiguousArgumentValue, msg)
     end
 

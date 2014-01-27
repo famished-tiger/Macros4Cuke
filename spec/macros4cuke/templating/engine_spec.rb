@@ -14,7 +14,7 @@ module Templating # Open this namespace to get rid of module qualifier prefixes
 describe Engine do
   # Sample template (consisting of a sequence of steps)
   let(:sample_template) do
-      source = <<-SNIPPET
+    source = <<-SNIPPET
   Given I landed in the homepage
   And I fill in "Username" with "<userid>"
   And I fill in "Password" with "<password>"
@@ -26,7 +26,7 @@ SNIPPET
     
   # Template containing two conditional sections
   let(:sophisticated_template) do
-      source = <<-SNIPPET
+    source = <<-SNIPPET
   When I fill in "firstname" with "<firstname>"
   And I fill in "lastname" with "<lastname>"
   # Next line defines a comment

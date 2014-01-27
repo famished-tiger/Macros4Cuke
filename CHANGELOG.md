@@ -1,3 +1,7 @@
+### 0.4.06 / 2014-01-27
+* [FIX] Addressed Rubocop 0.17 complains about bad indentation in some spec files.
+
+
 ### 0.4.05 / 2014-01-14
 * [CHANGE] File `.travis.yml`: Added Ruby MRI 2.1.0 to Travis CI
 * [CHANGE] File `README.md`: Added sentence explaining where list of macro. defs is placed.

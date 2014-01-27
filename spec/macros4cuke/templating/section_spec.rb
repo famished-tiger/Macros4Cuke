@@ -72,7 +72,7 @@ describe Section do
 
     it 'should expect that its subclasses render the children' do
       error_message = 'Method Section.render must be implemented in subclass.'
-       expect { subject.send(:render, Object.new, {}) }.to raise_error(
+      expect { subject.send(:render, Object.new, {}) }.to raise_error(
         NotImplementedError, error_message)
     end
 
