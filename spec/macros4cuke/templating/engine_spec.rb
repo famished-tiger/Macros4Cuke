@@ -208,8 +208,8 @@ SNIPPET
 
     it 'should complain when a placeholder is empty or blank' do
       text_w_empty_arg = sample_template.sub(/userid/, '')
-      msg = 'An empty or blank argument occurred in ' +
-        %Q('And I fill in "Username" with "<>"'.)
+      msg = %Q(An empty or blank argument occurred in\
+ 'And I fill in "Username" with "<>"'.)
       expect { Engine.new text_w_empty_arg }.to raise_error(
         Macros4Cuke::EmptyArgumentError, msg)
     end
@@ -242,8 +242,8 @@ SNIPPET
     it 'should complain when a closing tag is found without opening tag' do
       # Replacing an end of section tag by another...
       wrong_end = sophisticated_template.sub(/<\?birthdate>/, '</foobar>')
-      msg = 'End of section</foobar> found' + 
-        ' while no corresponding section is open.'
+      msg = 'End of section</foobar> found'\
+      ' while no corresponding section is open.'
       expect { Engine.new wrong_end }.to raise_error(StandardError, msg)
     end    
     

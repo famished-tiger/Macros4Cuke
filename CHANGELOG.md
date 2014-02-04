@@ -1,3 +1,9 @@
+### 0.4.07 / 2014-02-04
+* [FIX] Addressed Rubocop 0.18 complains string concatenation over multiple lines.
+* [CHANGE] File `formatting-service_spec.rb`: Replaced string operators + by newline escapes
+* [CHANGE] File `engine_spec.rb`: Replaced string operators + by newline escapes
+* [CHANGE] File `.rubocop.yml`: Removed two unsupported Cop settings
+
 ### 0.4.06 / 2014-01-27
 * [FIX] Addressed Rubocop 0.17 complains about bad indentation in some spec files.
 

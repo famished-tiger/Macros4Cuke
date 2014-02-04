@@ -59,8 +59,8 @@ describe FormattingService do
       formatter1 = double('formatter')
       formatter1.should_receive(:implements).once.and_return([])
       err_type = Macros4Cuke::NoFormattingEventForFormatter
-      err_msg = 'Formatter RSpec::Mocks::Mock does not ' +
-        'support any formatting event.'
+      err_msg = 'Formatter RSpec::Mocks::Mock does not'\
+      ' support any formatting event.'
       expect { subject.register(formatter1) }.to raise_error(err_type, err_msg)
     end
 
@@ -75,8 +75,8 @@ describe FormattingService do
       formatter = double('formatter')
       formatter.should_receive(:implements).once.and_return(notifications)
       err_type = Macros4Cuke::UnknownFormattingEvent
-      err_msg = 'Formatter RSpec::Mocks::Mock uses ' +
-        "the unknown formatting event 'non_standard'."
+      err_msg = "Formatter RSpec::Mocks::Mock uses\
+ the unknown formatting event 'non_standard'."
       expect { subject.register(formatter) }.to raise_error(err_type, err_msg)
     end
 

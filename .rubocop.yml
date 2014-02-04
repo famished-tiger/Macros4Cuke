@@ -4,10 +4,6 @@ AllCops:
     - '*/features/**'
     - '*/gems/**'
 
-
-AccessControl:
-  Enabled: false
-
 # This is disabled because some demos use UTF-8
 AsciiComments:
   Enabled: false
@@ -44,8 +40,6 @@ Encoding:
 IndentationWidth :
   Enabled: false
   
-MethodDefinition:
-  EnforcedStyle: parentheses
   
 # Avoid methods longer than 50 lines of code
 MethodLength:
