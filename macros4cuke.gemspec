@@ -22,7 +22,7 @@ Thank you for installing Macros4Cuke...
 Enjoy using Cucumber with macros...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 EOSTRING
-  pkg.rdoc_options << '--exclude="examples|features|spec"'  
+  pkg.rdoc_options << '--charset=UTF-8 --exclude="examples|features|spec"'  
 	file_list = Dir['.rubocop.yml', '.rspec', '.ruby-gemset', '.ruby-version', '.simplecov', '.travis.yml', '.yardopts', 'cucumber.yml', 'Gemfile', 'Rakefile',  'CHANGELOG.md', 'LICENSE.txt', 'README.md', 
     'lib/*.*', 'lib/**/*.rb', 'examples/**/*.*', 'features/*.*', 'features/**/*.rb', 'spec/**/*.rb'
   ]
