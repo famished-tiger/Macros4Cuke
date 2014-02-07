@@ -1,16 +1,18 @@
 # File: demo01.feature
 
-Feature: Show the use of a basic macro
+Feature: Define and use a basic macro-step
   As a Cuke user
-  So that I enjoy writing scenario.
+  I want to create macro-steps that replace repeated lower-level steps
+  So that I can write shorter and more readable scenarios.
 
 
-Scenario: Definition of a simple macro-step
+Scenario: Defining a simple macro-step
   # The next step creates a macro(-step)
   # The syntax of the new macro-step is specified between double quotes.
   # The steps to execute when the macro is used/invoked are listed in the multiline triple quotes arguments.
   Given I define the step "* I [log in]" to mean:
   """
+  # Here follows the steps to execute when this macro is called
   Given I landed in the homepage
   When I click "Sign in"
   And I fill in "Username" with "johndoe"

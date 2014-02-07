@@ -59,7 +59,7 @@ Once this is done, then the original scenario above can be rewritten as follows:
     Then I should see 11
 ```
 
-No programming was required! The only price to pay are the step syntax conventions imposed by __Macros4Cuke__.
+No programming was required! The only price to pay are the step syntax conventions imposed by __Macros4Cuke__ (e.g. the square brackets and the quotes).
 But this is really bargain compared to the added convenience.
 
 With a little imagination, Joe could even reduce the last scenario to something like:
@@ -71,7 +71,6 @@ With a little imagination, Joe could even reduce the last scenario to something 
 Are you interested to reduce the length of your scenarios or do you want to use higher-level
 steps that conceal the boring details without fiddling with step definition programming?...
 
-Then proceed to the topics below.
 
 
 

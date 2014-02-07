@@ -1,6 +1,7 @@
-__Macros4Cuke__ is a Cucumber extension that adds a macro facility your Cucumber scenarios.  
-  With it, you can create any new step that replaces a sequence of sub-steps.
-  All this can be done directly in your feature files without programming step definitions.
+__Macros4Cuke__ is a Cucumber extension that allows you create and use new Cucumber steps without programming.    
+  With it, your scenarios will become not only shorter but also more easy to follow. Indeed a macro-step you can
+  define can replace a sequence of detail-ridden steps. 
+
 
 [Get the gem](https://rubygems.org/gems/macros4cuke)
 [Source on GitHub](https://github.com/famished-tiger/Macros4Cuke)
