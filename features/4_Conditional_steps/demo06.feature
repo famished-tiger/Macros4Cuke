@@ -1,4 +1,4 @@
-# File: demo07.feature
+# File: demo06.feature
 
 Feature: Define conditional substeps in a macro-step.
   As a Cuke user

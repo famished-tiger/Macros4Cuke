@@ -1,3 +1,9 @@
+### 0.4.08 / 2014-02-08
+* [NEW] Added some tutorial material in [Relish] (https://www.relishapp.com/famished-tiger/macros4cuke/docs)
+* [CHANGE] `features` dir and feature files re-designed for publishing on Relish website.
+* [CHANGE] File `macros4cuke.gemspec`: RDOC is configured to use UTF-8 charset
+* [CHANGE] File `README.md`: Updated with links to Relish website.
+
 ### 0.4.07 / 2014-02-04
 * [FIX] Addressed Rubocop 0.18 complains string concatenation over multiple lines.
 * [CHANGE] File `formatting-service_spec.rb`: Replaced string operators + by newline escapes

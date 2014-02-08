@@ -1,4 +1,4 @@
-# File: demo04.feature
+# File: demo07.feature
 
 Feature: Insert a call to existing macro-step inside a new macro
   As a Cuke user
@@ -9,7 +9,7 @@ Feature: Insert a call to existing macro-step inside a new macro
 Scenario: Create a macro that uses another, existing, macro (YES, it's possible!)
   Given I define the step "* I [enter my credentials]" to mean:
   """
-  # Notice that the next step invokes a macro-step defined elsewhere
+  # The next step invokes a macro-step defined elsewhere
   When I [enter my userid "guest" and password "unguessable"]
   """
   

@@ -1,8 +1,9 @@
-# File: demo06.feature
+# File: demo05.feature
 
-Feature: Show the use of a macro with multiple arguments in a table
+Feature: Yet another example of: passing a Cucumber table into a macro-step
   As a Cuke user
-  So that I enjoy writing scenario.
+  I want to pass many arguments to a macro-step
+  So that I can use flexible and readable macros.
 
 
 Scenario: Defining a macro to be used with multiple arguments in a table
@@ -18,14 +19,14 @@ Scenario: Defining a macro to be used with multiple arguments in a table
   And I click "Save"
   """
 
-Scenario: Let's use the macro we created above
+Scenario: Using the macro we created above
   # Here the macro is invoked. Actual value for the argument are passed in a table argument.
   When I [enter my profile as]:
   |location|Nowhere-City|
-  |email|nobody@example.com|
-  |comment|First comment line|
-  |comment|Second comment line|
-  |comment|Third comment line|
+  |email   |nobody@example.com |
+  |comment |First comment line |
+  |comment |Second comment line|
+  |comment |Third comment line |
 
   # The next step verifies that the steps from the macro were effectively executed.
   Then I expect the following step trace:

@@ -196,7 +196,7 @@ class MacroStep
     args = raw_result.flatten.compact
     
     # Replace escaped quotes by quote character.
-    args.map! { |a| a.sub(/\\"/, '"') }  if mode == :invokation
+    args.map! { |arg| arg.sub(/\\"/, '"') }  if mode == :invokation
     
     return args
   end

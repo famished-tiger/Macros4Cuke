@@ -1,36 +1,35 @@
-# File: demo05.feature
+# File: demo01.feature
 
-Feature: Show the use of a macro with multiple arguments in a table
+Feature: Define and use a basic macro-step
   As a Cuke user
-  So that I enjoy writing scenario.
+  I want to create macro-steps that replace repeating lower-level steps
+  So that I can write shorter and more readable scenarios.
 
 
-Scenario: Defining a macro to be used with multiple arguments in a table
+Scenario: Defining a simple macro-step
   # The next step creates a macro(-step)
   # The syntax of the new macro-step is specified between double quotes.
   # The steps to execute when the macro is used/invoked are listed in the multiline triple quotes arguments.
-  # The macro arguments are put between chevrons <...>.
-  Given I define the step "* I [enter my credentials as]:" to mean:
+  Given I define the step "* I [log in]" to mean:
   """
+  # Here follows the steps to execute when this macro is called
   Given I landed in the homepage
   When I click "Sign in"
-  And I fill in "Username" with "<userid>"
-  And I fill in "Password" with "<password>"
+  And I fill in "Username" with "johndoe"
+  And I fill in "Password" with "unguessable"
   And I click "Submit"
   """
 
 Scenario: Let's use the macro we created above
-  # Here the macro is invoked. Actual value for the argument are passed in a table argument.
-  When I [enter my credentials as]:
-  |userid|guest|
-  |password|unguessable|
+  # Here the macro is invoked
+  When I [log in]
 
   # The next step verifies that the steps from the macro were effectively executed.
   Then I expect the following step trace:
   """
 Invoked step: ... I landed in the homepage
 Invoked step: ... I click "Sign in"
-Invoked step: ... I fill in "Username" with "guest"
+Invoked step: ... I fill in "Username" with "johndoe"
 Invoked step: ... I fill in "Password" with "unguessable"
 Invoked step: ... I click "Submit"
   """

@@ -68,10 +68,11 @@ With a little imagination, Joe could even reduce the last scenario to something 
     Then I should see 11
 ```
 
+See how the last example looks more natural and readable for a genuine calculator user.
+
 Are you interested to reduce the length of your scenarios or do you want to use higher-level
 steps that conceal the boring details without fiddling with step definition programming?...
 
-
-
+Then give __Macros4Cuke__ a try...
 
   

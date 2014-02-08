@@ -7,11 +7,12 @@ Macros4Cuke
 
 _Add macros to your Cucumber scenarios._  
 [Homepage](https://github.com/famished-tiger/Macros4Cuke)
+[Documentation] (https://www.relishapp.com/famished-tiger/macros4cuke/docs)
 
-__Macros4Cuke__ is a lightweight library that adds a macro facility your Cucumber scenarios.  
-  With it, you can create any new step that replaces a sequence of substeps.
+__Macros4Cuke__ is a Cucumber extension that adds a macro facility for your Cucumber scenarios.  
+  With it, you can create any new step that replaces a sequence of sub-steps.
   All this can be done directly in your feature files without programming step definitions.
-  
+
 ### Highlights ###
 * Works with out-of-the-box Cucumber
 * Simple installation and setup (no programming required),
@@ -21,6 +22,7 @@ __Macros4Cuke__ is a lightweight library that adds a macro facility your Cucumbe
 * Data values can be passed to the sub-steps,
 * Domain neutral: applicable to any kind of application that can be driven with Cucumber,
 * A group of sub-steps can be made conditional.
+
 
 Since version 0.4.00, it is also possible to [list all the encountered macro definitions](#listing-all-the-macro-definitions). 
 
@@ -437,6 +439,15 @@ text in an entry field may be noticeably different than skipping that same entry
 Think of specific UI-events that can trigger some special system response.
 
 
+## More documentation ##
+More samples and documentation can be found in the `features` folder. It contains
+many feature files and README.md -in Markdown format-.
+Most of the material has been rewritten and adapted so that it can be consulted at the Relish website.
+Relish -The living document- website is great to turn your feature files into an attractive documentation.
+
+[Macros4Cuke @ Relish] (https://www.relishapp.com/famished-tiger/macros4cuke/docs)
+
+
 ## Listing all the macro definitions ##
 When one begins to write macros spread over a large collection of feature files
  it becomes interesting to have an overview, a list of all macro ever defined.  
@@ -526,4 +537,4 @@ Macros with Cucumber is a hot topic, so it is good to know what other people say
 
 Copyright
 ---------
-Copyright (c) 2013, Dimitri Geshef. Macros4Cuke is released under the MIT License see [LICENSE.txt](https://github.com/famished-tiger/Macros4Cuke/blob/master/LICENSE.txt) for details.
+Copyright (c) 2014, Dimitri Geshef. Macros4Cuke is released under the MIT License see [LICENSE.txt](https://github.com/famished-tiger/Macros4Cuke/blob/master/LICENSE.txt) for details.
