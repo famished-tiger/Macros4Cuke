@@ -31,8 +31,8 @@ Scenario: Using the macro we created above
   # The next step verifies that the steps from the macro were effectively executed.
   Then I expect the following step trace:
   """
-  Invoked step: ... I fill in "location" with "Nowhere-City"
-  Invoked step: ... I fill in "email" with "nobody@example.com"
-  Invoked step: ... I fill in "comment" with "First comment line<br/>Second comment line<br/>Third comment line"
-  Invoked step: ... I click "Save"
+  And I fill in "location" with "Nowhere-City"
+  And I fill in "email" with "nobody@example.com"
+  And I fill in "comment" with "First comment line<br/>Second comment line<br/>Third comment line"
+  And I click "Save"
   """

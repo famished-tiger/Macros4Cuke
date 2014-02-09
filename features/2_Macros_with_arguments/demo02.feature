@@ -29,11 +29,11 @@ Scenario: Use the macro created above pass it a user id
   # The next step verifies that the steps from the macro were effectively executed.
   Then I expect the following step trace:
   """
-Invoked step: ... I landed in the homepage
-Invoked step: ... I click "Sign in"
-Invoked step: ... I fill in "Username" with "guest"
-Invoked step: ... I fill in "Password" with "unguessable"
-Invoked step: ... I click "Submit"
+  Given I landed in the homepage
+  When I click "Sign in"
+  And I fill in "Username" with "guest"
+  And I fill in "Password" with "unguessable"
+  And I click "Submit"
   """
   
   
@@ -43,9 +43,9 @@ Scenario: Use the macro with another user id
   # The next step verifies that the steps from the macro were effectively executed.
   Then I expect the following step trace:
   """
-Invoked step: ... I landed in the homepage
-Invoked step: ... I click "Sign in"
-Invoked step: ... I fill in "Username" with "me-again"
-Invoked step: ... I fill in "Password" with "unguessable"
-Invoked step: ... I click "Submit"
+  Given I landed in the homepage
+  When I click "Sign in"
+  And I fill in "Username" with "me-again"
+  And I fill in "Password" with "unguessable"
+  And I click "Submit"
   """

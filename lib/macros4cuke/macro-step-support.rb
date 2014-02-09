@@ -14,6 +14,8 @@ module Macros4Cuke # Module used as a namespace
 #   World(Macros4Cuke::MacroStepSupport)
 #
 module MacroStepSupport
+  # The substeps being executed in the scenario represented as text.
+  attr_reader(:substeps_trace)
 
   public
 
@@ -40,6 +42,11 @@ module MacroStepSupport
     # Generate a text rendition of the step to be executed.
     collection = MacroCollection.instance
     rendered_steps = collection.render_steps(aPhraseInstance, rawData)
+    
+    # Keep track of the sub-steps to execute
+    @substeps_trace = '' if @substeps_trace.nil?
+    @substeps_trace << rendered_steps
+    
 
     # Let Cucumber execute the sub-steps
     steps(rendered_steps)

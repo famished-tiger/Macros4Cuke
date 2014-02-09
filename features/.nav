@@ -1,0 +1,18 @@
+#This file used by relish gem to sort files and directories when publishing documentation on Relish website.
+- README.md
+- 1_the_basics:
+  - README.md
+  - demo01.feature
+- 2_macros_with_arguments:
+  - README.md
+  - demo02.feature
+  - demo03.feature
+- 3_macros_with_table_arguments:
+  - README.md
+  - demo04.feature
+  - demo05.feature
+- 4_conditional_steps:
+  - demo06.feature
+- 5_goodies:
+  - demo07.feature
+  - demo08.feature

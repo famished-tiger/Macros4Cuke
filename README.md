@@ -1,13 +1,14 @@
 Macros4Cuke
 ===========
+_Extend Cucumber with macro-steps._  
+[Homepage](https://github.com/famished-tiger/Macros4Cuke)  
+[Documentation] (https://www.relishapp.com/famished-tiger/macros4cuke/docs)
+
 [![Build Status](https://travis-ci.org/famished-tiger/Macros4Cuke.png?branch=master)](https://travis-ci.org/famished-tiger/Macros4Cuke)
 [![Code Climate](https://codeclimate.com/github/famished-tiger/Macros4Cuke.png)](https://codeclimate.com/github/famished-tiger/Macros4Cuke.png)
 [![Gem Version](https://badge.fury.io/rb/macros4cuke.png)](http://badge.fury.io/rb/macros4cuke)
 [![Dependency Status](https://gemnasium.com/famished-tiger/Macros4Cuke.png)](https://gemnasium.com/famished-tiger/Macros4Cuke)
 
-_Add macros to your Cucumber scenarios._  
-[Homepage](https://github.com/famished-tiger/Macros4Cuke)
-[Documentation] (https://www.relishapp.com/famished-tiger/macros4cuke/docs)
 
 __Macros4Cuke__ is a Cucumber extension that adds a macro facility for your Cucumber scenarios.  
   With it, you can create any new step that replaces a sequence of sub-steps.
@@ -68,6 +69,7 @@ Macros4Cuke not only helps in getting rid of the repeated step sequences,
  that are closer to the business logic.  
 
 See also the working examples in the ```features/``` folder.
+These feature files are also published on the [Relish website](https://www.relishapp.com/famished-tiger/macros4cuke/docs)
 
 ## Setup ##
 ### Pre-requisites ###

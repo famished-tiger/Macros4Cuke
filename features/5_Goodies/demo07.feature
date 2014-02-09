@@ -21,9 +21,10 @@ Scenario: Invoking the coarse-grained macro
   # Check that the nested macro still works
   Then I expect the following step trace:
   """
-Invoked step: ... I landed in the homepage
-Invoked step: ... I click "Sign in"
-Invoked step: ... I fill in "Username" with "guest"
-Invoked step: ... I fill in "Password" with "unguessable"
-Invoked step: ... I click "Submit"
+  When I [enter my userid "guest" and password "unguessable"]
+  Given I landed in the homepage
+  When I click "Sign in"
+  And I fill in "Username" with "guest"
+  And I fill in "Password" with "unguessable"
+  And I click "Submit"
   """

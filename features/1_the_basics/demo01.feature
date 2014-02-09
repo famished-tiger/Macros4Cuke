@@ -27,9 +27,9 @@ Scenario: Let's use the macro we created above
   # The next step verifies that the steps from the macro were effectively executed.
   Then I expect the following step trace:
   """
-Invoked step: ... I landed in the homepage
-Invoked step: ... I click "Sign in"
-Invoked step: ... I fill in "Username" with "johndoe"
-Invoked step: ... I fill in "Password" with "unguessable"
-Invoked step: ... I click "Submit"
+  Given I landed in the homepage
+  When I click "Sign in"
+  And I fill in "Username" with "johndoe"
+  And I fill in "Password" with "unguessable"
+  And I click "Submit"
   """

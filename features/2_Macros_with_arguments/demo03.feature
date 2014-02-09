@@ -26,10 +26,10 @@ Scenario: Using the macro with multiple arguments
   # The next step verifies that the steps from the macro were effectively executed.
   Then I expect the following step trace:
   """
-Invoked step: ... I landed in the homepage
-Invoked step: ... I click "Sign in"
-Invoked step: ... I fill in "Username" with "jdoe"
-Invoked step: ... I fill in "Password" with "cosmic"
-Invoked step: ... I click "Submit"
+  Given I landed in the homepage
+  When I click "Sign in"
+  And I fill in "Username" with "jdoe"
+  And I fill in "Password" with "cosmic"
+  And I click "Submit"
   """
 

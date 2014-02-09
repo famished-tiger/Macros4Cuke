@@ -47,13 +47,14 @@ Feature: Define conditional substeps in a macro-step.
     # The next step verifies that the optional steps from the macro were ignored.
     Then I expect the following step trace:
       """
-      Invoked step: ... I fill in "first_name" with "Alice"
-      Invoked step: ... I fill in "last_name" with "Inn"
-      Invoked step: ... I fill in "street_address" with "11, No Street"
-      Invoked step: ... I fill in "zip" with ""
-      Invoked step: ... I fill in "city" with "Nowhere-City"
-      Invoked step: ... I fill in "country" with "Wonderland"
-      Invoked step: ... I click "Save"
+      When I fill in "first_name" with "Alice"
+      And I fill in "last_name" with "Inn"
+      And I fill in "street_address" with "11, No Street"
+      And I fill in "zip" with ""
+      And I fill in "city" with "Nowhere-City"
+      And I fill in "country" with "Wonderland"
+
+      And I click "Save"
       """
     
     
@@ -72,14 +73,15 @@ Feature: Define conditional substeps in a macro-step.
     # The next step verifies that the optional steps from the macro were ignored.
     Then I expect the following step trace:
       """
-      Invoked step: ... I fill in "first_name" with "Alice"
-      Invoked step: ... I fill in "last_name" with "Inn"
-      Invoked step: ... I fill in "street_address" with "11, No Street"
-      Invoked step: ... I fill in "zip" with ""
-      Invoked step: ... I fill in "city" with "Nowhere-City"
-      Invoked step: ... I fill in "country" with "Wonderland"
-      Invoked step: ... I fill in "email" with "alice.inn@wonder.land"
-      Invoked step: ... I fill in "comment" with "No comment!"
-      Invoked step: ... I click "Save"
+      When I fill in "first_name" with "Alice"
+      And I fill in "last_name" with "Inn"
+      And I fill in "street_address" with "11, No Street"
+      And I fill in "zip" with ""
+      And I fill in "city" with "Nowhere-City"
+      And I fill in "country" with "Wonderland"
+      And I fill in "email" with "alice.inn@wonder.land"
+
+        And I fill in "comment" with "No comment!"
+      And I click "Save"
       """
   
