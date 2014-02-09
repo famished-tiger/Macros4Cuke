@@ -10,7 +10,7 @@ module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
 describe MacroCollection do
 
   let(:singleton) { MacroCollection.instance }
-  
+
   before(:all) do
     MacroCollection.instance.clear
   end
@@ -60,7 +60,7 @@ SNIPPET
 SNIPPET
       expect(rendered).to eq(expected)
     end
-    
+
   end # context
 
 end # describe

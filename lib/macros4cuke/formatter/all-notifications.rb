@@ -7,19 +7,19 @@ module Formatter
 
   # The list of all formatting notifications
   AllNotifications = [
-    :on_collection, 
-    :on_collection_end, 
-    :on_step, 
+    :on_collection,
+    :on_collection_end,
+    :on_step,
     :on_step_end,
-    :on_phrase, 
-    :on_renderer, 
+    :on_phrase,
+    :on_renderer,
     :on_renderer_end,
-    :on_source, 
+    :on_source,
     :on_static_text,
-    :on_eol, 
+    :on_eol,
     :on_comment,
     :on_placeholder,
-    :on_section, 
+    :on_section,
     :on_section_end
     ]
 

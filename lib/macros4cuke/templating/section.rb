@@ -8,17 +8,17 @@ module Macros4Cuke # Module used as a namespace
 
 
 # Module containing all classes implementing the simple template engine
-# used internally in Macros4Cuke. 
+# used internally in Macros4Cuke.
 module Templating
 
-# Base class used internally by the template engine.  
-# Represents a section in a template, that is, 
+# Base class used internally by the template engine.
+# Represents a section in a template, that is,
 # a set of template elements for which its rendition depends
 # on the value of a variable.
 class Section  < UnaryElement
   # The child elements of the section
   attr_reader(:children)
-  
+
   # @param aVarName [String] The name of the placeholder from a template.
   def initialize(aVarName)
     super(aVarName)
@@ -31,7 +31,7 @@ class Section  < UnaryElement
   def add_child(aChild)
     children << aChild
   end
-  
+
   # Retrieve all placeholder names that appear in the template.
   # @return [Array] The list of placeholder names.
   def variables()
@@ -45,19 +45,19 @@ class Section  < UnaryElement
           # Do nothing
       end
     end
-    
+
     return all_vars.flatten.uniq
   end
 
 
   # Render the placeholder given the passed arguments.
   # This method has the same signature as the {Engine#render} method.
-  # @return [String] The text value assigned to the placeholder. 
+  # @return [String] The text value assigned to the placeholder.
   #   Returns an empty string when no value is assigned to the placeholder.
   def render(aContextObject, theLocals)
     msg = "Method Section.#{__method__} must be implemented in subclass."
     fail(NotImplementedError, msg)
-  end    
+  end
 
 end # class
 
@@ -65,24 +65,24 @@ end # class
 # A specialized section in a template for which its rendition
 # depends on the (in)existence of an actual value bound to the variable name.
 class ConditionalSection < Section
-  # A boolean that indicates whether the rendition condition is 
+  # A boolean that indicates whether the rendition condition is
   # the existence of a value for the variable (true)
   # or its non-existence (false).
   attr_reader(:existence)
 
   # @param aVarName [String] The name of the placeholder from a template.
   # @param renderWhenExisting [boolean] When true, render the children elements
-  #   if a value exists for the variable.  
+  #   if a value exists for the variable.
   def initialize(aVarName, renderWhenExisting = true)
     super(aVarName)
     @existence = renderWhenExisting
   end
-  
+
   public
 
   # Render the placeholder given the passed arguments.
   # This method has the same signature as the {Engine#render} method.
-  # @return [String] The text value assigned to the placeholder. 
+  # @return [String] The text value assigned to the placeholder.
   #   Returns an empty string when no value is assigned to the placeholder.
   def render(aContextObject, theLocals)
     actual_value = retrieve_value_from(aContextObject, theLocals)
@@ -94,7 +94,7 @@ class ConditionalSection < Section
     else
       result = ''
     end
-    
+
     return result
   end
 

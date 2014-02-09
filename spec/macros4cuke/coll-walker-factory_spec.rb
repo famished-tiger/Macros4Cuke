@@ -20,7 +20,7 @@ describe CollWalkerFactory do
   end
 
   after(:all) do
-  # Clear the collection to prevent interference between spec files 
+  # Clear the collection to prevent interference between spec files
     macro_coll.clear
   end
 
@@ -134,7 +134,7 @@ describe CollWalkerFactory do
 
       fourteenth_substep_piece = subject.next
       expect(fourteenth_substep_piece).to eq([:on_eol, 3, nil])
-      
+
       fifteenth_substep_piece = subject.next
       expect(fifteenth_substep_piece).to eq([:on_renderer_end, 2, nil])
     end
@@ -249,7 +249,7 @@ describe CollWalkerFactory do
       expect { subject.next }.to raise_error(StopIteration)
 
     end
-    
+
     # Must be last test script since it pollutes the macro-collection
     it 'should complain when visiting an unsupported node' do
       first_step = macro_coll.macro_steps.values[0]

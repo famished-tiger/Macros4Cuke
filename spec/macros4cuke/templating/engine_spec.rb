@@ -23,7 +23,7 @@ SNIPPET
 
     source
   end
-    
+
   # Template containing two conditional sections
   let(:sophisticated_template) do
     source = <<-SNIPPET
@@ -39,9 +39,9 @@ SNIPPET
 SNIPPET
 
     source
-  end    
-  
-  
+  end
+
+
 
   # Rule for default instantiation
   subject { Engine.new sample_template }
@@ -63,7 +63,7 @@ SNIPPET
       sample_text = 'Mary has a little lamb'
       result = Engine.parse(sample_text)
 
-      # Expectation: an array with one couple: 
+      # Expectation: an array with one couple:
       # [:static, the source text]
       expect(result).to have(1).items
       expect(result[0]).to eq([:static, sample_text])
@@ -73,7 +73,7 @@ SNIPPET
       sample_text = '<some_tag>'
       result = Engine.parse(sample_text)
 
-      # Expectation: an array with one couple: 
+      # Expectation: an array with one couple:
       # [:static, the source text]
       expect(result).to have(1).items
       expect(result[0]).to eq([:dynamic, strip_chevrons(sample_text)])
@@ -83,7 +83,7 @@ SNIPPET
       sample_text = '<some_tag>some text'
       result = Engine.parse(sample_text)
 
-      # Expectation: an array with two couples: 
+      # Expectation: an array with two couples:
       # [dynamic, 'some_tag'][:static, some text]
       expect(result).to have(2).items
       expect(result[0]).to eq([:dynamic, 'some_tag'])
@@ -94,7 +94,7 @@ SNIPPET
       sample_text = 'some text<some_tag>'
       result = Engine.parse(sample_text)
 
-      # Expectation: an array with two couples: 
+      # Expectation: an array with two couples:
       # [:static, some text] [dynamic, 'some_tag']
       expect(result).to have(2).items
       expect(result[0]).to eq([:static,  'some text'])
@@ -196,7 +196,7 @@ SNIPPET
       instance = Engine.new ''
       expect(instance.source).to be_empty
     end
-    
+
     it 'should accept conditional section' do
       expect { Engine.new sophisticated_template }.not_to raise_error
       instance = Engine.new sophisticated_template
@@ -220,7 +220,7 @@ SNIPPET
       expect { Engine.new text_w_empty_arg }.to raise_error(
         Macros4Cuke::InvalidCharError, msg)
     end
-    
+
     it 'should complain when a section has no closing tag' do
       # Removing an end of section tag...
       text_w_open_section = sophisticated_template.sub(/<\/address>/, '')
@@ -229,7 +229,7 @@ SNIPPET
       expect { Engine.new text_w_open_section }.to raise_error(
         StandardError, error_message)
     end
-    
+
     it 'should complain when a closing tag has no corresponding opening tag' do
       # Replacing an end of section tag by another...
       text_w_wrong_end = sophisticated_template.sub(/<\/address>/, '</foobar>')
@@ -238,15 +238,15 @@ SNIPPET
       expect { Engine.new text_w_wrong_end }.to raise_error(
         StandardError, msg)
     end
-    
+
     it 'should complain when a closing tag is found without opening tag' do
       # Replacing an end of section tag by another...
       wrong_end = sophisticated_template.sub(/<\?birthdate>/, '</foobar>')
       msg = 'End of section</foobar> found'\
       ' while no corresponding section is open.'
       expect { Engine.new wrong_end }.to raise_error(StandardError, msg)
-    end    
-    
+    end
+
   end # context
 
   context 'Provided services:' do
@@ -302,13 +302,13 @@ SNIPPET
       instance = Engine.new ''
       expect(instance.render(nil, {})).to be_empty
     end
-    
-    
+
+
     it 'should render conditional sections' do
       instance = Engine.new(sophisticated_template)
-      
-      locals = { 
-        'firstname' => 'Anon', 
+
+      locals = {
+        'firstname' => 'Anon',
         'lastname' => 'Eemoos' ,
         'birthdate' => '1976-04-21'
       }
@@ -321,11 +321,11 @@ SNIPPET
 SNIPPET
 
       expect(rendered_text).to eq(expected)
-      
+
       # Redo with another context
       locals['birthdate'] = nil
       locals['address'] = '122, Mercer Street'
-      
+
       rendered_text = instance.render(Object.new, locals)
       expected = <<-SNIPPET
   When I fill in "firstname" with "Anon"
@@ -336,7 +336,7 @@ SNIPPET
 
       expect(rendered_text).to eq(expected)
     end
-    
+
 
     it 'should render multivalued actuals' do
       locals = { 'userid' => %w(johndoe yeti) } # Silly case

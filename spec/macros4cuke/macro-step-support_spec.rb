@@ -6,7 +6,7 @@ require_relative '../spec_helper'
 require_relative '../../lib/macros4cuke/macro-step-support'
 
 
-module Macros4Cuke	# Open the module to avoid lengthy qualified names
+module Macros4Cuke # Open the module to avoid lengthy qualified names
 
 # Class created just for testing purposes.
 class MyWorld
@@ -40,7 +40,7 @@ describe MacroStepSupport do
 SNIPPET
       ssteps
   end
-  
+
   # Start from a clean situation
   before(:all) do
     MacroCollection.instance.clear
@@ -82,7 +82,7 @@ SNIPPET
     it "should call the 'steps' method with substeps and variables" do
       # Notice that the call syntax can be used inside step definitions
       world.invoke_macro(phrase1, [%w[userid nobody], %w[password none]])
-      
+
       # Check that the 'steps' method was indeed called with correct argument
       param_assignments = { '<userid>' => 'nobody', '<password>' => 'none' }
       expected_text = m1_substeps.gsub(/<\S+>/, param_assignments)

@@ -60,7 +60,7 @@ describe Section do
       parent = Section.new('son')
       [ subject,
         Comment.new('# Simple step'),
-        EOLine.new,        
+        EOLine.new,
         StaticText.new('Bye '),
         Placeholder.new('firstname'),
         EOLine.new

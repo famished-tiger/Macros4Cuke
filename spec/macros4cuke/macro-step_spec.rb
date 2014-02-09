@@ -2,11 +2,11 @@
 
 
 require_relative '../spec_helper'
-require_relative '../../lib/macros4cuke/macro-step'	# The class under test
+require_relative '../../lib/macros4cuke/macro-step' # The class under test
 
 
 
-module Macros4Cuke	# Open the module to avoid lengthy qualified names
+module Macros4Cuke # Open the module to avoid lengthy qualified names
 
 describe MacroStep do
   let(:sample_phrase) { 'enter my credentials as <userid>' }
@@ -54,7 +54,7 @@ SNIPPET
     it 'should know its phrase' do
       expect(subject.phrase).to eq(sample_phrase)
     end
-    
+
     it 'should know its key' do
       expect(subject.key).to eq('enter_my_credentials_as_X_T')
     end

@@ -102,19 +102,19 @@ SNIPPET
       service = FormattingService.new
       service.register(subject)
       expect { service.start!(macro_coll) }.not_to raise_error
-      
+
       # Line-by-line comparison
       actual_lines = subject.io.string.split(/\r\n?|\n/)
       expected_lines = expected_output.split(/\r\n?|\n/)
-      
+
       # Exclude line 1 (because it is time-dependent) from the comparison
       actual_lines.shift
       expected_lines.shift
-      
+
       # Remove starting/ending spaces
       actual_lines.map!(&:strip)
-      expected_lines.map!(&:strip)     
-      
+      expected_lines.map!(&:strip)
+
       expect(actual_lines).to eq(expected_lines)
     end
 

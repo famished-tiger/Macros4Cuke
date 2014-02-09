@@ -20,11 +20,11 @@ class ToNull
   def implements()
     return Formatter::AllNotifications
   end
-  
+
   def on_collection(aLevel, aMacroCollection)
     ; # Do nothing
   end
-  
+
   def on_collection_end(aLevel)
     ; # Do nothing
   end
@@ -32,7 +32,7 @@ class ToNull
   def on_step(aLevel, aMacroStep)
     ; # Do nothing
   end
-  
+
   def on_step_end(aLevel)
     ; # Do nothing
   end
@@ -44,7 +44,7 @@ class ToNull
   def on_renderer(aLevel, aRenderer)
     ; # Do nothing
   end
-  
+
   def on_renderer_end(aLevel)
     ; # Do nothing
   end
@@ -52,27 +52,27 @@ class ToNull
   def on_source(aLevel, aSourceText)
     ; # Do nothing
   end
-  
+
   def on_static_text(aLevel, aText)
     ; # Do nothing
   end
-  
+
   def on_comment(aLevel, aComment)
     ; # Do nothing
   end
-  
+
   def on_eol(aLevel)
     ; # Do nothing
   end
-  
+
   def on_placeholder(aLevel, aPlaceHolderName)
     ; # Do nothing
   end
-  
+
   def on_section(aLevel, aSectionName)
     ; # Do Nothing
   end
-  
+
   def on_section_end(aLevel)
     ; # Do Nothing
   end

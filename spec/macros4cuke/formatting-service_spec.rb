@@ -66,10 +66,10 @@ describe FormattingService do
 
     it 'should complain when a formatter uses an unknown formatting event' do
       notifications = [
-        :on_collection, 
-        :on_collection_end, 
-        :non_standard, 
-        :on_step, 
+        :on_collection,
+        :on_collection_end,
+        :non_standard,
+        :on_step,
         :on_step_end
       ]
       formatter = double('formatter')
@@ -84,9 +84,9 @@ describe FormattingService do
       # Case: formatter that supports a few notifications only
       formatter1 = double('formatter')
       supported_notifications = [
-        :on_collection, 
-        :on_collection_end, 
-        :on_step, 
+        :on_collection,
+        :on_collection_end,
+        :on_step,
         :on_step_end
       ]
       formatter1.should_receive(:implements)

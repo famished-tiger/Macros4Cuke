@@ -17,7 +17,7 @@ module Formatter # Open this namespace to get rid of module qualifier prefixes
 
 describe ToTrace do
   include UseSampleCollection # Add convenience methods for sample collection
-  
+
   let(:destination) { StringIO.new }
 
   before(:all) do
@@ -26,7 +26,7 @@ describe ToTrace do
   end
 
   after(:all) do
-  # Clear the collection to prevent interference between spec files 
+  # Clear the collection to prevent interference between spec files
     macro_coll.clear
   end
 
@@ -35,19 +35,19 @@ describe ToTrace do
     it 'should be created with an IO parameter' do
       expect { ToTrace.new(destination) }.not_to raise_error
     end
-    
+
     it 'should react to all the notifications' do
       instance = ToTrace.new(destination)
       expect(instance.implements).to eq(Formatter::AllNotifications)
     end
 
   end # context
-  
-  
+
+
   context 'Provided services:' do
     # Default instantiation rule
     subject { ToTrace.new(destination) }
-    
+
     # The expected event trace for the sample collection
     let(:expected_trace) do
       trace_details = <<-SNIPPET
@@ -135,8 +135,8 @@ SNIPPET
 
       trace_details
     end
-    
-    
+
+
     it 'should render the trace event for a given macro-step collection' do
       service = FormattingService.new
       service.register(subject)

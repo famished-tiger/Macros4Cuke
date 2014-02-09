@@ -4,13 +4,13 @@
 
 module Macros4Cuke # Module used as a namespace
 
-  # Base class used internally by the template engine.  
+  # Base class used internally by the template engine.
   # The generalization of any element from a template that has one variable
   # whose actual value influences the rendition.
   class UnaryElement
     # The name of the placeholder/variable.
     attr_reader(:name)
-    
+
     # @param aVarName [String] The name of the placeholder from a template.
     def initialize(aVarName)
       @name = aVarName
@@ -26,10 +26,10 @@ module Macros4Cuke # Module used as a namespace
       if actual_value.nil? && aContextObject.respond_to?(name.to_sym)
         actual_value = aContextObject.send(name.to_sym)
       end
-      
+
       return actual_value
-    end  
-    
+    end
+
   end # class
 
 end # module

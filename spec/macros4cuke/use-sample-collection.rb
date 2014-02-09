@@ -7,7 +7,7 @@ require_relative '../../lib/macros4cuke/macro-collection'
 module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
 
 # Mix-in module.
-# Defines a set of methods that builds for testing purposes 
+# Defines a set of methods that builds for testing purposes
 # a sample collection of macro-steps.
 module UseSampleCollection
   # Phrase of first macro-step in the collection.
@@ -28,7 +28,7 @@ SNIPPET
 
   # Phrase of second macro-step in the collection.
   SamplePhrase2 = 'fill in the form with'
-  
+
   # Sub-steps of the second macro-step in the collection.
   SampleSubsteps2 = begin
     snippet = <<-SNIPPET
@@ -55,17 +55,17 @@ SNIPPET
     snippet
   end
 
-  # Helper. Stuff the macro collection with sample steps. 
+  # Helper. Stuff the macro collection with sample steps.
   def fill_collection()
     coll = MacroCollection.instance
-    
+
     coll.clear  # Start from scratch: zap the existing macro-steps
-    
+
     coll.add_macro(SamplePhrase1, SampleSubsteps1, true)
     coll.add_macro(SamplePhrase2, SampleSubsteps2, true)
   end
 
-  
+
   # Helper. For convenience, provide a shorter name
   # for the macro-step collection.
   def macro_coll()
