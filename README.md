@@ -69,7 +69,7 @@ Macros4Cuke not only helps in getting rid of the repeated step sequences,
  that are closer to the business logic.  
 
 See also the working examples in the ```features/``` folder.
-These feature files are also published on the [Relish website](https://www.relishapp.com/famished-tiger/macros4cuke/docs)
+Nicely formatted documentation extracted from these feature files is also available on the [Relish website](https://www.relishapp.com/famished-tiger/macros4cuke/docs)
 
 ## Setup ##
 ### Pre-requisites ###

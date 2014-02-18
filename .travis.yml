@@ -6,11 +6,12 @@ rvm:
   - 1.9.2
   - jruby-19mode
   - jruby-head
+  - rbx
 
 # Workaround issue of jruby-19mode configuration on Travis CI 
 matrix:
   allow_failures:
-    - rvm: jruby-19mode
+    - rvm: rbx
 
 gemfile:
   - Gemfile
