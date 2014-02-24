@@ -1,3 +1,4 @@
+# encoding: utf-8
 # File: macros4cuke.gemspec
 # Gem specification file for the Macros4Cuke project.
 
@@ -22,20 +23,23 @@ Thank you for installing Macros4Cuke...
 Enjoy using Cucumber with macros...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 EOSTRING
-  pkg.rdoc_options << '--charset=UTF-8 --exclude="examples|features|spec"'  
-	file_list = Dir['.rubocop.yml', '.rspec', '.ruby-gemset', '.ruby-version', '.simplecov', '.travis.yml', '.yardopts', 'cucumber.yml', 'Gemfile', 'Rakefile',  'CHANGELOG.md', 'LICENSE.txt', 'README.md', 
+  pkg.rdoc_options << '--charset=UTF-8 --exclude="examples|features|spec"'
+	file_list = Dir['.rubocop.yml', '.rspec', '.ruby-gemset', '.ruby-version', '.simplecov', '.travis.yml', '.yardopts', 'cucumber.yml', 'Gemfile', 'Rakefile',  'CHANGELOG.md', 'LICENSE.txt', 'README.md',
     'lib/*.*', 'lib/**/*.rb', 'examples/**/*.*', 'features/**/*.feature', 'features/**/*.md', 'features/**/*.rb','features/**/*.nav',  'spec/**/*.rb'
   ]
 	pkg.files = file_list
+  pkg.test_files = Dir[ "spec/**/*_spec.rb" ]
+
 	pkg.require_path = "lib"
-	
+
 	pkg.extra_rdoc_files = ['README.md']
   pkg.add_runtime_dependency('cucumber',[">= 0.5.0"])
+
   pkg.add_development_dependency('rake',[">= 0.8.0"])
   pkg.add_development_dependency('rspec',[">= 2.11.0"])
   pkg.add_development_dependency('simplecov',[">= 0.5.0"])
   pkg.add_development_dependency('rubygems', [">= 2.0.0"])
-	
+
 	pkg.bindir = 'bin'
 	pkg.executables = []
   pkg.license = 'MIT'
