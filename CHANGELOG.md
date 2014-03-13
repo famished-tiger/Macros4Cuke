@@ -1,3 +1,7 @@
+### 0.4.09 / 2014-03-13
+* [CHANGE] Updated source files to comply to Rubocop 0.19.
+* [CHANGE] File `.rubocop.yml`: Disabled FileName cop.
+
 ### 0.4.08 / 2014-02-08
 * [NEW] Added some tutorial material in [Relish] (https://www.relishapp.com/famished-tiger/macros4cuke/docs)
 * [CHANGE] `features` dir and feature files re-designed for publishing on Relish website.

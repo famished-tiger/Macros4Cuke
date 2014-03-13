@@ -51,12 +51,12 @@ class ToGherkin
   def on_phrase(aLevel, aPhraseText, useTable)
     suffix = useTable ? ':' : ''
     io.print "#{indentation(aLevel)}Given I define the step "
-    io.puts %Q|"* I [#{aPhraseText}]#{suffix}" to mean:|
+    io.puts %Q("* I [#{aPhraseText}]#{suffix}" to mean:)
   end
 
   def on_source(aLevel, aSourceText)
     ljust = indentation(aLevel)
-    triple_quotes = %Q|#{ljust}"""|
+    triple_quotes = %Q(#{ljust}""")
     io.puts triple_quotes
 
     # Indent source text

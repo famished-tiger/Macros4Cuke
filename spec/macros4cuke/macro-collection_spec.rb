@@ -49,7 +49,7 @@ SNIPPET
 
     it 'should return the rendition of a given macro-step' do
       phrase = '[enter my credentials]'
-      input_values = [ %w[userid nobody], %w[password no-secret] ]
+      input_values = [ %w(userid nobody), %w(password no-secret) ]
       rendered = singleton.render_steps(phrase, input_values)
       expected = <<-SNIPPET
   Given I landed in the homepage

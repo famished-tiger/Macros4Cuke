@@ -1,4 +1,4 @@
-# File: sample-collection.rb
+# File: use-sample-collection.rb
 # Purpose: mix-in module with helper methods to build a sample
 # collection of macro-steps.
 

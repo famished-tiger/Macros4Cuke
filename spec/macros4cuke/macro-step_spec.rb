@@ -60,11 +60,11 @@ SNIPPET
     end
 
     it 'should know the tags(placeholders) from its phrase' do
-      expect(subject.phrase_args).to eq(%w[userid])
+      expect(subject.phrase_args).to eq(%w(userid))
     end
 
     it 'should know the tags(placeholders) from its phrase and template' do
-      expect(subject.args).to eq(%w[userid password])
+      expect(subject.args).to eq(%w(userid password))
     end
 
   end # context
@@ -72,7 +72,7 @@ SNIPPET
 
   context 'Provided services:' do
 
-    let(:phrase_instance) { %Q|enter my credentials as "nobody"| }
+    let(:phrase_instance) { %Q(enter my credentials as "nobody") }
     it 'should render the substeps' do
       text = subject.expand(phrase_instance, [ %w(password no-secret) ])
       expectation = <<-SNIPPET
@@ -101,7 +101,7 @@ SNIPPET
     end
 
     it 'should un-escape the double-quotes for phrase arguments' do
-      specific_phrase = %q|enter my credentials as "quotable\""|
+      specific_phrase = %q(enter my credentials as "quotable\"")
       text = subject.expand(specific_phrase, [ %w(password no-secret) ])
       expectation = <<-SNIPPET
   Given I landed in the homepage
@@ -126,7 +126,7 @@ SNIPPET
 
     it 'should complain when argument gets a value from phrase and table' do
       # Error case: there is no macro argument called <unknown>
-      phrase = %Q|enter my credentials as "nobody"|
+      phrase = %Q(enter my credentials as "nobody")
       msg = "The macro argument 'userid' has value 'nobody' and 'someone'."
       args = [ %w(userid someone), %w(password no-secret) ]
       expect { subject.expand(phrase, args) }.to raise_error(

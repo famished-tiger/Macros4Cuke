@@ -15,7 +15,7 @@ describe StaticText do
   
   subject { StaticText.new(sample_text) }
 
-  context "Creation and initialization:" do
+  context 'Creation and initialization:' do
     it 'should be created with a text' do
       expect { StaticText.new(sample_text) }.not_to raise_error
     end
@@ -26,7 +26,7 @@ describe StaticText do
     
   end # context
   
-  context "Provided services:" do
+  context 'Provided services:' do
     it 'should render the source text as is' do
       context = double('fake_context')
       locals = double('fake_locals')

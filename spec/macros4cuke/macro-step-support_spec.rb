@@ -81,7 +81,7 @@ SNIPPET
 
     it "should call the 'steps' method with substeps and variables" do
       # Notice that the call syntax can be used inside step definitions
-      world.invoke_macro(phrase1, [%w[userid nobody], %w[password none]])
+      world.invoke_macro(phrase1, [%w(userid nobody), %w(password none)])
 
       # Check that the 'steps' method was indeed called with correct argument
       param_assignments = { '<userid>' => 'nobody', '<password>' => 'none' }

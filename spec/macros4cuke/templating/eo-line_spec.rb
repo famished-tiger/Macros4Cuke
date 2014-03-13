@@ -1,4 +1,4 @@
-# File: placeholder_spec.rb
+# File: eo-line_spec.rb
 
 require_relative '../../spec_helper'
 
@@ -11,16 +11,16 @@ module Templating # Open this namespace to get rid of module qualifier prefixes
 
 
 describe EOLine do
-  subject { EOLine.new() }
+  subject { EOLine.new }
 
-  context "Creation and initialization:" do
+  context 'Creation and initialization:' do
     it 'should be created withoutargument' do
-      expect { EOLine.new() }.not_to raise_error
+      expect { EOLine.new }.not_to raise_error
     end
     
   end # context
   
-  context "Provided services:" do
+  context 'Provided services:' do
     it 'should render a new line' do
       context = double('fake_context')
       locals = double('fake_locals')

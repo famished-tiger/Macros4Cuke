@@ -1,4 +1,4 @@
-# File: placeholder_spec.rb
+# File: comment_spec.rb
 
 require_relative '../../spec_helper'
 
@@ -15,7 +15,7 @@ describe Comment do
   
   subject { Comment.new(sample_text) }
 
-  context "Creation and initialization:" do
+  context 'Creation and initialization:' do
     it 'should be created with a text' do
       expect { Comment.new(sample_text) }.not_to raise_error
     end
@@ -26,7 +26,7 @@ describe Comment do
     
   end # context
   
-  context "Provided services:" do
+  context 'Provided services:' do
     it 'should render tan empty text' do
       context = double('fake_context')
       locals = double('fake_locals')
