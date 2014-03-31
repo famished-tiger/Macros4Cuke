@@ -3,7 +3,6 @@
 # Access the OptionParser library from the standard Ruby library
 require 'optparse'
 require 'pathname'
-require 'pp'  # TODO: remove this line
 
 require 'cucumber/platform'
 require_relative '../constants'

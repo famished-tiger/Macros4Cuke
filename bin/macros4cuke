@@ -10,8 +10,6 @@ require 'macros4cuke' # Load the Cukedep::Application class
 
 # The application's entry point
 app = Macros4Cuke::Application.new
-require 'pp'
-pp ARGV
 app.run!(ARGV.dup)
 
 # End of file
