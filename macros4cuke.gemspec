@@ -25,7 +25,12 @@ Enjoy using Cucumber with macros...
 EOSTRING
   pkg.rdoc_options << '--charset=UTF-8 --exclude="examples|features|spec"'
 	file_list = Dir['.rubocop.yml', '.rspec', '.ruby-gemset', '.ruby-version', '.simplecov', '.travis.yml', '.yardopts', 'cucumber.yml', 'Gemfile', 'Rakefile',  'CHANGELOG.md', 'LICENSE.txt', 'README.md',
-    'lib/*.*', 'lib/**/*.rb', 'examples/**/*.*', 'features/**/*.feature', 'features/**/*.md', 'features/**/*.rb','features/**/*.nav',  'spec/**/*.rb'
+    'bin/*.*',
+    'examples/**/*.*',
+    'lib/*.*', 'lib/**/*.rb',
+    'features/**/*.feature', 'features/**/*.md', 'features/**/*.rb','features/**/*.nav',
+    'spec/**/*.rb',
+    'templates/*.erb'
   ]
 	pkg.files = file_list
   pkg.test_files = Dir[ "spec/**/*_spec.rb" ]
