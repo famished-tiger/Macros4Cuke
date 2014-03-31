@@ -55,7 +55,7 @@ SNIPPET
     it 'should complain when entering the same macro again' do
       # Error case: trying to register another macro with same key/phrase.
       error_type = Macros4Cuke::DuplicateMacroError
-      msg = "A macro-step with phrase 'enter the credentials' already exist."
+      msg = "A macro-step with phrase 'enter the credentials' already exists."
       expect { world.add_macro(phrase1, m1_substeps, true) }.to raise_error(
         error_type, msg)
     end

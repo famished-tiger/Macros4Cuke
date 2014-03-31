@@ -7,11 +7,35 @@ module Macros4Cuke # Module used as a namespace
 class Macros4CukeError < StandardError
 end # class
 
+# @abstract
+# Specialized command-line errors.
+class CmdLineError < Macros4CukeError
+  def initialize(aMessage)
+    msg = "Error in command-line:\n"
+    super(msg + aMessage)
+  end  
+end # class
+
+class DirectoryNotFound < CmdLineError
+  def initialize(aDirPath)
+    msg = "Cannot find the directory '#{aDirPath}'."
+    super(msg)
+  end
+end # class
+
+
+class SupportFileExists < CmdLineError
+  def initialize(aDirPath)
+    msg = "The file '#{aDirPath}' already exists."
+    super(msg)
+  end
+end # class
+
 # Raised when one attempts to define a new macro
 # that has the same phrase as an existing macro.
 class DuplicateMacroError < Macros4CukeError
   def initialize(aPhrase)
-    super("A macro-step with phrase '#{aPhrase}' already exist.")
+    super("A macro-step with phrase '#{aPhrase}' already exists.")
   end
 end # class
 

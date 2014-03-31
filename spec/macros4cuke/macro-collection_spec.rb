@@ -42,7 +42,7 @@ SNIPPET
       expect(singleton).to have(1).macro_steps
 
       # Error case: inserting another macro with same phrase.
-      msg = "A macro-step with phrase '[enter my credentials]' already exist."
+      msg = "A macro-step with phrase '[enter my credentials]' already exists."
       expect { singleton.add_macro(*args) }.to raise_error(
         Macros4Cuke::DuplicateMacroError, msg)
     end

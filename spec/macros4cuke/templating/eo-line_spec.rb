@@ -3,7 +3,7 @@
 require_relative '../../spec_helper'
 
 # Load the classes under test
-require_relative '../../../lib/macros4cuke/templating/template-element'
+require_relative '../../../lib/macros4cuke/templating/eo-line'
 
 module Macros4Cuke
 
@@ -14,7 +14,7 @@ describe EOLine do
   subject { EOLine.new }
 
   context 'Creation and initialization:' do
-    it 'should be created withoutargument' do
+    it 'should be created without argument' do
       expect { EOLine.new }.not_to raise_error
     end
     

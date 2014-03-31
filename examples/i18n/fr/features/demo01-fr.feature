@@ -3,6 +3,7 @@ Fonctionnalité: Macro-pas
   Afin d'écrire des scénarios plus facilement
   En tant qu'utilisateur de Cucumber
   Je souhaite pouvoir créer des macro-étapes
+  
 
 Scénario: Définition d'un macro-pas (de scénario)
   Etant donné que je crée le pas "Quand j'[imprime le texte <un_texte>]" qui équivaut à:
@@ -13,6 +14,11 @@ Scénario: Définition d'un macro-pas (de scénario)
   
 Scénario: Utilisation d'un macro-pas (de scénario)
   Quand j'[imprime le texte "Bonjour!"]
+  Alors je m'attends à voir:
+  """
+Bonjour!
+
+  """
   
 Scénario: Définition d'un macro-pas appelant des macro-pas!
   Etant donné que je crée le pas "Quand j'[imprime le texte <un_texte> trois fois]" qui équivaut à:
@@ -24,4 +30,11 @@ Scénario: Définition d'un macro-pas appelant des macro-pas!
   
 Scénario: Utilisation du dernier macro-pas (de scénario)
   Quand j'[imprime le texte "Trois fois!" trois fois]
+  Alors je m'attends à voir:
+  """
+Trois fois!
+Trois fois!
+Trois fois!
+
+  """
   

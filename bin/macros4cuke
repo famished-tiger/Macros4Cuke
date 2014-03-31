@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# File: macros4cuke
+# The 'executable' of the Macros4Cuke library.
+
+mydir = File.dirname(__FILE__)
+lib_dir = mydir + '/../lib'
+$LOAD_PATH.unshift lib_dir unless $LOAD_PATH.include?(lib_dir)
+
+require 'macros4cuke' # Load the Cukedep::Application class	
+
+# The application's entry point
+app = Macros4Cuke::Application.new
+require 'pp'
+pp ARGV
+app.run!(ARGV.dup)
+
+# End of file

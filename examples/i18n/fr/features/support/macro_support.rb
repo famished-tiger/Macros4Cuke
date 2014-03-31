@@ -5,13 +5,8 @@
 # of your Cucumber project.
 
 
-# Macros4Cuke step one: Load modules and classes from the gem.
-require 'macros4cuke'
-
-
-# Macros4Cuke step two: extend the world object with the mix-in module
-# that adds the support for macros in Cucumber.
-World(Macros4Cuke::MacroStepSupport)
+# Load modules and classes from the gem and also its step definitions
+require 'macros4cuke/cucumber'
 
 
 # End of file

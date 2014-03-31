@@ -41,7 +41,7 @@ EOSTRING
   pkg.add_development_dependency('rubygems', [">= 2.0.0"])
 
 	pkg.bindir = 'bin'
-	pkg.executables = []
+	pkg.executables = %w(macros4cuke)
   pkg.license = 'MIT'
   pkg.required_ruby_version = '>= 1.9.1'
 end
