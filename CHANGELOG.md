@@ -1,3 +1,20 @@
+### 0.5.03 / 2014-04-01
+* [CHANGE] File `README.md`: Updated the installation steps.
+* [CHANGE] Files `macro_support.rb` renamed to `use_macros4cuke.rb`
+
+### 0.5.02 / 2014-03-31
+* [CHANGE] File `.travis.yml`: Allow build failure with Travis' jruby-head (Travis build scripts miss Bundler install)
+
+### 0.5.01 / 2014-03-31
+* [CHANGE] File `macros4cuke`: Removal of command-line option echoing.
+
+### 0.5.00 / 2014-03-31
+* [NEW] Added macros4cuke "executable". The CLI simplifies the installation of macros in Cucumber projects.
+* [NEW] File `cucumber.rb`: require only this file in order to integrate `Macros4Cuke` in your Cucumber project.
+* [CHANGE] File `macros4cuke.gemspec`: Added `bin` and `templates` dirs.
+* [NEW] File `exceptions.rb`: New command-line related exception classes.
+
+
 ### 0.4.09 / 2014-03-13
 * [CHANGE] Updated source files to comply to Rubocop 0.19.
 * [CHANGE] File `.rubocop.yml`: Disabled FileName cop.

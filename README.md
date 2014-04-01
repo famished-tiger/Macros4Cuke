@@ -73,38 +73,57 @@ Nicely formatted documentation extracted from these feature files is also availa
 
 ## Setup ##
 ### Pre-requisites ###
+
 Macros4Cuke works with:  
-- MRI Ruby 1.9.x and 2.0.x.  
-- JRuby (was tested with version 1.7.3 and above).
+- MRI Ruby 1.9.x, 2.0.x and 2.1.x.  
+- JRuby (was tested with version 1.7.3 and above),  
+- Rubinius 2.x
+
+Macros4Cuke requires Cucumber.
 
 ### Installation ###
-The macros4cuke gem is fairly standard:  
+The macros4cuke gem installation is fairly standard.  
+If you have a `Gemfile`, add `macros4cuke` to it. Otherwise, install the gem like this:
+ 
 ```bash  
 $[sudo] gem install macros4cuke
 ```
 
-### Configuring up your Cucumber projects ####
-  
-* Step 1: Add support for macros in an existing Cucumber project    
-  
+### Configuring your Cucumber projects ####
+The procedure to add support for macros in an existing Cucumber project
+was simplified since version 0.5.00. 
+ 
+There are two possible ways to do it:  
+- By editing manually a support file; or,  
+- Let Macros4cuke configure your project.   
+ 
+#### Alternative 1: manually add one line in a support file  
+Require the library in one of your ruby files under `features/support` (e.g. `env.rb`):  
+ 
 ```ruby
 # /features/support/env.rb
-# Add the two next lines
-require 'macros4cuke'  
-World(Macros4Cuke::MacroStepSupport)
-```  
-  
-* Step 2: Import the macro-management steps  
-In your `/features/step_definitions/` folder:  
-  - The cleanest is to create a Ruby file (say, 'use\_macro\_steps.rb') with the line:  
-  
-```ruby  
-require 'macros4cuke/../macro_steps'
-```  
-  - Alternatively, you could directly add the require in one of your step definition file.
- 
-  
+# Add the next single line
+require 'macros4cuke/cucumber'  
+``` 
+
 That's it! Now you can start writing macros in your Cucumber project.
+
+#### Alternative 2: let macros4cuke configure your project
+
+Use the following command-line:
+```bash  
+$[sudo] macros4cuke --setup project_path
+```
+
+Where __project_path__ is the location of your Cucumber project.  
+In case the working directory of the shell/command prompt is
+already the directory containing the Cucumber project, then the
+command-line is simply:  
+```bash  
+$[sudo] macros4cuke --setup .
+``` 
+
+Notice that ending dot above means "the current directory".
 
 
 ## Getting started ##
