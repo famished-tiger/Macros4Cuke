@@ -42,7 +42,7 @@ class Section  < UnaryElement
         when Section
           subResult.concat(a_child.variables)
         else
-          # Do nothing
+        # Do nothing
       end
     end
 
@@ -54,7 +54,7 @@ class Section  < UnaryElement
   # This method has the same signature as the {Engine#render} method.
   # @return [String] The text value assigned to the placeholder.
   #   Returns an empty string when no value is assigned to the placeholder.
-  def render(aContextObject, theLocals)
+  def render(_, _)
     msg = "Method Section.#{__method__} must be implemented in subclass."
     fail(NotImplementedError, msg)
   end

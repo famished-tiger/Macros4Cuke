@@ -28,7 +28,7 @@ class StaticText
   # Render the static text.
   # This method has the same signature as the {Engine#render} method.
   # @return [String] Static text is returned verbatim ("as is")
-  def render(aContextObject, theLocals)
+  def render(_, _)
     return source
   end
 end # class

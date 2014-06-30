@@ -20,7 +20,7 @@ describe CollWalkerFactory do
   end
 
   after(:all) do
-  # Clear the collection to prevent interference between spec files
+    # Clear the collection to prevent interference between spec files
     macro_coll.clear
   end
 
@@ -165,7 +165,7 @@ describe CollWalkerFactory do
       second_step = macro_coll.macro_steps.values[1]
       substep_chunks = second_step.renderer.representation.dup
       substep_chunks.map! do |ck|
-        if ck.kind_of?(Templating::Section)
+        if ck.is_a?(Templating::Section)
           [ck, ck.children, ck].flatten
         else
           ck
@@ -241,7 +241,7 @@ describe CollWalkerFactory do
         actual = subject.next
         expect(actual[0]).to eq(event[0])
         expect(actual[1]).to eq(event[1])
-        unless event[2].nil?
+        if event[2]
           expected_obj = substep_chunks[i + 1]
           expect(actual[2]).to eq(expected_obj.send(event[2]))
         end
@@ -256,7 +256,7 @@ describe CollWalkerFactory do
       first_step.renderer.representation.insert(2, :not_a_valid_element)
       err_type = Macros4Cuke::InternalError
       err_msg = "Don't know how to format a Symbol."
-      expect { subject.each { |x| } }.to raise_error(err_type, err_msg)
+      expect { subject.each { |_| } }.to raise_error(err_type, err_msg)
     end
 
   end # context

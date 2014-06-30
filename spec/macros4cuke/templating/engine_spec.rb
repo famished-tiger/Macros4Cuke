@@ -118,11 +118,11 @@ SNIPPET
 
       # Expectation: an array with items couples:
       expect(result).to have(5).items
-      expect(result[0]).to eq([:static ,  'begin '])
+      expect(result[0]).to eq([:static,  'begin '])
       expect(result[1]).to eq([:dynamic, 'some_tag'])
-      expect(result[2]).to eq([:static , 'middle'])
+      expect(result[2]).to eq([:static, 'middle'])
       expect(result[3]).to eq([:dynamic, 'another_tag'])
-      expect(result[4]).to eq([:static,  ' end'])
+      expect(result[4]).to eq([:static, ' end'])
 
       # Case: two consecutive tags
       sample_text = 'begin <some_tag><another_tag> end'
@@ -163,14 +163,14 @@ SNIPPET
         StandardError, error_message)
     end
 
-    it  'should complain if a text misses an opening chevron' do
+    it 'should complain if a text misses an opening chevron' do
       sample_text = 'begin <some_tag> > end'
       error_message = "Missing opening chevron '<'."
       expect { Engine.parse(sample_text) }.to raise_error(
         StandardError, error_message)
     end
 
-    it  'should complain if a text has nested opening chevrons' do
+    it 'should complain if a text has nested opening chevrons' do
       sample_text = 'begin <<some_tag> > end'
       error_message = "Nested opening chevron '<'."
       expect { Engine.parse(sample_text) }.to raise_error(
@@ -309,7 +309,7 @@ SNIPPET
 
       locals = {
         'firstname' => 'Anon',
-        'lastname' => 'Eemoos' ,
+        'lastname' => 'Eemoos',
         'birthdate' => '1976-04-21'
       }
       rendered_text = instance.render(Object.new, locals)

@@ -30,7 +30,7 @@ class Comment
   # Cucumber::RbSupport::RbWorld#steps complains when it sees a comment.
   # This method has the same signature as the {Engine#render} method.
   # @return [String] Empty string ("as is")
-  def render(aContextObject, theLocals)
+  def render(_, _)
     return ''
   end
 end # class

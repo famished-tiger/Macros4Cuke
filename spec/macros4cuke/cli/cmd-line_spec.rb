@@ -152,7 +152,7 @@ END_MESSAGE
       restore_stderr
     end
    
-    it "should complain when project to setup does'nt exist" do
+    it "should complain when project to setup doesn't exist" do
       hijack_stderr
       err_msg =  <<-END_MESSAGE
 Error in command-line:

@@ -18,7 +18,7 @@ class EOLine
   # Render an end of line.
   # This method has the same signature as the {Engine#render} method.
   # @return [String] An end of line marker. Its exact value is OS-dependent.
-  def render(aContextObject, theLocals)
+  def render(_, _)
     return "\n"
   end
 end # class

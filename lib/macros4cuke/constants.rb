@@ -3,7 +3,7 @@
 
 module Macros4Cuke # Module used as a namespace
   # The version number of the gem.
-  Version = '0.5.03'
+  Version = '0.5.05'
 
   # Brief description of the gem.
   Description = 'Add your own macro-steps to Cucumber scenarios'
@@ -11,8 +11,8 @@ module Macros4Cuke # Module used as a namespace
   # Constant Macros4Cuke::RootDir contains the absolute path of Macro4Cuke's
   # root directory. Note: it also ends with a slash character.
   unless defined?(RootDir)
-  # The initialisation of constant RootDir is guarded in order
-  # to avoid multiple initialisation (not allowed for constants)
+    # The initialisation of constant RootDir is guarded in order
+    # to avoid multiple initialisation (not allowed for constants)
 
     # The root folder of Macros4Cuke.
     RootDir = begin

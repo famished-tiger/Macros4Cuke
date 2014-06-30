@@ -1,5 +1,5 @@
 # File: formatting-service.rb
-# Purpose: Implementation of the WalkEventPublisher class.
+# Purpose: Implementation of the FormattingService class.
 
 require_relative 'exceptions'
 require_relative 'coll-walker-factory'
@@ -39,9 +39,9 @@ class FormattingService
 
     # Check that each event from the event list the formatter is known.
     supported_events.each do |event|
-      unless Formatter::AllNotifications.include? event
-        fail(UnknownFormattingEvent.new(aFormatter, event))
-      end
+      next if Formatter::AllNotifications.include? event
+      
+      fail(UnknownFormattingEvent.new(aFormatter, event))
     end
 
     formatters << aFormatter
@@ -58,11 +58,11 @@ class FormattingService
       # Notify each formatter of the visit event.
       formatters.each do |fmt|
         accepted_notifications = fmt.implements
-        if accepted_notifications.include? msg
-          # Assumption: all nil argument(s) are at the end
-          arg_vector = visit_event[2..-1].reject { |an_arg| an_arg.nil? }
-          fmt.send(msg, nesting_level, *arg_vector)
-        end
+        next unless accepted_notifications.include? msg
+        
+        # Assumption: all nil argument(s) are at the end
+        arg_vector = visit_event[2..-1].reject { |an_arg| an_arg.nil? }
+        fmt.send(msg, nesting_level, *arg_vector)
       end
     end
   end

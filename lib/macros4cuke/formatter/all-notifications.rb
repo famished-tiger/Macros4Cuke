@@ -21,7 +21,7 @@ module Formatter
     :on_placeholder,
     :on_section,
     :on_section_end
-    ]
+  ]
 
 end # module
 

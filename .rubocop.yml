@@ -1,8 +1,8 @@
 AllCops:
-  Excludes:
-    - '*/examples/**'
-    - '*/features/**'
-    - '*/gems/**'
+  Exclude:
+    - 'examples/**/*'
+    - 'features/**/*'
+    - 'gems/**/*'
 
 # This is disabled because some demos use UTF-8
 AsciiComments:
@@ -47,7 +47,10 @@ IndentationWidth :
 # Avoid methods longer than 50 lines of code
 MethodLength:
   Max: 50
-  CountComments: false
+  CountComments: false 
+ 
+NonNilCheck:
+  Enabled: false
 
 NumericLiterals:
   Enabled: false

@@ -1,3 +1,11 @@
+### 0.5.05 / 2014-06-30
+* [CHANGE] Many files updated for Rubocop 0.24.0. There remain 4 Rubocop offenses.
+
+
+### 0.5.04 / 2014-04-07
+* [CHANGE] File `.rubocop.yml`: Updated for Rubocop 0.20.1. NonNilCheck cop disabled.
+
+
 ### 0.5.03 / 2014-04-01
 * [CHANGE] File `README.md`: Updated the installation steps.
 * [CHANGE] Files `macro_support.rb` renamed to `use_macros4cuke.rb`

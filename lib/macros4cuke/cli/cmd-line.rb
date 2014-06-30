@@ -114,7 +114,7 @@ EOS
   def validated_feature_path(theProjectPath)
     dirs = [theProjectPath, 'features', 'support']
     feature_path = dirs.reduce(Pathname.getwd) do |path, dir_name|
-      path = path + dir_name
+      path += dir_name
       unless path.exist?
         fail DirectoryNotFound.new(path.relative_path_from(Pathname.getwd))
       end

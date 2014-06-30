@@ -23,7 +23,7 @@ describe FormattingService do
   end
 
   after(:all) do
-  # Clear the collection to prevent interference between spec files
+    # Clear the collection to prevent interference between spec files
     macro_coll.clear
   end
 

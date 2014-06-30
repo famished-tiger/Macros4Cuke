@@ -4,6 +4,9 @@
 require 'strscan' # Use the StringScanner for lexical analysis.
 require_relative '../exceptions' # Load the custom exception classes.
 
+require_relative 'static-text'
+require_relative 'eo-line'
+require_relative 'comment'
 require_relative 'template-element'
 require_relative 'placeholder'
 require_relative 'section'  # Load the Section and ConditionalSection
@@ -15,76 +18,6 @@ module Macros4Cuke # Module used as a namespace
 # Module containing all classes implementing the simple template engine
 # used internally in Macros4Cuke.
 module Templating
-
-# Class used internally by the template engine.
-# Represents a static piece of text from a template.
-# A static text is a text that is reproduced verbatim
-# when rendering a template.
-class StaticText
-  # The static text extracted from the original template.
-  attr_reader(:source)
-
-
-  # @param aSourceText [String] A piece of text extracted
-  #   from the template that must be rendered verbatim.
-  def initialize(aSourceText)
-    @source = aSourceText
-  end
-
-  public
-
-  # Render the static text.
-  # This method has the same signature as the {Engine#render} method.
-  # @return [String] Static text is returned verbatim ("as is")
-  def render(aContextObject, theLocals)
-    return source
-  end
-end # class
-
-
-# Class used internally by the template engine.
-# Represents a comment from a template.
-# A static text is a text that is reproduced verbatim
-# when rendering a template.
-class Comment
-  # The comment as extracted from the original template.
-  attr_reader(:source)
-
-
-  # @param aSourceText [String] A piece of text extracted
-  #   from the template that must be rendered verbatim.
-  def initialize(aSourceText)
-    @source = aSourceText
-  end
-
-  public
-
-  # Render the comment.
-  # Comments are rendered as empty text. This is necessary because
-  # Cucumber::RbSupport::RbWorld#steps complains when it sees a comment.
-  # This method has the same signature as the {Engine#render} method.
-  # @return [String] Empty string ("as is")
-  def render(aContextObject, theLocals)
-    return ''
-  end
-end # class
-
-
-# Class used internally by the template engine.
-# Represents an end of line that must be rendered as such.
-class EOLine
-
-  public
-
-  # Render an end of line.
-  # This method has the same signature as the {Engine#render} method.
-  # @return [String] An end of line marker. Its exact value is OS-dependent.
-  def render(aContextObject, theLocals)
-    return "\n"
-  end
-end # class
-
-
 
 # A very simple implementation of a templating engine.
 # Earlier versions of Macros4Cuke relied on the logic-less
@@ -168,7 +101,7 @@ class Engine
             subResult.concat(element.variables)
 
           else
-            # Do nothing
+          # Do nothing
         end
       end
 
@@ -213,7 +146,7 @@ class Engine
   def self.identify_parse_error(aTextLine)
     # Unsuccessful scanning: we typically have improperly balanced chevrons.
     # We will analyze the opening and closing chevrons...
-     # First: replace escaped chevron(s)
+    # First: replace escaped chevron(s)
     no_escaped = aTextLine.gsub(/\\[<>]/, '--')
 
     # var. equals count_of(<) -  count_of(>): can only be 0 or temporarily 1
@@ -243,9 +176,9 @@ class Engine
       line_items = self.class.parse(line)
       line_items.each do |(kind, text)|
         # A tag text cannot be empty nor blank
-        if (kind == :dynamic) && text.strip.empty?
-          fail(EmptyArgumentError.new(line.strip))
-        end
+        next if (kind != :dynamic) || !text.strip.empty?
+        
+        fail(EmptyArgumentError.new(line.strip))
       end
 
       line_items

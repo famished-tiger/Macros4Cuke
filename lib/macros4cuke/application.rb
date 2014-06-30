@@ -19,10 +19,10 @@ class Application
   # Entry point for the application object.
   def run!(theCmdLineArgs)
     @options = options_from(theCmdLineArgs)
-    if options[:setup]
-      options[:setup].each do |a_path|
-        setup_project(a_path)
-      end
+    return unless options[:setup]
+    
+    options[:setup].each do |a_path|
+      setup_project(a_path)
     end
   end
 
@@ -46,7 +46,8 @@ class Application
     begin
       fail SupportFileExists.new(destination) if File.exist?(destination)
 
-      template_pathname = Macros4Cuke::RootDir + 'templates/use_macros4cuke.erb'
+      template_pathname =
+        Macros4Cuke::RootDir + 'templates/use_macros4cuke.erb'
       template = File.read(template_pathname)
 
 
@@ -62,6 +63,7 @@ class Application
       # Write file contents to file in binary mode in order to avoid eol
       # consisting of CRLF
       File.open(destination, 'wb') { |theFile| theFile.write(file_text) }
+
     rescue Macros4Cuke::CmdLineError => exc
       $stderr.puts exc.message
       exit

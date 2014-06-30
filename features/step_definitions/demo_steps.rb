@@ -2,21 +2,25 @@
 # A few step definitions for demo and testing purpose.
 
 When(/^I landed in the homepage$/) do
-  #trace_steps << 'Invoked step: ... I landed in the homepage'
+  # trace_steps << 'Invoked step: ... I landed in the homepage'
 end
 
 When(/^I click "([^"]*)"$/) do |element|
-  #trace_steps << "Invoked step: ... I click \"#{element}\""
+  msg = 'Invoked step: ... I click '
+  msg << "\"#{element}\""
+  # trace_steps << msg
 end
 
 
 When(/^I fill in "(.*?)" with "(.*?)"$/) do |element, text|
-  #trace_steps << "Invoked step: ... I fill in \"#{element}\" with \"#{text}\""
+  msg = "Invoked step: ... I fill in \"#{element}\" with "
+  msg << "\"#{text}\""
+  # trace_steps << msg
 end
 
 
 Then(/^I expect the following step trace:$/) do |step_text|
-  #trace_steps.should == step_text.split(/\r?\n|\n/)
+  # trace_steps.should == step_text.split(/\r?\n|\n/)
   substeps_trace.chomp.should == step_text
 end
 

@@ -47,7 +47,7 @@ end
 #  |password|unguessable|
 When(/^I \[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   # Ensure that the second argument is of the correct type
-  unless table_argument.kind_of?(Cucumber::Ast::Table)
+  unless table_argument.is_a?(Cucumber::Ast::Table)
     fail(Macros4Cuke::DataTableNotFound.new(macro_phrase))
   end
 

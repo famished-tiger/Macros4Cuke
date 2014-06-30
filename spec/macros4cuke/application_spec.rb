@@ -87,14 +87,14 @@ describe Application do
       file_path = '/test_dir/features/support'
       file_name = 'use_macros4cuke.rb'
       args = %w(--setup ./test_dir)
-      my_dir = File.dirname(__FILE__)
+      mydir = File.dirname(__FILE__)
       
       expect { subject.run!(args) }.not_to raise_error
       
       hijack_stderr
       err_msg = <<-MSG_END
 Error in command-line:
-The file '#{my_dir}/test_dir/features/support/use_macros4cuke.rb' already exists.
+The file '#{mydir}/test_dir/features/support/use_macros4cuke.rb' already exists.
 MSG_END
 
       expect { subject.run!(args) }.to raise_error(SystemExit)

@@ -21,59 +21,59 @@ class ToNull
     return Formatter::AllNotifications
   end
 
-  def on_collection(aLevel, aMacroCollection)
+  def on_collection(_, _)
     ; # Do nothing
   end
 
-  def on_collection_end(aLevel)
+  def on_collection_end(_)
     ; # Do nothing
   end
 
-  def on_step(aLevel, aMacroStep)
+  def on_step(_, _)
     ; # Do nothing
   end
 
-  def on_step_end(aLevel)
+  def on_step_end(_)
     ; # Do nothing
   end
 
-  def on_phrase(aLevel, aPhraseText, useTable)
+  def on_phrase(_, _, _)
     ; # Do nothing
   end
 
-  def on_renderer(aLevel, aRenderer)
+  def on_renderer(_, _)
     ; # Do nothing
   end
 
-  def on_renderer_end(aLevel)
+  def on_renderer_end(_)
     ; # Do nothing
   end
 
-  def on_source(aLevel, aSourceText)
+  def on_source(_, _)
     ; # Do nothing
   end
 
-  def on_static_text(aLevel, aText)
+  def on_static_text(_, _)
     ; # Do nothing
   end
 
-  def on_comment(aLevel, aComment)
+  def on_comment(_, _)
     ; # Do nothing
   end
 
-  def on_eol(aLevel)
+  def on_eol(_)
     ; # Do nothing
   end
 
-  def on_placeholder(aLevel, aPlaceHolderName)
+  def on_placeholder(_, _)
     ; # Do nothing
   end
 
-  def on_section(aLevel, aSectionName)
+  def on_section(_, _)
     ; # Do Nothing
   end
 
-  def on_section_end(aLevel)
+  def on_section_end(_)
     ; # Do Nothing
   end
 

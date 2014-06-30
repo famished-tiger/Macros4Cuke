@@ -26,7 +26,7 @@ class ToTrace
     return Formatter::AllNotifications
   end
 
-  def on_collection(aLevel, aMacroCollection)
+  def on_collection(aLevel, _)
     trace_event(aLevel, __method__)
   end
 
@@ -34,7 +34,7 @@ class ToTrace
     trace_event(aLevel, __method__)
   end
 
-  def on_step(aLevel, aMacroStep)
+  def on_step(aLevel, _)
     trace_event(aLevel, __method__)
   end
 
@@ -42,11 +42,11 @@ class ToTrace
     trace_event(aLevel, __method__)
   end
 
-  def on_phrase(aLevel, aPhraseText, useTable)
+  def on_phrase(aLevel, _,  _)
     trace_event(aLevel, __method__)
   end
 
-  def on_renderer(aLevel, aRenderer)
+  def on_renderer(aLevel, _)
     trace_event(aLevel, __method__)
   end
 
@@ -54,15 +54,15 @@ class ToTrace
     trace_event(aLevel, __method__)
   end
 
-  def on_source(aLevel, aSourceText)
+  def on_source(aLevel, _)
     trace_event(aLevel, __method__)
   end
 
-  def on_static_text(aLevel, aStaticText)
+  def on_static_text(aLevel, _)
     trace_event(aLevel, __method__)
   end
 
-  def on_comment(aLevel, aComment)
+  def on_comment(aLevel, _)
     trace_event(aLevel, __method__)
   end
 
@@ -70,11 +70,11 @@ class ToTrace
     trace_event(aLevel, __method__)
   end
 
-  def on_placeholder(aLevel, aPlaceHolderName)
+  def on_placeholder(aLevel, _)
     trace_event(aLevel, __method__)
   end
 
-  def on_section(aLevel, aSectionName)
+  def on_section(aLevel, _)
     trace_event(aLevel, __method__)
   end
 

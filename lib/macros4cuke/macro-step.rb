@@ -145,7 +145,7 @@ class MacroStep
       rawData.each do |a_row|
         (a_key, value) = validate_row(a_row, macro_parameters)
         if macro_parameters.include? a_key
-          if macro_parameters[a_key].kind_of?(Array)
+          if macro_parameters[a_key].is_a?(Array)
             macro_parameters[a_key] << value
           else
             macro_parameters[a_key] = [macro_parameters[a_key], value]
@@ -206,18 +206,17 @@ class MacroStep
   def validate_phrase_args(thePhraseArgs, substepsVars)
     # Error when the phrase names an argument that never occurs in the substeps
     thePhraseArgs.each do |phrase_arg|
-      unless substepsVars.include? phrase_arg
-        fail(UselessPhraseArgument.new(phrase_arg))
-      end
+      next if substepsVars.include? phrase_arg
+      fail(UselessPhraseArgument.new(phrase_arg))
     end
     # Error when a substep has an argument that never appears in the phrase
     # and the macro-step does not use data table.
     unless use_table?
       substepsVars.each do |substep_arg|
-        unless thePhraseArgs.include?(substep_arg) ||
+        next if thePhraseArgs.include?(substep_arg) ||
         BuiltinParameters.include?(substep_arg)
-          fail(UnreachableSubstepArgument.new(substep_arg))
-        end
+        
+        fail(UnreachableSubstepArgument.new(substep_arg))
       end
     end
 
