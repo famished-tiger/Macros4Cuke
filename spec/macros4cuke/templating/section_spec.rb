@@ -36,7 +36,7 @@ describe Section do
     end
 
     it 'should have no child at start' do
-       expect(subject).to have(0).children
+       expect(subject.children).to be_empty
     end
 
   end # context

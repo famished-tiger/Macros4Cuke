@@ -21,7 +21,7 @@ end
 
 Then(/^I expect the following step trace:$/) do |step_text|
   # trace_steps.should == step_text.split(/\r?\n|\n/)
-  substeps_trace.chomp.should == step_text
+  expect(substeps_trace.chomp).to eq(step_text)
 end
 
 
@@ -38,7 +38,7 @@ SNIPPET
   rescue Macros4Cuke::DataTableNotFound => exc
     phrase = '[fill in the form with]:'
     msg = "The step with phrase #{phrase} requires a data table."
-    exc.message.should == msg
+    expect(exc.message).to eq(msg)
   end
 end
 

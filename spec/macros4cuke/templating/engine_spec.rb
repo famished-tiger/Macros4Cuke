@@ -65,7 +65,7 @@ SNIPPET
 
       # Expectation: an array with one couple:
       # [:static, the source text]
-      expect(result).to have(1).items
+      expect(result.size).to eq(1)
       expect(result[0]).to eq([:static, sample_text])
     end
 
@@ -75,7 +75,7 @@ SNIPPET
 
       # Expectation: an array with one couple:
       # [:static, the source text]
-      expect(result).to have(1).items
+      expect(result.size).to eq(1)
       expect(result[0]).to eq([:dynamic, strip_chevrons(sample_text)])
     end
 
@@ -85,7 +85,7 @@ SNIPPET
 
       # Expectation: an array with two couples:
       # [dynamic, 'some_tag'][:static, some text]
-      expect(result).to have(2).items
+      expect(result.size).to eq(2)
       expect(result[0]).to eq([:dynamic, 'some_tag'])
       expect(result[1]).to eq([:static,  'some text'])
     end
@@ -96,7 +96,7 @@ SNIPPET
 
       # Expectation: an array with two couples:
       # [:static, some text] [dynamic, 'some_tag']
-      expect(result).to have(2).items
+      expect(result.size).to eq(2)
       expect(result[0]).to eq([:static,  'some text'])
       expect(result[1]).to eq([:dynamic, 'some_tag'])
     end
@@ -106,7 +106,7 @@ SNIPPET
       result = Engine.parse(sample_text)
 
       # Expectation: an array with three couples:
-      expect(result).to have(3).items
+      expect(result.size).to eq(3)
       expect(result[0]).to eq([:static,  'begin '])
       expect(result[1]).to eq([:dynamic, 'some_tag'])
       expect(result[2]).to eq([:static,  ' end'])
@@ -117,7 +117,7 @@ SNIPPET
       result = Engine.parse(sample_text)
 
       # Expectation: an array with items couples:
-      expect(result).to have(5).items
+      expect(result.size).to eq(5)
       expect(result[0]).to eq([:static,  'begin '])
       expect(result[1]).to eq([:dynamic, 'some_tag'])
       expect(result[2]).to eq([:static, 'middle'])
@@ -129,7 +129,7 @@ SNIPPET
       result = Engine.parse(sample_text)
 
       # Expectation: an array with four couples:
-      expect(result).to have(4).items
+      expect(result.size).to eq(4)
       expect(result[0]).to eq([:static,  'begin '])
       expect(result[1]).to eq([:dynamic, 'some_tag'])
       expect(result[2]).to eq([:dynamic, 'another_tag'])
@@ -141,7 +141,7 @@ SNIPPET
       result = Engine.parse(sample_text)
 
       # Expectation: an array with one couple: [:static, the source text]
-      expect(result).to have(1).items
+      expect(result.size).to eq(1)
       expect(result[0]).to eq([:static, sample_text])
     end
 
@@ -150,7 +150,7 @@ SNIPPET
       result = Engine.parse(sample_text)
 
       # Expectation: an array with three couples:
-      expect(result).to have(3).items
+      expect(result.size).to eq(3)
       expect(result[0]).to eq([:static,  'begin '])
       expect(result[1]).to eq([:dynamic, 'some_\<\\>weird\>_tag'])
       expect(result[2]).to eq([:static,  ' end'])

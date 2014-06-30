@@ -75,7 +75,7 @@ describe Application do
       file_name = 'use_macros4cuke.rb'
       
       subject.run!(%w(--setup ./test_dir))
-      expect(File.exist?(file_path + '/' + file_name)).to be_true
+      expect(File.exist?(file_path + '/' + file_name)).to be true
       
       File.delete(file_path + '/' + file_name)
       delete_dirs(file_path)

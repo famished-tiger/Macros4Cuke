@@ -34,7 +34,7 @@ describe FormattingService do
     end
 
     it 'has no formatter at start' do
-      expect(subject).to have(0).formatters
+      expect(subject.formatters).to be_empty
     end
 
   end # context
@@ -43,23 +43,23 @@ describe FormattingService do
   context 'Provided services:' do
     it 'should know its registered formatter(s)' do
       formatter1 = double('fake_one')
-      formatter1.should_receive(:implements).once.and_return([:on_collection])
+      expect(formatter1).to receive(:implements).once.and_return([:on_collection])
       subject.register(formatter1)
-      expect(subject).to have(1).formatters
+      expect(subject.formatters.size).to eq(1)
 
       formatter2 = double('fake_two')
-      formatter2.should_receive(:implements).once.and_return([:on_step])
+      expect(formatter2).to receive(:implements).once.and_return([:on_step])
       subject.register(formatter2)
-      expect(subject).to have(2).formatters
+      expect(subject.formatters.size).to eq(2)
 
       expect(subject.formatters).to eq([formatter1, formatter2])
     end
 
     it "should complain when a formatter doesn't implement notifications" do
       formatter1 = double('formatter')
-      formatter1.should_receive(:implements).once.and_return([])
+      expect(formatter1).to receive(:implements).once.and_return([])
       err_type = Macros4Cuke::NoFormattingEventForFormatter
-      err_msg = 'Formatter RSpec::Mocks::Mock does not'\
+      err_msg = 'Formatter RSpec::Mocks::Double does not'\
       ' support any formatting event.'
       expect { subject.register(formatter1) }.to raise_error(err_type, err_msg)
     end
@@ -73,9 +73,9 @@ describe FormattingService do
         :on_step_end
       ]
       formatter = double('formatter')
-      formatter.should_receive(:implements).once.and_return(notifications)
+      expect(formatter).to receive(:implements).once.and_return(notifications)
       err_type = Macros4Cuke::UnknownFormattingEvent
-      err_msg = "Formatter RSpec::Mocks::Mock uses\
+      err_msg = "Formatter RSpec::Mocks::Double uses\
  the unknown formatting event 'non_standard'."
       expect { subject.register(formatter) }.to raise_error(err_type, err_msg)
     end
@@ -89,28 +89,28 @@ describe FormattingService do
         :on_step,
         :on_step_end
       ]
-      formatter1.should_receive(:implements)
+      expect(formatter1).to receive(:implements)
         .at_least(69).times
         .and_return(supported_notifications)
       subject.register(formatter1)
 
       # Test the notifications send to the formatter
-      formatter1.should_receive(:on_collection).once do |level, coll|
+      expect(formatter1).to receive(:on_collection).once do |level, coll|
         expect(level).to eq(0)
         expect(coll).to eq(macro_coll)
       end
 
-      formatter1.should_receive(:on_step).twice do |level, a_step|
+      expect(formatter1).to receive(:on_step).twice do |level, a_step|
         expect(level).to eq(1)
         expect(macro_coll.macro_steps.values).to include(a_step)
       end
 
-      formatter1.should_receive(:on_step_end).twice do |level, arg|
+      expect(formatter1).to receive(:on_step_end).twice do |level, arg|
         expect(level).to eq(1)
         expect(arg).to be_nil
       end
 
-      formatter1.should_receive(:on_collection_end).once do |level, arg|
+      expect(formatter1).to receive(:on_collection_end).once do |level, arg|
         expect(level).to eq(0)
         expect(arg).to be_nil
       end
@@ -120,7 +120,7 @@ describe FormattingService do
     it 'should support multiple formatters' do
       formatter1 = double('formatter')
       supported_notifications = [:on_collection]
-      formatter1.should_receive(:implements)
+      expect(formatter1).to receive(:implements)
         .at_least(69 * 3).times
         .and_return(supported_notifications)
 
@@ -128,7 +128,7 @@ describe FormattingService do
       3.times { subject.register(formatter1) }
 
       # ... then the collection is formatted three times
-      formatter1.should_receive(:on_collection).at_least(3).times
+      expect(formatter1).to receive(:on_collection).at_least(3).times
       subject.start!(macro_coll)
     end
   end # context

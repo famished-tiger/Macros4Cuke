@@ -39,7 +39,7 @@ SNIPPET
       phrase = '[enter my credentials]'
       args = [phrase, sample_substeps, true]
       expect { singleton.add_macro(*args) }.not_to raise_error
-      expect(singleton).to have(1).macro_steps
+      expect(singleton.macro_steps.size).to eq(1)
 
       # Error case: inserting another macro with same phrase.
       msg = "A macro-step with phrase '[enter my credentials]' already exists."
