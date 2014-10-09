@@ -1,4 +1,8 @@
 ### 0.5.06 / 2014-06-30
+* [CHANGE] Multiple minor changes to please Rubocop 0.26.1
+* [CHANGE] File `demo03.feature`: Added an example with scenario outline
+
+### 0.5.06 / 2014-06-30
 * [CHANGE] Spec files upgraded to RSpec3.x.x
 * [CHANGE] File `Gemfile` updated with dependency on RSpec3
 * [CHANGE] File `macros4cuke.gemspec` updated with dependency on RSpec3

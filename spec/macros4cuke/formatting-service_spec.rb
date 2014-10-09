@@ -43,7 +43,8 @@ describe FormattingService do
   context 'Provided services:' do
     it 'should know its registered formatter(s)' do
       formatter1 = double('fake_one')
-      expect(formatter1).to receive(:implements).once.and_return([:on_collection])
+      events = [:on_collection]
+      expect(formatter1).to receive(:implements).once.and_return(events)
       subject.register(formatter1)
       expect(subject.formatters.size).to eq(1)
 

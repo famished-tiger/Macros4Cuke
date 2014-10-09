@@ -32,4 +32,25 @@ Scenario: Using the macro with multiple arguments
   And I fill in "Password" with "cosmic"
   And I click "Submit"
   """
+  
+Scenario Outline: Using the macro in a scenario outline with argument values from example rows
+  # Macros work smoothly in scenario outlines.
+  # Their argument values can even be initialized from the example rows
+  # Here the macro is invoked. It argument values <user_id>, <pwd> comes from example rows below.
+  When I [enter my userid "<user_id>" and password "<pwd>"]
 
+  # The next step verifies that the steps from the macro were effectively executed.
+  Then I expect the following step trace:
+  """
+  Given I landed in the homepage
+  When I click "Sign in"
+  And I fill in "Username" with "<user_id>"
+  And I fill in "Password" with "<pwd>"
+  And I click "Submit"
+  """
+  Then I click "Sign out"
+  
+  Examples:
+  |user_id |   pwd   | 
+  |james007|goldeneye|
+  |ann     |oneemous |

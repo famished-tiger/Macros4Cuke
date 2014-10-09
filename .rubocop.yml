@@ -12,8 +12,13 @@ CaseIndentation:
   IndentWhenRelativeTo: end
   IndentOneStep: true
 
+# Rubocop enforces the use of is_a? instead of kind_of?
+# Which is contrary to modelling practice.
+ClassCheck:
+  Enabled: false
+  
 ClassLength:
-  Max: 200
+  Max: 250
   CountComments: false  
 
 ConstantName:  

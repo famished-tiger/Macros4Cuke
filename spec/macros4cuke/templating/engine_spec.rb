@@ -202,7 +202,7 @@ SNIPPET
       instance = Engine.new sophisticated_template
       elements = instance.instance_variable_get(:@representation)
       sections = elements.select { |e| e.is_a?(Section) }
-      names = sections.map { |e| e.to_s }
+      names = sections.map(&:to_s)
       expect(names).to eq(%w(<?address> <?birthdate> <?dummy>))
     end
 

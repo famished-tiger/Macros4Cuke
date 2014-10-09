@@ -61,7 +61,7 @@ class FormattingService
         next unless accepted_notifications.include? msg
         
         # Assumption: all nil argument(s) are at the end
-        arg_vector = visit_event[2..-1].reject { |an_arg| an_arg.nil? }
+        arg_vector = visit_event[2..-1].reject(&:nil?)
         fmt.send(msg, nesting_level, *arg_vector)
       end
     end
