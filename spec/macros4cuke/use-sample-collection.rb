@@ -5,7 +5,6 @@
 require_relative '../../lib/macros4cuke/macro-collection'
 
 module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
-
 # Mix-in module.
 # Defines a set of methods that builds for testing purposes
 # a sample collection of macro-steps.
@@ -71,9 +70,7 @@ SNIPPET
   def macro_coll()
     return MacroCollection.instance
   end
-
 end # module
-
 end # module
 
 # End of file

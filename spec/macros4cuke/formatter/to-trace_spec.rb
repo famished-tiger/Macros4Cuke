@@ -12,9 +12,7 @@ require_relative '../../../lib/macros4cuke/formatting-service'
 require_relative '../../../lib/macros4cuke/formatter/to-trace'
 
 module Macros4Cuke
-
 module Formatter # Open this namespace to get rid of module qualifier prefixes
-
 describe ToTrace do
   include UseSampleCollection # Add convenience methods for sample collection
 
@@ -40,7 +38,6 @@ describe ToTrace do
       instance = ToTrace.new(destination)
       expect(instance.implements).to eq(Formatter::AllNotifications)
     end
-
   end # context
 
 
@@ -144,11 +141,8 @@ SNIPPET
       expect(subject.io.string).to eq(expected_trace)
     end
   end # context
-
 end # describe
-
 end # module
-
 end # module
 
 

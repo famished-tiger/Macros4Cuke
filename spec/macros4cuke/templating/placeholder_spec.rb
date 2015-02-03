@@ -6,16 +6,12 @@ require_relative '../../spec_helper'
 require_relative '../../../lib/macros4cuke/templating/placeholder'
 
 module Macros4Cuke
-
 module Templating # Open this namespace to get rid of module qualifier prefixes
-
-
 describe Placeholder do
   # Default instantiation rule
   subject { Placeholder.new('foobar') }
 
   context 'Creation and initialization:' do
-
     it 'should be created with a variable name' do
       expect { Placeholder.new('foobar') }.not_to raise_error
     end
@@ -23,7 +19,6 @@ describe Placeholder do
     it 'should know the name of its variable' do
       expect(subject.name).to eq('foobar')
     end
-
   end # context
 
   context 'Provided services:' do
@@ -58,13 +53,9 @@ describe Placeholder do
       rendered_text = subject.render(context, {})
       expect(rendered_text).to eq('world')
     end
-
   end # context
-
 end # describe
-
 end # module
-
 end # module
 
 # End of file

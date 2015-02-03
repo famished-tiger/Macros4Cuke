@@ -10,7 +10,6 @@ require_relative 'use-sample-collection'
 require_relative '../../lib/macros4cuke/formatting-service'
 
 module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
-
 describe FormattingService do
   include UseSampleCollection # Add convenience methods for sample collection
 
@@ -36,7 +35,6 @@ describe FormattingService do
     it 'has no formatter at start' do
       expect(subject.formatters).to be_empty
     end
-
   end # context
 
 
@@ -133,10 +131,7 @@ describe FormattingService do
       subject.start!(macro_coll)
     end
   end # context
-
-
 end # describe
-
 end # module
 
 

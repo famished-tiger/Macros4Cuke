@@ -1,3 +1,7 @@
+### 0.5.08 / 2015-02-xx
+* [CHANGE] Code layout reformat to please Rubocop 0.28.0 (Removal of 'Extra empty line detected at...' offenses)
+* [TEST] Regression tests with Cucumber 1.3.18: all pass
+
 ### 0.5.06 / 2014-06-30
 * [CHANGE] Multiple minor changes to please Rubocop 0.26.1
 * [CHANGE] File `demo03.feature`: Added an example with scenario outline

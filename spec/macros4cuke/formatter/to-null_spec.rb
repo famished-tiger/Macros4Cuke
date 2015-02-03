@@ -11,9 +11,7 @@ require_relative '../../../lib/macros4cuke/formatting-service'
 require_relative '../../../lib/macros4cuke/formatter/to-null'
 
 module Macros4Cuke
-
 module Formatter # Open this namespace to get rid of module qualifier prefixes
-
 describe ToNull do
   include UseSampleCollection # Add convenience methods for sample collection
 
@@ -37,7 +35,6 @@ describe ToNull do
       instance = ToNull.new
       expect(instance.implements).to eq(Formatter::AllNotifications)
     end
-
   end # context
 
 
@@ -51,11 +48,8 @@ describe ToNull do
       expect { service.start!(macro_coll) }.not_to raise_error
     end
   end # context
-
 end # describe
-
 end # module
-
 end # module
 
 

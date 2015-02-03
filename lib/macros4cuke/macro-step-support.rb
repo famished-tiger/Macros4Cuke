@@ -4,7 +4,6 @@ require_relative 'exceptions'
 require_relative 'macro-collection'
 
 module Macros4Cuke # Module used as a namespace
-
 # Mix-in module that should be extending World objects in Cucumber.
 # Synopsis (in env.rb):
 #
@@ -59,9 +58,7 @@ module MacroStepSupport
   def clear_macros()
     MacroCollection.instance.clear
   end
-
 end # module
-
 end # module
 
 

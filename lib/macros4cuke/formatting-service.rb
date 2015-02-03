@@ -7,7 +7,6 @@ require_relative './formatter/all-notifications'
 
 
 module Macros4Cuke # Module used as a namespace
-
 # A worker class that drives the rendering of macro-steps in
 # any registered format.
 class FormattingService
@@ -66,9 +65,7 @@ class FormattingService
       end
     end
   end
-
 end # class
-
 end # module
 
 # End of file

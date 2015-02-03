@@ -5,8 +5,6 @@ require_relative 'macro-collection'
 
 
 module Macros4Cuke # Module used as a namespace
-
-
 # A Coll(ection)WalkerFactory object is a factory that creates
 # an enumerator that itself walks in the passed macro collection object.
 # The walker performs a depth-first visit and yields visit events.
@@ -110,12 +108,7 @@ class CollWalkerFactory
 
     return [:on_section, nesting_level, current_node.name]
   end
-
-
-
-
 end # class
-
 end # module
 
 # End of file

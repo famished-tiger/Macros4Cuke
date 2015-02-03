@@ -6,7 +6,6 @@ require_relative 'exceptions'
 require_relative 'templating/engine'
 
 module Macros4Cuke # Module used as a namespace
-
 # A macro-step object is a Cucumber step that is itself
 # an aggregation of lower-level sub-steps.
 # When a macro-step is used in a scenario, then its execution is equivalent
@@ -214,7 +213,7 @@ class MacroStep
     unless use_table?
       substepsVars.each do |substep_arg|
         next if thePhraseArgs.include?(substep_arg) ||
-        BuiltinParameters.include?(substep_arg)
+                BuiltinParameters.include?(substep_arg)
         
         fail(UnreachableSubstepArgument.new(substep_arg))
       end
@@ -229,9 +228,7 @@ class MacroStep
   def use_table?()
     return key =~ /_T$/
   end
-
 end # class
-
 end # module
 
 # End of file

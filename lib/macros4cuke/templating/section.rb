@@ -5,12 +5,9 @@ require_relative 'unary-element' # Load the superclass
 
 
 module Macros4Cuke # Module used as a namespace
-
-
 # Module containing all classes implementing the simple template engine
 # used internally in Macros4Cuke.
 module Templating
-
 # Base class used internally by the template engine.
 # Represents a section in a template, that is,
 # a set of template elements for which its rendition depends
@@ -41,8 +38,6 @@ class Section  < UnaryElement
           subResult << a_child.name
         when Section
           subResult.concat(a_child.variables)
-        else
-        # Do nothing
       end
     end
 
@@ -58,7 +53,6 @@ class Section  < UnaryElement
     msg = "Method Section.#{__method__} must be implemented in subclass."
     fail(NotImplementedError, msg)
   end
-
 end # class
 
 
@@ -103,14 +97,9 @@ class ConditionalSection < Section
   def to_s()
     return "<?#{name}>"
   end
-
 end # class
-
-
 SectionEndMarker = Struct.new(:name)
-
 end # module
-
 end # module
 
 # End of file

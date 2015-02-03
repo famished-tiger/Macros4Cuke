@@ -13,12 +13,9 @@ require_relative 'section'  # Load the Section and ConditionalSection
 
 
 module Macros4Cuke # Module used as a namespace
-
-
 # Module containing all classes implementing the simple template engine
 # used internally in Macros4Cuke.
 module Templating
-
 # A very simple implementation of a templating engine.
 # Earlier versions of Macros4Cuke relied on the logic-less
 # Mustache template engine.
@@ -77,7 +74,7 @@ class Engine
       # -In case of consecutive eol's only one is rendered.
       # -In case of comment followed by one eol, both aren't rendered
       unless element.is_a?(EOLine) &&
-        (prev.is_a?(EOLine) || prev.is_a?(Comment))
+             (prev.is_a?(EOLine) || prev.is_a?(Comment))
         subResult << element.render(aContextObject, theLocals)
       end
       prev = element
@@ -99,9 +96,6 @@ class Engine
 
           when Section
             subResult.concat(element.variables)
-
-          else
-          # Do nothing
         end
       end
 
@@ -316,16 +310,12 @@ class Engine
       msg = 'found while no corresponding section is open.'
       fail(StandardError, msg_prefix + msg)
     end
-    if marker.name != sections.last.name
-      msg = "doesn't match current section '#{sections.last.name}'."
-      fail(StandardError, msg_prefix + msg)
-    end
+    return if marker.name == sections.last.name
+    msg = "doesn't match current section '#{sections.last.name}'."
+    fail(StandardError, msg_prefix + msg)
   end
-
 end # class
-
 end # module
-
 end # module
 
 # End of file

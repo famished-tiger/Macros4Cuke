@@ -8,9 +8,7 @@ require_relative '../../lib/macros4cuke/exceptions'
 require_relative '../../lib/macros4cuke/application'
 
 module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
-
 describe Application do
-
   before(:each) do
     @current_wkdir = Dir.getwd
     Dir.chdir(File.dirname(__FILE__))
@@ -106,11 +104,8 @@ MSG_END
       File.delete(".#{file_path}/#{file_name}")
       delete_dirs('.' + file_path)
     end    
-  
   end # context
-
 end # describe
-
 end # module
 
 

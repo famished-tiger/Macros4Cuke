@@ -2,12 +2,10 @@ require 'rubygems'
 require_relative './lib/macros4cuke/constants'
 
 namespace :gem do
-
 desc 'Push the gem to rubygems.org'
 task :push do
   system("gem push macros4cuke-#{Macros4Cuke::Version}.gem")
 end
-
 end # namespace
 
 # Testing-specific tasks

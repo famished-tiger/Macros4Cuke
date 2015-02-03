@@ -5,7 +5,6 @@ require 'singleton'  # We'll use the Singleton design pattern for this class.
 require_relative 'macro-step'
 
 module Macros4Cuke # Module used as a namespace
-
 # Represents a container of macros.
 # It gathers all the macros encountered by Cucumber while "executing"
 # the feature files.
@@ -76,9 +75,7 @@ class MacroCollection
     key = MacroStep.macro_key(aMacroPhrase, useTable, :invokation)
     return macro_steps[key]
   end
-
 end # class
-
 end # module
 
 

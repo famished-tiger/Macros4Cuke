@@ -5,7 +5,6 @@ require 'erb'
 require_relative 'cli/cmd-line'
 
 module Macros4Cuke # Module used as a namespace
-
 # Runner for the Macros4Cuke application.
 class Application
   attr_reader(:options)
@@ -69,9 +68,7 @@ class Application
       exit
     end
   end
-
 end # class
-
 end # module
 
 # End of file

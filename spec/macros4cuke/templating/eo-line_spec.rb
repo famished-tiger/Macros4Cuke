@@ -6,18 +6,14 @@ require_relative '../../spec_helper'
 require_relative '../../../lib/macros4cuke/templating/eo-line'
 
 module Macros4Cuke
-
 module Templating # Open this namespace to get rid of module qualifier prefixes
-
-
 describe EOLine do
   subject { EOLine.new }
 
   context 'Creation and initialization:' do
     it 'should be created without argument' do
       expect { EOLine.new }.not_to raise_error
-    end
-    
+    end   
   end # context
   
   context 'Provided services:' do
@@ -29,11 +25,8 @@ describe EOLine do
     end
   
   end # context  
-
 end # describe
-
 end # module
-
 end # module
 
 # End of file

@@ -8,11 +8,8 @@ require 'cucumber/platform'
 require_relative '../constants'
 
 module Macros4Cuke # Module used as a namespace
-
 # Module dedicated to the command-line interface
 module CLI
-
-
 # Manages the application command-line interface (CLI).
 # It is merely a thin wrapper around the OptionParser library.
 # Responsibilities:
@@ -70,7 +67,6 @@ EOS
         puts msg
         options[:version] = true
       end 
-
     end
   end
 
@@ -132,11 +128,8 @@ EOS
     puts ShortHelpMsg
     exit
   end
-
 end # class
-
 end # module
-
 end # module
 
 # End of file

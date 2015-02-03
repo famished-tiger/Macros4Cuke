@@ -5,20 +5,15 @@ require_relative 'unary-element' # Load the superclass
 
 
 module Macros4Cuke # Module used as a namespace
-
 # Module containing all classes implementing the simple template engine
 # used internally in Macros4Cuke.
 module Templating
-
   # Class used internally by the template engine.
   # Represents a named placeholder in a template, that is,
   # a name placed between <..> in the template.
   # At rendition, a placeholder is replaced by the text value
   # that is associated with it.
   class Placeholder < UnaryElement
-
-    public
-
     # Render the placeholder given the passed arguments.
     # This method has the same signature as the {Engine#render} method.
     # @return [String] The text value assigned to the placeholder.
@@ -42,11 +37,8 @@ module Templating
 
       return result
     end
-
   end # class
-
 end # module
-
 end # module
 
 # End of file

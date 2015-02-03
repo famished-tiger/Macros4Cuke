@@ -7,7 +7,6 @@ require_relative '../../lib/macros4cuke/macro-step' # The class under test
 
 
 module Macros4Cuke # Open the module to avoid lengthy qualified names
-
 describe MacroStep do
   let(:sample_phrase) { 'enter my credentials as <userid>' }
 
@@ -66,12 +65,10 @@ SNIPPET
     it 'should know the tags(placeholders) from its phrase and template' do
       expect(subject.args).to eq(%w(userid password))
     end
-
   end # context
 
 
   context 'Provided services:' do
-
     let(:phrase_instance) { 'enter my credentials as "nobody"' }
     it 'should render the substeps' do
       text = subject.expand(phrase_instance, [ %w(password no-secret) ])
@@ -150,12 +147,8 @@ SNIPPET
       expected = substeps.gsub(/<quotes>/, '"""')
       expect(actual).to eq(expected)
     end
-
-
   end # context
-
 end # describe
-
 end # module
 
 # End of file

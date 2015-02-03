@@ -6,9 +6,7 @@ require_relative '../spec_helper'
 require_relative '../../lib/macros4cuke/macro-collection'
 
 module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
-
 describe MacroCollection do
-
   let(:singleton) { MacroCollection.instance }
 
   before(:all) do
@@ -19,8 +17,7 @@ describe MacroCollection do
     it 'should be empty' do
       expect(singleton.macro_steps).to be_empty
     end
-
-  end
+  end # context
 
   context 'Provided services:' do
     let(:sample_substeps) do
@@ -60,12 +57,8 @@ SNIPPET
 SNIPPET
       expect(rendered).to eq(expected)
     end
-
   end # context
-
 end # describe
-
 end # module
-
 
 # End of file

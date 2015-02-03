@@ -3,10 +3,8 @@
 require_relative '../constants'
 
 module Macros4Cuke # Module used as a namespace
-
 # Namespace for all formatters of MacroCollection and MacroStep objects
 module Formatter
-
 # A macro-step formatter that outputs to the given IO the macro-steps from a
 # macro collection into a Gherkin feature file.
 class ToGherkin
@@ -71,12 +69,8 @@ class ToGherkin
   def indentation(aLevel)
     return '  ' * (aLevel)
   end
-
-
 end # class
-
 end # module
-
 end # module
 
 # End of file

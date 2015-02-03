@@ -7,7 +7,6 @@ require_relative '../../lib/macros4cuke/macro-step-support'
 
 
 module Macros4Cuke # Open the module to avoid lengthy qualified names
-
 # Class created just for testing purposes.
 class MyWorld
   include Macros4Cuke::MacroStepSupport
@@ -20,8 +19,6 @@ class MyWorld
     @substeps ||= []
     @substeps << substep_text
   end
-
-
 end # class
 
 describe MacroStepSupport do
@@ -71,7 +68,6 @@ SNIPPET
   end # context
 
   context 'Invoking macro(s):' do
-
     it 'should complain when invoking an unknown macro-step' do
       phrase_unknown = 'dream of a perfect world'
       msg = "Unknown macro-step with phrase: 'dream of a perfect world'."
@@ -88,22 +84,17 @@ SNIPPET
       expected_text = m1_substeps.gsub(/<\S+>/, param_assignments)
       expect(world.substeps.first).to eq(expected_text)
     end
-
   end # context
 
   context 'Clearing macro(s):' do
-
     it 'should clear all macros' do
       expect { world.clear_macros }.not_to raise_error
 
       # Control the post-condition
       expect(MacroCollection.instance.macro_steps).to be_empty
     end
-
   end # context
-
 end # describe
-
 end # module
 
 

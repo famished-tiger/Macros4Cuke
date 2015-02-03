@@ -14,10 +14,7 @@ require_relative '../../../lib/macros4cuke/formatting-service'
 require_relative '../../../lib/macros4cuke/formatter/to-gherkin'
 
 module Macros4Cuke
-
 module Formatter # Open this namespace to get rid of module qualifier prefixes
-
-
 describe ToGherkin do
   include UseSampleCollection # Add convenience methods for sample collection
 
@@ -35,12 +32,10 @@ describe ToGherkin do
 
 
   context 'Creation and initialization:' do
-
     it 'should be created with an IO object' do
       an_io = StringIO.new
       expect { ToGherkin.new(an_io) }.not_to raise_error
     end
-
   end # context
 
   context 'Provided services:' do
@@ -117,13 +112,9 @@ SNIPPET
 
       expect(actual_lines).to eq(expected_lines)
     end
-
   end # context
-
 end # describe
-
 end # module
-
 end # module
 
 # End of file

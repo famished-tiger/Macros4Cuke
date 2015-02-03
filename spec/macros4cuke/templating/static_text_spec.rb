@@ -6,10 +6,7 @@ require_relative '../../spec_helper'
 require_relative '../../../lib/macros4cuke/templating/static-text'
 
 module Macros4Cuke
-
 module Templating # Open this namespace to get rid of module qualifier prefixes
-
-
 describe StaticText do
   let(:sample_text) { 'Some text' }
   
@@ -35,11 +32,8 @@ describe StaticText do
     end
   
   end # context  
-
 end # describe
-
 end # module
-
 end # module
 
 # End of file

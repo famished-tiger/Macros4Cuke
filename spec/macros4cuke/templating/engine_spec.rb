@@ -7,10 +7,7 @@ require_relative '../../../lib/macros4cuke/templating/engine'
 
 
 module Macros4Cuke
-
 module Templating # Open this namespace to get rid of module qualifier prefixes
-
-
 describe Engine do
   # Sample template (consisting of a sequence of steps)
   let(:sample_template) do
@@ -176,11 +173,9 @@ SNIPPET
       expect { Engine.parse(sample_text) }.to raise_error(
         StandardError, error_message)
     end
-
   end # context
 
   context 'Creation and initialization:' do
-
     it 'should accept an empty template text' do
       expect { Engine.new '' }.not_to raise_error
     end
@@ -246,11 +241,9 @@ SNIPPET
       ' while no corresponding section is open.'
       expect { Engine.new wrong_end }.to raise_error(StandardError, msg)
     end
-
   end # context
 
   context 'Provided services:' do
-
     it 'should know the variable(s) it contains' do
       # Case using the sample template
       expect(subject.variables).to be == %w(userid password)
@@ -352,11 +345,8 @@ SNIPPET
       expect(rendered_text).to eq(expected)
     end
   end # context
-
 end # describe
-
 end # module
-
 end # module
 
 # End of file

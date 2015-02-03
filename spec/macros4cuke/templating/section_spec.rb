@@ -9,9 +9,7 @@ require_relative '../../../lib/macros4cuke/templating/section'
 
 
 module Macros4Cuke
-
 module Templating # Open this namespace to get rid of module qualifier prefixes
-
 # Spec for abstract class Section.
 describe Section do
   # Default instantiation rule
@@ -26,7 +24,6 @@ describe Section do
   end
 
   context 'Creation and initialization' do
-
     it 'should be created with a variable name' do
       expect { Section.new('foobar') }.not_to raise_error
     end
@@ -38,7 +35,6 @@ describe Section do
     it 'should have no child at start' do
        expect(subject.children).to be_empty
     end
-
   end # context
 
   context 'Provided services:' do
@@ -75,18 +71,14 @@ describe Section do
       expect { subject.send(:render, Object.new, {}) }.to raise_error(
         NotImplementedError, error_message)
     end
-
   end # context
-
 end # describe
 
 
 
 
 describe ConditionalSection do
-
   context 'Creation and initialization:' do
-
     it 'should be created with a variable name and a boolean' do
       expect { ConditionalSection.new('foobar', false) }.not_to raise_error
       expect { ConditionalSection.new('foobar', true) }.not_to raise_error
@@ -98,7 +90,6 @@ describe ConditionalSection do
         expect(instance.existence).to eq(existence)
       end
     end
-
   end # context
 
   context 'Provided services:' do
@@ -157,13 +148,9 @@ describe ConditionalSection do
       rendered_text = instance.render(Object.new, locals)
       expect(rendered_text).to eq('')
     end
-
   end # context
-
 end # describe
-
 end # module
-
 end # module
 
 # End of file

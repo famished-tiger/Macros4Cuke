@@ -9,7 +9,6 @@ require_relative 'use-sample-collection'
 require_relative '../../lib/macros4cuke/coll-walker-factory'
 
 module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
-
 describe CollWalkerFactory do
   include UseSampleCollection # Add convenience methods for sample collection
 
@@ -28,7 +27,6 @@ describe CollWalkerFactory do
     it 'should be created without parameter' do
       expect { CollWalkerFactory.new }.not_to raise_error
     end
-
   end # context
 
   context 'Provided factory services:' do
@@ -247,7 +245,6 @@ describe CollWalkerFactory do
         end
       end
       expect { subject.next }.to raise_error(StopIteration)
-
     end
 
     # Must be last test script since it pollutes the macro-collection
@@ -258,11 +255,8 @@ describe CollWalkerFactory do
       err_msg = "Don't know how to format a Symbol."
       expect { subject.each { |_| } }.to raise_error(err_type, err_msg)
     end
-
   end # context
-
 end # describe
-
 end # module
 
 

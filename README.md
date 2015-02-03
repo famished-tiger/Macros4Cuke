@@ -558,4 +558,4 @@ Macros with Cucumber is a hot topic, so it is good to know what other people say
 
 Copyright
 ---------
-Copyright (c) 2014, Dimitri Geshef. Macros4Cuke is released under the MIT License see [LICENSE.txt](https://github.com/famished-tiger/Macros4Cuke/blob/master/LICENSE.txt) for details.
+Copyright (c) 2014-2015, Dimitri Geshef. Macros4Cuke is released under the MIT License see [LICENSE.txt](https://github.com/famished-tiger/Macros4Cuke/blob/master/LICENSE.txt) for details.

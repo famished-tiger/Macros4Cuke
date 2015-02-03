@@ -3,7 +3,6 @@
 
 
 module Macros4Cuke # Module used as a namespace
-
   # Base class used internally by the template engine.
   # The generalization of any element from a template that has one variable
   # whose actual value influences the rendition.
@@ -29,9 +28,6 @@ module Macros4Cuke # Module used as a namespace
 
       return actual_value
     end
-
   end # class
-
 end # module
-
 # End of file
