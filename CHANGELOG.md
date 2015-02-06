@@ -1,4 +1,10 @@
-### 0.5.08 / 2015-02-xx
+### 0.5.09 / 2015-02-06
+* [CHANGE] Minimal code layout reformat to please Rubocop 0.29.0
+* [CHANGE] File `README.md` added licensing badge (MIT license)
+* [FIX] File `.rubocop.yml`: removal of setting for obsolete EmptyLinesAroundBody cop.
+
+
+### 0.5.08 / 2015-02-03
 * [CHANGE] Code layout reformat to please Rubocop 0.28.0 (Removal of 'Extra empty line detected at...' offenses)
 * [TEST] Regression tests with Cucumber 1.3.18: all pass
 

@@ -3,6 +3,7 @@ AllCops:
     - 'examples/**/*'
     - 'features/**/*'
     - 'gems/**/*'
+    - 'lab/**/*'
 
 AbcSize:
   Max: 45
@@ -38,10 +39,7 @@ Documentation:
   Enabled: false
   
 EmptyLines:
-  Enabled: false
-  
-EmptyLinesAroundBody:
-  Enabled: false  
+  Enabled: false 
 
 Encoding:
   Enabled: false
@@ -63,6 +61,9 @@ NonNilCheck:
 
 NumericLiterals:
   Enabled: false
+  
+PerceivedComplexity:
+  Max: 10
   
 RaiseArgs:
   Enabled: false
