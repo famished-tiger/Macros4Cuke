@@ -12,14 +12,17 @@ class CollWalkerFactory
   # Structure used internally by the walker
   StringNode = Struct.new(:event, :text, :extra)
 
+  # Factory method.
+  # @param aMacroCollection [MacroCollection] The collection of macros
+  #   encountered so far
+  # @return [Enumerator] 
   def build_walker(aMacroCollection)
     level = 0
     collection = aMacroCollection
     current_node = collection
     backlog = collection.macro_steps.values
 
-    visitor = Enumerator.new do
-      |result_receiver| # 'result_receiver' is a Yielder
+    visitor = Enumerator.new do |result_receiver| # argument is a Yielder
       loop do
         case current_node
           when MacroCollection

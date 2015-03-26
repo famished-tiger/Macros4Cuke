@@ -1,3 +1,6 @@
+### 0.5.10 / 2015-03-26
+* [CHANGE] Minimal code layout reformat in `CollWalkerFactory#build_walker` to please Rubocop 0.29.1
+
 ### 0.5.09 / 2015-02-06
 * [CHANGE] Minimal code layout reformat to please Rubocop 0.29.0
 * [CHANGE] File `README.md` added licensing badge (MIT license)
