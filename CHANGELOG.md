@@ -1,4 +1,8 @@
-### 0.5.11 / 2015-03-26
+### 0.5.12 / 2015-04-02
+* [FIX] File `.travis.yml`: Removed MRI Ruby 1.9.2 since it is rejected by latest Cucumber version.
+* [NEW] File `.travis.yml` Added support for Ruby 2.2.0
+
+### 0.5.11 / 2015-04-02
 * [TEST] Regression tests with Cucumber 2.0.0: all pass, no code change required
 * [CHANGE] File `README.md` Mention that _Macros4Cuke_ works with Cucumber 2.0.0
 
