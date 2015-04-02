@@ -1,3 +1,7 @@
+### 0.5.11 / 2015-03-26
+* [TEST] Regression tests with Cucumber 2.0.0: all pass, no code change required
+* [CHANGE] File `README.md` Mention that _Macros4Cuke_ works with Cucumber 2.0.0
+
 ### 0.5.10 / 2015-03-26
 * [CHANGE] Minimal code layout reformat in `CollWalkerFactory#build_walker` to please Rubocop 0.29.1
 

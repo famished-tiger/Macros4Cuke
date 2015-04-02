@@ -15,7 +15,7 @@ __Macros4Cuke__ is a Cucumber extension that adds a macro facility for your Cucu
   All this can be done directly in your feature files without programming step definitions.
 
 ### Highlights ###
-* Works with out-of-the-box Cucumber
+* Works with out-of-the-box Cucumber (including version 2.0.0!)
 * Simple installation and setup (no programming required),
 * Familiar syntax for macro-step definitions,
 * Substep sequence can be of arbitrary length,
