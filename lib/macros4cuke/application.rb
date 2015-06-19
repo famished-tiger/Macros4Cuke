@@ -40,7 +40,7 @@ class Application
   def setup_project(aPath)
     file_name = 'use_macros4cuke'
     prefix = aPath.relative? ? './' : ''
-    destination = prefix +  aPath.to_s + '/' + file_name + '.rb'
+    destination = prefix + aPath.to_s + '/' + file_name + '.rb'
 
     begin
       fail SupportFileExists.new(destination) if File.exist?(destination)

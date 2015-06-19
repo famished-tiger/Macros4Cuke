@@ -7,12 +7,17 @@ AllCops:
 
 AbcSize:
   Max: 45
-  Enabled: true
     
 # This is disabled because some demos use UTF-8
 AsciiComments:
   Enabled: false
-
+  
+Attr:
+  Enabled: false
+  
+BlockComments:
+  Enabled: false
+  
 CaseIndentation:
   IndentWhenRelativeTo: end
   IndentOneStep: true
@@ -56,6 +61,10 @@ MethodLength:
   Max: 50
   CountComments: false 
  
+# Avoid modules longer than 500 lines of code 
+ModuleLength:
+  Max: 500
+ 
 NonNilCheck:
   Enabled: false
 
@@ -70,6 +79,10 @@ RaiseArgs:
   
 RedundantReturn:
   Enabled: false
+  
+RegexpLiteral:
+  EnforcedStyle: mixed
+  AllowInnerSlashes: false
 
 SpaceInsideBrackets:
   Enabled: false
@@ -77,3 +90,5 @@ SpaceInsideBrackets:
 TrailingWhitespace:
   Enabled: false
   
+VariableName:
+  Enabled: false  

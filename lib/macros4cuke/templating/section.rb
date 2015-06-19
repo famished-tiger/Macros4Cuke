@@ -12,7 +12,7 @@ module Templating
 # Represents a section in a template, that is,
 # a set of template elements for which its rendition depends
 # on the value of a variable.
-class Section  < UnaryElement
+class Section < UnaryElement
   # The child elements of the section
   attr_reader(:children)
 

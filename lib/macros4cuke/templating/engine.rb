@@ -249,7 +249,7 @@ class Engine
   # @param aText [String] The text that is enclosed between chevrons.
   def parse_tag(aText)
     # Recognize the first character
-    if aText =~ /^[\?\/]/
+    if aText =~ %r{^[\?/]}
       matching = DisallowedSigns.match(aText[1..-1])
     else
       # Disallow punctuation and delimiter signs in tags.

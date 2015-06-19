@@ -78,7 +78,7 @@ class CollWalkerFactory
 
   # Add children elements to the visit backlog
   def add_children(anEnumerable, theBacklog)
-    anEnumerable.reverse.each do |elem|
+    anEnumerable.reverse_each do |elem|
       theBacklog.unshift(elem)
     end
   end

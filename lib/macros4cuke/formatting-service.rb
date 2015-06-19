@@ -32,7 +32,7 @@ class FormattingService
     supported_events = aFormatter.implements
 
     # Complain if list is empty or nil
-    if supported_events.nil? ||  supported_events.empty?
+    if supported_events.nil? || supported_events.empty?
       fail(NoFormattingEventForFormatter.new(aFormatter))
     end
 

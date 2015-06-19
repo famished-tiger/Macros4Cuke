@@ -218,7 +218,7 @@ SNIPPET
 
     it 'should complain when a section has no closing tag' do
       # Removing an end of section tag...
-      text_w_open_section = sophisticated_template.sub(/<\/address>/, '')
+      text_w_open_section = sophisticated_template.sub(%r{</address>}, '')
 
       error_message = 'Unterminated section <?address>.'
       expect { Engine.new text_w_open_section }.to raise_error(
@@ -227,7 +227,7 @@ SNIPPET
 
     it 'should complain when a closing tag has no corresponding opening tag' do
       # Replacing an end of section tag by another...
-      text_w_wrong_end = sophisticated_template.sub(/<\/address>/, '</foobar>')
+      text_w_wrong_end = sophisticated_template.sub(%r{</address>}, '</foobar>')
 
       msg = "End of section</foobar> doesn't match current section 'address'."
       expect { Engine.new text_w_wrong_end }.to raise_error(
