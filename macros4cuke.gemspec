@@ -43,17 +43,17 @@ EOSTRING
   pkg.require_path = 'lib'
 
   pkg.extra_rdoc_files = ['README.md']
-  pkg.add_runtime_dependency('cucumber', ['>= 0.5.0'])
+  pkg.add_runtime_dependency('cucumber', ['>= 1.3.18'])
 
-  pkg.add_development_dependency('rake', ['>= 0.8.0'])
-  pkg.add_development_dependency('rspec', ['>= 2.11.0'])
-  pkg.add_development_dependency('simplecov', ['>= 0.5.0'])
+  pkg.add_development_dependency('rake', ['>= 0.9.2'])
+  pkg.add_development_dependency('rspec', ['>= 3.0.0'])
+  pkg.add_development_dependency('simplecov', ['>= 0.6.2'])
   pkg.add_development_dependency('rubygems', ['>= 2.0.0'])
 
   pkg.bindir = 'bin'
   pkg.executables = %w(macros4cuke)
   pkg.license = 'MIT'
-  pkg.required_ruby_version = '>= 1.9.1'
+  pkg.required_ruby_version = '>= 1.9.3'
 end
 
 if $PROGRAM_NAME == __FILE__

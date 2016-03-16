@@ -1,3 +1,6 @@
+### 0.5.14 / 2016-03-16
+* [FIX] File `macro_steps`: Cucumber complained about allusion to deprecated class `Cucumber::Ast::Table`.
+
 ### 0.5.13 / 2015-06-19
 * [CHANGE] Code re-formatted to please Rubocop 0.32.0
 * [FIX] File `.rubocop.yml`: disable some cop settings that were too loud.
