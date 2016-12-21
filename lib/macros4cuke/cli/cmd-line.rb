@@ -70,8 +70,6 @@ EOS
     end
   end
 
-  public
-
   # Perform the command-line parsing
   def parse!(theCmdLineArgs)
     begin
@@ -112,7 +110,7 @@ EOS
     feature_path = dirs.reduce(Pathname.getwd) do |path, dir_name|
       path += dir_name
       unless path.exist?
-        fail DirectoryNotFound.new(path.relative_path_from(Pathname.getwd))
+        raise DirectoryNotFound.new(path.relative_path_from(Pathname.getwd))
       end
       path
     end

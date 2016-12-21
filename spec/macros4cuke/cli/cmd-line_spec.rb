@@ -134,7 +134,7 @@ END_MESSAGE
 
     it 'should complain when an option misses an argument' do
       hijack_stderr
-      err_msg =  <<-END_MESSAGE
+      err_msg = <<-END_MESSAGE
 No argument provided with command line option: --setup
 END_MESSAGE
 
@@ -148,7 +148,7 @@ END_MESSAGE
 
     it "should complain when project to setup doesn't exist" do
       hijack_stderr
-      err_msg =  <<-END_MESSAGE
+      err_msg = <<-END_MESSAGE
 Error in command-line:
 Cannot find the directory 'not_a_dir'.
 END_MESSAGE
@@ -166,7 +166,7 @@ END_MESSAGE
       mk_subdir('test_dir')
 
       hijack_stderr
-      err_msg =  <<-END_MESSAGE
+      err_msg = <<-END_MESSAGE
 Error in command-line:
 Cannot find the directory 'test_dir/features'.
 END_MESSAGE
@@ -181,7 +181,7 @@ END_MESSAGE
 
       mk_subdir('test_dir/features')
       hijack_stderr
-      err_msg =  <<-END_MESSAGE
+      err_msg = <<-END_MESSAGE
 Error in command-line:
 Cannot find the directory 'test_dir/features/support'.
 END_MESSAGE

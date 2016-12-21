@@ -22,8 +22,6 @@ class Section < UnaryElement
     @children = []
   end
 
-  public
-
   # Add a child element as member of the section
   def add_child(aChild)
     children << aChild
@@ -51,7 +49,7 @@ class Section < UnaryElement
   #   Returns an empty string when no value is assigned to the placeholder.
   def render(_, _)
     msg = "Method Section.#{__method__} must be implemented in subclass."
-    fail(NotImplementedError, msg)
+    raise(NotImplementedError, msg)
   end
 end # class
 
@@ -71,8 +69,6 @@ class ConditionalSection < Section
     super(aVarName)
     @existence = renderWhenExisting
   end
-
-  public
 
   # Render the placeholder given the passed arguments.
   # This method has the same signature as the {Engine#render} method.

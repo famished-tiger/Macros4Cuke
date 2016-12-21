@@ -9,7 +9,7 @@ require_relative 'eo-line'
 require_relative 'comment'
 require_relative 'template-element'
 require_relative 'placeholder'
-require_relative 'section'  # Load the Section and ConditionalSection
+require_relative 'section' # Load the Section and ConditionalSection
 
 
 module Macros4Cuke # Module used as a namespace
@@ -32,7 +32,7 @@ class Engine
   # between chevrons <...> template tags.
   DisallowedSigns = begin
     # Use concatenation (+) to work around Ruby bug!
-    forbidden =  ' !"#' + "$%&'()*+,-./:;<=>?[\\]^`{|}~"
+    forbidden = ' !"#' + "$%&'()*+,-./:;<=>?[\\]^`{|}~"
     all_escaped = []
     forbidden.each_char { |ch| all_escaped << Regexp.escape(ch) }
     pattern = all_escaped.join('|')
@@ -53,8 +53,6 @@ class Engine
     @source = aSourceTemplate
     @representation = compile(aSourceTemplate)
   end
-
-  public
 
   # Render the template within the given scope object and
   # with the locals specified.
@@ -112,7 +110,7 @@ class Engine
     scanner = StringScanner.new(aTextLine)
     result = []
 
-    if scanner.check(/\s*#/)  # Detect comment line
+    if scanner.check(/\s*#/) # Detect comment line
       result << [:comment, aTextLine]
     else
       until scanner.eos?
@@ -132,8 +130,6 @@ class Engine
     return result
   end
 
-  private
-
   # Called when the given text line could not be parsed.
   # Raises an exception with the syntax issue identified.
   # @param aTextLine [String] A text line from the template.
@@ -152,13 +148,14 @@ class Engine
         when '>' then unbalance -= 1
       end
 
-      fail(StandardError, "Nested opening chevron '<'.") if unbalance > 1
-      fail(StandardError, "Missing opening chevron '<'.") if unbalance < 0
+      raise(StandardError, "Nested opening chevron '<'.") if unbalance > 1
+      raise(StandardError, "Missing opening chevron '<'.") if unbalance < 0
     end
 
-    fail(StandardError, "Missing closing chevron '>'.") if unbalance == 1
+    raise(StandardError, "Missing closing chevron '>'.") if unbalance == 1
   end
-
+  
+  private  
 
   # Create the internal representation of the given template.
   def compile(aSourceTemplate)
@@ -172,7 +169,7 @@ class Engine
         # A tag text cannot be empty nor blank
         next if (kind != :dynamic) || !text.strip.empty?
         
-        fail(EmptyArgumentError.new(line.strip))
+        raise(EmptyArgumentError.new(line.strip))
       end
 
       line_items
@@ -236,10 +233,10 @@ class Engine
     (kind, text) = aCouple
 
     result = case kind
-      when :static then StaticText.new(text)
-      when :comment then Comment.new(text)
-      when :dynamic then parse_tag(text)
-    end
+               when :static then StaticText.new(text)
+               when :comment then Comment.new(text)
+               when :dynamic then parse_tag(text)
+             end
 
     return result
   end
@@ -255,17 +252,17 @@ class Engine
       # Disallow punctuation and delimiter signs in tags.
       matching = DisallowedSigns.match(aText)
     end
-    fail(InvalidCharError.new(aText, matching[0])) if matching
+    raise(InvalidCharError.new(aText, matching[0])) if matching
 
     result = case aText[0, 1]
-      when '?'
-        ConditionalSection.new(aText[1..-1], true)
+               when '?'
+                 ConditionalSection.new(aText[1..-1], true)
 
-      when '/'
-        SectionEndMarker.new(aText[1..-1])
-      else
-        Placeholder.new(aText)
-    end
+               when '/'
+                 SectionEndMarker.new(aText[1..-1])
+               else
+                 Placeholder.new(aText)
+             end
 
     return result
   end
@@ -273,7 +270,7 @@ class Engine
   # Transform a flat sequence of elements into a hierarchy of sections.
   # @param flat_sequence [Array] a linear list of elements (including sections)
   def compile_sections(flat_sequence)
-    open_sections = []  # The list of nested open sections
+    open_sections = [] # The list of nested open sections
 
     compiled = flat_sequence.each_with_object([]) do |element, subResult|
       case element
@@ -294,8 +291,8 @@ class Engine
     end
 
     unless open_sections.empty?
-      error_message =  "Unterminated section #{open_sections.last}."
-      fail(StandardError, error_message)
+      error_message = "Unterminated section #{open_sections.last}."
+      raise(StandardError, error_message)
     end
 
     return compiled
@@ -308,11 +305,11 @@ class Engine
 
     if sections.empty?
       msg = 'found while no corresponding section is open.'
-      fail(StandardError, msg_prefix + msg)
+      raise(StandardError, msg_prefix + msg)
     end
     return if marker.name == sections.last.name
     msg = "doesn't match current section '#{sections.last.name}'."
-    fail(StandardError, msg_prefix + msg)
+    raise(StandardError, msg_prefix + msg)
   end
 end # class
 end # module

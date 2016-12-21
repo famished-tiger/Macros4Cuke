@@ -1,5 +1,4 @@
 # File: macro-step_spec.rb
-
 require_relative '../spec_helper'
 
 # The class under test
@@ -50,29 +49,31 @@ SNIPPET
     end
 
     it 'should complain when entering the same macro again' do
+      txt = phrase1
+      substeps = m1_substeps
       # Error case: trying to register another macro with same key/phrase.
-      error_type = Macros4Cuke::DuplicateMacroError
+      exc = Macros4Cuke::DuplicateMacroError
       msg = "A macro-step with phrase 'enter the credentials' already exists."
-      expect { world.add_macro(phrase1, m1_substeps, true) }.to raise_error(
-        error_type, msg)
+      expect { world.add_macro(txt, substeps, true) }.to raise_error(exc, msg)
     end
 
     it 'should complain macro uses no table and phrase is parameterless' do
       # Error case: substeps have arguments,
       # but the macro has no mechanism to pass the needed data.
-      phrase = 'fill in the credentials'
+      txt = 'fill in the credentials'
+      substeps = m1_substeps
+      exc = Macros4Cuke::UnreachableSubstepArgument
       msg = "The sub-step argument 'userid' does not appear in the phrase."
-      expect { world.add_macro(phrase, m1_substeps, false) }.to raise_error(
-        Macros4Cuke::UnreachableSubstepArgument, msg)
+      expect { world.add_macro(txt, substeps, false) }.to raise_error(exc, msg)
     end
   end # context
 
   context 'Invoking macro(s):' do
     it 'should complain when invoking an unknown macro-step' do
       phrase_unknown = 'dream of a perfect world'
+      exc = Macros4Cuke::UnknownMacroError
       msg = "Unknown macro-step with phrase: 'dream of a perfect world'."
-      expect { world.invoke_macro(phrase_unknown) }.to raise_error(
-        Macros4Cuke::UnknownMacroError, msg)
+      expect { world.invoke_macro(phrase_unknown) }.to raise_error(exc, msg)
     end
 
     it "should call the 'steps' method with substeps and variables" do

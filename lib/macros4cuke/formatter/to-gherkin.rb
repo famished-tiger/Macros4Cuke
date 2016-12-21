@@ -19,8 +19,6 @@ class ToGherkin
     @step_count = 0
   end
 
-  public
-
   # Tell which notifications this formatter subscribes to.
   def implements()
     return [:on_collection, :on_step, :on_step_end, :on_phrase, :on_source]
@@ -49,16 +47,16 @@ class ToGherkin
   def on_phrase(aLevel, aPhraseText, useTable)
     suffix = useTable ? ':' : ''
     io.print "#{indentation(aLevel)}Given I define the step "
-    io.puts %Q("* I [#{aPhraseText}]#{suffix}" to mean:)
+    io.puts %("* I [#{aPhraseText}]#{suffix}" to mean:)
   end
 
   def on_source(aLevel, aSourceText)
     ljust = indentation(aLevel)
-    triple_quotes = %Q(#{ljust}""")
+    triple_quotes = %(#{ljust}""")
     io.puts triple_quotes
 
     # Indent source text
-    indented_text = aSourceText.gsub(/^/m, "#{ljust}")
+    indented_text = aSourceText.gsub(/^/m, ljust.to_s)
 
     io.puts indented_text
     io.puts triple_quotes
@@ -67,7 +65,7 @@ class ToGherkin
   private
 
   def indentation(aLevel)
-    return '  ' * (aLevel)
+    return '  ' * aLevel
   end
 end # class
 end # module

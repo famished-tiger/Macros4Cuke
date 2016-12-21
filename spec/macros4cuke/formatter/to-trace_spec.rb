@@ -1,5 +1,4 @@
 # File: to-trace_spec.rb
-
 require 'stringio'
 require_relative '../../spec_helper'
 

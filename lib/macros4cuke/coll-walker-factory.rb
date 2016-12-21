@@ -62,7 +62,7 @@ class CollWalkerFactory
 
           else
             err_msg = "Don't know how to format a #{current_node.class}."
-            fail(InternalError, err_msg)
+            raise(InternalError, err_msg)
         end
 
         current_node = backlog.shift

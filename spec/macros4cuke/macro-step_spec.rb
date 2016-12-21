@@ -37,17 +37,18 @@ SNIPPET
     it 'should complain when a sub-step argument can never be assigned' do
       phrase = sample_phrase
       template = sample_template
+      exc = Macros4Cuke::UnreachableSubstepArgument
       msg = "The sub-step argument 'password' does not appear in the phrase."
-      expect { MacroStep.new(phrase, template, false) }.to raise_error(
-        Macros4Cuke::UnreachableSubstepArgument, msg)
+      expect { MacroStep.new(phrase, template, false) }.to raise_error(exc, msg)
     end
 
 
     it 'should complain when an argument in phrase never occurs in substeps' do
       phrase = 'enter my credentials as <foobar>'
+      exc = Macros4Cuke::UselessPhraseArgument
       msg = "The phrase argument 'foobar' does not appear in a sub-step."
-      expect { MacroStep.new(phrase, sample_template, true) }.to raise_error(
-        Macros4Cuke::UselessPhraseArgument, msg)
+      template = sample_template
+      expect { MacroStep.new(phrase, template, true) }.to raise_error(exc, msg)
     end
 
     it 'should know its phrase' do
@@ -114,20 +115,20 @@ SNIPPET
 
     it 'should complain when an unknown variable is used' do
       # Error case: there is no macro argument called <unknown>
-      error_message = "Unknown macro-step argument 'unknown'."
+      exc = UnknownArgumentError
+      msg = "Unknown macro-step argument 'unknown'."
       args = [ %w(unknown anything) ]
-      expect { subject.expand(phrase_instance, args) }.to raise_error(
-        UnknownArgumentError, error_message)
+      expect { subject.expand(phrase_instance, args) }.to raise_error(exc, msg)
     end
 
 
     it 'should complain when argument gets a value from phrase and table' do
       # Error case: there is no macro argument called <unknown>
       phrase = 'enter my credentials as "nobody"'
+      exc = AmbiguousArgumentValue
       msg = "The macro argument 'userid' has value 'nobody' and 'someone'."
       args = [ %w(userid someone), %w(password no-secret) ]
-      expect { subject.expand(phrase, args) }.to raise_error(
-        AmbiguousArgumentValue, msg)
+      expect { subject.expand(phrase, args) }.to raise_error(exc, msg)
     end
 
 

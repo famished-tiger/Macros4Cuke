@@ -17,8 +17,6 @@ module Formatter
       @io = anIO
     end
 
-    public
-
     # Tell which notifications the formatter subscribes to.
     def implements()
       return Formatter::AllNotifications
@@ -40,7 +38,7 @@ module Formatter
       trace_event(aLevel, __method__)
     end
 
-    def on_phrase(aLevel, _,  _)
+    def on_phrase(aLevel, _, _)
       trace_event(aLevel, __method__)
     end
 

@@ -10,7 +10,7 @@ module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
 # a sample collection of macro-steps.
 module UseSampleCollection
   # Phrase of first macro-step in the collection.
-  SamplePhrase1 = 'enter my credentials as <userid>'
+  SamplePhrase1 = 'enter my credentials as <userid>'.freeze
 
   # Sub-steps of the first macro-step in the collection.
   SampleSubsteps1 = begin
@@ -26,7 +26,7 @@ SNIPPET
   end
 
   # Phrase of second macro-step in the collection.
-  SamplePhrase2 = 'fill in the form with'
+  SamplePhrase2 = 'fill in the form with'.freeze
 
   # Sub-steps of the second macro-step in the collection.
   SampleSubsteps2 = begin
@@ -58,7 +58,7 @@ SNIPPET
   def fill_collection()
     coll = MacroCollection.instance
 
-    coll.clear  # Start from scratch: zap the existing macro-steps
+    coll.clear # Start from scratch: zap the existing macro-steps
 
     coll.add_macro(SamplePhrase1, SampleSubsteps1, true)
     coll.add_macro(SamplePhrase2, SampleSubsteps2, true)

@@ -1,5 +1,4 @@
 # File: engine_spec.rb
-
 require_relative '../../spec_helper'
 
 # Load the class under test
@@ -155,23 +154,23 @@ SNIPPET
 
     it 'should complain if a tag misses an closing chevron' do
       sample_text = 'begin <some_tag\> end'
-      error_message = "Missing closing chevron '>'."
-      expect { Engine.parse(sample_text) }.to raise_error(
-        StandardError, error_message)
+      exc = StandardError      
+      err_msg = "Missing closing chevron '>'."
+      expect { Engine.parse(sample_text) }.to raise_error(exc, err_msg)
     end
 
     it 'should complain if a text misses an opening chevron' do
       sample_text = 'begin <some_tag> > end'
-      error_message = "Missing opening chevron '<'."
-      expect { Engine.parse(sample_text) }.to raise_error(
-        StandardError, error_message)
+      exc = StandardError      
+      err_msg = "Missing opening chevron '<'."
+      expect { Engine.parse(sample_text) }.to raise_error(exc, err_msg)
     end
 
     it 'should complain if a text has nested opening chevrons' do
       sample_text = 'begin <<some_tag> > end'
-      error_message = "Nested opening chevron '<'."
-      expect { Engine.parse(sample_text) }.to raise_error(
-        StandardError, error_message)
+      exc = StandardError
+      err_msg = "Nested opening chevron '<'."
+      expect { Engine.parse(sample_text) }.to raise_error(exc, err_msg)
     end
   end # context
 
@@ -203,35 +202,33 @@ SNIPPET
 
     it 'should complain when a placeholder is empty or blank' do
       text_w_empty_arg = sample_template.sub(/userid/, '')
-      msg = %Q(An empty or blank argument occurred in\
+      exc = Macros4Cuke::EmptyArgumentError
+      msg = %(An empty or blank argument occurred in\
  'And I fill in "Username" with "<>"'.)
-      expect { Engine.new text_w_empty_arg }.to raise_error(
-        Macros4Cuke::EmptyArgumentError, msg)
+      expect { Engine.new text_w_empty_arg }.to raise_error(exc, msg)
     end
 
     it 'should complain when a placeholder contains an invalid character' do
       text_w_empty_arg = sample_template.sub(/userid/, 'user%id')
+      exc = Macros4Cuke::InvalidCharError
       msg = "The invalid sign '%' occurs in the argument 'user%id'."
-      expect { Engine.new text_w_empty_arg }.to raise_error(
-        Macros4Cuke::InvalidCharError, msg)
+      expect { Engine.new text_w_empty_arg }.to raise_error(exc, msg)
     end
 
     it 'should complain when a section has no closing tag' do
       # Removing an end of section tag...
       text_w_open_section = sophisticated_template.sub(%r{</address>}, '')
-
-      error_message = 'Unterminated section <?address>.'
-      expect { Engine.new text_w_open_section }.to raise_error(
-        StandardError, error_message)
+      exc = StandardError
+      msg = 'Unterminated section <?address>.'
+      expect { Engine.new text_w_open_section }.to raise_error(exc, msg)
     end
 
     it 'should complain when a closing tag has no corresponding opening tag' do
       # Replacing an end of section tag by another...
       text_w_wrong_end = sophisticated_template.sub(%r{</address>}, '</foobar>')
-
+      exc = StandardError
       msg = "End of section</foobar> doesn't match current section 'address'."
-      expect { Engine.new text_w_wrong_end }.to raise_error(
-        StandardError, msg)
+      expect { Engine.new text_w_wrong_end }.to raise_error(exc, msg)
     end
 
     it 'should complain when a closing tag is found without opening tag' do

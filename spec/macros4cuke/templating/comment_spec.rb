@@ -1,5 +1,4 @@
 # File: comment_spec.rb
-
 require_relative '../../spec_helper'
 
 # Load the classes under test

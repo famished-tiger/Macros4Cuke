@@ -20,8 +20,6 @@ module Macros4Cuke # Module used as a namespace
         @source = aSourceText
       end
 
-      public
-
       # Render the static text.
       # This method has the same signature as the {Engine#render} method.
       # @return [String] Static text is returned verbatim ("as is")

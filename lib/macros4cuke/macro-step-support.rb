@@ -16,8 +16,6 @@ module MacroStepSupport
   # The substeps being executed in the scenario represented as text.
   attr_reader(:substeps_trace)
 
-  public
-
   # Add a new macro.
   # Pre-condition: there is no existing macro with the same key.
   # @param aPhrase [String] The text that is enclosed between

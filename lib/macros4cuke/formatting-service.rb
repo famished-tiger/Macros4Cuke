@@ -33,14 +33,14 @@ class FormattingService
 
     # Complain if list is empty or nil
     if supported_events.nil? || supported_events.empty?
-      fail(NoFormattingEventForFormatter.new(aFormatter))
+      raise(NoFormattingEventForFormatter.new(aFormatter))
     end
 
     # Check that each event from the event list the formatter is known.
     supported_events.each do |event|
       next if Formatter::AllNotifications.include? event
       
-      fail(UnknownFormattingEvent.new(aFormatter, event))
+      raise(UnknownFormattingEvent.new(aFormatter, event))
     end
 
     formatters << aFormatter

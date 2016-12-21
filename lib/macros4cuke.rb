@@ -3,6 +3,7 @@
 # for a Macros4Cuke user.
 
 require_relative './macros4cuke/constants'
+require_relative './macros4cuke/application'
 require_relative './macros4cuke/macro-step-support'
 
 # End of file

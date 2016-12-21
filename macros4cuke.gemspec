@@ -26,7 +26,8 @@ EOSTRING
   pkg.rdoc_options << '--charset=UTF-8 --exclude="examples|features|spec"'
   file_list = Dir[
     '.rubocop.yml', '.rspec', '.ruby-gemset', '.ruby-version', '.simplecov',
-    '.travis.yml',  '.yardopts', 'appveyor.yml', 'cucumber.yml', 'Gemfile', 'Rakefile',
+    '.travis.yml',  '.yardopts', 'appveyor.yml', 'cucumber.yml', 'Gemfile', 
+    'Rakefile',
     'CHANGELOG.md',
     'LICENSE.txt', 'README.md',
     'bin/*.*',
@@ -45,9 +46,9 @@ EOSTRING
   pkg.extra_rdoc_files = ['README.md']
   pkg.add_runtime_dependency('cucumber', ['>= 1.3.18'])
 
-  pkg.add_development_dependency('rake', ['>= 0.9.2'])
+  pkg.add_development_dependency('rake', ['>= 10.0.0'])
   pkg.add_development_dependency('rspec', ['>= 3.0.0'])
-  pkg.add_development_dependency('simplecov', ['>= 0.6.2'])
+  pkg.add_development_dependency('simplecov', ['>= 0.7.0'])
   pkg.add_development_dependency('rubygems', ['>= 2.0.0'])
 
   pkg.bindir = 'bin'

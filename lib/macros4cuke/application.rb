@@ -9,8 +9,6 @@ module Macros4Cuke # Module used as a namespace
 class Application
   attr_reader(:options)
 
-  public
-
   def initialize()
     @options = {}
   end
@@ -43,7 +41,7 @@ class Application
     destination = prefix + aPath.to_s + '/' + file_name + '.rb'
 
     begin
-      fail SupportFileExists.new(destination) if File.exist?(destination)
+      raise SupportFileExists.new(destination) if File.exist?(destination)
 
       template_pathname =
         Macros4Cuke::RootDir + 'templates/use_macros4cuke.erb'

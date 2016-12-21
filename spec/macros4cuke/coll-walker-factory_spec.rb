@@ -183,57 +183,57 @@ describe CollWalkerFactory do
       [
         [:on_placeholder, 3, :name], # 0
         [:on_static_text, 3, :source], # 1
-        [:on_eol, 3, nil],  # 2
+        [:on_eol, 3, nil], # 2
         [:on_static_text, 3, :source], # 3
         [:on_placeholder, 3, :name], # 4
-        [:on_static_text, 3, :source],  # 5
-        [:on_eol, 3, nil],  # 6
-        [:on_static_text, 3, :source],  # 7
-        [:on_placeholder, 3, :name],  # 8
-        [:on_static_text, 3, :source],  # 9
-        [:on_eol, 3, nil],  # 10
-        [:on_static_text, 3, :source],  # 11
-        [:on_placeholder, 3, :name],  # 12
-        [:on_static_text, 3, :source],  # 13
-        [:on_eol, 3, nil],  # 14
-        [:on_static_text, 3, :source],  # 15
-        [:on_placeholder, 3, :name],  # 16
-        [:on_static_text, 3, :source],  # 17
-        [:on_eol, 3, nil],  # 18
-        [:on_static_text, 3, :source],  # 19
-        [:on_placeholder, 3, :name],  # 20
-        [:on_static_text, 3, :source],  # 21
-        [:on_eol, 3, nil],  # 22
-        [:on_eol, 3, nil],  # 23
+        [:on_static_text, 3, :source], # 5
+        [:on_eol, 3, nil], # 6
+        [:on_static_text, 3, :source], # 7
+        [:on_placeholder, 3, :name], # 8
+        [:on_static_text, 3, :source], # 9
+        [:on_eol, 3, nil], # 10
+        [:on_static_text, 3, :source], # 11
+        [:on_placeholder, 3, :name], # 12
+        [:on_static_text, 3, :source], # 13
+        [:on_eol, 3, nil], # 14
+        [:on_static_text, 3, :source], # 15
+        [:on_placeholder, 3, :name], # 16
+        [:on_static_text, 3, :source], # 17
+        [:on_eol, 3, nil], # 18
+        [:on_static_text, 3, :source], # 19
+        [:on_placeholder, 3, :name], # 20
+        [:on_static_text, 3, :source], # 21
+        [:on_eol, 3, nil], # 22
+        [:on_eol, 3, nil], # 23
         [:on_comment, 3, :source], # 24
-        [:on_eol, 3, nil],  # 25
+        [:on_eol, 3, nil], # 25
         [:on_comment, 3, :source], # 26
-        [:on_eol, 3, nil],  # 27
+        [:on_eol, 3, nil], # 27
         [:on_comment, 3, :source], # 28
-        [:on_eol, 3, nil],  # 29
-        [:on_section, 3, :name],  # 30
-        [:on_static_text, 4, :source],  # 31
-        [:on_placeholder, 4, :name],  # 32
-        [:on_static_text, 4, :source],  # 33
-        [:on_eol, 4, nil],  # 34
-        [:on_section_end, 3, nil],  # 35
-        [:on_eol, 3, nil],  # 36
+        [:on_eol, 3, nil], # 29
+        [:on_section, 3, :name], # 30
+        [:on_static_text, 4, :source], # 31
+        [:on_placeholder, 4, :name], # 32
+        [:on_static_text, 4, :source], # 33
+        [:on_eol, 4, nil], # 34
+        [:on_section_end, 3, nil], # 35
+        [:on_eol, 3, nil], # 36
         [:on_comment, 3, :source], # 37
-        [:on_eol, 3, nil],  # 38
+        [:on_eol, 3, nil], # 38
         [:on_comment, 3, :source], # 39
-        [:on_eol, 3, nil],  # 40
+        [:on_eol, 3, nil], # 40
         [:on_comment, 3, :source], # 41
-        [:on_eol, 3, nil],  # 42
-        [:on_section, 3, :name],  # 43
-        [:on_static_text, 4, :source],  # 44
-        [:on_placeholder, 4, :name],  # 45
-        [:on_static_text, 4, :source],  # 46
-        [:on_eol, 4, nil],  # 47
-        [:on_section_end, 3, nil],  # 48
-        [:on_static_text, 3, :source],  # 49
+        [:on_eol, 3, nil], # 42
+        [:on_section, 3, :name], # 43
+        [:on_static_text, 4, :source], # 44
+        [:on_placeholder, 4, :name], # 45
+        [:on_static_text, 4, :source], # 46
+        [:on_eol, 4, nil], # 47
+        [:on_section_end, 3, nil], # 48
+        [:on_static_text, 3, :source], # 49
         [:on_eol, 3, nil], # 50
-        [:on_renderer_end, 2, nil],  # 51
-        [:on_step_end, 1, nil],  # 52
+        [:on_renderer_end, 2, nil], # 51
+        [:on_step_end, 1, nil], # 52
         [:on_collection_end, 0, nil] # 53
       ].each_with_index do |event, i|
         actual = subject.next

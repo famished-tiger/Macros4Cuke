@@ -19,7 +19,7 @@ module Macros4Cuke # Module used as a namespace
       :on_placeholder,
       :on_section,
       :on_section_end
-    ]
+    ].freeze
   end # module
 end # module
 

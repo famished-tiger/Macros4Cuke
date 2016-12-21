@@ -1,7 +1,6 @@
 # File: macro-step.rb
 # Purpose: Implementation of the MacroStep class.
 
-
 require_relative 'exceptions'
 require_relative 'templating/engine'
 
@@ -17,7 +16,7 @@ class MacroStep
   # The set of predefined macro argument constant values.
   BuiltinParameters = {
     'quotes' => '"""'
-  }
+  }.freeze
 
   # A template engine that expands the sub-steps upon request.
   attr_reader(:renderer)
@@ -84,7 +83,7 @@ class MacroStep
     stripped_phrase = aMacroPhrase.strip # Remove leading ... trailing space(s)
 
     # Remove every underscore
-    stripped_phrase.gsub!(/_/, '')
+    stripped_phrase.delete!('_')
 
     # Replace all consecutive whitespaces by an underscore
     stripped_phrase.gsub!(/\s+/, '_')
@@ -93,12 +92,12 @@ class MacroStep
     # Determine the pattern to isolate
     # each argument/parameter with its delimiters
     pattern = case mode
-      when :definition
-        /<(?:[^\\<>]|\\.)*>/
-      when :invokation
-        /"([^\\"]|\\.)*"/
+                when :definition
+                  /<(?:[^\\<>]|\\.)*>/
+                when :invokation
+                  /"([^\\"]|\\.)*"/
 
-    end
+              end
 
     # Each text between quotes or chevron is replaced by the letter X
     normalized = stripped_phrase.gsub(pattern, 'X')
@@ -165,9 +164,9 @@ class MacroStep
   # @param params [Hash] The pairs phrase argument name => value
   def validate_row(a_row, params)
     (a_key, value) = a_row
-    fail(UnknownArgumentError.new(a_key)) unless args.include? a_key
+    raise(UnknownArgumentError.new(a_key)) unless args.include? a_key
     if (phrase_args.include? a_key) && (params[a_key] != value)
-      fail(AmbiguousArgumentValue.new(a_key, params[a_key], value))
+      raise(AmbiguousArgumentValue.new(a_key, params[a_key], value))
     end
 
     return a_row
@@ -185,17 +184,17 @@ class MacroStep
     # determine the syntax of the arguments/parameters
     # as a regular expression with one capturing group
     pattern = case mode
-      when :definition
-        /<((?:[^\\<>]|\\.)*)>/
-        # /{{{([^}]*)}}}|{{([^}]*)}}/ # Two capturing groups!...
-      when :invokation
-        /"((?:[^\\"]|\\.)*)"/
-    end
+                when :definition
+                  /<((?:[^\\<>]|\\.)*)>/
+                  # /{{{([^}]*)}}}|{{([^}]*)}}/ # Two capturing groups!...
+                when :invokation
+                  /"((?:[^\\"]|\\.)*)"/
+              end
     raw_result = aMacroPhrase.scan(pattern)
     args = raw_result.flatten.compact
 
     # Replace escaped quotes by quote character.
-    args.map! { |arg| arg.sub(/\\"/, '"') }  if mode == :invokation
+    args.map! { |arg| arg.sub(/\\"/, '"') } if mode == :invokation
 
     return args
   end
@@ -206,7 +205,7 @@ class MacroStep
     # Error when the phrase names an argument that never occurs in the substeps
     thePhraseArgs.each do |phrase_arg|
       next if substepsVars.include? phrase_arg
-      fail(UselessPhraseArgument.new(phrase_arg))
+      raise(UselessPhraseArgument.new(phrase_arg))
     end
     # Error when a substep has an argument that never appears in the phrase
     # and the macro-step does not use data table.
@@ -215,7 +214,7 @@ class MacroStep
         next if thePhraseArgs.include?(substep_arg) ||
                 BuiltinParameters.include?(substep_arg)
         
-        fail(UnreachableSubstepArgument.new(substep_arg))
+        raise(UnreachableSubstepArgument.new(substep_arg))
       end
     end
 

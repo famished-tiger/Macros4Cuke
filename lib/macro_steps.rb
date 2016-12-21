@@ -34,7 +34,7 @@ end
 #  When I [log in as "guest"]
 #
 When(/^I \[((?:[^\\\]]|\\.)+)\]$/) do |macro_phrase|
-  invoke_macro(macro_phrase)  # This will call the macro with the given phrase
+  invoke_macro(macro_phrase) # This will call the macro with the given phrase
 end
 
 
@@ -47,8 +47,9 @@ end
 #  |password|unguessable|
 When(/^I \[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   # Ensure that the second argument is of the correct type
-  unless table_argument.is_a?(Cucumber::Ast::Table)
-    fail(Macros4Cuke::DataTableNotFound.new(macro_phrase))
+  # unless table_argument.is_a?(Cucumber::Ast::Table)
+  unless table_argument.is_a?(Cucumber::MultilineArgument::DataTable)
+    raise(Macros4Cuke::DataTableNotFound.new(macro_phrase))
   end
 
   # This will call the macro with the given phrase.

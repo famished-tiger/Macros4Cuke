@@ -20,8 +20,6 @@ module Macros4Cuke # Module used as a namespace
         @source = aSourceText
       end
 
-      public
-
       # Render the comment.
       # Comments are rendered as empty text. This is necessary because
       # Cucumber::RbSupport::RbWorld#steps complains when it sees a comment.

@@ -22,18 +22,18 @@ module Templating
       actual_value = retrieve_value_from(aContextObject, theLocals)
 
       result = case actual_value
-        when NilClass
-          ''
+                 when NilClass
+                   ''
 
-        when Array
-          # TODO: Move away from hard-coded separator.
-          actual_value.join('<br/>')
+                 when Array
+                   # TODO: Move away from hard-coded separator.
+                   actual_value.join('<br/>')
 
-        when String
-          actual_value
-        else
-          actual_value.to_s
-      end
+                 when String
+                   actual_value
+                 else
+                   actual_value.to_s
+               end
 
       return result
     end

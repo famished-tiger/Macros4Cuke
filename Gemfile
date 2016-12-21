@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'cucumber', ['>= 1.3.18']
 
 group :development do
-  gem 'rake',  '>= 0.9.2' 
+  gem 'rake',  '>= 10.0.0' 
   gem 'rspec', '>= 3.0.0'
-  gem 'simplecov', '>= 0.6.2'
+  gem 'simplecov', '>= 0.7.0'
 end

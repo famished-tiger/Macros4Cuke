@@ -1,5 +1,4 @@
 # File: section_spec.rb
-
 require_relative '../../spec_helper'
 require_relative '../../../lib/macros4cuke/templating/template-element'
 require_relative '../../../lib/macros4cuke/templating/placeholder'
@@ -17,7 +16,8 @@ describe Section do
 
   # Return a list of possible child elements
   let(:sample_children) do
-    [ StaticText.new('Hello '),
+    [ 
+      StaticText.new('Hello '),
       Placeholder.new('user'),
       EOLine.new
     ]
@@ -54,7 +54,8 @@ describe Section do
 
       # Case: at least one child is a group
       parent = Section.new('son')
-      [ subject,
+      [ 
+        subject,
         Comment.new('# Simple step'),
         EOLine.new,
         StaticText.new('Bye '),
@@ -67,9 +68,10 @@ describe Section do
 
 
     it 'should expect that its subclasses render the children' do
-      error_message = 'Method Section.render must be implemented in subclass.'
-      expect { subject.send(:render, Object.new, {}) }.to raise_error(
-        NotImplementedError, error_message)
+      exc = NotImplementedError
+      err_msg = 'Method Section.render must be implemented in subclass.'
+      obj = Object.new
+      expect { subject.send(:render, obj, {}) }.to raise_error(exc, err_msg)
     end
   end # context
 end # describe
@@ -95,7 +97,8 @@ describe ConditionalSection do
   context 'Provided services:' do
     # Return a list of possible child elements
     let(:sample_children) do
-      [ StaticText.new('Hello '),
+      [ 
+        StaticText.new('Hello '),
         Placeholder.new('user'),
         EOLine.new
       ]

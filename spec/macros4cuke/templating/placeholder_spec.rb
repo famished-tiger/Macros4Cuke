@@ -1,5 +1,4 @@
 # File: placeholder_spec.rb
-
 require_relative '../../spec_helper'
 
 # Load the classes under test
@@ -33,7 +32,7 @@ describe Placeholder do
 
       # Case: context object has a nil value associated to 'foobar'
       context = Object.new
-      def context.foobar  # Add singleton method foobar that returns nil
+      def context.foobar # Add singleton method foobar that returns nil
         nil
       end
       rendered_text = subject.render(context, {})

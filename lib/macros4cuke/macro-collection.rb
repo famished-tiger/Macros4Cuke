@@ -1,7 +1,7 @@
 # File: macro-collection.rb
 # Purpose: Implementation of the MacroCollection class.
 
-require 'singleton'  # We'll use the Singleton design pattern for this class.
+require 'singleton' # We'll use the Singleton design pattern for this class.
 require_relative 'macro-step'
 
 module Macros4Cuke # Module used as a namespace
@@ -16,8 +16,6 @@ class MacroCollection
   #   A Hash with pairs of the form: macro key => MacroStep object
 
 
-  public
-
   # Add a new macro.
   # Pre-condition: there is no existing macro with the same key.
   # @param aPhrase [String] The text that is enclosed between
@@ -31,7 +29,7 @@ class MacroCollection
     # Prevent collision of macros (macros with same phrase).
     # This can occur if a macro was defined in a background section.
     # An exception is raised if the phrase syntax of both macros are the
-    fail(DuplicateMacroError, aPhrase) if find_macro(aPhrase, useTable)
+    raise(DuplicateMacroError, aPhrase) if find_macro(aPhrase, useTable)
 
     macro_steps[new_macro.key] = new_macro
   end
@@ -47,10 +45,10 @@ class MacroCollection
   def render_steps(aPhrase, rawData = nil)
     use_table = !rawData.nil?
     macro = find_macro(aPhrase, use_table)
-    fail(UnknownMacroError, aPhrase) if macro.nil?
+    raise(UnknownMacroError, aPhrase) if macro.nil?
 
     # Render the steps
-    return  macro.expand(aPhrase, rawData)
+    return macro.expand(aPhrase, rawData)
   end
 
 
