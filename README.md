@@ -16,17 +16,17 @@ __Macros4Cuke__ is a Cucumber extension that adds a macro facility for your Cucu
   All this can be done directly in your feature files without programming step definitions.
 
 ### Highlights ###
-* Works with out-of-the-box Cucumber (including version 2.0.0!)
+* Works with out-of-the-box Cucumber
 * Simple installation and setup (no programming required),
 * Familiar syntax for macro-step definitions,
-* Substep sequence can be of arbitrary length,
+* Sub-step sequence can be of arbitrary length,
 * Macro-steps may have data arguments,
 * Data values can be passed to the sub-steps,
 * Domain neutral: applicable to any kind of application that can be driven with Cucumber,
 * A group of sub-steps can be made conditional.
 
 
-Since version 0.4.00, it is also possible to [list all the encountered macro definitions](#listing-all-the-macro-definitions). 
+Since version 0.4.00, it is also possible to [list all the encountered macro definitions](#listing-all-the-macro-definitions).
 
 ## A quick example ##
 Here is a macro-step example taken from our demo files:  
@@ -50,13 +50,13 @@ the macro-step is invoked(used) elsewhere in a feature file.
 
 That macro-step can then be used/invoked in a scenario like this:  
 
-```cucumber 
+```cucumber
     When I [enter my userid "jdoe" and password "hello-world"]
 ```
 
 Once it is executing, the invoked macro-step should be equivalent to:  
 
-```cucumber 
+```cucumber
     Given I landed in the homepage  
     When I click "Sign in"  
     And I fill in "Username" with "jdoe"  
@@ -85,27 +85,27 @@ Macros4Cuke requires Cucumber.
 ### Installation ###
 The macros4cuke gem installation is fairly standard.  
 If you have a `Gemfile`, add `macros4cuke` to it. Otherwise, install the gem like this:
- 
+
 ```bash  
 $[sudo] gem install macros4cuke
 ```
 
 ### Configuring your Cucumber projects ####
 The procedure to add support for macros in an existing Cucumber project
-was simplified since version 0.5.00. 
- 
+was simplified since version 0.5.00.
+
 There are two possible ways to do it:  
 - By editing manually a support file; or,  
 - Let Macros4cuke configure your project.   
- 
+
 #### Alternative 1: manually add one line in a support file  
 Require the library in one of your ruby files under `features/support` (e.g. `env.rb`):  
- 
+
 ```ruby
 # /features/support/env.rb
 # Add the next single line
 require 'macros4cuke/cucumber'  
-``` 
+```
 
 That's it! Now you can start writing macros in your Cucumber project.
 
@@ -122,7 +122,7 @@ already the directory containing the Cucumber project, then the
 command-line is simply:  
 ```bash  
 $[sudo] macros4cuke --setup .
-``` 
+```
 
 Notice that ending dot above means "the current directory".
 
@@ -175,7 +175,7 @@ A phrase can be without argument as in:
   # A phrase without argument
   [enter my credentials]
 ```
-  
+
 Alternatively, a phrase can have one or more arguments enclosed between chevrons <...>.
 For instance, the next first phrase has two arguments, the second has three arguments:  
 
@@ -187,13 +187,13 @@ For instance, the next first phrase has two arguments, the second has three argu
 Each argument (variable) is enclosed between <...> chevrons. In our last example,
 the argument names are: _origin_ and _destination_. Notice that _origin_ and _destination_ are
  variable names that will take a value (if any) when the step is invoked _(more on this later)_.
- 
+
 
 #### Specifying the sub-steps of a macro-step ####
-The sub-steps are placed in a Gherkin multiline text, that is, a text that is enclosed between 
+The sub-steps are placed in a Gherkin multiline text, that is, a text that is enclosed between
  triple quotes ("""). In the next example,  
 
-```cucumber 
+```cucumber
   Given I define the step "When I [enter my credentials]" to mean:  
   """  
   Given I landed in the homepage   
@@ -202,12 +202,12 @@ The sub-steps are placed in a Gherkin multiline text, that is, a text that is en
   And I click "Sign in"  
   """  
 ```  
-  
+
 the text between triple quotes enumerates the sub-steps associated with the macro-step.  
  A pleasing aspect is the familiar syntax the sub-steps have: they closely look to genuine steps of a scenario.  
-Sub-steps can also have macro arguments. 
+Sub-steps can also have macro arguments.
  For instance, the previous step sequence could have two arguments called _userid_ and _password_:  
- 
+
 ```cucumber  
   """  
   Given I landed in the homepage   
@@ -215,7 +215,7 @@ Sub-steps can also have macro arguments.
   And I fill in "Password" with "<password>"  
   And I click "Sign in"  
   """  
-``` 
+```
 
 ### Using (invoking) a macro-step ###
 A macro-step can only be invoked after its definition has been read by Cucumber.  
@@ -227,7 +227,7 @@ The syntax rules for using a given macro-step in a scenario are pretty straightf
 Consider the following macro-step definition:  
 
 ```cucumber
-  Given I define the step "When I [log in as <userid>]" to mean: 
+  Given I define the step "When I [log in as <userid>]" to mean:
   """
   # Sub-steps come here...
   """
@@ -235,7 +235,7 @@ Consider the following macro-step definition:
 
 Its quoted sentence is ```"When I [log in as <userid>]"```, therefore
  the macro-step can be invoked in a scenario like this:  
- 
+
 ```cucumber
   Given I do this ...
   When I [log in as "jdoe"]
@@ -246,7 +246,7 @@ Its quoted sentence is ```"When I [log in as <userid>]"```, therefore
 Here is another -partial- macro-step definition:  
 
 ```cucumber
-  Given I define the step "When I [travel from <origin> to <destination> via <stop>]" to mean: 
+  Given I define the step "When I [travel from <origin> to <destination> via <stop>]" to mean:
   """
   # Sub-steps come here...
   """
@@ -294,17 +294,17 @@ This step can be used like this:
   |city| Old White Castle|  
   |postcode|JK345|  
 ```
-  
+
 Here are few observations worth noticing:   
 - The data table has two columns.  
 - Each row is of the form: |argument name| actual value|. For instance, the argument _street_address_ takes
 the value "Main Street, 22".  
-- Data rows don't have to follow strictly the order of the arguments in the sub-step sequence. 
+- Data rows don't have to follow strictly the order of the arguments in the sub-step sequence.
 
 ## Macro-step arguments ##
 
 ### Argument names ###
-In line with most computer languages, Macros4Cuke accepts argument names containing alphanumeric characters and 
+In line with most computer languages, Macros4Cuke accepts argument names containing alphanumeric characters and
 underscores.  
 In fact, the only characters that are not allowed in argument names are the following punctuation or delimiting
 signs:  
@@ -316,7 +316,7 @@ An argument appearing in the phrase MUST always be bound to a value at the step 
 Taking again a previous example of a -partial- macro-step definition:  
 
 ```cucumber
-  Given I define the step "When I [travel from <origin> to <destination> via <stop>]" to mean: 
+  Given I define the step "When I [travel from <origin> to <destination> via <stop>]" to mean:
   """
   # Sub-steps come here...
   """
@@ -335,7 +335,7 @@ The next invokation is syntactically correct for Macros4Cuke:
   When I [travel from "San Francisco" to "" via "Las Vegas"]
 ```
 
-The _destination_ argument gets an empty text as actual value. 
+The _destination_ argument gets an empty text as actual value.
 
 For any argument that can receive a value through a data table, three situations can occur:  
 1. A row for that argument together with a text value are specified at invokation. The argument is bound to that text value.  
@@ -362,7 +362,7 @@ Consider the following attempt of a macro-step definition:
 ```
 
 This will result in an error. The issue is caused by the nesting of triple quotes:
-Cucumber simply doesn't allow this. In fact, the error is reported by [Gherkin](https://github.com/cucumber/gherkin), 
+Cucumber simply doesn't allow this. In fact, the error is reported by [Gherkin](https://github.com/cucumber/gherkin),
 a component used by Cucumber.  
 As Gherkin has other [issues](https://github.com/cucumber/gherkin/issues/124) with docstrings, we
 need a workaround today until the fixes are applied.  
@@ -388,8 +388,8 @@ Thus to make the previous example work, one must change it like follows:
 
 ## Conditional sections in substeps. ##
 To make the macros more flexible, it is possible to define conditional sections in the substep sequence.  
-The general pattern for the conditional section is: 
- 
+The general pattern for the conditional section is:
+
 ```cucumber
   <?foobar>
   substep1
@@ -424,7 +424,7 @@ Consider the following example:
 ```
 
 When invoked like this:
-  
+
 ```cucumber
   When I [fill in the form with]:
   |firstname     |Alice|
@@ -455,7 +455,7 @@ the email macro argument.
 
 
 A typical use case for conditional sections is to prevent the execution of one or more steps in
-absence of a given data item. This simulates, for instance, the behaviour of a user that skips 
+absence of a given data item. This simulates, for instance, the behaviour of a user that skips
 one or more widgets in a page/screen. From a user interface testing viewpoint, entering an empty
 text in an entry field may be noticeably different than skipping that same entry field.
 Think of specific UI-events that can trigger some special system response.
@@ -481,7 +481,7 @@ This specialized step has the following syntax:
 ```
 
 Where `all_macros.feature` is a feature file that will be generated when Cucumber
-terminates. The resulting feature file lists all the macros (one per scenario) in 
+terminates. The resulting feature file lists all the macros (one per scenario) in
 the familiar Gherkin syntax. The file is placed in the current directory (i.e. the directory where
 Cucumber was launched).
 
@@ -489,12 +489,12 @@ Cucumber was launched).
 
 ## A word on Step Argument Transforms##
 Cucumber provides a handy facility that helps to convert implicitly the values of step arguments.
-A first description of this lesser-known functionality is available at 
+A first description of this lesser-known functionality is available at
 [Step Argument Transforms] (https://github.com/cucumber/cucumber/wiki/Step-Argument-Transforms).  
 Does Macros4Cuke provide such a facility for its own macro-step arguments?  
 The answer is no: if macro-steps had their own kind of transformations, then these would have interfere with the ones defined directly in Cucumber.
 In fact, Cucumber will happily apply transformations on any step, including the macro definition steps and the
-steps invoking macros. Stated otherwise, all the rules pertaining to the Step Argument Transforms work as usual. Or almost. 
+steps invoking macros. Stated otherwise, all the rules pertaining to the Step Argument Transforms work as usual. Or almost.
 There is one very specific case where Cucumber behaves slightly differently: the transforms aren't applied when a sub-step is executed.
 Internally, Macros4Cuke calls the `Cucumber::RbSupport::RbWorld::#steps` method that allows to run a Gherkin snippet (the substeps),
 and it appears that this method does not trigger the transforms. In practice, this doesn't prevent the use of transforms together
@@ -504,7 +504,7 @@ with Macros4Cuke. In the vast majority of cases both will work fine as expected.
 ## FAQ ##
 __Q__: Can I define a macro in one scenario and invoke it in another scenario in the same feature file?  
 __A__: Yes. Once a macro is defined in a feature file it can be invoked in any scenario that follows the definition.  
-In fact, the macro can be invoked in any scenario from any feature file, provided the invokation takes place _after_ the 
+In fact, the macro can be invoked in any scenario from any feature file, provided the invokation takes place _after_ the
 macro definition.  
 
 __Q__: So, a macro can be shared between multiple files.  
@@ -519,7 +519,7 @@ __Q__: Can I define a macro-step in a `Background` section?
 __A__: No. Here is why: every step from the Background section is executed in each scenario (outline).
 If a macro were defined in the Background, then the macro definition will occur multiple times, which is
  flagged as an error by Macros4Cuke.  
- 
+
 __Q__: Can I define a macro-step in a `Scenario Outline`?  
 __A__: No, if the scenario outline has multiple rows then an error will occur. Bear in mind,
 that steps in a scenario outline are repeating n times, n being the number of rows in the example table.
@@ -534,7 +534,7 @@ __A__: Yes. As a macro-step can be invoked multiple times.
 ## Changelog
 
 Macros4Cuke's changelog is available [here](CHANGELOG.md).
- 
+
 ## More resources:
 -   [**Detailed CI status**](https://travis-ci.org/famished-tiger/Macros4Cuke)
 -   [**Suggest an improvement**](https://github.com/famished-tiger/Macros4Cuke/issues)
@@ -551,7 +551,7 @@ In addition __Macros4Cuke__ allows advanced users to craft their own steps witho
 This last argument becomes important in the context of user acceptance testing, a domain where the assumption that
  every tester is also Rubyist is -alas!- far from the truth.
 
- 
+
 Macros with Cucumber is a hot topic, so it is good to know what other people say about it:  
 [Support for Macros] (https://github.com/cucumber/gherkin/issues/178)  
 [Substeps - macro request for the nth time] (http://grokbase.com/t/gg/cukes/133ey063b8/cucumber-substeps-macro-request-for-the-nth-time)

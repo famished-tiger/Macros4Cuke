@@ -26,7 +26,7 @@ EOSTRING
   pkg.rdoc_options << '--charset=UTF-8 --exclude="examples|features|spec"'
   file_list = Dir[
     '.rubocop.yml', '.rspec', '.ruby-gemset', '.ruby-version', '.simplecov',
-    '.travis.yml',  '.yardopts', 'cucumber.yml', 'Gemfile', 'Rakefile',
+    '.travis.yml',  '.yardopts', 'appveyor.yml', 'cucumber.yml', 'Gemfile', 'Rakefile',
     'CHANGELOG.md',
     'LICENSE.txt', 'README.md',
     'bin/*.*',
@@ -53,7 +53,7 @@ EOSTRING
   pkg.bindir = 'bin'
   pkg.executables = %w(macros4cuke)
   pkg.license = 'MIT'
-  pkg.required_ruby_version = '>= 1.9.3'
+  pkg.required_ruby_version = '>= 2.0.0'
 end
 
 if $PROGRAM_NAME == __FILE__
