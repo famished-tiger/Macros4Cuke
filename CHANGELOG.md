@@ -1,3 +1,12 @@
+### 0.5.15 / 2016-12-21
+* [NEW] File `appveyor.yml`: Added AppVeyor CI so that Macros4Cuke builds also
+can be tested on Windows. This complements the Travis CI which runs on Linux.
+* [CHANGE] File `README.md` Added AppVeyor badge
+* [CHANGE] A pass to adapt code style in order to please Rubocop 0.46.0
+* [CHANGE] File `.travis.yml` Added support for Ruby 2.3.x, dropped Ruby 1.9.3
+* [CHANGE] File `macros4cuke.gemspec` Minimal Ruby version supported is now Ruby 2.0.0
+
+
 ### 0.5.14 / 2016-03-16
 * [FIX] File `macro_steps`: Cucumber complained about allusion to deprecated class `Cucumber::Ast::Table`.
 
@@ -106,9 +115,9 @@
 * [CHANGE] File `.rubocop.yml`: Disabled a few new 0.15.0 cops
 * [CHANGE] Files from `lib` and `spec` dirs updated for Rubocop 0.15.0
 
-### 0.4.00 / 2013-11-17 
+### 0.4.00 / 2013-11-17
 #### Version number bumped. New feature: to list all encountered macro definitions into a single feature file.
-* [FEATURE] Sample `demo07.feature` file illustrates the new step that will list all macro definitions. 
+* [FEATURE] Sample `demo07.feature` file illustrates the new step that will list all macro definitions.
 * [NEW] Class CollWalkerFactory. Creates specialized Enumerators that walk over the macro collection.
 * [NEW] Module Formatter. Purpose: Grouping of all classes that render macro definitions
 * [NEW] File `all-notifications.rb` List of macro collection visit events.
@@ -145,16 +154,16 @@
 ### 0.3.37 / 2013-06-27
 * [FIX] File `macros4cuke.gemspec`: added README.md in extra_rdoc_files option.
 * [CHANGE] File `README.md`: Re-formatting so that it is better rendered with darkfish (from YARD).
-* [CHANGE] File `.yardopts` : grouped the exclude options on one line. 
+* [CHANGE] File `.yardopts` : grouped the exclude options on one line.
 
 ### 0.3.36 / 2013-06-27
 * [FIX] File `macros4cuke.gemspec`: corrected the rdoc_options to exclude doc from examples, features and spec folders.
   This was necessary because all but the latest versions of RDoc have difficulties to cope with utf-8.
-* [CHANGE] File `.yardopts` : added more folders to exclude from documentation generation. 
+* [CHANGE] File `.yardopts` : added more folders to exclude from documentation generation.
 
 ### 0.3.35 / 2013-06-27
 * [CHANGE] File `macros4cuke.gemspec`: added rdoc_options to exclude doc from examples, features and spec folders.
-  This was necessary because all but the latest versions of RDoc have difficulties to cope with utf-8. 
+  This was necessary because all but the latest versions of RDoc have difficulties to cope with utf-8.
 
 ### 0.3.34 / 2013-06-20
 * [CHANGE] Most files: Except for the i18n sample files, the utf-8 encoding comment was in all Ruby files of the project.
@@ -243,7 +252,7 @@
 
 ### 0.3.16 / 2013-05-20
 * [CHANGE] File `demo06.feature`: Added a scenario that causes a specific exception to be raised.
-* [CHANGE] File `demo_steps.rb`: Added a specific step that raises a TableNotException. It is captured and compared to expectations. 
+* [CHANGE] File `demo_steps.rb`: Added a specific step that raises a TableNotException. It is captured and compared to expectations.
 * [CHANGE] File `engine.rb`: Removed two lines that were never executed.
 
 ### 0.3.15 / 2013-05-20
@@ -289,7 +298,7 @@
 * [NEW] File `.travis.yml`: Added for integration with Travis CI
 * [NEW] File `Gemfile`: Added for integration with Bundler
 * [NEW] File `Rakefile`: Added with test tasks
-* [CHANGE] File `macros4cuke.gemspec`: added development dependency on rake. 
+* [CHANGE] File `macros4cuke.gemspec`: added development dependency on rake.
 
 ### 0.3.03 / 2013-05-11
 * [CHANGE] File `README.md`: added section on conditional section.
@@ -304,7 +313,7 @@
 * [CHANGE] Method `Engine#compile_sction` completed and tested to support section elements.
 * [CHANGE] Method `Section#variables` expanded to support section elements.
 * [CHANGE] Method `Engine#variables` expanded to support section elements.
-* [CHANGE] Method `Engine#compile_line` added two formatting rules. 
+* [CHANGE] Method `Engine#compile_line` added two formatting rules.
 * [CHANGE] Method `MacroStep#scan_arguments` now un-escape the \" sequence into plain quote.
 * [CHANGE] examples/ folder expanded and reorganized
 * [FIX] Method `Section#render` fixed typo in call to __method__
@@ -428,7 +437,7 @@
 
 ### 0.2.01 / 2013-4-26
 
-* [CHANGE] Regexps in step definitions accept escape character sequence. 
+* [CHANGE] Regexps in step definitions accept escape character sequence.
 * [CHANGE] Expanded `README.md` file.
 * [FIX] Corrected remnant of Mustache template in `travelling_demo.feature` file.
 
@@ -457,7 +466,7 @@
 ### 0.1.05 / Unreleased
 
 * [CHANGE] `demo_steps.rb`. Added few step definitions that emit output to the screen (so that at least something is shown in the demo).  
-* [CHANGE] `MacroStep` class: regexp slightly reworked to accept escaped double quotes in actual values. 
+* [CHANGE] `MacroStep` class: regexp slightly reworked to accept escaped double quotes in actual values.
 * [CHANGE] `travelling_demo.feature`: Added one example with escaped quotes in actual value.
 
 
