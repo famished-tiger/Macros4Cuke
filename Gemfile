@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-# Prevent Bundler to load the dependencies from our .gemspec file
 
 gem 'cucumber', '~> 3.0'
 
