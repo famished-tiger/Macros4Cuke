@@ -8,7 +8,6 @@ _Extend Cucumber with macro-steps._
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/amsdudnqo1jqfody?svg=true)](https://ci.appveyor.com/project/famished-tiger/macros4cuke)
 [![Code Climate](https://codeclimate.com/github/famished-tiger/Macros4Cuke.png)](https://codeclimate.com/github/famished-tiger/Macros4Cuke.png)
 [![Gem Version](https://badge.fury.io/rb/macros4cuke.png)](http://badge.fury.io/rb/macros4cuke)
-[![Dependency Status](https://gemnasium.com/famished-tiger/Macros4Cuke.png)](https://gemnasium.com/famished-tiger/Macros4Cuke)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](https://github.com/famished-tiger/Macros4Cuke/blob/master/LICENSE.txt)
 
 __Macros4Cuke__ is a Cucumber extension that adds a macro facility for your Cucumber scenarios.  
