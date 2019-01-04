@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
+# Prevent Bundler to load the dependencies from our .gemspec file
 
-git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
+gem 'cucumber', '~> 3.0'
 
-# Specify your gem's dependencies in skeem.gemspec
-gemspec
+group :development do
+  gem 'rake',  '>= 10.0.0' 
+  gem 'rspec', '~> 3.0'
+  gem 'simplecov', '>= 0.8.0'
+end
