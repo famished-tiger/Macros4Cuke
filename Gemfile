@@ -1,10 +1,6 @@
-# Generated from C:/Ruby22-x64/lib/ruby/site_ruby/macros4cuke/macros4cuke.gemspec
-# Prevent Bundler to load the dependencies from our .gemspec file
+source 'https://rubygems.org'
 
-gem 'cucumber', '~> 3.0'
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-group :development do
-  gem 'rake',  '>= 10.0.0' 
-  gem 'rspec', '~> 3.0'
-  gem 'simplecov', '>= 0.8.0'
-end
+# Specify your gem's dependencies in skeem.gemspec
+gemspec
