@@ -154,7 +154,7 @@ Cannot find the directory 'not_a_dir'.
 END_MESSAGE
 
       # Application is stopped
-      args = %w(--setup not_a_dir)
+      args = %w[--setup not_a_dir]
       expect { subject.parse!(args) }.to raise_error(SystemExit)
 
       # Error message text is displayed
@@ -170,7 +170,7 @@ END_MESSAGE
 Error in command-line:
 Cannot find the directory 'test_dir/features'.
 END_MESSAGE
-      args = %w(--setup ./test_dir)
+      args = %w[--setup ./test_dir]
 
       # Application is stopped
       expect { subject.parse!(args) }.to raise_error(SystemExit)
@@ -198,7 +198,7 @@ END_MESSAGE
       mk_subdir('test_dir/features/support')
 
       expected = { setup: [Pathname.getwd + 'test_dir/features/support'] }
-      expect(subject.parse!(%w(--setup ./test_dir))).to eq(expected)
+      expect(subject.parse!(%w[--setup ./test_dir])).to eq(expected)
 
       file_path = expected[:setup].first
       Dir.rmdir(file_path)

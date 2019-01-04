@@ -1,3 +1,12 @@
+### 0.5.16 / 2019-01-4
+- Maintenance release.
+
+* [CHANGE] Code re-styling to please Rubocop 0.62.0.
+* [CHANGE] File `.travis.yml`: updated Ruby versions.
+* [CHANGE] File `appveyor.yml` updated Ruby versions.
+* [CHANGE] File `README.me` removal obsolete icon.
+* [CHANGE] File `LICENSE.txt` Updated copyright years.
+
 ### 0.5.15 / 2016-12-21
 * [NEW] File `appveyor.yml`: Added AppVeyor CI so that Macros4Cuke builds also
 can be tested on Windows. This complements the Travis CI which runs on Linux.

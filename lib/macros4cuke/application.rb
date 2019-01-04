@@ -60,7 +60,6 @@ class Application
       # Write file contents to file in binary mode in order to avoid eol
       # consisting of CRLF
       File.open(destination, 'wb') { |theFile| theFile.write(file_text) }
-
     rescue Macros4Cuke::CmdLineError => exc
       $stderr.puts exc.message
       exit

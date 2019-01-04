@@ -63,7 +63,7 @@ class Engine
   #   tag/placeholder name => actual value.
   # @return [String] The rendition of the template given
   #  the passed argument values.
-  def render(aContextObject = Object.new, theLocals)
+  def render(aContextObject = Object.new, theLocals = {})
     return '' if @representation.empty?
 
     prev = nil
@@ -80,7 +80,6 @@ class Engine
 
     return result
   end
-
 
   # Retrieve all placeholder names that appear in the template.
   # @return [Array] The list of placeholder names.
@@ -154,8 +153,8 @@ class Engine
 
     raise(StandardError, "Missing closing chevron '>'.") if unbalance == 1
   end
-  
-  private  
+
+  private
 
   # Create the internal representation of the given template.
   def compile(aSourceTemplate)
@@ -168,7 +167,7 @@ class Engine
       line_items.each do |(kind, text)|
         # A tag text cannot be empty nor blank
         next if (kind != :dynamic) || !text.strip.empty?
-        
+
         raise(EmptyArgumentError.new(line.strip))
       end
 
@@ -212,7 +211,6 @@ class Engine
     return line_rep
   end
 
-
   # Apply rule: if last item in line is an end of section marker,
   # then place eoline before that item.
   # Otherwise, end the line with a eoline marker.
@@ -225,7 +223,6 @@ class Engine
       theLineRep << EOLine.new
     end
   end
-
 
   # @param aCouple [Array] a two-element array of the form: [kind, text]
   # Where kind must be one of :static, :dynamic
@@ -240,7 +237,6 @@ class Engine
 
     return result
   end
-
 
   # Parse the contents of a tag entry.
   # @param aText [String] The text that is enclosed between chevrons.
@@ -308,6 +304,7 @@ class Engine
       raise(StandardError, msg_prefix + msg)
     end
     return if marker.name == sections.last.name
+
     msg = "doesn't match current section '#{sections.last.name}'."
     raise(StandardError, msg_prefix + msg)
   end

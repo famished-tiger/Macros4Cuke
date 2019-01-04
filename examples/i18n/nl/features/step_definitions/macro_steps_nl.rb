@@ -1,4 +1,3 @@
-# encoding: utf-8
 # "Vertaling" in het Nederlands van macrostappen van Macros4Cuke
 # Dit zijn stappen definities dat rechstreeks het API van Macros4Cuke gebruiken
 
@@ -19,7 +18,7 @@ Als(/^ik \[([^\]]+)\]:$/) do |macro_phrase, table_argument|
   # Ensure that the second argument is of the correct type
   unless table_argument.kind_of?(Cucumber::Ast::Table)
     error_message = 'Deze stap vereist een tabel als parameter.'
-    fail(Macros4Cuke::DataTableNotFound, error_message)
+    raise(Macros4Cuke::DataTableNotFound, error_message)
   end
 
   # This will call the macro with the given phrase.

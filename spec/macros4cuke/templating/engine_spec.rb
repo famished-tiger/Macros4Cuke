@@ -154,14 +154,14 @@ SNIPPET
 
     it 'should complain if a tag misses an closing chevron' do
       sample_text = 'begin <some_tag\> end'
-      exc = StandardError      
+      exc = StandardError
       err_msg = "Missing closing chevron '>'."
       expect { Engine.parse(sample_text) }.to raise_error(exc, err_msg)
     end
 
     it 'should complain if a text misses an opening chevron' do
       sample_text = 'begin <some_tag> > end'
-      exc = StandardError      
+      exc = StandardError
       err_msg = "Missing opening chevron '<'."
       expect { Engine.parse(sample_text) }.to raise_error(exc, err_msg)
     end
@@ -197,7 +197,7 @@ SNIPPET
       elements = instance.instance_variable_get(:@representation)
       sections = elements.select { |e| e.is_a?(Section) }
       names = sections.map(&:to_s)
-      expect(names).to eq(%w(<?address> <?birthdate> <?dummy>))
+      expect(names).to eq(%w[<?address> <?birthdate> <?dummy>])
     end
 
     it 'should complain when a placeholder is empty or blank' do
@@ -243,7 +243,7 @@ SNIPPET
   context 'Provided services:' do
     it 'should know the variable(s) it contains' do
       # Case using the sample template
-      expect(subject.variables).to be == %w(userid password)
+      expect(subject.variables).to be == %w[userid password]
 
       # Case of an empty source template text
       instance = Engine.new ''
@@ -329,7 +329,7 @@ SNIPPET
 
 
     it 'should render multivalued actuals' do
-      locals = { 'userid' => %w(johndoe yeti) } # Silly case
+      locals = { 'userid' => %w[johndoe yeti] } # Silly case
 
       rendered_text = subject.render(Object.new, locals)
       expected = <<-SNIPPET

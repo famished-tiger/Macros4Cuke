@@ -63,7 +63,7 @@ describe Section do
         EOLine.new
       ].each { |a_child| parent.add_child(a_child) }
 
-      expect(parent.variables).to eq(%w(user firstname))
+      expect(parent.variables).to eq(%w[user firstname])
     end
 
 

@@ -72,7 +72,7 @@ describe Application do
       file_path = './test_dir/features/support'
       file_name = 'use_macros4cuke.rb'
       
-      subject.run!(%w(--setup ./test_dir))
+      subject.run!(%w[--setup ./test_dir])
       expect(File.exist?(file_path + '/' + file_name)).to be true
       
       File.delete(file_path + '/' + file_name)
@@ -84,7 +84,7 @@ describe Application do
       
       file_path = '/test_dir/features/support'
       file_name = 'use_macros4cuke.rb'
-      args = %w(--setup ./test_dir)
+      args = %w[--setup ./test_dir]
       mydir = File.dirname(__FILE__)
       
       expect { subject.run!(args) }.not_to raise_error

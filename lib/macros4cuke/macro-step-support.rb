@@ -28,7 +28,6 @@ module MacroStepSupport
     MacroCollection.instance.add_macro(aPhrase, aTemplate, useTable)
   end
 
-
   # Invoke a macro with given phrase and (optionally) a table of values
   # @param aPhraseInstance [String] an instance of the macro phrase.
   # That is, the text between [...] and with zero or more actual values.
@@ -48,7 +47,6 @@ module MacroStepSupport
     # Let Cucumber execute the sub-steps
     steps(rendered_steps)
   end
-
 
   # Clear (remove) all the macro-step definitions.
   # After this, we are in the same situation when no macro-step

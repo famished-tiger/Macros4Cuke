@@ -64,12 +64,8 @@ describe FormattingService do
     end
 
     it 'should complain when a formatter uses an unknown formatting event' do
-      notifications = [
-        :on_collection,
-        :on_collection_end,
-        :non_standard,
-        :on_step,
-        :on_step_end
+      notifications = %i[
+        on_collection on_collection_end non_standard on_step on_step_end
       ]
       formatter = double('formatter')
       expect(formatter).to receive(:implements).once.and_return(notifications)
@@ -82,11 +78,8 @@ describe FormattingService do
     it 'should support formatters using a subset of possible notifications' do
       # Case: formatter that supports a few notifications only
       formatter1 = double('formatter')
-      supported_notifications = [
-        :on_collection,
-        :on_collection_end,
-        :on_step,
-        :on_step_end
+      supported_notifications = %i[
+        on_collection on_collection_end on_step on_step_end
       ]
       expect(formatter1).to receive(:implements)
         .at_least(69).times

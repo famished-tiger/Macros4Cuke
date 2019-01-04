@@ -60,11 +60,11 @@ SNIPPET
     end
 
     it 'should know the tags(placeholders) from its phrase' do
-      expect(subject.phrase_args).to eq(%w(userid))
+      expect(subject.phrase_args).to eq(%w[userid])
     end
 
     it 'should know the tags(placeholders) from its phrase and template' do
-      expect(subject.args).to eq(%w(userid password))
+      expect(subject.args).to eq(%w[userid password])
     end
   end # context
 
@@ -72,7 +72,7 @@ SNIPPET
   context 'Provided services:' do
     let(:phrase_instance) { 'enter my credentials as "nobody"' }
     it 'should render the substeps' do
-      text = subject.expand(phrase_instance, [ %w(password no-secret) ])
+      text = subject.expand(phrase_instance, [ %w[password no-secret] ])
       expectation = <<-SNIPPET
   Given I landed in the homepage
   When I click "Sign in"
@@ -100,7 +100,7 @@ SNIPPET
 
     it 'should un-escape the double-quotes for phrase arguments' do
       specific_phrase = 'enter my credentials as "quotable\""'
-      text = subject.expand(specific_phrase, [ %w(password no-secret) ])
+      text = subject.expand(specific_phrase, [ %w[password no-secret] ])
       expectation = <<-SNIPPET
   Given I landed in the homepage
   When I click "Sign in"
@@ -117,7 +117,7 @@ SNIPPET
       # Error case: there is no macro argument called <unknown>
       exc = UnknownArgumentError
       msg = "Unknown macro-step argument 'unknown'."
-      args = [ %w(unknown anything) ]
+      args = [ %w[unknown anything] ]
       expect { subject.expand(phrase_instance, args) }.to raise_error(exc, msg)
     end
 
@@ -127,7 +127,7 @@ SNIPPET
       phrase = 'enter my credentials as "nobody"'
       exc = AmbiguousArgumentValue
       msg = "The macro argument 'userid' has value 'nobody' and 'someone'."
-      args = [ %w(userid someone), %w(password no-secret) ]
+      args = [ %w[userid someone], %w[password no-secret] ]
       expect { subject.expand(phrase, args) }.to raise_error(exc, msg)
     end
 

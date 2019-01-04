@@ -1,8 +1,6 @@
-# encoding: utf-8
 # Een paar stappen definities.
 
 require 'stringio'
-
 
 Als(/^ik "(.*?)" op het scherm afdruk$/) do |some_text|
   $stderr.puts some_text

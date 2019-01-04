@@ -21,7 +21,7 @@ class ToGherkin
 
   # Tell which notifications this formatter subscribes to.
   def implements()
-    return [:on_collection, :on_step, :on_step_end, :on_phrase, :on_source]
+    return %i[on_collection on_step on_step_end on_phrase on_source]
   end
 
   def on_collection(_, _)
@@ -42,7 +42,6 @@ class ToGherkin
   def on_step_end(_)
     io.puts ''
   end
-
 
   def on_phrase(aLevel, aPhraseText, useTable)
     suffix = useTable ? ':' : ''

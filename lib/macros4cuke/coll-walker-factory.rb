@@ -103,7 +103,6 @@ class CollWalkerFactory
     return [:on_renderer, nesting_level, current_node]
   end
 
-
   # Generate an on_section event
   def emit_on_section(current_node, nesting_level, backlog)
     backlog.unshift(StringNode.new(:on_section_end, nil))

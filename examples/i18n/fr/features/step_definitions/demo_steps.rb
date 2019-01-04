@@ -1,4 +1,3 @@
-# encoding: utf-8
 # Quelques définitions de pas de scénarios Cucumber.
 
 require 'stringio'

@@ -64,7 +64,6 @@ SNIPPET
     coll.add_macro(SamplePhrase2, SampleSubsteps2, true)
   end
 
-
   # Helper. For convenience, provide a shorter name
   # for the macro-step collection.
   def macro_coll()

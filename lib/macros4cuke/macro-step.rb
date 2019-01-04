@@ -50,12 +50,10 @@ class MacroStep
     @renderer = Templating::Engine.new(theSubsteps)
     substeps_vars = renderer.variables
 
-
     @args = validate_phrase_args(@phrase_args, substeps_vars)
     @args.concat(substeps_vars)
     @args.uniq!
   end
-
 
   # Compute the identifier of the macro from the given macro phrase.
   # A macro phrase is a text that may contain zero or more placeholders.
@@ -88,7 +86,6 @@ class MacroStep
     # Replace all consecutive whitespaces by an underscore
     stripped_phrase.gsub!(/\s+/, '_')
 
-
     # Determine the pattern to isolate
     # each argument/parameter with its delimiters
     pattern = case mode
@@ -106,7 +103,6 @@ class MacroStep
 
     return key
   end
-
 
   # Render the steps from the template, given the values
   # taken by the parameters
@@ -172,7 +168,6 @@ class MacroStep
     return a_row
   end
 
-
   # Retrieve from the macro phrase, all the text between <..> or double quotes.
   # Returns an array. Each of its elements corresponds to quoted text.
   # Example:
@@ -205,6 +200,7 @@ class MacroStep
     # Error when the phrase names an argument that never occurs in the substeps
     thePhraseArgs.each do |phrase_arg|
       next if substepsVars.include? phrase_arg
+      
       raise(UselessPhraseArgument.new(phrase_arg))
     end
     # Error when a substep has an argument that never appears in the phrase
@@ -220,7 +216,6 @@ class MacroStep
 
     return thePhraseArgs.dup
   end
-
 
   # Return true, if the macro-step requires a data table
   # to pass actual values of the arguments.

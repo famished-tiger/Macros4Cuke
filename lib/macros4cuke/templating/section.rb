@@ -42,7 +42,6 @@ class Section < UnaryElement
     return all_vars.flatten.uniq
   end
 
-
   # Render the placeholder given the passed arguments.
   # This method has the same signature as the {Engine#render} method.
   # @return [String] The text value assigned to the placeholder.
@@ -52,7 +51,6 @@ class Section < UnaryElement
     raise(NotImplementedError, msg)
   end
 end # class
-
 
 # A specialized section in a template for which its rendition
 # depends on the (in)existence of an actual value bound to the variable name.
@@ -87,7 +85,6 @@ class ConditionalSection < Section
 
     return result
   end
-
 
   # @return [String] The original text representation of the tag.
   def to_s()

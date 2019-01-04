@@ -23,7 +23,7 @@ class CmdLine
 For help about the command-line syntax, do:
 macros4cuke --help
 END_MSG
-
+                 .freeze
   # A Hash with the result of the command-line parse.
   attr_reader(:options)
 
@@ -77,11 +77,9 @@ EOS
     rescue Macros4Cuke::CmdLineError => exc
       $stderr.puts exc.message
       exit
-      
     rescue OptionParser::InvalidOption => exc
       $stderr.puts exc.message
       exit
-
     rescue OptionParser::MissingArgument => exc
       err_msg = ''
       exc.args.each do |arg|
@@ -112,6 +110,7 @@ EOS
       unless path.exist?
         raise DirectoryNotFound.new(path.relative_path_from(Pathname.getwd))
       end
+      
       path
     end
 

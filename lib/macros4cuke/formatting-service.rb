@@ -16,13 +16,11 @@ class FormattingService
   # Link to a factory of walker objects that visit macro collections
   attr_reader(:walker_factory)
 
-
   # Constructor.
   def initialize()
     @formatters = []
     @walker_factory = CollWalkerFactory.new
   end
-
 
   # Register a formatter.
   # Raises an exception when the formatter implements

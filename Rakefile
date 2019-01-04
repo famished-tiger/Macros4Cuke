@@ -45,7 +45,7 @@ end
 
 # Combine RSpec and Cucumber tests
 desc 'Run tests, with RSpec and Cucumber'
-task test: [:spec, :cucumber]
+task test: %i[spec cucumber]
 
 
 # Default rake task

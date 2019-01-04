@@ -15,7 +15,6 @@ class MacroCollection
   # @!attribute [r] macro_steps.
   #   A Hash with pairs of the form: macro key => MacroStep object
 
-
   # Add a new macro.
   # Pre-condition: there is no existing macro with the same key.
   # @param aPhrase [String] The text that is enclosed between
@@ -51,14 +50,12 @@ class MacroCollection
     return macro.expand(aPhrase, rawData)
   end
 
-
   # Clear/remove all macro definitions from the collection.
   # Post-condition: we are back to the same situation as
   # no macro was ever defined.
   def clear()
     macro_steps.clear
   end
-
 
   # Read accessor for the @macro_steps attribute.
   def macro_steps()
