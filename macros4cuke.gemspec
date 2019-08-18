@@ -45,7 +45,7 @@ EOSTRING
   pkg.require_path = 'lib'
 
   pkg.extra_rdoc_files = ['README.md']
-  pkg.add_runtime_dependency('cucumber', ['~> 3.0'])
+  pkg.add_runtime_dependency('cucumber', ['>= 3.0'])
 
   pkg.add_development_dependency('rake', ['>= 10.0.0'])
   pkg.add_development_dependency('rspec', ['>= 3.0.0'])
