@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: formatting-service.rb
 # Purpose: Implementation of the FormattingService class.
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: use-sample-collection.rb
 # Purpose: mix-in module with helper methods to build a sample
 # collection of macro-steps.
@@ -10,7 +12,7 @@ module Macros4Cuke # Open this namespace to avoid module qualifier prefixes
 # a sample collection of macro-steps.
 module UseSampleCollection
   # Phrase of first macro-step in the collection.
-  SamplePhrase1 = 'enter my credentials as <userid>'.freeze
+  SamplePhrase1 = 'enter my credentials as <userid>'
 
   # Sub-steps of the first macro-step in the collection.
   SampleSubsteps1 = begin
@@ -26,7 +28,7 @@ SNIPPET
   end
 
   # Phrase of second macro-step in the collection.
-  SamplePhrase2 = 'fill in the form with'.freeze
+  SamplePhrase2 = 'fill in the form with'
 
   # Sub-steps of the second macro-step in the collection.
   SampleSubsteps2 = begin

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: macro-collection_spec.rb
 
 require_relative '../spec_helper'
@@ -20,7 +22,7 @@ describe Application do
   
   def hijack_stdout()
     @orig_stdout = $stdout
-    $stdout = StringIO.new('', 'w')
+    $stdout = StringIO.new(+'', 'w')
   end
   
   def restore_stdout()
@@ -29,7 +31,7 @@ describe Application do
   
   def hijack_stderr()
     @orig_stderr = $stderr
-    $stderr = StringIO.new('', 'w')
+    $stderr = StringIO.new(+'', 'w')
   end
   
   def restore_stderr()

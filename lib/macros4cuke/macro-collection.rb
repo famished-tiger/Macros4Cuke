@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: macro-collection.rb
 # Purpose: Implementation of the MacroCollection class.
 

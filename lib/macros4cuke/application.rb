@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: application.rb
 
 require 'erb'
@@ -60,8 +62,8 @@ class Application
       # Write file contents to file in binary mode in order to avoid eol
       # consisting of CRLF
       File.open(destination, 'wb') { |theFile| theFile.write(file_text) }
-    rescue Macros4Cuke::CmdLineError => exc
-      $stderr.puts exc.message
+    rescue Macros4Cuke::CmdLineError => e
+      $stderr.puts e.message
       exit
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: to-trace.rb
 
 require_relative 'all-notifications'

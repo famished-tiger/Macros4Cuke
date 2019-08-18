@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: section_spec.rb
 require_relative '../../spec_helper'
 require_relative '../../../lib/macros4cuke/templating/template-element'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: use_macros4cuke.rb
 # Purpose: Add the support for macros in Cucumber.
 # This file is meant to be put next to the 'env.rb' file

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: env.rb
 
 module DemoMacros4Cuke # Use the module as a namespace

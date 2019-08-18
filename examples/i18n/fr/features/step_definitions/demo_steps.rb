@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Quelques définitions de pas de scénarios Cucumber.
 
 require 'stringio'

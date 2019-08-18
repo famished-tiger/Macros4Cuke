@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # "Traduction" en Français des macro-pas de Macros4Cuke
 # Des définitions de pas faisant directement appel à l'API de Macros4Cuke
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: cli.rb
 
 # Access the OptionParser library from the standard Ruby library
@@ -23,7 +25,7 @@ class CmdLine
 For help about the command-line syntax, do:
 macros4cuke --help
 END_MSG
-                 .freeze
+
   # A Hash with the result of the command-line parse.
   attr_reader(:options)
 
@@ -74,15 +76,15 @@ EOS
   def parse!(theCmdLineArgs)
     begin
       parser.parse!(theCmdLineArgs.dup) 
-    rescue Macros4Cuke::CmdLineError => exc
-      $stderr.puts exc.message
+    rescue Macros4Cuke::CmdLineError => e
+      $stderr.puts e.message
       exit
-    rescue OptionParser::InvalidOption => exc
-      $stderr.puts exc.message
+    rescue OptionParser::InvalidOption => e
+      $stderr.puts e.message
       exit
-    rescue OptionParser::MissingArgument => exc
-      err_msg = ''
-      exc.args.each do |arg|
+    rescue OptionParser::MissingArgument => e
+      err_msg = +''
+      e.args.each do |arg|
         err_msg << "No argument provided with command line option: #{arg}\n"
       end
       $stderr.puts err_msg

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: collection-walker_spec.rb
 
 require_relative '../spec_helper'

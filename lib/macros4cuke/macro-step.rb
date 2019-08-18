@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: macro-step.rb
 # Purpose: Implementation of the MacroStep class.
 
@@ -135,7 +137,7 @@ class MacroStep
       macro_parameters[phrase_args[index]] = val
     end
 
-    unless rawData.nil?
+    if rawData
       rawData.each do |a_row|
         (a_key, value) = validate_row(a_row, macro_parameters)
         if macro_parameters.include? a_key

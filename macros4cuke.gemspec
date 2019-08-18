@@ -1,4 +1,6 @@
-# File: macros4cuke.gemspec
+# frozen_string_literal: true
+
+
 # Gem specification file for the Macros4Cuke project.
 
 require 'rubygems'
@@ -52,7 +54,7 @@ EOSTRING
   pkg.bindir = 'bin'
   pkg.executables = %w[macros4cuke]
   pkg.license = 'MIT'
-  pkg.required_ruby_version = '>= 2.0.0'
+  pkg.required_ruby_version = '>= 2.3.0'
 end
 
 if $PROGRAM_NAME == __FILE__

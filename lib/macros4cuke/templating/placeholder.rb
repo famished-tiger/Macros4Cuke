@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: placeholder.rb
 # Purpose: Implementation of the Placeholder class.
 

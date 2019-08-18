@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: cucumber.rb
 # Purpose: Load Macros4Cuke modules and classes, register its step definitions
 

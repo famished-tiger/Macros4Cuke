@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Een paar stappen definities.
 
 require 'stringio'

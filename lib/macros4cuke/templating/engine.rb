@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: engine.rb
 # Purpose: Implementation of the Engine class.
 
@@ -67,7 +69,7 @@ class Engine
     return '' if @representation.empty?
 
     prev = nil
-    result = @representation.each_with_object('') do |element, subResult|
+    result = @representation.each_with_object(+'') do |element, subResult|
       # Output compaction rules:
       # -In case of consecutive eol's only one is rendered.
       # -In case of comment followed by one eol, both aren't rendered
@@ -146,9 +148,9 @@ class Engine
         when '<' then unbalance += 1
         when '>' then unbalance -= 1
       end
-
-      raise(StandardError, "Nested opening chevron '<'.") if unbalance > 1
-      raise(StandardError, "Missing opening chevron '<'.") if unbalance < 0
+      suffix = "opening chevron '<'."
+      raise(StandardError, 'Nested ' + suffix) if unbalance > 1
+      raise(StandardError, 'Missing ' + suffix) if unbalance.negative?
     end
 
     raise(StandardError, "Missing closing chevron '>'.") if unbalance == 1

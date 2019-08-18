@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: macro-step_spec.rb
 
 

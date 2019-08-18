@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: coll-walker-factory.rb
 # Purpose: Implementation of the CollWalkerFactory class.
 

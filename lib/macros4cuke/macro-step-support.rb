@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: macro-step-support.rb
 
 require_relative 'exceptions'
@@ -40,7 +42,7 @@ module MacroStepSupport
     rendered_steps = collection.render_steps(aPhraseInstance, rawData)
     
     # Keep track of the sub-steps to execute
-    @substeps_trace = '' if @substeps_trace.nil?
+    @substeps_trace = +'' if @substeps_trace.nil?
     @substeps_trace << rendered_steps
     
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Macros4Cuke # Module used as a namespace
   # Module containing all classes implementing the simple template engine
   # used internally in Macros4Cuke.

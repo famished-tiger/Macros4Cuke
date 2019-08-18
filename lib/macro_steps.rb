@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: macro_steps.rb
 # Purpose: step definitions that help to build macro-steps
 # (i.e. a Cucumber step that is equivalent to a sequence of sub-steps)

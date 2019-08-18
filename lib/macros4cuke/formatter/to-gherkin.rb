@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: to-gherkin.rb
 
 require_relative '../constants'

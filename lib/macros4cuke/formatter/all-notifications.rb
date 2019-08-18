@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: all_notifications.rb
 
 module Macros4Cuke # Module used as a namespace

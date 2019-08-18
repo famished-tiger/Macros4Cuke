@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: section.rb
 # Purpose: Implementation of the Section and ConditionalSection classes.
 
@@ -76,7 +78,7 @@ class ConditionalSection < Section
     actual_value = retrieve_value_from(aContextObject, theLocals)
     if (!actual_value.nil? && existence) || (actual_value.nil? && !existence)
       # Let render the children
-      result = children.each_with_object('') do |a_child, sub_result|
+      result = children.each_with_object(+'') do |a_child, sub_result|
         sub_result << a_child.render(aContextObject, theLocals)
       end
     else

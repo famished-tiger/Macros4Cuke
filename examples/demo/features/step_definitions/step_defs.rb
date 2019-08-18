@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: demo_steps.rb
 # A few step definitions for demo and testing purpose.
 

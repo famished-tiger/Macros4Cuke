@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # "Vertaling" in het Nederlands van macrostappen van Macros4Cuke
 # Dit zijn stappen definities dat rechstreeks het API van Macros4Cuke gebruiken
 

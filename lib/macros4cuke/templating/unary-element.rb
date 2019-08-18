@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: unary-element.rb
 # Purpose: Implementation of the Section and ConditionalSection classes.
 

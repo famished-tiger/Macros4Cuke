@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: macro-collection_spec.rb
 
 require_relative '../spec_helper'

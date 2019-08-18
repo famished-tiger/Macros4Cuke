@@ -1,10 +1,16 @@
+### 0.5.17 / 2019-08-18
+- Code refactoring to use string frozen magic comments (as a consequence, macros4cuke runs only on Rubies 2.3 or newer).  
+- Code restyling to please rubocop 0.7.40. 
+* [CHANGE] File `.travis.yml`: updated Ruby versions.
+* [CHANGE] File `appveyor.yml` updated Ruby versions.
+
 ### 0.5.16 / 2019-01-4
 - Maintenance release.
 
 * [CHANGE] Code re-styling to please Rubocop 0.62.0.
 * [CHANGE] File `.travis.yml`: updated Ruby versions.
 * [CHANGE] File `appveyor.yml` updated Ruby versions.
-* [CHANGE] File `README.me` removal obsolete icon.
+* [CHANGE] File `README.me` removal obsolete badge.
 * [CHANGE] File `LICENSE.txt` Updated copyright years.
 
 ### 0.5.15 / 2016-12-21

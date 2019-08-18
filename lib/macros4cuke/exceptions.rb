@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # File: exceptions.rb
 
 module Macros4Cuke # Module used as a namespace
@@ -121,9 +123,9 @@ end # class
 # is nil or empty.
 class NoFormattingEventForFormatter < Macros4CukeError
   def initialize(aFormatter)
-    msg = "Formatter #{aFormatter.class}"
-    msg << ' does not support any formatting event.'
-    super(msg)
+    msg1 = "Formatter #{aFormatter.class}"
+    msg2 = 'does not support any formatting event.'
+    super(msg1 + ' ' + msg2)
   end
 end # class
 
@@ -131,9 +133,9 @@ end # class
 # Raised when a macro-step formatter uses an unknown formatting event.
 class UnknownFormattingEvent < Macros4CukeError
   def initialize(aFormatter, anEvent)
-    msg = "Formatter #{aFormatter.class}"
-    msg << " uses the unknown formatting event '#{anEvent}'."
-    super(msg)
+    msg1 = "Formatter #{aFormatter.class}"
+    msg2 = "uses the unknown formatting event '#{anEvent}'."
+    super(msg1 + ' ' + msg2)
   end
 end # class
 
