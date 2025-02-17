@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-
+# File: macros4cuke.gemspec
 # Gem specification file for the Macros4Cuke project.
 
 require 'rubygems'
@@ -26,8 +24,8 @@ Enjoy using Cucumber with macros...
 EOSTRING
   pkg.rdoc_options << '--charset=UTF-8 --exclude="examples|features|spec"'
   file_list = Dir[
-    '.rubocop.yml', '.rspec', '.ruby-gemset', '.ruby-version', '.simplecov',
-    '.travis.yml',  '.yardopts', 'appveyor.yml', 'cucumber.yml', 'Gemfile', 
+    '.rubocop.yml', '.rspec', '.ruby-gemset', '.ruby-version',
+    '.yardopts', 'appveyor.yml', 'cucumber.yml', 'Gemfile',
     'Rakefile',
     'CHANGELOG.md',
     'LICENSE.txt', 'README.md',
@@ -45,16 +43,16 @@ EOSTRING
   pkg.require_path = 'lib'
 
   pkg.extra_rdoc_files = ['README.md']
-  pkg.add_runtime_dependency('cucumber', ['>= 3.0'])
+  pkg.add_runtime_dependency('cucumber', ['~> 9.0'])
 
-  pkg.add_development_dependency('rake', ['>= 10.0.0'])
-  pkg.add_development_dependency('rspec', ['>= 3.0.0'])
-  pkg.add_development_dependency('simplecov', ['>= 0.8.0'])
+  pkg.add_development_dependency 'rake', '~> 13.1.0'
+  pkg.add_development_dependency 'rspec', '~> 3.12'
+  pkg.add_development_dependency 'yard', '~> 0.9.34'
 
   pkg.bindir = 'bin'
   pkg.executables = %w[macros4cuke]
   pkg.license = 'MIT'
-  pkg.required_ruby_version = '>= 2.3.0'
+  pkg.required_ruby_version = '>= 3.2.0'
 end
 
 if $PROGRAM_NAME == __FILE__
