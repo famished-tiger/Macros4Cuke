@@ -1,10 +1,5 @@
-# frozen_string_literal: true
-
 # File: spec_helper.rb
 # Purpose: utility file that is loaded by all our RSpec files
-
-require 'simplecov'
-
 
 require 'rspec' # Use the RSpec framework
 require 'pp'    # Use pretty-print for debugging purposes
@@ -18,6 +13,5 @@ RSpec.configure do |config|
   # Display stack trace in case of failure
   config.full_backtrace = true
 end
-
 
 # End of file

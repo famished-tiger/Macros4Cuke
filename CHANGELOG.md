@@ -1,8 +1,9 @@
+### 0.5.18 / 2025-02-17
+Tested against MRI Ruby 3.4.1
+- [FIX] corrected some Rubocope 1.72.0 "offences"
+
 ### 0.5.17 / 2019-08-18
-- Code refactoring to use string frozen magic comments (as a consequence, macros4cuke runs only on Rubies 2.3 or newer).  
-- Code restyling to please rubocop 0.7.40. 
-* [CHANGE] File `.travis.yml`: updated Ruby versions.
-* [CHANGE] File `appveyor.yml` updated Ruby versions.
+- [CHANGE] Gemfile update
 
 ### 0.5.16 / 2019-01-4
 - Maintenance release.
